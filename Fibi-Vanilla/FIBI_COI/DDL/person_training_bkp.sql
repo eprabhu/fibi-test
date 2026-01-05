@@ -1,0 +1,27 @@
+
+
+--
+--  `person_training_bkp`
+--
+
+DROP TABLE IF EXISTS `person_training_bkp`;
+
+CREATE TABLE `person_training_bkp` (
+  `PERSON_TRAINING_ID` int(11) NOT NULL DEFAULT '0',
+  `COMMENTS` varchar(255) DEFAULT NULL,
+  `DATE_ACKNOWLEDGED` datetime(6) DEFAULT NULL,
+  `DATE_REQUESTED` datetime(6) DEFAULT NULL,
+  `DATE_SUBMITTED` datetime(6) DEFAULT NULL,
+  `FOLLOWUP_DATE` datetime(6) DEFAULT NULL,
+  `PERSON_ID` varchar(255) DEFAULT NULL,
+  `SCORE` varchar(255) DEFAULT NULL,
+  `TRAINING_CODE` int(11) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  `IS_NON_EMPLOYEE` varchar(1) DEFAULT NULL,
+  `ACTIVE_FLAG` varchar(1) DEFAULT NULL,
+  `TRAINING_NUMBER` int(11) NOT NULL
+) ;
+
+
+

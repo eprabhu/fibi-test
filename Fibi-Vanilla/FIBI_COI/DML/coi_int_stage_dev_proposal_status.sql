@@ -1,0 +1,13 @@
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('1', 'In Progress', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('2', 'Approval Pending', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('3', 'Approval Granted', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('4', 'Approval Not Initiated - Submitted', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('5', 'Approval Pending - Submitted', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('6', 'Approved and Submitted', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('7', 'Disapproved', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('8', 'Approved Post-Submission', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('9', 'Disapproved Post-Submission', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('10', 'Cancelled', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('11', 'Document Error Occurred', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('12', 'Revisions Requested', now(), 'admin', 'Y');
+INSERT INTO `coi_int_stage_dev_proposal_status` (`STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('13', 'Approved', now(), 'admin', 'Y');

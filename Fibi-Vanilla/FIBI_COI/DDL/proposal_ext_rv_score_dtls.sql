@@ -1,0 +1,38 @@
+
+
+--
+--  `proposal_ext_rv_score_dtls`
+--
+
+DROP TABLE IF EXISTS `proposal_ext_rv_score_dtls`;
+
+CREATE TABLE `proposal_ext_rv_score_dtls` (
+  `EXT_REVIEW_ID` int(11) DEFAULT NULL,
+  `PI_NAME` varchar(90) DEFAULT NULL,
+  `PROPOSAL_TITLE` varchar(1000) DEFAULT NULL,
+  `PROPOSAL_ID` int(11) DEFAULT NULL,
+  `GRANT_HEADER_ID` int(11) DEFAULT NULL,
+  `GRANT_CALL_NAME` varchar(1000) DEFAULT NULL,
+  `AVG_SCORE` decimal(4,2) DEFAULT NULL,
+  `TOP_2_AVG` decimal(4,2) DEFAULT NULL,
+  `DELTA` decimal(4,2) DEFAULT NULL,
+  `REVIEW_REVIEWER_ID` int(11) DEFAULT NULL,
+  `REVIEWER_NAME` varchar(300) DEFAULT NULL,
+  `REVIEWER_HIDX` int(11) DEFAULT NULL,
+  `SCORE1` decimal(4,2) DEFAULT NULL,
+  `SCORE2` decimal(4,2) DEFAULT NULL,
+  `SCORE3` decimal(4,2) DEFAULT NULL,
+  `SCORE4` decimal(4,2) DEFAULT NULL,
+  `SCORE5` decimal(4,2) DEFAULT NULL,
+  `SCORE6` decimal(4,2) DEFAULT NULL,
+  `SCORE7` decimal(4,2) DEFAULT NULL,
+  `SCORE8` decimal(4,2) DEFAULT NULL,
+  `SCORE9` decimal(4,2) DEFAULT NULL,
+  `SCORE10` decimal(4,2) DEFAULT NULL,
+  `REVIEWER_TOTAL` decimal(4,2) DEFAULT NULL,
+  `VERSION_NUMBER` int(11) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT CURRENT_TIMESTAMP
+) ;
+
+
+

@@ -1,0 +1,5 @@
+INSERT INTO `coi_project_type` (`COI_PROJECT_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `BADGE_COLOR`, `PROJECT_ICON`, `FCOI_NEEDED`, `PROJECT_DISCLOSURE_NEEDED`) VALUES ('1', 'Award', now(), 'admin', '#c9a742', 'workspace_premium', 'Y', 'Y');
+INSERT INTO `coi_project_type` (`COI_PROJECT_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `BADGE_COLOR`, `PROJECT_ICON`, `FCOI_NEEDED`, `PROJECT_DISCLOSURE_NEEDED`) VALUES ('2', 'Institute Proposal', '2024-08-01 16:31:58', 'admin', '#148582', 'text_snippet', 'Y', 'N');
+INSERT INTO `coi_project_type` (`COI_PROJECT_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `BADGE_COLOR`, `PROJECT_ICON`, `FCOI_NEEDED`, `PROJECT_DISCLOSURE_NEEDED`) VALUES ('3', 'Development Proposal', now(), 'admin', '#7d9e32', 'text_snippet', 'N', 'N');
+INSERT INTO `coi_project_type` (`COI_PROJECT_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('4', 'IRB Protocol', now(), 'admin');
+INSERT INTO `coi_project_type` (`COI_PROJECT_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('5', 'IACUC Protocol', now(), 'admin');

@@ -1,0 +1,21 @@
+
+
+--
+--  `person_role_rt`
+--
+
+DROP TABLE IF EXISTS `person_role_rt`;
+
+CREATE TABLE `person_role_rt` (
+  `PERSON_ID` varchar(90) NOT NULL,
+  `UNIT_NUMBER` varchar(8) NOT NULL,
+  `RIGHT_NAME` varchar(50) NOT NULL,
+  `ROLE_ID` int(11) NOT NULL,
+  PRIMARY KEY (`PERSON_ID`,`UNIT_NUMBER`,`RIGHT_NAME`,`ROLE_ID`),
+  KEY `PERSON_ROLE_RT_IX1` (`PERSON_ID`),
+  KEY `PERSON_ROLE_RT_IX2` (`RIGHT_NAME`),
+  KEY `PERSON_ROLE_RT_IX3` (`PERSON_ID`,`UNIT_NUMBER`,`RIGHT_NAME`)
+) ;
+
+
+

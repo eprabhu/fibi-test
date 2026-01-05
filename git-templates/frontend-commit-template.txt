@@ -1,0 +1,21 @@
+[FE] <Action>: <Short Description>
+
+Details:
+- <Describe UI/UX changes, bug fixes, or added features.>
+- <Mention ticket numbers or components affected.>
+
+Impact:
+- <Specify browser compatibility, styling changes, or breakpoints.>
+
+Testing:
+- <Mention manual or automated test coverage/results.>
+
+Example:
+[FE] Update: Add tooltip for dashboard buttons
+
+Details:
+- Added tooltips to Save and Export buttons on the dashboard.
+- Improved accessibility by using ARIA labels.
+
+Impact:
+- Affects dashboard component only.

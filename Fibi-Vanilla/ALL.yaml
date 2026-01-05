@@ -1,0 +1,92 @@
+databaseChangeLog:
+
+    - changeSet:
+            id: 2
+            author: fibi_admin
+            labels: 'CORE'
+            comment: To add primary key to databaseChangeLog table.
+            changes:
+                - sql:
+                    sql: |
+                        Analyze table DATABASECHANGELOG;
+                        SET @sql := IF(
+                            (SELECT COUNT(*) FROM information_schema.COLUMNS
+                            WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'DATABASECHANGELOG' AND COLUMN_NAME = 'DATABASECHANGELOG_ID') = 0,
+                            'ALTER TABLE DATABASECHANGELOG ADD COLUMN DATABASECHANGELOG_ID BIGINT AUTO_INCREMENT PRIMARY KEY;',
+                            'DO 1'
+                        );
+                        PREPARE stmt FROM @sql;
+                        EXECUTE stmt;
+                        DEALLOCATE PREPARE stmt;
+
+    - include:
+        file: Fibi-Vanilla/FIBI_CORE/ALL.yaml
+        labels: 'CORE'
+    - include:
+        file: Fibi-Vanilla/FIBI_REPORT/ALL.yaml
+        labels: 'REPORT'
+    - include:
+        file: Fibi-Vanilla/FIBI_GRANTCALL/ALL.yaml
+        labels: 'GRANTCALL'
+    - include:
+        file: Fibi-Vanilla/FIBI_DEVELOPMENT_PROPOSAL/ALL.yaml
+        labels: 'DEV_PROPOSAL'
+    - include:
+        file: Fibi-Vanilla/FIBI_INSTITUTE_PROPOSAL/ALL.yaml
+        labels: 'INSTITUTE_PROPOSAL'
+    - include:
+        file: Fibi-Vanilla/FIBI_AWARD/ALL.yaml
+        labels: 'AWARD'
+    - include:
+        file: Fibi-Vanilla/FIBI_MANPOWER/ALL.yaml
+        labels: 'MANPOWER'
+    - include:
+        file: Fibi-Vanilla/FIBI_CLAIMS/ALL.yaml
+        labels: 'CLAIMS'
+    - include:
+        file: Fibi-Vanilla/FIBI_PROGRESS_REPORT/ALL.yaml
+        labels: 'PROGRESS_REPORT'
+    - include:
+        file: Fibi-Vanilla/FIBI_SERVICE_REQUEST/ALL.yaml
+        labels: 'SERVICE_REQUEST'
+    - include:
+        file: Fibi-Vanilla/FIBI_AGREEMENT/ALL.yaml
+        labels: 'AGREEMENT'
+    - include:
+        file: Fibi-Vanilla/FIBI_RESEARCHER_PROFILE/ALL.yaml
+        labels: 'RESEARCHER_PROFILE'
+    - include:
+        file: Fibi-Vanilla/FIBI_DOC_SIGN/ALL.yaml
+        labels: 'DOC_SIGN'
+    - include:
+        file: Fibi-Vanilla/FIBI_EXTERNAL_REVIEWER/ALL.yaml
+        labels: 'EXTERNAL_REVIEWER'
+    - include:
+        file: Fibi-Vanilla/FIBI_FORM_BUILDER/ALL.yaml
+        labels: 'FORM_BUILDER'
+    - include:
+        file: Fibi-Vanilla/FIBI_MAIL_READER/ALL.yaml
+        labels: 'MAIL_READER'
+    - include:
+        file: Fibi-Vanilla/FIBI_IACUC/ALL.yaml
+        labels: 'IACUC'
+    - include:
+        file: Fibi-Vanilla/FIBI_IRB/ALL.yaml
+        labels: 'IRB'
+    - include:
+        file: Fibi-Vanilla/FIBI_COI/ALL.yaml
+        labels: 'COI'
+    #   - include:
+    #       file: Fibi-Vanilla/FIBI_INSTITUTIONAL_CONFIG/ALL.yaml
+
+    - changeSet:
+        id: 1
+        author: fibi_admin
+        comment: To call sync procedures.
+        labels: 'CORE'
+        changes:
+            - sql:
+                sql: |
+                    CALL REFRESH_UNIT_HIERARCHY_LEVEL();
+                    CALL SYNC_UNIT_WITH_CHILDREN();
+                    CALL AWARD_CUSTOM_DATA_RT_FULL_SYNC();

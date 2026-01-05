@@ -1,0 +1,5 @@
+INSERT INTO `opa_disposition_status_type` (`DISPOSITION_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('1', 'Pending', 'Y', '2024-08-01 13:17:51', 'admin', '1');
+
+INSERT INTO `opa_disposition_status_type` (`DISPOSITION_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('2', 'Void', 'Y', '2024-08-01 13:17:51', 'admin', '3');
+
+INSERT INTO `opa_disposition_status_type` (`DISPOSITION_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('3', 'Approved', 'Y', '2024-08-01 13:17:51', 'admin', '2');

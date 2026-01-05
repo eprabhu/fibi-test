@@ -1,0 +1,1 @@
+INSERT INTO `qrtz_cron_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`, `CRON_EXPRESSION`, `TIME_ZONE_ID`) VALUES ('coi', 'Travel Reminder Notification', 'DEFAULT', '0 0 0 * * ?', 'UTC');

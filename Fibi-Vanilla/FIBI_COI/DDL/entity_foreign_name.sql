@@ -1,0 +1,21 @@
+
+
+--
+--  `entity_foreign_name`
+--
+
+DROP TABLE IF EXISTS `entity_foreign_name`;
+
+CREATE TABLE `entity_foreign_name` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ENTITY_ID` int(11) DEFAULT NULL,
+  `FOREIGN_NAME` varchar(500) DEFAULT NULL,
+  `UPDATED_BY` varchar(40) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ENTITY_FOREIGN_NAME_FK1_idx` (`ENTITY_ID`),
+  CONSTRAINT `ENTITY_FOREIGN_NAME_FK1` FOREIGN KEY (`ENTITY_ID`) REFERENCES `entity` (`ENTITY_ID`)
+) ;
+
+
+

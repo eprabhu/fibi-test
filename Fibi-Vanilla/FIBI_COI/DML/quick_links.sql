@@ -1,0 +1,9 @@
+INSERT INTO `quick_links` (`QUICK_LINK_ID`, `URL`, `NAME`, `DESCRIPTION`, `TYPE`, `START_DATE`, `END_DATE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('1', 'https://stage.fibiweb.com/fibi/#/fibi/codetable', 'fibi', 'code table edit', 'L', '2021-02-07 00:00:00', '2021-02-24 00:00:00', '2024-08-01 12:24:16', 'fibi_admin');
+
+INSERT INTO `quick_links` (`QUICK_LINK_ID`, `URL`, `NAME`, `DESCRIPTION`, `TYPE`, `START_DATE`, `END_DATE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('2', 'https://mit-atlas-web.azurewebsites.net/research', 'Office of Research', 'ORS website', 'L', '2023-03-01 00:00:00', '2023-06-15 00:00:00', '2024-08-01 12:24:16', 'fibi_admin');
+
+INSERT INTO `quick_links` (`QUICK_LINK_ID`, `URL`, `NAME`, `DESCRIPTION`, `TYPE`, `START_DATE`, `END_DATE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('3', 'https://www.rmit.edu.au/', 'Fibi Demo for Loyola', 'open to see new grant details', 'E', '2023-04-01 00:00:00', '2023-06-30 00:00:00', '2024-08-01 12:24:16', 'fibi_admin', '2');
+
+INSERT INTO `quick_links` (`QUICK_LINK_ID`, `URL`, `NAME`, `DESCRIPTION`, `TYPE`, `START_DATE`, `END_DATE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('4', 'https://stage.fibiweb.com/fibi/#/fibi/codetable', 'Demo with Zayed University', 'Demo with Zayed University', 'E', '2021-03-23 00:00:00', '2021-03-24 00:00:00', '2024-08-01 12:24:16', 'fibi_admin', '2');
+
+INSERT INTO `quick_links` (`QUICK_LINK_ID`, `URL`, `NAME`, `DESCRIPTION`, `TYPE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('6', 'https://www.akronchildrens.org/', 'AKRONS CHILDREN\'S HOSPITAL', 'IMDA Website', 'L', '2024-08-01 12:24:16', 'fibi_admin', '4');

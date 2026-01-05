@@ -1,0 +1,361 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS COI_INT_PROJECT_DISCL_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/COI_INT_PROJECT_DISCL_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS COI_INT_PROJECT_DISCL_STATUS; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS COI_INT_PROP_DISCL_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/COI_INT_PROP_DISCL_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS COI_INT_PROP_DISCL_STATUS; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS COI_INT_PRSN_DISCL_EXP_DATE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/COI_INT_PRSN_DISCL_EXP_DATE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS COI_INT_PRSN_DISCL_EXP_DATE; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CAN_NOTIFY_FOR_CREATE_AWD_DISCL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_CAN_NOTIFY_FOR_CREATE_AWD_DISCL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CAN_NOTIFY_FOR_CREATE_AWD_DISCL; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_DISCL_SYNC_FLAG_REQ_IN_AWD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_CHK_DISCL_SYNC_FLAG_REQ_IN_AWD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_DISCL_SYNC_FLAG_REQ_IN_AWD; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_DISCL_SYNC_FLAG_REQ_IN_IP; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_CHK_DISCL_SYNC_FLAG_REQ_IN_IP.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_DISCL_SYNC_FLAG_REQ_IN_IP; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_FCOI_REQUIRED; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_CHK_FCOI_REQUIRED.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_FCOI_REQUIRED; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_HIERARCHY_HAS_DISCL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_CHK_HIERARCHY_HAS_DISCL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_HIERARCHY_HAS_DISCL; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_MATRIX_COMPLETED; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_CHK_MATRIX_COMPLETED.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_MATRIX_COMPLETED; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_OPA_PERSON_IS_FACULTY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_CHK_OPA_PERSON_IS_FACULTY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_OPA_PERSON_IS_FACULTY; 
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_COI_PERSON_HAS_AUTHORIZATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_COI_PERSON_HAS_AUTHORIZATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_COI_PERSON_HAS_AUTHORIZATION; 
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_EVALUATE_RULE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_EVALUATE_RULE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_EVALUATE_RULE; 
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_EVAL_DISCLOSURE_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_EVAL_DISCLOSURE_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_EVAL_DISCLOSURE_STATUS; 
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_GET_OVAL_AWD_PRJT_DISCL_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_GET_OVAL_AWD_PRJT_DISCL_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_GET_OVAL_AWD_PRJT_DISCL_STATUS; 
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_GET_OVERALL_PRJT_DISCL_RVW_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_GET_OVERALL_PRJT_DISCL_RVW_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_GET_OVERALL_PRJT_DISCL_RVW_STATUS; 
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_GET_OVERALL_PRJT_DISCL_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_GET_OVERALL_PRJT_DISCL_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_GET_OVERALL_PRJT_DISCL_STATUS; 
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_GET_OVRAL_AWD_PRJT_DISCL_RVW_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_GET_OVRAL_AWD_PRJT_DISCL_RVW_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_GET_OVRAL_AWD_PRJT_DISCL_RVW_STATUS; 
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_GET_TRAINING_MODULE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_GET_TRAINING_MODULE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_GET_TRAINING_MODULE; 
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_INT_CAN_CREATE_PROP_DISCL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_INT_CAN_CREATE_PROP_DISCL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_INT_CAN_CREATE_PROP_DISCL; 
+ 
+  - changeSet: 
+      id: 20 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_INT_CAN_MARK_DISCL_VOID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_INT_CAN_MARK_DISCL_VOID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_INT_CAN_MARK_DISCL_VOID; 
+ 
+  - changeSet: 
+      id: 21 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_MAP_TRAINING_TYPE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_MAP_TRAINING_TYPE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_MAP_TRAINING_TYPE; 
+ 
+  - changeSet: 
+      id: 22 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_OPA_DISCLOSURE_REQUIRED; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_OPA_DISCLOSURE_REQUIRED.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_OPA_DISCLOSURE_REQUIRED; 
+ 
+  - changeSet: 
+      id: 23 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_SET_PROJECT_DISCLOSURE_REVIEW_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FN_SET_PROJECT_DISCLOSURE_REVIEW_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_SET_PROJECT_DISCLOSURE_REVIEW_STATUS; 
+ 
+  - changeSet: 
+      id: 24 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FUNC_FIND_DUPLICATE_ENTITY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/FUNCTIONS/FUNC_FIND_DUPLICATE_ENTITY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FUNC_FIND_DUPLICATE_ENTITY; 

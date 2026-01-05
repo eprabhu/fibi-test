@@ -1,0 +1,25 @@
+
+
+--
+--  `consulting_discl_action_log`
+--
+
+DROP TABLE IF EXISTS `consulting_discl_action_log`;
+
+CREATE TABLE `consulting_discl_action_log` (
+  `ACTION_LOG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DISCLOSURE_ID` int(11) DEFAULT NULL,
+  `ACTION_TYPE_CODE` varchar(3) DEFAULT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `COMMENT` varchar(4000) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`ACTION_LOG_ID`),
+  KEY `CONSULTING_ACTION_LOG_FK2` (`ACTION_TYPE_CODE`),
+  KEY `CONSULTING_ACTION_LOG_FK1` (`DISCLOSURE_ID`),
+  CONSTRAINT `consulting_ACTION_LOG_FK1` FOREIGN KEY (`DISCLOSURE_ID`) REFERENCES `consulting_disclosure` (`DISCLOSURE_ID`),
+  CONSTRAINT `consulting_ACTION_LOG_FK2` FOREIGN KEY (`ACTION_TYPE_CODE`) REFERENCES `consulting_discl_action_log_type` (`ACTION_TYPE_CODE`)
+) ;
+
+
+

@@ -1,0 +1,5 @@
+INSERT INTO `entity_stage_admin_review_type` (`ADMIN_REVIEW_STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('1', 'Pending', '2024-11-01 14:49:44', 'admin', 'Y');
+INSERT INTO `entity_stage_admin_review_type` (`ADMIN_REVIEW_STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('2', 'Completed', '2024-11-01 14:49:44', 'admin', 'Y');
+INSERT INTO `entity_stage_admin_review_type` (`ADMIN_REVIEW_STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('3', 'Error In Process', '2024-11-01 14:49:44', 'admin', 'Y');
+INSERT INTO `entity_stage_admin_review_type` (`ADMIN_REVIEW_STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('4', 'Processing', '2024-11-01 14:49:45', 'admin', 'Y');
+INSERT INTO `entity_stage_admin_review_type` (`ADMIN_REVIEW_STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('5', 'Completed-Error in Enrich & Verify Process', '2025-01-18 06:48:58', 'admin', 'Y');

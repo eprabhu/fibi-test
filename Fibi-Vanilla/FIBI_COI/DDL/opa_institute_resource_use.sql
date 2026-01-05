@@ -1,0 +1,22 @@
+
+
+--
+--  `opa_institute_resource_use`
+--
+
+DROP TABLE IF EXISTS `opa_institute_resource_use`;
+
+CREATE TABLE `opa_institute_resource_use` (
+  `OPA_INST_RES_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `OPA_DISCLOSURE_ID` int(11) DEFAULT NULL,
+  `OPA_DISCL_PERSON_ENTITY_ID` int(11) DEFAULT NULL,
+  `DESCRIPTION` varchar(4000) DEFAULT NULL,
+  `DESCRIPTION_1` varchar(4000) DEFAULT NULL,
+  `DESCRIPTION_2` varchar(4000) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`OPA_INST_RES_ID`)
+) ;
+
+
+

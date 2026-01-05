@@ -1,0 +1,91 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS coi_project_award_status_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/VIEWS/coi_project_award_status_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS coi_project_award_status_v; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS coi_project_award_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/VIEWS/coi_project_award_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS coi_project_award_v; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS coi_project_institute_proposal_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/VIEWS/coi_project_institute_proposal_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS coi_project_institute_proposal_v; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS coi_project_proposal_qnr_ans_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/VIEWS/coi_project_proposal_qnr_ans_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS coi_project_proposal_qnr_ans_v; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS coi_project_proposal_status_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/VIEWS/coi_project_proposal_status_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS coi_project_proposal_status_v; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS coi_project_proposal_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/VIEWS/coi_project_proposal_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS coi_project_proposal_v; 

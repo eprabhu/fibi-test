@@ -1,0 +1,24 @@
+
+
+--
+--  `fibi_coi_int_error_log`
+--
+
+DROP TABLE IF EXISTS `fibi_coi_int_error_log`;
+
+CREATE TABLE `fibi_coi_int_error_log` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SECTION` varchar(1000) DEFAULT NULL,
+  `ERROR_TYPE` varchar(1000) DEFAULT NULL,
+  `ERROR_MESSAGE` varchar(4000) DEFAULT NULL,
+  `ERROR_DETAILS` varchar(4000) DEFAULT NULL,
+  `MODULE_CODE` varchar(40) DEFAULT NULL,
+  `MODULE_ITEM_KEY` varchar(1000) DEFAULT NULL,
+  `MODULE_SUB_ITEM_KEY` varchar(1000) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UPDATE_USER` varchar(40) DEFAULT 'KC_INTEGRATION',
+  PRIMARY KEY (`ID`)
+) ;
+
+
+

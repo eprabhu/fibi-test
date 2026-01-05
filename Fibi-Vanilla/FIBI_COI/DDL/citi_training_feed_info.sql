@@ -1,0 +1,27 @@
+
+
+--
+--  `citi_training_feed_info`
+--
+
+DROP TABLE IF EXISTS `citi_training_feed_info`;
+
+CREATE TABLE `citi_training_feed_info` (
+  `FEED_INFO_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `FILE_NAME` varchar(255) DEFAULT NULL,
+  `FILE_TYPE` varchar(255) DEFAULT NULL,
+  `FEED_START_TIME` datetime DEFAULT NULL,
+  `FEED_END_TIME` datetime DEFAULT NULL,
+  `NO_OF_RECORDS` int(11) DEFAULT NULL,
+  `NO_OF_FAILED_RECORDS` int(11) DEFAULT NULL,
+  `FEED_TYPE` varchar(255) DEFAULT NULL,
+  `FEED_STATUS` varchar(255) DEFAULT NULL,
+  `UPDATED_TIMESTAMP` datetime DEFAULT NULL,
+  `CREATED_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATED_BY` varchar(255) DEFAULT NULL,
+  `COMMENT` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`FEED_INFO_ID`)
+) ;
+
+
+

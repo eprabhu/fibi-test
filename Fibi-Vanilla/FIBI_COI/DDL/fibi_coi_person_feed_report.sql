@@ -1,0 +1,28 @@
+
+
+--
+--  `fibi_coi_person_feed_report`
+--
+
+DROP TABLE IF EXISTS `fibi_coi_person_feed_report`;
+
+CREATE TABLE `fibi_coi_person_feed_report` (
+  `PERSON_FEED_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PERSON_ID` varchar(40) DEFAULT NULL,
+  `REQUEST_DATE` timestamp NULL DEFAULT NULL,
+  `START_TIMESTAMP` timestamp NULL DEFAULT NULL,
+  `END_TIMESTAMP` timestamp NULL DEFAULT NULL,
+  `DURATION` bigint(20) DEFAULT NULL,
+  `TOTAL_USER_COUNT` int(11) DEFAULT NULL,
+  `NEW_USER_COUNT` int(11) DEFAULT NULL,
+  `UPDATED_USER_COUNT` int(11) DEFAULT NULL,
+  `EXCEPTION_DETAILS` blob,
+  `INVALID_PERSONS` blob,
+  `FEED_STATUS` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` timestamp NULL DEFAULT NULL,
+  `UPDATED_BY` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`PERSON_FEED_ID`)
+) ;
+
+
+

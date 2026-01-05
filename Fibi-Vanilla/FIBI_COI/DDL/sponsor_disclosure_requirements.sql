@@ -1,0 +1,20 @@
+
+
+--
+--  `sponsor_disclosure_requirements`
+--
+
+DROP TABLE IF EXISTS `sponsor_disclosure_requirements`;
+
+CREATE TABLE `sponsor_disclosure_requirements` (
+  `SPONSOR_CODE` varchar(6) NOT NULL,
+  `KEY_PERSON_DISCL_REQUIREMENT` varchar(10) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATED_BY` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`SPONSOR_CODE`),
+  CONSTRAINT `SPONSOR_DISCLOSURE_REQUIREMENTS_FK1` FOREIGN KEY (`SPONSOR_CODE`) REFERENCES `sponsor` (`SPONSOR_CODE`),
+  CONSTRAINT `CHK_KEY_PERSON_DISCL_REQUIREMENT` CHECK ((`KEY_PERSON_DISCL_REQUIREMENT` in (_utf8mb4'ALL',_utf8mb4'PI-COI')))
+) ;
+
+
+

@@ -1,0 +1,18 @@
+[DB] <Action>: <Short Description>
+
+Details:
+- <Detailed explanation of changes made in the database.>
+- <Mention any migrations/scripts added.>
+
+Impact:
+- <Mention any dependencies, breaking changes, or compatibility notes.>
+
+Example:
+[DB] Add: New table for user preferences
+
+Details:
+- Added `user_preferences` table with columns for theme and notifications.
+- Included SQL migration script.
+
+Impact:
+- Requires database migration before deploying.

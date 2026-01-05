@@ -1,0 +1,4 @@
+INSERT INTO `coi_travel_disclosure_status` (`TRAVEL_DISCLOSURE_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('1', 'No Conflict', 'Y', now(), 'admin', '1');
+INSERT INTO `coi_travel_disclosure_status` (`TRAVEL_DISCLOSURE_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('2', 'Potential Conflict', 'Y', now(), 'admin', '2');
+INSERT INTO `coi_travel_disclosure_status` (`TRAVEL_DISCLOSURE_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('3', 'Conflict Identified', 'Y', now(), 'admin', '3');
+INSERT INTO `coi_travel_disclosure_status` (`TRAVEL_DISCLOSURE_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('4', 'Conflict Managed', 'Y', now(), 'admin', '4');

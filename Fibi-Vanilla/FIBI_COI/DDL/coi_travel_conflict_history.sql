@@ -1,0 +1,21 @@
+
+
+--
+--  `coi_travel_conflict_history`
+--
+
+DROP TABLE IF EXISTS `coi_travel_conflict_history`;
+
+CREATE TABLE `coi_travel_conflict_history` (
+  `COI_TRAVEL_CONFLICT_HISTORY_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `TRAVEL_DISCLOSURE_ID` int(11) NOT NULL,
+  `COMMENT` varchar(4000) DEFAULT NULL,
+  `CONFLICT_STATUS_CODE` varchar(3) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`COI_TRAVEL_CONFLICT_HISTORY_ID`),
+  KEY `COI_TRAVEL_CONFLICT_HISTORY_FK1_idx` (`CONFLICT_STATUS_CODE`)
+) ;
+
+
+

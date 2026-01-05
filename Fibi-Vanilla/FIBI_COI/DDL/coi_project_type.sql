@@ -1,0 +1,22 @@
+
+
+--
+--  `coi_project_type`
+--
+
+DROP TABLE IF EXISTS `coi_project_type`;
+
+CREATE TABLE `coi_project_type` (
+  `COI_PROJECT_TYPE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `BADGE_COLOR` varchar(100) DEFAULT NULL,
+  `PROJECT_ICON` varchar(45) DEFAULT NULL,
+  `FCOI_NEEDED` varchar(1) DEFAULT NULL,
+  `PROJECT_DISCLOSURE_NEEDED` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`COI_PROJECT_TYPE_CODE`)
+) ;
+
+
+

@@ -1,0 +1,26 @@
+
+
+--
+--  `coi_travel_destinations`
+--
+
+DROP TABLE IF EXISTS `coi_travel_destinations`;
+
+CREATE TABLE `coi_travel_destinations` (
+  `TRAVEL_DESTINATION_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `TRAVEL_DISCLOSURE_ID` int(11) DEFAULT NULL,
+  `PLACE_OF_STAY` varchar(100) DEFAULT NULL,
+  `CITY` varchar(100) DEFAULT NULL,
+  `STATE` varchar(100) DEFAULT NULL,
+  `POST_CODE` varchar(20) DEFAULT NULL,
+  `COUNTRY_CODE` varchar(3) DEFAULT NULL,
+  `STAY_START_DATE` datetime DEFAULT NULL,
+  `STAY_END_DATE` datetime DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATED_BY` varchar(40) DEFAULT NULL,
+  `TRAVEL_MEDIUM_DETAIL` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`TRAVEL_DESTINATION_ID`)
+) ;
+
+
+

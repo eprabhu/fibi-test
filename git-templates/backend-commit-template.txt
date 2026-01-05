@@ -1,0 +1,22 @@
+[BE] <Action>: <Short Description>
+
+Details:
+- <Detailed explanation of changes made to backend logic.>
+- <Mention ticket numbers, updated API endpoints, etc.>
+
+Impact:
+- <Mention affected modules or breaking changes.>
+
+Testing:
+- <Mention test cases or results.>
+
+Example:
+[BE] Fix: Null pointer in authentication service
+
+Details:
+- Fixed null pointer exception when logging in with null email.
+- Updated `/auth/login` endpoint validation logic.
+
+Impact:
+- Authentication module.
+- No breaking changes.

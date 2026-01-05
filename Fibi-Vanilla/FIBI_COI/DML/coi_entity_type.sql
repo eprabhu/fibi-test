@@ -1,0 +1,7 @@
+INSERT INTO `coi_entity_type` (`ENTITY_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('001', 'US Governmental Organization (Federal, State, Local, Tribal)', 'Y', now(), '10000000001');
+INSERT INTO `coi_entity_type` (`ENTITY_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('002', 'Foreign Governmental Organization', 'Y', now(), '10000000001');
+INSERT INTO `coi_entity_type` (`ENTITY_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('003', 'For Profit Organization (Foreign or US)', 'Y', now(), '10000000001');
+INSERT INTO `coi_entity_type` (`ENTITY_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('004', 'Non-profit Organization (Foreign or US)', 'Y', now(), '10000000001');
+INSERT INTO `coi_entity_type` (`ENTITY_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('005', 'US Institution of Higher Education, Research, Medical Center, Academic Teaching Hospital', 'Y', now(), '10000000001');
+INSERT INTO `coi_entity_type` (`ENTITY_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('006', 'Foreign Institution of Higher Education, Research, Medical Center, Academic Teaching Hospital', 'Y', now(), '10000000001');
+INSERT INTO `coi_entity_type` (`ENTITY_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('007', 'Individual', 'Y', now(), '10000000001');

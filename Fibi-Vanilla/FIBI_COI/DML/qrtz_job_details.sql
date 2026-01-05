@@ -1,0 +1,1 @@
+INSERT INTO `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`, `JOB_CLASS_NAME`, `IS_DURABLE`, `IS_NONCONCURRENT`, `IS_UPDATE_DATA`, `REQUESTS_RECOVERY`, `JOB_DATA`) VALUES ('coi', 'Travel Reminder Notification', 'coi', 'com.polus.fibicomp.quartzscheduler.TravelDisclScheduler', '0', '1', '0', '0', '?');

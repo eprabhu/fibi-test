@@ -1,0 +1,22 @@
+
+
+--
+--  `entity_prior_name`
+--
+
+DROP TABLE IF EXISTS `entity_prior_name`;
+
+CREATE TABLE `entity_prior_name` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ENTITY_ID` int(11) DEFAULT NULL,
+  `PRIOR_NAME` varchar(500) DEFAULT NULL,
+  `EFFECTIVE_YEAR` date DEFAULT NULL,
+  `UPDATED_BY` varchar(40) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ENTITY_PRIOR_NAME_FK1_idx` (`ENTITY_ID`),
+  CONSTRAINT `ENTITY_PRIOR_NAME_FK1` FOREIGN KEY (`ENTITY_ID`) REFERENCES `entity` (`ENTITY_ID`)
+) ;
+
+
+

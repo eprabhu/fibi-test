@@ -1,0 +1,3 @@
+INSERT INTO `opa_status_type` (`STATUS_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('I', 'In progress', 'Y', '2024-08-01 13:17:49', 'admin');
+
+INSERT INTO `opa_status_type` (`STATUS_TYPE_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('S', 'Submitted', 'Y', '2024-08-01 13:17:49', 'admin');

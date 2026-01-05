@@ -1,0 +1,2 @@
+INSERT INTO `entity_stage_batch_source_type` (`SRC_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('1', 'Sponsor', '2024-11-01 14:49:44', '10000000001', 'Y');
+INSERT INTO `entity_stage_batch_source_type` (`SRC_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('2', 'Organization', '2024-11-01 14:49:44', '10000000001', 'Y');

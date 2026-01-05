@@ -1,0 +1,21 @@
+
+
+--
+--  `entity_section_access_right`
+--
+
+DROP TABLE IF EXISTS `entity_section_access_right`;
+
+CREATE TABLE `entity_section_access_right` (
+  `SEC_ACCESS_RIGHT_ID` int(11) NOT NULL,
+  `SECTION_CODE` varchar(3) DEFAULT NULL,
+  `RIGHT_NAME` varchar(100) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` timestamp NULL DEFAULT NULL,
+  `UPDATED_BY` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`SEC_ACCESS_RIGHT_ID`),
+  KEY `ENTITY_SECTION_ACCESS_RIGHT_FK1` (`SECTION_CODE`),
+  CONSTRAINT `ENTITY_SECTION_ACCESS_RIGHT_FK1` FOREIGN KEY (`SECTION_CODE`) REFERENCES `entity_section` (`ENTITY_SECTION_CODE`)
+) ;
+
+
+

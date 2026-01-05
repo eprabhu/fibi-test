@@ -1,0 +1,8 @@
+INSERT INTO `entity_stage_admin_action_type` (`ADMIN_ACTION_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('1', 'Marked as Duplicate and Included', '2024-12-13 10:04:25', '10000000001', 'Y');
+INSERT INTO `entity_stage_admin_action_type` (`ADMIN_ACTION_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('2', 'Selected as Original', '2024-12-13 10:04:25', '10000000001', 'Y');
+INSERT INTO `entity_stage_admin_action_type` (`ADMIN_ACTION_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('3', 'Created entity with DUNS', '2024-12-13 10:04:25', '10000000001', 'Y');
+INSERT INTO `entity_stage_admin_action_type` (`ADMIN_ACTION_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('4', 'Marked as Exclude', '2024-12-13 10:04:25', '10000000001', 'Y');
+INSERT INTO `entity_stage_admin_action_type` (`ADMIN_ACTION_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('5', 'Created entity without DUNS', '2024-12-13 10:04:25', '10000000001', 'Y');
+INSERT INTO `entity_stage_admin_action_type` (`ADMIN_ACTION_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('6', 'Marked As Duplicate and Excluded', '2024-12-13 10:04:50', '10000000001', 'Y');
+INSERT INTO `entity_stage_admin_action_type` (`ADMIN_ACTION_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('7', 'Marked as Duplicate and Included-Original Created', '2025-01-31 18:18:10', '10000000001', 'Y');
+INSERT INTO `entity_stage_admin_action_type` (`ADMIN_ACTION_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('8', 'Marked as Duplicate and Excluded-Original Created', '2025-01-31 18:18:10', '10000000001', 'Y');

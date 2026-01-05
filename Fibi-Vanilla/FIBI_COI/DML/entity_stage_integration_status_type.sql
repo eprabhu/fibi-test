@@ -1,0 +1,3 @@
+INSERT INTO `entity_stage_integration_status_type` (`INTEGRATION_STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('ERR', 'Error', '2024-09-20 17:18:07', '100000001', 'I');
+INSERT INTO `entity_stage_integration_status_type` (`INTEGRATION_STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('SCM', 'Successfully Matched', '2024-09-20 17:18:07', '100000001', 'I');
+INSERT INTO `entity_stage_integration_status_type` (`INTEGRATION_STATUS_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATED_BY`, `IS_ACTIVE`) VALUES ('SUM', 'Successfully Unmatched', '2024-09-20 17:18:07', '100000001', 'I');

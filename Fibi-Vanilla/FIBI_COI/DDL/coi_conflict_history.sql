@@ -1,0 +1,22 @@
+
+
+--
+--  `coi_conflict_history`
+--
+
+DROP TABLE IF EXISTS `coi_conflict_history`;
+
+CREATE TABLE `coi_conflict_history` (
+  `COI_CONFLICT_HISTORY_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `COI_DISCL_PROJECT_ENTITY_REL_ID` int(11) NOT NULL,
+  `DISCLOSURE_ID` int(11) NOT NULL,
+  `MESSAGE` varchar(200) DEFAULT NULL,
+  `COMMENT` varchar(4000) DEFAULT NULL,
+  `CONFLICT_STATUS_CODE` varchar(3) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATED_BY` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`COI_CONFLICT_HISTORY_ID`)
+) ;
+
+
+

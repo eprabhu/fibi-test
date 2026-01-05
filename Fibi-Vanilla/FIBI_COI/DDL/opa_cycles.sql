@@ -1,0 +1,22 @@
+
+
+--
+--  `opa_cycles`
+--
+
+DROP TABLE IF EXISTS `opa_cycles`;
+
+CREATE TABLE `opa_cycles` (
+  `OPA_CYCLE_NUMBER` int(11) NOT NULL AUTO_INCREMENT,
+  `PERIOD_START_DATE` date NOT NULL,
+  `PERIOD_END_DATE` date NOT NULL,
+  `OPA_CYCLE_STATUS` varchar(1) NOT NULL,
+  `OPEN_DATE` date DEFAULT NULL,
+  `CLOSE_DATE` date DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime NOT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  PRIMARY KEY (`OPA_CYCLE_NUMBER`)
+) ;
+
+
+

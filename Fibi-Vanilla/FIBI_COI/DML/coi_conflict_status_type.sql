@@ -1,0 +1,4 @@
+INSERT INTO `coi_conflict_status_type` (`CONFLICT_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('1', 'No Conflict', 'Y', now(), 'admin', '1');
+INSERT INTO `coi_conflict_status_type` (`CONFLICT_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('2', 'Potential Conflict', 'Y', now(), 'admin', '2');
+INSERT INTO `coi_conflict_status_type` (`CONFLICT_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('3', 'Conflict Identified', 'Y', now(), 'admin', '3');
+INSERT INTO `coi_conflict_status_type` (`CONFLICT_STATUS_CODE`, `DESCRIPTION`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `SORT_ORDER`) VALUES ('4', 'No Conflict without Engagement', 'Y', now(), 'admin', '4');

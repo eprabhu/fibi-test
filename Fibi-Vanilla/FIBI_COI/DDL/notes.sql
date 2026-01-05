@@ -1,0 +1,20 @@
+
+
+--
+--  `notes`
+--
+
+DROP TABLE IF EXISTS `notes`;
+
+CREATE TABLE `notes` (
+  `NOTE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PERSON_ID` varchar(45) DEFAULT NULL,
+  `TITLE` varchar(500) DEFAULT NULL,
+  `CONTENT` text,
+  `UPDATED_BY` varchar(60) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  PRIMARY KEY (`NOTE_ID`)
+) ;
+
+
+

@@ -1,0 +1,1276 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS BULK_UPDATE_GLOBAL_ENTITY_FOREIGN_FLAG; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/BULK_UPDATE_GLOBAL_ENTITY_FOREIGN_FLAG.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS BULK_UPDATE_GLOBAL_ENTITY_FOREIGN_FLAG; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CLENSEMATCH_ENT_INFO_BY_DUNS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/CLENSEMATCH_ENT_INFO_BY_DUNS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CLENSEMATCH_ENT_INFO_BY_DUNS; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_COPY_GLOBAL_ENTITY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_COPY_GLOBAL_ENTITY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_COPY_GLOBAL_ENTITY; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DELETE_COI_DISCLOSURES_BY_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DELETE_COI_DISCLOSURES_BY_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DELETE_COI_DISCLOSURES_BY_ID; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DELETE_OPA_DISCLOSURES_BY_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DELETE_OPA_DISCLOSURES_BY_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DELETE_OPA_DISCLOSURES_BY_ID; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DELETE_RECORDS_BY_PERSON_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DELETE_RECORDS_BY_PERSON_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DELETE_RECORDS_BY_PERSON_ID; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DELETE_SFI_BY_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DELETE_SFI_BY_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DELETE_SFI_BY_ID; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DELETE_TRAVEL_DISCLOSURES_BY_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DELETE_TRAVEL_DISCLOSURES_BY_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DELETE_TRAVEL_DISCLOSURES_BY_ID; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DISCL_ENT_PROJ_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DISCL_ENT_PROJ_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DISCL_ENT_PROJ_DETAILS; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DISCL_GENERATE_JSON_PROJECT_SNAPSHOT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DISCL_GENERATE_JSON_PROJECT_SNAPSHOT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DISCL_GENERATE_JSON_PROJECT_SNAPSHOT; 
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DISCL_PROJ_ENTITY_INSERTION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DISCL_PROJ_ENTITY_INSERTION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DISCL_PROJ_ENTITY_INSERTION; 
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_DISCL_VOID_DEACTIVATED_PROJECT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_DISCL_VOID_DEACTIVATED_PROJECT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_DISCL_VOID_DEACTIVATED_PROJECT; 
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_EVALUATE_VALIDATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_EVALUATE_VALIDATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_EVALUATE_VALIDATION; 
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_EVALUATE_VALIDATION_BACKUP; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_EVALUATE_VALIDATION_BACKUP.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_EVALUATE_VALIDATION_BACKUP; 
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_EVALUATE_VALIDATION_TEST; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_EVALUATE_VALIDATION_TEST.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_EVALUATE_VALIDATION_TEST; 
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_INT_GET_ENTITY_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_INT_GET_ENTITY_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_INT_GET_ENTITY_DETAILS; 
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_INT_KC_SPON_ORG_RESPONSE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_INT_KC_SPON_ORG_RESPONSE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_INT_KC_SPON_ORG_RESPONSE; 
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_INT_PROJECT_PRSN_DISCL_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_INT_PROJECT_PRSN_DISCL_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_INT_PROJECT_PRSN_DISCL_STATUS; 
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_INT_PROP_PERSON_DISCL_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_INT_PROP_PERSON_DISCL_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_INT_PROP_PERSON_DISCL_STATUS; 
+ 
+  - changeSet: 
+      id: 20 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_INT_VALDTE_PERSN_DETILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_INT_VALDTE_PERSN_DETILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_INT_VALDTE_PERSN_DETILS; 
+ 
+  - changeSet: 
+      id: 21 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_SYNC_DISCLOSURE_RISK; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_SYNC_DISCLOSURE_RISK.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_SYNC_DISCLOSURE_RISK; 
+ 
+  - changeSet: 
+      id: 22 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_SYNC_FCOI_DISCLOSURE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_SYNC_FCOI_DISCLOSURE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_SYNC_FCOI_DISCLOSURE; 
+ 
+  - changeSet: 
+      id: 23 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_SYNC_INSERT_DISCL_PROJECTS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_SYNC_INSERT_DISCL_PROJECTS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_SYNC_INSERT_DISCL_PROJECTS; 
+ 
+  - changeSet: 
+      id: 24 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_SYNC_REMOVE_DEACTIVATED_PROJECTS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_SYNC_REMOVE_DEACTIVATED_PROJECTS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_SYNC_REMOVE_DEACTIVATED_PROJECTS; 
+ 
+  - changeSet: 
+      id: 25 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_SYNC_UPDATE_DISCL_INTEG_UPDATES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_SYNC_UPDATE_DISCL_INTEG_UPDATES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_SYNC_UPDATE_DISCL_INTEG_UPDATES; 
+ 
+  - changeSet: 
+      id: 26 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_UPD_ANS_TO_NEW_QUEST_VERSN; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_UPD_ANS_TO_NEW_QUEST_VERSN.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_UPD_ANS_TO_NEW_QUEST_VERSN; 
+ 
+  - changeSet: 
+      id: 27 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COI_VALIDATE_DISCLOSURE_CONFLICTS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COI_VALIDATE_DISCLOSURE_CONFLICTS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COI_VALIDATE_DISCLOSURE_CONFLICTS; 
+ 
+  - changeSet: 
+      id: 28 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_FORM_DATA_TO_NEW_VERSION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/COPY_FORM_DATA_TO_NEW_VERSION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_FORM_DATA_TO_NEW_VERSION; 
+ 
+  - changeSet: 
+      id: 29 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_CORPORATE_LINKAGE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/ENRICH_ENTITY_CORPORATE_LINKAGE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_CORPORATE_LINKAGE; 
+ 
+  - changeSet: 
+      id: 30 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_HEADER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/ENRICH_ENTITY_HEADER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_HEADER; 
+ 
+  - changeSet: 
+      id: 31 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_INDUSTRY_CATE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/ENRICH_ENTITY_INDUSTRY_CATE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_INDUSTRY_CATE; 
+ 
+  - changeSet: 
+      id: 32 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_INDUSTRY_CATE_JSON; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/ENRICH_ENTITY_INDUSTRY_CATE_JSON.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_INDUSTRY_CATE_JSON; 
+ 
+  - changeSet: 
+      id: 33 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_REGISTRATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/ENRICH_ENTITY_REGISTRATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_REGISTRATION; 
+ 
+  - changeSet: 
+      id: 34 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_TELEPHONE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/ENRICH_ENTITY_TELEPHONE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ENRICH_ENTITY_TELEPHONE; 
+ 
+  - changeSet: 
+      id: 35 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ENRICH_FOREIGN_NAME; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/ENRICH_FOREIGN_NAME.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ENRICH_FOREIGN_NAME; 
+ 
+  - changeSet: 
+      id: 36 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ENRICH_TRADE_STYLE_NAME; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/ENRICH_TRADE_STYLE_NAME.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ENRICH_TRADE_STYLE_NAME; 
+ 
+  - changeSet: 
+      id: 37 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS EVALUATE_FORM_MANDATORY_VALIDATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/EVALUATE_FORM_MANDATORY_VALIDATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS EVALUATE_FORM_MANDATORY_VALIDATION; 
+ 
+  - changeSet: 
+      id: 38 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS EVALUATE_FORM_VALIDATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/EVALUATE_FORM_VALIDATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS EVALUATE_FORM_VALIDATION; 
+ 
+  - changeSet: 
+      id: 39 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS EVALUATE_OPA_QUESTIONNAIRE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/EVALUATE_OPA_QUESTIONNAIRE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS EVALUATE_OPA_QUESTIONNAIRE; 
+ 
+  - changeSet: 
+      id: 40 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS EVALUATE_PER_ENT_MATRIX; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/EVALUATE_PER_ENT_MATRIX.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS EVALUATE_PER_ENT_MATRIX; 
+ 
+  - changeSet: 
+      id: 41 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS FCOI_DISCLOSRE_RENEWAL_REMINDER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/FCOI_DISCLOSRE_RENEWAL_REMINDER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS FCOI_DISCLOSRE_RENEWAL_REMINDER; 
+ 
+  - changeSet: 
+      id: 42 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GENERATE_ATTACHMENT_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GENERATE_ATTACHMENT_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GENERATE_ATTACHMENT_NUMBER; 
+ 
+  - changeSet: 
+      id: 43 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GENERATE_OPA_DISCLOSURE_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GENERATE_OPA_DISCLOSURE_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GENERATE_OPA_DISCLOSURE_NUMBER; 
+ 
+  - changeSet: 
+      id: 44 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD_OVERVIEW; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_AWARD_DASHBOARD_OVERVIEW.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD_OVERVIEW; 
+ 
+  - changeSet: 
+      id: 45 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWD_FOR_NOTIFY_DISCL_CREATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_AWD_FOR_NOTIFY_DISCL_CREATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWD_FOR_NOTIFY_DISCL_CREATION; 
+ 
+  - changeSet: 
+      id: 46 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_AWARD_PROJECT_OVERVIEW; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_AWARD_PROJECT_OVERVIEW.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_AWARD_PROJECT_OVERVIEW; 
+ 
+  - changeSet: 
+      id: 47 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_DISCLOSURES_FOR_BANNER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_DISCLOSURES_FOR_BANNER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_DISCLOSURES_FOR_BANNER; 
+ 
+  - changeSet: 
+      id: 48 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_DISCLOSURE_HISTORY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_DISCLOSURE_HISTORY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_DISCLOSURE_HISTORY; 
+ 
+  - changeSet: 
+      id: 49 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_DISCL_GENERAL_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_DISCL_GENERAL_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_DISCL_GENERAL_DETAILS; 
+ 
+  - changeSet: 
+      id: 50 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_DISCL_PROJECT_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_DISCL_PROJECT_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_DISCL_PROJECT_DETAILS; 
+ 
+  - changeSet: 
+      id: 51 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_DISCL_REVIEW_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_DISCL_REVIEW_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_DISCL_REVIEW_DETAILS; 
+ 
+  - changeSet: 
+      id: 52 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_ENTITY_PERSON_ENTITY_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_ENTITY_PERSON_ENTITY_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_ENTITY_PERSON_ENTITY_DETAILS; 
+ 
+  - changeSet: 
+      id: 53 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_OPA_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_OPA_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_OPA_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 54 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_PERSON_ENTITY_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_PERSON_ENTITY_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_PERSON_ENTITY_DETAILS; 
+ 
+  - changeSet: 
+      id: 55 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_PROJECTS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_PROJECTS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_PROJECTS; 
+ 
+  - changeSet: 
+      id: 56 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COI_TRAVEL_DISCLOSURE_ADMIN_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COI_TRAVEL_DISCLOSURE_ADMIN_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COI_TRAVEL_DISCLOSURE_ADMIN_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 57 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_COMPONENT_RULE_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_COMPONENT_RULE_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_COMPONENT_RULE_ID; 
+ 
+  - changeSet: 
+      id: 58 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_CONSULTING_DISCLOSURE_ADMIN_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_CONSULTING_DISCLOSURE_ADMIN_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_CONSULTING_DISCLOSURE_ADMIN_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 59 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_DISCLOSURE_PROJECTS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_DISCLOSURE_PROJECTS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_DISCLOSURE_PROJECTS; 
+ 
+  - changeSet: 
+      id: 60 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_ENTITY_DASHBOARD_DYNAMIC_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_ENTITY_DASHBOARD_DYNAMIC_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_ENTITY_DASHBOARD_DYNAMIC_COUNT; 
+ 
+  - changeSet: 
+      id: 61 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_ENTITY_DASHBOARD_DYNAMIC_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_ENTITY_DASHBOARD_DYNAMIC_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_ENTITY_DASHBOARD_DYNAMIC_DATA; 
+ 
+  - changeSet: 
+      id: 62 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_ENTITY_HIERARCHY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_ENTITY_HIERARCHY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_ENTITY_HIERARCHY; 
+ 
+  - changeSet: 
+      id: 63 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_ENTITY_MANDATORY_FIELDS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_ENTITY_MANDATORY_FIELDS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_ENTITY_MANDATORY_FIELDS; 
+ 
+  - changeSet: 
+      id: 64 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_ENTITY_TAB_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_ENTITY_TAB_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_ENTITY_TAB_STATUS; 
+ 
+  - changeSet: 
+      id: 65 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_GLOBAL_ENTITY_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_GLOBAL_ENTITY_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_GLOBAL_ENTITY_DETAILS; 
+ 
+  - changeSet: 
+      id: 66 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_HEIR_PERSON_DISCLOSURES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_HEIR_PERSON_DISCLOSURES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_HEIR_PERSON_DISCLOSURES; 
+ 
+  - changeSet: 
+      id: 67 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_HEIR_PROJECT_DETAIL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_HEIR_PROJECT_DETAIL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_HEIR_PROJECT_DETAIL; 
+ 
+  - changeSet: 
+      id: 68 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_HEIR_PROJECT_TREE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_HEIR_PROJECT_TREE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_HEIR_PROJECT_TREE; 
+ 
+  - changeSet: 
+      id: 69 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_OPA_PERSON_ENTITY_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_OPA_PERSON_ENTITY_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_OPA_PERSON_ENTITY_DETAILS; 
+ 
+  - changeSet: 
+      id: 70 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PERSON_ENTITIES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_PERSON_ENTITIES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PERSON_ENTITIES; 
+ 
+  - changeSet: 
+      id: 71 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PERSON_ENTITY_INFO; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_PERSON_ENTITY_INFO.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PERSON_ENTITY_INFO; 
+ 
+  - changeSet: 
+      id: 72 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PROJECT_OVERVIEW; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_PROJECT_OVERVIEW.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PROJECT_OVERVIEW; 
+ 
+  - changeSet: 
+      id: 73 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_TRAVEL_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_TRAVEL_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_TRAVEL_DETAILS; 
+ 
+  - changeSet: 
+      id: 74 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_TRAVEL_DETAILS_OF_ENGAGEMENT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/GET_TRAVEL_DETAILS_OF_ENGAGEMENT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_TRAVEL_DETAILS_OF_ENGAGEMENT; 
+ 
+  - changeSet: 
+      id: 75 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_OPA_DISCLOSURE_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/INSERT_OPA_DISCLOSURE_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_OPA_DISCLOSURE_DETAILS; 
+ 
+  - changeSet: 
+      id: 76 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MIGRATE_PERSON_TRAINING; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/MIGRATE_PERSON_TRAINING.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MIGRATE_PERSON_TRAINING; 
+ 
+  - changeSet: 
+      id: 77 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS PROC_SYNC_OPA_PER_ENTITY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/PROC_SYNC_OPA_PER_ENTITY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS PROC_SYNC_OPA_PER_ENTITY; 
+ 
+  - changeSet: 
+      id: 78 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS PROJECT_DISCLOSURE_RENEWAL_REMINDER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/PROJECT_DISCLOSURE_RENEWAL_REMINDER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS PROJECT_DISCLOSURE_RENEWAL_REMINDER; 
+ 
+  - changeSet: 
+      id: 79 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS RULE_EVALUATION_FOR_FN; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/RULE_EVALUATION_FOR_FN.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS RULE_EVALUATION_FOR_FN; 
+ 
+  - changeSet: 
+      id: 80 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SYNC_SFIS_AND_DISCLOSURE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/SYNC_SFIS_AND_DISCLOSURE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SYNC_SFIS_AND_DISCLOSURE; 
+ 
+  - changeSet: 
+      id: 81 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS TRAVEL_VALIDATE_REIMBURSEMENT_COST; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/TRAVEL_VALIDATE_REIMBURSEMENT_COST.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS TRAVEL_VALIDATE_REIMBURSEMENT_COST; 
+ 
+  - changeSet: 
+      id: 82 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_GLOBAL_ENTITY_FOREIGN_FLAG; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/UPDATE_GLOBAL_ENTITY_FOREIGN_FLAG.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_GLOBAL_ENTITY_FOREIGN_FLAG; 
+ 
+  - changeSet: 
+      id: 83 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPD_DOCS_WITH_ORG_ENTITY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/UPD_DOCS_WITH_ORG_ENTITY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPD_DOCS_WITH_ORG_ENTITY; 
+ 
+  - changeSet: 
+      id: 84 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS VALIDATE_ENTITY_MANDATORY_FIELDS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/VALIDATE_ENTITY_MANDATORY_FIELDS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS VALIDATE_ENTITY_MANDATORY_FIELDS; 
+ 
+  - changeSet: 
+      id: 85 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS VALIDATE_PROJECT_DISCLOSURE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_COI/PROCEDURES/VALIDATE_PROJECT_DISCLOSURE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS VALIDATE_PROJECT_DISCLOSURE; 

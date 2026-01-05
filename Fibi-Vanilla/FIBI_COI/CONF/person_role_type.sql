@@ -1,0 +1,10 @@
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('53', 'COI Reporter', '2024-08-01 16:58:46', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('56', 'COI Primary Administrator', '2024-08-01 16:58:46', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('57', 'COI Reviewer', '2024-08-01 16:58:46', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('58', 'Entity Admins', '2024-11-29 13:50:40', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('59', 'Entity Reporters', '2024-11-29 13:53:08', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('60', 'Engagement Person', '2025-01-08 12:26:51', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('61', 'Travel Administrators', '2025-02-28 17:53:26', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('62', 'Travel Admin Group', '2025-02-28 17:53:26', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('63', 'Travel Primary Administrator', '2025-02-28 17:53:26', 'quickstart', 'Y');
+INSERT INTO `person_role_type` (`ROLE_TYPE_CODE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `IS_ACTIVE`) VALUES ('64', 'Travel Reporter', '2025-02-28 17:53:26', 'quickstart', 'Y');

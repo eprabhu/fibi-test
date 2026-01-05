@@ -1,0 +1,17 @@
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `LOOKUP_TYPE`, `LOOKUP_VALUE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('1', 'Royalty Income from intellectual property, including copyrights (excluding from MIT)', '1', 'ARG_VALUE_LOOKUP', 'REMUNERATION_RANGE', '1', '1', 'Y', '2024-12-31 10:21:06', 'system');
+
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `LOOKUP_TYPE`, `LOOKUP_VALUE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('2', 'Member of a Board of Directors or Science Advisory Board', '1', 'ARG_VALUE_LOOKUP', 'REMUNERATION_RANGE', '1', '2', 'Y', '2024-12-31 10:21:06', 'system');
+
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `LOOKUP_TYPE`, `LOOKUP_VALUE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('3', 'Consulting', '1', 'ARG_VALUE_LOOKUP', 'REMUNERATION_RANGE', '1', '3', 'Y', '2024-12-31 10:21:06', 'system');
+
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `LOOKUP_TYPE`, `LOOKUP_VALUE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('4', 'Service as an Employee', '1', 'ARG_VALUE_LOOKUP', 'REMUNERATION_RANGE', '1', '4', 'Y', '2024-12-31 10:21:06', 'system');
+
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `LOOKUP_TYPE`, `LOOKUP_VALUE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('5', 'Speaking at conferences or seminars (excluding US universities and others*)\r Exclude income from:\r- U.S. Federal, State or Local government agencies\r- U.S. Institutes of higher education\r- Research institutes affiliated with Institutes of higher education, and academic teaching hospitals and medical centers\"', '1', 'ARG_VALUE_LOOKUP', 'REMUNERATION_RANGE', '1', '5', 'Y', '2024-12-31 10:21:06', 'system');
+
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `LOOKUP_TYPE`, `LOOKUP_VALUE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('6', 'Any Equity Interest in a non-publically traded company', '1', 'ARG_VALUE_LOOKUP', 'OWNERSHIP_INTEREST', '2', '1', 'Y', '2024-12-31 10:21:06', 'system');
+
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('7', 'Common Stock Holdings (no. of shares)', '2', '2', '2', 'Y', '2024-12-31 10:21:06', 'system');
+
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('8', 'Stock Options (no. of shares)', '2', '2', '3', 'Y', '2024-12-31 10:21:06', 'system');
+
+INSERT INTO `per_ent_matrix_question` (`MATRIX_QUESTION_ID`, `COLUMN_LABEL`, `ANSWER_TYPE_CODE`, `LOOKUP_TYPE`, `LOOKUP_VALUE`, `GROUP_ID`, `SORT_ID`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATED_BY`) VALUES ('9', 'Other Ownership Interests (i.e.Personal or Family investment in Entity)', '1', 'ARG_VALUE_LOOKUP', 'OWNERSHIP_INTEREST', '2', '4', 'Y', '2024-12-31 10:21:06', 'system');

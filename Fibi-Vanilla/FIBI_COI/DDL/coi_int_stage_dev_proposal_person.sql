@@ -1,0 +1,30 @@
+
+
+--
+--  `coi_int_stage_dev_proposal_person`
+--
+
+DROP TABLE IF EXISTS `coi_int_stage_dev_proposal_person`;
+
+CREATE TABLE `coi_int_stage_dev_proposal_person` (
+  `PROPOSAL_NUMBER` varchar(20) NOT NULL,
+  `KEY_PERSON_ID` varchar(40) NOT NULL,
+  `KEY_PERSON_ROLE_CODE` int(11) DEFAULT NULL,
+  `KEY_PERSON_ROLE` varchar(25) DEFAULT NULL,
+  `KEY_PERSON_NAME` varchar(90) DEFAULT NULL,
+  `PERCENTAGE_OF_EFFORT` decimal(5,2) DEFAULT NULL,
+  `STATUS` varchar(1) DEFAULT 'A',
+  `CERTIFICATION_FLAG` varchar(20) DEFAULT NULL,
+  `DISCLOSURE_REQUIRED_FLAG` varchar(20) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `ATTRIBUTE_1_LABEL` varchar(90) DEFAULT NULL,
+  `ATTRIBUTE_1_VALUE` varchar(90) DEFAULT NULL,
+  `ATTRIBUTE_2_LABEL` varchar(90) DEFAULT NULL,
+  `ATTRIBUTE_2_VALUE` varchar(90) DEFAULT NULL,
+  `ATTRIBUTE_3_LABEL` varchar(90) DEFAULT NULL,
+  `ATTRIBUTE_3_VALUE` varchar(90) DEFAULT NULL,
+  PRIMARY KEY (`PROPOSAL_NUMBER`,`KEY_PERSON_ID`)
+) ;
+
+
+

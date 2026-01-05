@@ -1,0 +1,1 @@
+INSERT INTO lookup_window (`LOOKUP_WINDOW_NAME`, `DESCRIPTION`, `TABLE_NAME`, `COLUMN_NAME`, `UPDATE_TIMESTAMP`, `UPDATE_USER`, `DATA_TYPE_CODE`) VALUES ('LeadUnit', 'LeadUnit', 'Lead Unit', 'unitName', '2019-06-14 11:26:36', 'admin', '7');
