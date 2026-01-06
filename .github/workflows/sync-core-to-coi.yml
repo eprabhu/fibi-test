@@ -2,10 +2,10 @@ name: Sync CORE to COI
 
 on:
   push:
-    branches: [main, master]
     paths:
       - 'Fibi-Vanilla/FIBI_CORE/**'
       - 'Fibi-*-Release/**/CORE/**'
+      - 'Fibi-*-Release/**/ROUTINES/**'
 
 permissions:
   contents: write
@@ -104,6 +104,14 @@ jobs:
         env:
           GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
       
+      - name: Get current branch name
+        id: branch
+        run: |
+          # Extract branch name from ref (e.g., refs/heads/feature-branch -> feature-branch)
+          BRANCH_NAME="${{ github.ref_name }}"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo "Current branch: $BRANCH_NAME"
+      
       - name: Checkout COI
         if: steps.check-core.outputs.changed == 'true'
         run: |
@@ -112,6 +120,19 @@ jobs:
           cd coi-repo
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Get the branch name from the source repository
+          SOURCE_BRANCH="${{ steps.branch.outputs.branch_name }}"
+          echo "Checking out branch: $SOURCE_BRANCH"
+          
+          # Check if branch exists in COI repository
+          if git ls-remote --heads origin "$SOURCE_BRANCH" | grep -q "$SOURCE_BRANCH"; then
+            echo "Branch $SOURCE_BRANCH exists in COI, checking it out..."
+            git checkout "$SOURCE_BRANCH"
+          else
+            echo "Branch $SOURCE_BRANCH does not exist in COI, creating it..."
+            git checkout -b "$SOURCE_BRANCH"
+          fi
         env:
           GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
       
@@ -341,9 +362,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Get the current branch name
-          BRANCH=$(git branch --show-current || echo "main")
-          echo "Current branch: $BRANCH"
+          # Get the branch name from source repository
+          SOURCE_BRANCH="${{ steps.branch.outputs.branch_name }}"
+          echo "Syncing to branch: $SOURCE_BRANCH"
+          
+          # Ensure we're on the correct branch
+          CURRENT_BRANCH=$(git branch --show-current || echo "")
+          if [ "$CURRENT_BRANCH" != "$SOURCE_BRANCH" ]; then
+            echo "Switching to branch: $SOURCE_BRANCH"
+            if git ls-remote --heads origin "$SOURCE_BRANCH" | grep -q "$SOURCE_BRANCH"; then
+              git checkout "$SOURCE_BRANCH"
+            else
+              git checkout -b "$SOURCE_BRANCH"
+            fi
+          fi
           
           # Configure remote URL with token
           git remote set-url origin https://x-access-token:${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
@@ -368,11 +400,12 @@ jobs:
             git commit -m "Auto-sync CORE and ROUTINES from fibi-test
 
           Source commit: ${{ github.sha }}
-          Source: ${{ github.repository }}"
+          Source branch: $SOURCE_BRANCH
+          Source repository: ${{ github.repository }}"
             
-            echo "Pushing to COI repository (branch: $BRANCH)..."
-            git push origin $BRANCH
-            echo "✅ Sync completed successfully!"
+            echo "Pushing to COI repository (branch: $SOURCE_BRANCH)..."
+            git push origin "$SOURCE_BRANCH" || git push -u origin "$SOURCE_BRANCH"
+            echo "✅ Sync completed successfully to branch: $SOURCE_BRANCH"
           else
             echo "No changes to commit. Already in sync."
           fi
