@@ -35,7 +35,7 @@ jobs:
         with:
           repository: eprabhu/coi
           path: coi-repo
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_COI_PUSH_TOKEN }}
       
       - name: Sync CORE files
         if: steps.check-core.outputs.changed == 'true'
