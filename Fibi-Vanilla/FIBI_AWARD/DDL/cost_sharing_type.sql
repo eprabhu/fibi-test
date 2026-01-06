@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `cost_sharing_type`;
+
+CREATE TABLE `cost_sharing_type` (
+  `COST_SHARE_TYPE_CODE` int(11) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  PRIMARY KEY (`COST_SHARE_TYPE_CODE`)
+) ;

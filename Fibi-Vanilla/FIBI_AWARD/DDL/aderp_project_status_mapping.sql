@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS `aderp_project_status_mapping`;
+
+CREATE TABLE `aderp_project_status_mapping` (
+  `MAPPING_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `API_PROJECT_STATUS_CODE` varchar(50) DEFAULT NULL,
+  `API_PROJECT_STATUS` varchar(255) DEFAULT NULL,
+  `STATUS_CODE` varchar(3) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`MAPPING_ID`)
+) ;

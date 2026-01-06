@@ -1,0 +1,18 @@
+
+
+--
+--  `sap_integration_log`
+--
+
+DROP TABLE IF EXISTS `sap_integration_log`;
+
+CREATE TABLE `sap_integration_log` (
+  `SAP_INTEGRATION_LOG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MESSAGE` varchar(1000) DEFAULT NULL,
+  `MESSAGE_TYPE` varchar(45) DEFAULT NULL,
+  `INTERFACE_TYPE` varchar(45) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`SAP_INTEGRATION_LOG_ID`)
+);
+

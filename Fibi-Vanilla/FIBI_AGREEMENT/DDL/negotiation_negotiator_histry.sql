@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `negotiation_negotiator_histry`;
+
+CREATE TABLE `negotiation_negotiator_histry` (
+  `NEGO_NEGOTIATOR_HISTRY_ID` decimal(22,0) NOT NULL,
+  `NEGOTIATION_ID` decimal(22,0) DEFAULT NULL,
+  `NEGOTIATOR_PERSON_ID` varchar(40) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`NEGO_NEGOTIATOR_HISTRY_ID`)
+) ;

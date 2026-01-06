@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `fund_disbursement_basis_type`;
+
+CREATE TABLE `fund_disbursement_basis_type` (
+  `FUND_DISBURSEMENT_BASIS_TYPE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`FUND_DISBURSEMENT_BASIS_TYPE_CODE`)
+) ;

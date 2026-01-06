@@ -1,0 +1,95 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/envelope_status.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS envelope_status;
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/envelope_details.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS envelope_details;
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/envelope_document.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS envelope_document;
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/esign_recipient_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: |
+            SET FOREIGN_KEY_CHECKS = 0;
+            DROP TABLE IF EXISTS esign_recipient_type;
+            SET FOREIGN_KEY_CHECKS = 1;
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/envelope_recipient.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS envelope_recipient;
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/esignature_configuration.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS esignature_configuration;
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/esign_action_log.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS esign_action_log;

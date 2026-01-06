@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS `agreement_link_module`;
+
+CREATE TABLE `agreement_link_module` (
+  `MODULE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(40) DEFAULT NULL,
+  `SORT_ORDER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`MODULE_CODE`)
+) ;

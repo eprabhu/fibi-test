@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `grant_call_research_type`;
+
+CREATE TABLE `grant_call_research_type` (
+  `RESEARCH_TYPE_CODE` int(11) NOT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  PRIMARY KEY (`RESEARCH_TYPE_CODE`)
+) ;

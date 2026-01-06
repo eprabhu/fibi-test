@@ -1,0 +1,136 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CLAIM_SUBMIT_MANPOWER_DATA_UPDATE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/CLAIM_SUBMIT_MANPOWER_DATA_UPDATE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CLAIM_SUBMIT_MANPOWER_DATA_UPDATE; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DELETE_INACTIVE_PERSONS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/DELETE_INACTIVE_PERSONS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DELETE_INACTIVE_PERSONS; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_WORKDAY_MANPOWER_RETRIGGER_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/GET_WORKDAY_MANPOWER_RETRIGGER_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_WORKDAY_MANPOWER_RETRIGGER_COUNT; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_WORKDAY_MANPOWER_RETRIGGER_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/GET_WORKDAY_MANPOWER_RETRIGGER_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_WORKDAY_MANPOWER_RETRIGGER_DETAILS; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MANPOWER_CLEAR_INTEGRATION_RESP; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/MANPOWER_CLEAR_INTEGRATION_RESP.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MANPOWER_CLEAR_INTEGRATION_RESP; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MNPR_ACTIVE_AWARD_ACTIONS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/MNPR_ACTIVE_AWARD_ACTIONS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MNPR_ACTIVE_AWARD_ACTIONS; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MNPR_REVERT_COMMITTED_COST; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/MNPR_REVERT_COMMITTED_COST.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MNPR_REVERT_COMMITTED_COST; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_MANPOWER_AWARD_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/UPDATE_MANPOWER_AWARD_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_MANPOWER_AWARD_NUMBER; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS WORKDAY_PARTIAL_ALLOC_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/PROCEDURES/WORKDAY_PARTIAL_ALLOC_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS WORKDAY_PARTIAL_ALLOC_REPORT; 

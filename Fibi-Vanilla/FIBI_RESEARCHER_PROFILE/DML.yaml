@@ -1,0 +1,37 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/code_table_configuration.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/researcher_profile_section.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/researcher_attachment_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       

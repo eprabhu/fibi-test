@@ -1,0 +1,16 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GENERATE_FORM_BUILDER_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_FORM_BUILDER/PROCEDURES/GENERATE_FORM_BUILDER_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GENERATE_FORM_BUILDER_NUMBER; 

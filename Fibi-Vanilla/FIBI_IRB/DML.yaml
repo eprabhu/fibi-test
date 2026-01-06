@@ -1,0 +1,85 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/code_table_configuration.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/message.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/rights.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/role_rights.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/special_review_usage.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/irb_protocol_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/irb_protocol_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       

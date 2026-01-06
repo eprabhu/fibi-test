@@ -1,0 +1,16 @@
+
+
+DROP TABLE IF EXISTS `report_type`;
+
+CREATE TABLE `report_type` (
+  `TYPE_CODE` varchar(255) NOT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `JSON_NAME` varchar(100) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  `VIEW_NAME` varchar(100) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  `TYPE` varchar(2) DEFAULT NULL,
+  `MAX_RESULT_COUNT` varchar(7) DEFAULT NULL,
+  PRIMARY KEY (`TYPE_CODE`)
+) ;

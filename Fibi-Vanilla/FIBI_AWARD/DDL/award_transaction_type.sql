@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `award_transaction_type`;
+
+CREATE TABLE `award_transaction_type` (
+  `AWARD_TRANSACTION_TYPE_CODE` decimal(3,0) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` date DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  PRIMARY KEY (`AWARD_TRANSACTION_TYPE_CODE`)
+) ;

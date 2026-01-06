@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `award_association_type`;
+
+CREATE TABLE `award_association_type` (
+  `ASSOCIATION_TYPE_CODE` varchar(255) NOT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  PRIMARY KEY (`ASSOCIATION_TYPE_CODE`)
+) ;

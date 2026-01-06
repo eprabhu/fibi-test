@@ -1,0 +1,2 @@
+INSERT INTO person_role_type (`ROLE_TYPE_CODE`,`DESCRIPTION`,`UPDATE_TIMESTAMP`,`UPDATE_USER`,`IS_ACTIVE`) VALUES (105,'Service Requester',utc_timestamp(),'admin','Y');
+INSERT INTO person_role_type (`ROLE_TYPE_CODE`,`DESCRIPTION`,`UPDATE_TIMESTAMP`,`UPDATE_USER`,`IS_ACTIVE`) VALUES (52,'Service Request Administrator',utc_timestamp(),'admin','Y');

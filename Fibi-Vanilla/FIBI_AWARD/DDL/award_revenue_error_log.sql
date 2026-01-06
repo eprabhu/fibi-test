@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS `award_revenue_error_log`;
+
+CREATE TABLE `award_revenue_error_log` (
+  `ERROR_LOG_ID` int(11) NOT NULL,
+  `ACCOUNT_NUMBER` varchar(100) DEFAULT NULL,
+  `INTERNAL_ORDER_CODE` varchar(50) DEFAULT NULL,
+  `ERROR_MESSAGE` varchar(4000) DEFAULT NULL,
+  `PROCEDURE_NAME` varchar(30) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime NOT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  PRIMARY KEY (`ERROR_LOG_ID`)
+) ;

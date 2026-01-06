@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `sap_claim_feed_batch_files`;
+
+CREATE TABLE `sap_claim_feed_batch_files` (
+  `BATCH_FILE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `BATCH_ID` int(11) NOT NULL,
+  `BATCH_FILE_NAME` varchar(50) NOT NULL,
+  `NO_OF_RECORDS` int(11) NOT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  `UPDATE_TIMESTAMP` datetime NOT NULL,
+  PRIMARY KEY (`BATCH_FILE_ID`),
+  KEY `CLAIM_FEED_BATCH_FILES_FK1_idx` (`BATCH_ID`),
+  CONSTRAINT `CLAIM_FEED_BATCH_FILES_FK1` FOREIGN KEY (`BATCH_ID`) REFERENCES `sap_claim_feed_batch` (`BATCH_ID`)
+) ;

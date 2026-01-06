@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS `sap_claim_feed_batch`;
+
+CREATE TABLE `sap_claim_feed_batch` (
+  `BATCH_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NO_OF_RECORDS` int(11) NOT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  `CREATE_TIMESTAMP` datetime DEFAULT NULL,
+  `RESPONSE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`BATCH_ID`)
+) ;

@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `workday_configuration_data`;
+
+CREATE TABLE `workday_configuration_data` (
+  `CONFIGURATION_KEY` varchar(255) NOT NULL,
+  `CONFIGURATION_VALUE` varchar(255) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CONFIGURATION_KEY`)
+) ;

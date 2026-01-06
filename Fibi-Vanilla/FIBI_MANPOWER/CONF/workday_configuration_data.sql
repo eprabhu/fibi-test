@@ -1,0 +1,2 @@
+INSERT INTO workday_configuration_data (CONFIGURATION_KEY,CONFIGURATION_VALUE,DESCRIPTION,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('SUBSCRIPTION_KEY_VALUE','f5456698c367470dbdfca87fec0f3c5d','This is the subscription key value for making Workday requests','2021-02-18 13:03:18','admin');
+INSERT INTO workday_configuration_data (CONFIGURATION_KEY,CONFIGURATION_VALUE,DESCRIPTION,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('WORKDAY_API','https://apidev.ntu.edu.sg/Workday/','This is the api for workday','2021-02-18 13:03:16','admin');

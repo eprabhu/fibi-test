@@ -1,0 +1,417 @@
+databaseChangeLog: 
+  - changeSet: 
+      id: FIBI-8122-1 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/activity_type.sql
+            relativeToChangelogFile: true 
+      rollback: empty   
+
+  - changeSet: 
+      id: FIBI-8122-13
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/role.sql
+            relativeToChangelogFile: true 
+      rollback: empty
+
+  - changeSet: 
+      id: FIBI-8122-2 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/agreement_workflow_action.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-3 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/business_rule_variable.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-4 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/institute_rates.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-5 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/lookup_window.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-6 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/module_derived_roles.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-7 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/notification_type.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-8 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/parameter.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: FIBI-8122-9
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/person_role_type.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-10 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report_class.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-11 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-12 
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/role_rights.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-14
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/sr_type.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-15
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/task_module_mapping.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-16
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/task_section_mapping.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+    
+  - changeSet: 
+      id: FIBI-8122-17
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/task_type.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-18
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/valid_ce_rate_types.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: FIBI-8122-19
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/valid_report_class.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-20
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report_type.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: FIBI-8122-21
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report_template.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: FIBI-8122-22
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/widget_lookup.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: FIBI-8122-23
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/sponsor_term.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: FIBI-8122-24
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/sponsor_term_type.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+      
+  - changeSet: 
+      id: FIBI-8122-25
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/business_rules_experssion.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: FIBI-8122-26
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/business_rules.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-27
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/business_rule_variable.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-28
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/person_role_type.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-29
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/meta_rules.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-30
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/meta_rule_detail.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-31
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/workflow_map.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-32
+      author: Prabhu.E 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/workflow_map_detail.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-33
+      author: Farsana Khadar 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/clauses_bank.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-34
+      author: Farsana Khadar 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/clauses_group.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-35
+      author: Farsana Khadar 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/clauses.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+      
+  - changeSet: 
+      id: FIBI-8122-36
+      author: Farsana Khadar 
+      labels: 'DML' 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/agreement_type_template.sql
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: FIBI-8122-37
+      author: Farsana Khadar 
+      labels: 'DML' 
+      comment: To update WORKFLOW_COLUMN_NEXTVALUE 
+      - sql:
+              sql: | 
+                    SET SQL_SAFE_UPDATES =0;
+                    UPDATE WORKFLOW_COLUMN_NEXTVALUE 
+                    SET RULE_ID =(SELECT COALESCE(MAX(CAST(RULE_ID AS UNSIGNED)), 0) + 1 as ID FROM business_rules) ,
+                    WORKFLOW_ID = (SELECT COALESCE(MAX(WORKFLOW_ID), 0) + 1 as ID FROM WORKFLOW),
+                    WORKFLOW_DETAIL_ID = (SELECT COALESCE(MAX(WORKFLOW_DETAIL_ID), 0) + 1 as ID FROM WORKFLOW_DETAIL),
+                    MAP_ID = (SELECT COALESCE(MAX(MAP_ID), 0) + 1 as ID FROM workflow_map),
+                    MAP_DETAIL_ID = (SELECT COALESCE(MAX(MAP_DETAIL_ID), 0) + 1 as ID FROM workflow_map_detail),
+                    RULES_EXPERSSION_ID = (SELECT COALESCE(MAX(RULES_EXPERSSION_ID), 0) + 1 as ID FROM business_rules_experssion),
+                    RULES_EXPERSSION_ARG_ID = (SELECT COALESCE(MAX(BUSINESS_RULE_EXP_ARGS_ID), 0) + 1 as ID FROM business_rule_exp_args);
+                    SET SQL_SAFE_UPDATES =1;
+      rollback: empty 
+

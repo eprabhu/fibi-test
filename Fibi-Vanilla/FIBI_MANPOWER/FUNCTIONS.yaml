@@ -1,0 +1,31 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHCK_MANPOWER_POSITION_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/FUNCTIONS/FN_CHCK_MANPOWER_POSITION_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHCK_MANPOWER_POSITION_ID; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CREATE_SUPORG; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/FUNCTIONS/FN_CREATE_SUPORG.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CREATE_SUPORG; 

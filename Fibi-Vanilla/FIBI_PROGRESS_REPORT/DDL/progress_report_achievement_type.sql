@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS `progress_report_achievement_type`;
+
+CREATE TABLE `progress_report_achievement_type` (
+  `ACHIEVEMENT_TYPE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(300) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `SECTION_TYPE` varchar(1) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  `TEMPLATE_DESCRIPTION` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`ACHIEVEMENT_TYPE_CODE`)
+) ;

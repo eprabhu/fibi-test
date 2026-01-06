@@ -1,0 +1,19 @@
+
+
+--
+--  `scopus_metrics`
+--
+
+DROP TABLE IF EXISTS `scopus_metrics`;
+
+CREATE TABLE `scopus_metrics` (
+  `SCOPUS_ID` varchar(40) NOT NULL,
+  `METRIC_TYPE` varchar(100) DEFAULT NULL,
+  `YEAR` int(11) NOT NULL,
+  `VALUE` int(11) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`SCOPUS_ID`,`YEAR`),
+  CONSTRAINT `SCOPUS_METRICS_FK1` FOREIGN KEY (`SCOPUS_ID`) REFERENCES `scopus` (`SCOPUS_ID`)
+);
+

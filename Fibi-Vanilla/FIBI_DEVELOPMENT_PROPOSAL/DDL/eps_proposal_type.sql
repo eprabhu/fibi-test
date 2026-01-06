@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS `eps_proposal_type`;
+
+CREATE TABLE `eps_proposal_type` (
+  `TYPE_CODE` int(11) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  `CAN_MERGE_TO_IP` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`TYPE_CODE`)
+) ;

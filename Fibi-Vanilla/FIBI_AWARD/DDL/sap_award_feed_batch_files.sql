@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS `sap_award_feed_batch_files`;
+
+CREATE TABLE `sap_award_feed_batch_files` (
+  `BATCH_FILE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `BATCH_FILE_NAME` varchar(255) DEFAULT NULL,
+  `BATCH_ID` int(11) DEFAULT NULL,
+  `NO_OF_RECORDS` int(11) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`BATCH_FILE_ID`)
+) ;

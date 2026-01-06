@@ -1,0 +1,1 @@
+INSERT INTO lookup_window (LOOKUP_WINDOW_NAME,DESCRIPTION,TABLE_NAME,COLUMN_NAME,OTHERS_DISPLAY_COLUMNS,UPDATE_TIMESTAMP,UPDATE_USER,DATA_TYPE_CODE) VALUES ('Instituteproposal','Institute Proposal','instituteproposal','instituteproposal',NULL,'2020-03-18 09:18:47','admin','6');

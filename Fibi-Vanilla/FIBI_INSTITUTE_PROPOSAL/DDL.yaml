@@ -1,0 +1,394 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_status.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_status;
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_action_item.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_action_item;
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_action_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_action_type;
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_attach_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_attach_type;
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_resrch_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_resrch_type;
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_type;
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_funding_status.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: |
+            SET FOREIGN_KEY_CHECKS = 0;
+            DROP TABLE IF EXISTS proposal_funding_status;
+            SET FOREIGN_KEY_CHECKS = 1;
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal;
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/ip_budget_header.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS ip_budget_header;
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/action_letter_template.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS action_letter_template;
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/ip_budget_period.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS ip_budget_period;
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_action_log.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_action_log;
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_admin_details.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_admin_details;
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_attachments.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_attachments;
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_comments.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_comments;
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_comment_attachments.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_comment_attachments;
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_keywords.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_keywords;
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_persons.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_persons;
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_persons_attachmnt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_persons_attachmnt;
+ 
+  - changeSet: 
+      id: 20 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_project_team.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_project_team;
+ 
+  - changeSet: 
+      id: 21 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_resrch_areas.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_resrch_areas;
+ 
+  - changeSet: 
+      id: 22 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_review.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_review;
+ 
+  - changeSet: 
+      id: 23 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_review_comment.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_review_comment;
+ 
+  - changeSet: 
+      id: 24 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_review_attachment.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_review_attachment;
+ 
+  - changeSet: 
+      id: 25 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_special_review.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_special_review;
+ 
+  - changeSet: 
+      id: 26 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_sponsors.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_sponsors;
+ 
+  - changeSet: 
+      id: 27 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/proposal_version_history.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS proposal_version_history;
+ 
+  - changeSet: 
+      id: 28 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/prop_person_units.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS prop_person_units;
+ 
+  - changeSet: 
+      id: 29 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/valid_ce_rate_types.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS valid_ce_rate_types;
+ 
+  - changeSet: 
+      id: 30 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/valid_report_class.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS valid_report_class;

@@ -1,0 +1,248 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/report_status.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS report_status;
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/report_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS report_type;
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/report_template.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS report_template;
+ 
+  # - changeSet: 
+  #     id: 4 
+  #     author: fibi_admin 
+  #     labels: DDL 
+  #     comment: DDL change set 
+  #     changes: 
+  #       - sqlFile: 
+  #           path: DDL/birt_download_option.sql 
+  #           relativeToChangelogFile: true 
+  #           splitStatements: true
+  #     rollback: 
+  #       - sql: DROP TABLE IF EXISTS birt_download_option;
+ 
+  # - changeSet: 
+  #     id: 5 
+  #     author: fibi_admin 
+  #     labels: DDL 
+  #     comment: DDL change set 
+  #     changes: 
+  #       - sqlFile: 
+  #           path: DDL/birt_template.sql 
+  #           relativeToChangelogFile: true 
+  #           splitStatements: true
+  #     rollback: 
+  #       - sql: DROP TABLE IF EXISTS birt_template;
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/custom_data_report_rt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS custom_data_report_rt;
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/expense_tracker_rt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS expense_tracker_rt;
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/person_rt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS person_rt;
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/prog_rpt_hdr_rt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS prog_rpt_hdr_rt;
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/prog_rpt_kpi_rt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS prog_rpt_kpi_rt;
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/prog_rpt_milestones_rt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS prog_rpt_milestones_rt;
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/pr_master_dataset_rt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS pr_master_dataset_rt;
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/report_columns.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS report_columns;
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/report_last_sync_time.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS report_last_sync_time;
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/report_type_join.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS report_type_join;
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/special_term_quest_report_dataset.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS special_term_quest_report_dataset;
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/temp_award_master_dataset.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS temp_award_master_dataset;
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/temp_award_master_dataset_dmp.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS temp_award_master_dataset_dmp;
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/temp_pr_master_dataset_rt.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS temp_pr_master_dataset_rt;

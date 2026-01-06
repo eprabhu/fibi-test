@@ -1,0 +1,46 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_RESEARCHER_PROFILE_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_RESEARCHER_PROFILE/PROCEDURES/GET_RESEARCHER_PROFILE_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_RESEARCHER_PROFILE_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_RESEARCHER_PROFILE_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_RESEARCHER_PROFILE/PROCEDURES/GET_RESEARCHER_PROFILE_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_RESEARCHER_PROFILE_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_RESEARCHER_PUBLICATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_RESEARCHER_PROFILE/PROCEDURES/GET_RESEARCHER_PUBLICATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_RESEARCHER_PUBLICATION; 

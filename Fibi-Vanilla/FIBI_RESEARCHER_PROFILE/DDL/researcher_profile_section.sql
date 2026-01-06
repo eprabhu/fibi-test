@@ -1,0 +1,15 @@
+
+DROP TABLE IF EXISTS `researcher_profile_section`;
+
+CREATE TABLE `researcher_profile_section` (
+  `SECTION_CODE` varchar(6) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `CAN_INSTITUTION_MAKE_PRIVATE` varchar(1) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  `SORT_ORDER` int(11) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `HELP` varchar(2000) DEFAULT NULL,
+  `INSTRUCTION` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`SECTION_CODE`)
+) ;

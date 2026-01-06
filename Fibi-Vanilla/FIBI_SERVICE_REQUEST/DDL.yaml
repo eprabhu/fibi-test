@@ -1,0 +1,293 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_action_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_action_type;
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_attachment_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_attachment_type;
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_role_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_role_type;
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/assoc_sr.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS assoc_sr;
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_status.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: |
+            SET FOREIGN_KEY_CHECKS = 0;
+            DROP TABLE IF EXISTS sr_status;
+            SET FOREIGN_KEY_CHECKS = 1;
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_category.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: |
+            SET FOREIGN_KEY_CHECKS = 0;
+            DROP TABLE IF EXISTS sr_category;
+            SET FOREIGN_KEY_CHECKS = 1;
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_priority.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_priority;
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_header.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_header;
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_action_log.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_action_log;
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_attachment.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_attachment;
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_comments.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_comments;
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_header_field.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_header_field;
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_header_history.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_header_history;
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_mail_informations.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_mail_informations;
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_module_mapping.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_module_mapping;
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_persons.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_persons;
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_person_roles.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_person_roles;
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_person_units.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_person_units;
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_process_flow.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_process_flow;
+ 
+  - changeSet: 
+      id: 20 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_reporter_change_history.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_reporter_change_history;
+ 
+  - changeSet: 
+      id: 21 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_status_history.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_status_history;
+ 
+  - changeSet: 
+      id: 22 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/sr_watcher.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS sr_watcher;

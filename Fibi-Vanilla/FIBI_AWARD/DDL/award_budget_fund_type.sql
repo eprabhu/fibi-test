@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `award_budget_fund_type`;
+
+CREATE TABLE `award_budget_fund_type` (
+  `FUND_TYPE_CODE` varchar(3) NOT NULL,
+  `FUND_TYPE` varchar(200) DEFAULT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `IS_DEFAULT` varchar(1) DEFAULT NULL,
+  `IS_COST_SHARE_ENABLE` varchar(1) DEFAULT NULL,
+  `REFERENCE_COLUMN` varchar(60) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  PRIMARY KEY (`FUND_TYPE_CODE`)
+) ;

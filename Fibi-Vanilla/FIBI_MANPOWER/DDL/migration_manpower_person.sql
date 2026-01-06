@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `migration_manpower_person`;
+
+CREATE TABLE `migration_manpower_person` (
+  `MIGRATION_MANPOWER_PERSON_ID` varchar(255) NOT NULL,
+  `CITIZENSHIP` varchar(255) DEFAULT NULL,
+  `NATIONALITY` varchar(255) DEFAULT NULL,
+  `WORKERID` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`MIGRATION_MANPOWER_PERSON_ID`)
+) ;

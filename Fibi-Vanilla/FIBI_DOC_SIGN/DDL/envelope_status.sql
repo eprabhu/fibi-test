@@ -1,0 +1,10 @@
+
+DROP TABLE IF EXISTS `envelope_status`;
+
+CREATE TABLE `envelope_status` (
+  `STATUS` varchar(255) NOT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`STATUS`)
+) ;

@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS `agreement_association_link`;
+
+CREATE TABLE `agreement_association_link` (
+  `MODULE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `AGREEMENT_REQUEST_ID` int(11) DEFAULT NULL,
+  `MODULE_CODE` int(11) DEFAULT NULL,
+  `MODULE_ITEM_KEY` varchar(12) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`MODULE_ID`)
+) ;

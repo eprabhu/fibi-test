@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `orcid_parameter`;
+
+CREATE TABLE `orcid_parameter` (
+  `PARAMETER_NAME` varchar(100) NOT NULL,
+  `VALUE` varchar(1000) DEFAULT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(40) NOT NULL,
+  PRIMARY KEY (`PARAMETER_NAME`)
+) ;

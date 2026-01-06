@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `grant_call_attach_type`;
+
+CREATE TABLE `grant_call_attach_type` (
+  `GRANT_ATTACHMNT_TYPE_CODE` int(11) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  PRIMARY KEY (`GRANT_ATTACHMNT_TYPE_CODE`)
+) ;

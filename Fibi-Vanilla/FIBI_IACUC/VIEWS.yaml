@@ -1,0 +1,16 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS ac_protocol_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_IACUC/VIEWS/ac_protocol_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS ac_protocol_v; 

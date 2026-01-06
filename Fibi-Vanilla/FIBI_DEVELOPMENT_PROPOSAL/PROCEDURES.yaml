@@ -1,0 +1,316 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_ADDITIONAL_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_ADDITIONAL_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_ADDITIONAL_DATA; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_ATTCH_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_ATTCH_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_ATTCH_DATA; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_BUDGET_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_BUDGET_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_BUDGET_DATA; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_COMMENTS_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_COMMENTS_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_COMMENTS_DATA; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_CP_REPORT_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_CP_REPORT_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_CP_REPORT_DATA; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_CUSTOM_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_CUSTOM_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_CUSTOM_DATA; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_DATA; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_KPI_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_KPI_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_KPI_DATA; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_ORGANIZATION_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_ORGANIZATION_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_ORGANIZATION_DATA; 
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_PERSON_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_PERSON_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_PERSON_DATA; 
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_QUESTIONNAIRE_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/COPY_MERGE_EPS_PROPOSAL_QUESTIONNAIRE_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_MERGE_EPS_PROPOSAL_QUESTIONNAIRE_DATA; 
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_EVAL_DELETED_PERSON_LIST; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/GET_EVAL_DELETED_PERSON_LIST.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_EVAL_DELETED_PERSON_LIST; 
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PROPOSAL_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/GET_PROPOSAL_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PROPOSAL_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PROPOSAL_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/GET_PROPOSAL_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PROPOSAL_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PROP_EXT_RVW_DTLS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/GET_PROP_EXT_RVW_DTLS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PROP_EXT_RVW_DTLS; 
+ 
+  # - changeSet: 
+  #     id: 17 
+  #     author: fibi_admin 
+  #     labels: PROCEDURES 
+  #     comment: PROCEDURE change set 
+  #     changes: 
+  #       - sql: 
+  #           sql: DROP PROCEDURE IF EXISTS GET_WIDGET_DATA_IN_DETAIL; 
+  #       - sqlFile: 
+  #           path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/GET_WIDGET_DATA_IN_DETAIL.sql 
+  #           relativeToChangelogFile: false 
+  #           splitStatements: false
+  #     rollback: 
+  #       - sql: DROP PROCEDURE IF EXISTS GET_WIDGET_DATA_IN_DETAIL; 
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS LOAD_PROP_EXT_RVW_DTLS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/LOAD_PROP_EXT_RVW_DTLS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS LOAD_PROP_EXT_RVW_DTLS; 
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS PROPOSAL_WAITING_WORKFLOW_REMINDER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/PROPOSAL_WAITING_WORKFLOW_REMINDER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS PROPOSAL_WAITING_WORKFLOW_REMINDER; 
+ 
+  - changeSet: 
+      id: 20 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_PROPOSAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/RESET_AUTO_INCREMENT_PROPOSAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_PROPOSAL; 
+ 
+  - changeSet: 
+      id: 21 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_PROPOSAL_DURATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_DEVELOPMENT_PROPOSAL/PROCEDURES/UPDATE_PROPOSAL_DURATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_PROPOSAL_DURATION; 

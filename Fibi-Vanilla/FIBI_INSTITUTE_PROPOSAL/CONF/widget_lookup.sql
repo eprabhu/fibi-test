@@ -1,0 +1,2 @@
+INSERT INTO widget_lookup (`WIDGET_ID`,`DESCRIPTION`,`WIDGET_NAME`,`IS_ACTIVE`,`UPDATE_TIMESTAMP`,`UPDATE_USER`,`SIZE`,`IMAGE_PATH`) VALUES (34,'Institute Proposals by Lead Unit','Institute Proposals by Lead Unit','Y',utc_timestamp(),'admin','S','ip_by_lead_unit.png');
+INSERT INTO widget_lookup (`WIDGET_ID`,`DESCRIPTION`,`WIDGET_NAME`,`IS_ACTIVE`,`UPDATE_TIMESTAMP`,`UPDATE_USER`,`SIZE`,`IMAGE_PATH`) VALUES (35,'Institute Proposals by Sponsor - Current FY','Institute Proposals by Sponsor - Current FY','Y',utc_timestamp(),'admin','S','ip_by_sponsor_current_fy.png');

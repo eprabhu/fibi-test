@@ -1,0 +1,136 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_ADVANCE_CAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_CHK_CLAIM_ADVANCE_CAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_ADVANCE_CAL; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_AMOUNT_ZERO; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_CHK_CLAIM_AMOUNT_ZERO.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_AMOUNT_ZERO; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_INVOICE_GRT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_CHK_CLAIM_INVOICE_GRT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_INVOICE_GRT; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_INVOICE_LINE_ITEMS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_CHK_CLAIM_INVOICE_LINE_ITEMS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_INVOICE_LINE_ITEMS; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_INV_LINEITEM_ZERO; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_CHK_CLAIM_INV_LINEITEM_ZERO.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_CLAIM_INV_LINEITEM_ZERO; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_INVOICE_CUSTOMER_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_CHK_INVOICE_CUSTOMER_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_INVOICE_CUSTOMER_NUMBER; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_INV_CUSTOMER_NO_LENGTH; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_CHK_INV_CUSTOMER_NO_LENGTH.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_INV_CUSTOMER_NO_LENGTH; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_FOR_ALL_CLAIMS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_FOR_ALL_CLAIMS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_FOR_ALL_CLAIMS; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_VERIFY_CLAIMS_REFUNDED; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/FUNCTIONS/FN_VERIFY_CLAIMS_REFUNDED.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_VERIFY_CLAIMS_REFUNDED; 

@@ -1,0 +1,10 @@
+
+DROP TABLE IF EXISTS `sr_role_type`;
+
+CREATE TABLE `sr_role_type` (
+  `ROLE_TYPE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`ROLE_TYPE_CODE`)
+) ;

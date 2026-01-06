@@ -1,0 +1,10 @@
+
+DROP TABLE IF EXISTS `proposal_funding_status`;
+
+CREATE TABLE `proposal_funding_status` (
+  `FUNDING_STATUS_CODE` int(11) NOT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`FUNDING_STATUS_CODE`)
+) ;

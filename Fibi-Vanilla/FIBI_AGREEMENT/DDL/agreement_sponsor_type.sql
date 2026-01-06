@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `agreement_sponsor_type`;
+
+CREATE TABLE `agreement_sponsor_type` (
+  `AGREEMENT_SPONSOR_TYPE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`AGREEMENT_SPONSOR_TYPE_CODE`)
+) ;

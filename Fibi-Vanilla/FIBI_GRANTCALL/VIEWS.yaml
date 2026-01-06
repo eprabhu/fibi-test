@@ -1,0 +1,31 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS grant_call_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/VIEWS/grant_call_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS grant_call_report_v; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS pre_award_summary_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/VIEWS/pre_award_summary_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS pre_award_summary_report_v; 

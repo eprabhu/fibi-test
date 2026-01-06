@@ -1,0 +1,267 @@
+INSERT INTO code_table_configuration (`TABLE_NAME`,`DISPLAY_NAME`,`CONTENT`,`GROUP_NAME`,`DESCRIPTION`,`UPDATE_USER`,`UPDATE_TIMESTAMP`,`IS_LOG_ENABLED`) VALUES ('REPORT_STATUS','Award Report Status','{\n    \"group\": \"Award\",\n    \"codeTableName\": \"Award Report Status\",\n    \"description\": \"List of all report statuses in Award module\",\n    \"databaseTableName\": \"REPORT_STATUS\",\n    \"fields\": [\n        {\n            \"columnName\": \"REPORT_STATUS_CODE\",\n            \"displayName\": \"Report Status Code\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 3,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"DESCRIPTION\",\n            \"displayName\": \"Description\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 200,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"UPDATE_TIMESTAMP\",\n            \"displayName\": \"Update Timestamp\",\n            \"dataType\": \"Date\",\n            \"isEditable\": false,\n            \"length\": null,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"UPDATE_USER\",\n            \"displayName\": \"Update User\",\n            \"dataType\": \"String\",\n            \"isEditable\": false,\n            \"length\": 60,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": \"PERSON#USER_NAME\",\n            \"defaultValue\": null\n        }\n    ],\n    \"primaryKey\": [\n        \"REPORT_STATUS_CODE\"\n    ],\n    \"dependency\": [],\n    \"actions\": null\n}','Award','List of all report statuses in Award module','quickstart','2021-04-08 13:51:03','N');
+INSERT INTO code_table_configuration (TABLE_NAME,DISPLAY_NAME,CONTENT,GROUP_NAME,DESCRIPTION,UPDATE_USER,UPDATE_TIMESTAMP,IS_LOG_ENABLED) VALUES ('REPORT_TEMPLATE','Report Template ','{"group": "General","codeTableName": "Report Template","description": "List of all Template","databaseTableName": "REPORT_TEMPLATE","fields": [{ "columnName": "MODULE_CODE", "displayName": "Module code", "dataType": "INTEGER", "isEditable": true, "length": 3, "canEmpty": false,"visible": false,"valueChanged": null, "index": null,"filterType": "lookUp","valueField": "COEUS_MODULE#MODULE_CODE","isTransient": null,"values": null,"refColumnName": null, "defaultValue": "DESCRIPTION_MODULE_CODE"},{"columnName": "DESCRIPTION_MODULE_CODE","displayName": "Module ","dataType": "String","isEditable": false,"length": null,"canEmpty": false,"visible": true,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": "true","values": null,"refColumnName": null,"defaultValue": null},{"columnName": "REPORT_TEMPLATE_ID","displayName": "Template ID","dataType": "INTEGER","isEditable": false,"length": 5,"canEmpty": false,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "TEMPLATE_NAME","displayName": "Template Name","dataType": "String","isEditable": true,"length": 90,"canEmpty": false,"visible": true,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "TEMPLATE_DESCRIPTION","displayName": "Template Description","dataType": "String","isEditable": true,"length": 200,"canEmpty": false,"visible": true,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "TEMPLATE_OWNER_PERSON_ID","displayName": "Template owner person id","dataType": "String","isEditable": false,"length": 40,"canEmpty": false,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "TEMPLATE_SQL","displayName": "Template sql","dataType": "LONGTEXT","isEditable": false,"length": 200,"canEmpty": false,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "TEMPLATE_JSON","displayName": "Template json","dataType": "LONGTEXT","isEditable": false,"length": 200,"canEmpty": false,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "CREATE_TIMESTAMP","displayName": "Create Timestamp","dataType": "Date","isEditable": false,"length": null,"canEmpty": false,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "UPDATE_USER","displayName": "Update User","dataType": "String","isEditable": false,"length": 60,"canEmpty": false,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": "PERSON#USER_NAME","defaultValue": null},{"columnName": "UPDATE_TIMESTAMP","displayName": "update timestamp","dataType": "Date","isEditable": false,"length": null,"canEmpty": false,"visible": true,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "CREATE_USER","displayName": "Create User","dataType": "String","isEditable": false,"length": 60,"canEmpty": true,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "TEMPLATE_TYPE","displayName": "Template type","dataType": "String","isEditable": false,"length": 20,"canEmpty": true,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},		{"columnName": "SUB_MODULE_CODE","displayName": "sub Module code","dataType": "INTEGER","isEditable": false,"length": 20,"canEmpty": true,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "TYPE_CODE","displayName": "type code","dataType": "String","isEditable": false,"length": 225,"canEmpty": true,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "SORT_ORDER","displayName": "sort order","dataType": "INTEGER","isEditable": false,"length": 225,"canEmpty": true,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null},{"columnName": "MODULE_DESCRIPTION","displayName": "module description","dataType": "String","isEditable": false,"length": 200,"canEmpty": true,"visible": false,"valueChanged": null,"index": null,"filterType": null,"valueField": null,"isTransient": null,"values": null,"refColumnName": null,"defaultValue": null}], "primaryKey": ["REPORT_TEMPLATE_ID" ], "dependency": [],"actions": "U"}','General','list of all templates','admin',UTC_TIMESTAMP(),'Y');
+INSERT INTO code_table_configuration (TABLE_NAME,DISPLAY_NAME,CONTENT,GROUP_NAME,DESCRIPTION,UPDATE_USER,UPDATE_TIMESTAMP,IS_LOG_ENABLED) VALUES ('REPORT_TYPE','Report Type','{"group":"General","codeTableName":"Report Type","description":"List of all report types","databaseTableName":"REPORT_TYPE","fields":[{"columnName":"TYPE_CODE","displayName":"Type Code","dataType":"String","isEditable":true,"length":3,"canEmpty":false,"visible":true,"valueChanged":null,"index":null,"filterType":null,"valueField":null,"isTransient":null,"values":null,"refColumnName":null,"defaultValue":null},{"columnName":"DESCRIPTION","displayName":"Description","dataType":"String","isEditable":true,"length":200,"canEmpty":true,"visible":true,"valueChanged":null,"index":null,"filterType":null,"valueField":null,"isTransient":null,"values":null,"refColumnName":null,"defaultValue":null},{"columnName":"UPDATE_TIMESTAMP","displayName":"Update Timestamp","dataType":"Date","isEditable":false,"length":null,"canEmpty":false,"visible":true,"valueChanged":null,"index":null,"filterType":null,"valueField":null,"isTransient":null,"values":null,"refColumnName":null,"defaultValue":null},{"columnName":"UPDATE_USER","displayName":"Update User","dataType":"String","isEditable":false,"length":60,"canEmpty":false,"visible":true,"valueChanged":null,"index":null,"filterType":null,"valueField":null,"isTransient":null,"values":null,"refColumnName":"PERSON#USER_NAME","defaultValue":null},{"columnName":"VIEW_NAME","displayName":"View Name","dataType":"String","isEditable":false,"length":30,"canEmpty":false,"visible":true,"valueChanged":null,"index":null,"filterType":null,"valueField":null,"isTransient":null,"values":null,"refColumnName":null,"defaultValue":null},{"columnName":"JSON_NAME","displayName":"Json Name","dataType":"String","isEditable":false,"length":30,"canEmpty":false,"visible":true,"valueChanged":null,"index":null,"filterType":null,"valueField":null,"isTransient":null,"values":null,"refColumnName":null,"defaultValue":null},{"columnName":"MAX_RESULT_COUNT","displayName":"Maximum Allowed Records Limit","dataType":"String","isEditable":true,"length":7,"canEmpty":true,"visible":true,"valueChanged":null,"index":null,"filterType":null,"valueField":null,"isTransient":null,"values":null,"refColumnName":null,"defaultValue":null},{"columnName":"IS_ACTIVE","displayName":"Is Active","dataType":"String","isEditable":true,"length":1,"canEmpty":false,"visible":true,"valueChanged":null,"index":null,"filterType":"switch","valueField":null,"isTransient":null,"values":null,"refColumnName":null,"defaultValue":null}],"primaryKey":["TYPE_CODE"],"dependency":[{"displayName":"Report Template","table_name":"REPORT_TEMPLATE","columnName":"TYPE_CODE"},{"displayName":"Report Type Join","table_name":"report_type_join","columnName":"TYPE_CODE"}],"actions":null}','General','List of all report types','admin','2022-03-21 02:01:18','N');
+INSERT INTO code_table_configuration (`TABLE_NAME`,`DISPLAY_NAME`,`CONTENT`,`GROUP_NAME`,`DESCRIPTION`,`UPDATE_USER`,`UPDATE_TIMESTAMP`,`IS_LOG_ENABLED`) VALUES ('REPORT','Award Report','{\n    \"group\": \"Award\",\n    \"codeTableName\": \"Award Report\",\n    \"description\": \"List of all reports in Award module\",\n    \"databaseTableName\": \"REPORT\",\n    \"fields\": [\n        {\n            \"columnName\": \"REPORT_CODE\",\n            \"displayName\": \"Report Code\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 3,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"DESCRIPTION\",\n            \"displayName\": \"Description\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 200,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"UPDATE_TIMESTAMP\",\n            \"displayName\": \"Update Timestamp\",\n            \"dataType\": \"Date\",\n            \"isEditable\": false,\n            \"length\": null,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"UPDATE_USER\",\n            \"displayName\": \"Update User\",\n            \"dataType\": \"String\",\n            \"isEditable\": false,\n            \"length\": 60,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": \"PERSON#USER_NAME\",\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"FINAL_REPORT_FLAG\",\n            \"displayName\": \"Final Report Flag\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 1,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": \"switch\",\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        }\n    ],\n    \"primaryKey\": [\n        \"REPORT_CODE\"\n    ],\n    \"dependency\": [\n        {\n            \"displayName\": \"Sponsor Report\",\n            \"table_name\": \"sponsor_report\",\n            \"columnName\": \"REPORT_CODE\"\n        },\n        {\n            \"displayName\": \"Vaild Report Class\",\n            \"table_name\": \"valid_report_class\",\n            \"columnName\": \"REPORT_CODE\"\n        },\n        {\n            \"displayName\": \"Award Report Terms\",\n            \"table_name\": \"award_report_terms\",\n            \"columnName\": \"REPORT_CODE\"\n        },\n        {\n            \"displayName\": \"Award Report Reminder\",\n            \"table_name\": \"award_report_reminder\",\n            \"columnName\": \"REPORT_CODE\"\n        }\n    ],\n    \"actions\": null\n}','Award','List of all reports in Award module','quickstart','2021-04-08 13:51:02','N');
+INSERT INTO code_table_configuration (`TABLE_NAME`,`DISPLAY_NAME`,`CONTENT`,`GROUP_NAME`,`DESCRIPTION`,`UPDATE_USER`,`UPDATE_TIMESTAMP`,`IS_LOG_ENABLED`) VALUES ('REPORT_CLASS','Award Report Class','{\n    \"group\": \"Award\",\n    \"codeTableName\": \"Award ReportClass\",\n    \"description\": \"ListofallreportclassesinAwardmodule\",\n    \"databaseTableName\": \"REPORT_CLASS\",\n    \"fields\": [\n        {\n            \"columnName\": \"REPORT_CLASS_CODE\",\n            \"displayName\": \"Report Class Code\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 3,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"DESCRIPTION\",\n            \"displayName\": \"Description\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 200,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"IS_ATTACHMENT_OR_REPORT\",\n            \"displayName\": \"Mode of Report\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 1,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": \"systemDropdown\",\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": [\n                {\n                    \"code\": \"A\",\n                    \"description\": \"Attachment Only\"\n                },\n                {\n                    \"code\": \"R\",\n                    \"description\": \"Report Only\"\n                },\n                {\n                    \"code\": \"E\",\n                    \"description\": \"Either Attachment Or Report\"\n                }\n            ],\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"COPY_REPORT\",\n            \"displayName\": \"Copy Report from Previous\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 1,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": \"switch\",\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"COPY_FROM\",\n            \"displayName\": \"Copy From\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 3,\n            \"canEmpty\": true,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": \"lookUp\",\n            \"valueField\": \"REPORT_CLASS#REPORT_CLASS_CODE\",\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"UPDATE_TIMESTAMP\",\n            \"displayName\": \"Update Timestamp\",\n            \"dataType\": \"Date\",\n            \"isEditable\": false,\n            \"length\": null,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"UPDATE_USER\",\n            \"displayName\": \"Update User\",\n            \"dataType\": \"String\",\n            \"isEditable\": false,\n            \"length\": 60,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": null,\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": \"PERSON#USER_NAME\",\n            \"defaultValue\": null\n        },\n        {\n            \"columnName\": \"IS_ACTIVE\",\n            \"displayName\": \"Is Active\",\n            \"dataType\": \"String\",\n            \"isEditable\": true,\n            \"length\": 1,\n            \"canEmpty\": false,\n            \"visible\": true,\n            \"valueChanged\": null,\n            \"index\": null,\n            \"filterType\": \"switch\",\n            \"valueField\": null,\n            \"isTransient\": null,\n            \"values\": null,\n            \"refColumnName\": null,\n            \"defaultValue\": null\n        }\n    ],\n    \"primaryKey\": [\n        \"REPORT_CLASS_CODE\"\n    ],\n    \"dependency\": [\n        {\n            \"displayName\": \"SponsorReport\",\n            \"table_name\": \"sponsor_report\",\n            \"columnName\": \"REPORT_CLASS_CODE\"\n        },\n        {\n            \"displayName\": \"VaildReportClass\",\n            \"table_name\": \"valid_report_class\",\n            \"columnName\": \"REPORT_CLASS_CODE\"\n        },\n        {\n            \"displayName\": \"AwardReportTerms\",\n            \"table_name\": \"award_report_terms\",\n            \"columnName\": \"REPORT_CLASS_CODE\"\n        },\n        {\n            \"displayName\": \"AwardReportReminder\",\n            \"table_name\": \"award_report_reminder\",\n            \"columnName\": \"REPORT_CLASS_CODE\"\n        },\n        {\n            \"displayName\": \"ValidReportClass\",\n            \"table_name\": \"valid_report_class\",\n            \"columnName\": \"REPORT_CLASS_CODE\"\n        }\n    ],\n    \"actions\": null\n}','Award','	List of all report classes in Award module.\n\nNotes-\n1) Mode of report:\n  • A- Attachment only (Report uploaded as an attachment in award reporting requirement tab).\n  • R- Report only (Create report via progress report module).\n  • E- Either Attachment or Report (User can chose either one of the above options).\n \n2) Copy Report from Previous:\n  • Enabling this flag permits users to generate a new report in a sequential manner by duplicating a report from the latest approved version of the same report class and report type.\n  • This option is applicable only for reports created via progress report module.\n \n3) Copy From:\n  • Designate a report class in the \"Copy From\" field to indicate the specific report class that should be duplicated when generating a new report.\n  • This flag is considered only when \"Copy Report from Previous\" is OFF \n','quickstart','2021-04-08 13:51:02','N');
+-- INSERT INTO code_table_configuration (TABLE_NAME,DISPLAY_NAME,CONTENT,GROUP_NAME,DESCRIPTION,UPDATE_USER,UPDATE_TIMESTAMP,IS_LOG_ENABLED) VALUES ('BIRT_DOWNLOAD_OPTION','Birt Download Optioin','{
+-- 	"actions" : "IUD",
+-- 	"codeTableName" : "Birt Report Download Options",
+-- 	"databaseTableName" : "BIRT_DOWNLOAD_OPTION",
+-- 	"dependency" : [
+-- 		{
+-- 			"columnName" : "TYPE_CODE",
+-- 			"displayName" : "Report Type",
+-- 			"table_name" : "REPORT_TYPE"
+-- 		}
+-- 	],
+-- 	"description" : "List of all Birt Templates",
+-- 	"fields" : [
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "ID",
+-- 			"dataType" : "INTEGER",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Id",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : false,
+-- 			"isTransient" : null,
+-- 			"length" : 11,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : false
+-- 		},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "TYPE_CODE",
+-- 			"dataType" : "String",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Report Type Code",
+-- 			"filterType" : "lookUp",
+-- 			"index" : null,
+-- 			"isEditable" : true,
+-- 			"isTransient" : null,
+-- 			"length" : 5,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : "REPORT_TYPE#TYPE_CODE",
+-- 			"values" : null,
+-- 			"visible" : true,
+-- 			"defaultValue": "DESCRIPTION_TYPE_CODE"
+-- 		},
+-- 		{
+-- 		"columnName": "DESCRIPTION_TYPE_CODE",
+-- 		"displayName": "Report Type",
+-- 		"dataType": "String",
+-- 		"isEditable": false,
+-- 		"length": null,
+-- 		"canEmpty": false,
+-- 		"visible": true,
+-- 		"valueChanged": null,
+-- 		"index": null,
+-- 		"filterType": null,
+-- 		"valueField": null,
+-- 		"isTransient": "true",
+-- 		"values": null,
+-- 		"refColumnName": null,
+-- 		"defaultValue": null
+-- 	},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "DOWNLOAD_TYPE",
+-- 			"dataType" : "String",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Download Type",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : true,
+-- 			"isTransient" : null,
+-- 			"length" : 1,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "UPDATE_TIMESTAMP",
+-- 			"dataType" : "Date",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Update Timestamp",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : false,
+-- 			"isTransient" : null,
+-- 			"length" : null,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "UPDATE_USER",
+-- 			"dataType" : "String",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Update User",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : false,
+-- 			"isTransient" : null,
+-- 			"length" : 60,
+-- 			"refColumnName" : "PERSON#USER_NAME",
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		}
+-- 	],
+-- 	"fileColumnName" : null,
+-- 	"group" : "General",
+-- 	"primaryKey" : [
+-- 		"ID"
+-- 	]
+-- }','General','Birt report download options','admin','2022-09-15 04:24:38','N');
+-- INSERT INTO code_table_configuration (TABLE_NAME,DISPLAY_NAME,CONTENT,GROUP_NAME,DESCRIPTION,UPDATE_USER,UPDATE_TIMESTAMP,IS_LOG_ENABLED) VALUES ('BIRT_TEMPLATE','Birt Templates','{
+-- 	"actions" : "IU",
+-- 	"codeTableName" : "Birt Template",
+-- 	"databaseTableName" : "BIRT_TEMPLATE",
+-- 	"dependency" : [
+-- 		{
+-- 			"columnName" : "TYPE_CODE",
+-- 			"displayName" : "Report Type",
+-- 			"table_name" : "REPORT_TYPE"
+-- 		}
+-- 	],
+-- 	"description" : "List of all Birt Templates",
+-- 	"fields" : [
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "ID",
+-- 			"dataType" : "INTEGER",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Id",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : false,
+-- 			"isTransient" : null,
+-- 			"length" : 11,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "TYPE_CODE",
+-- 			"dataType" : "String",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Report Type Code",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : true,
+-- 			"isTransient" : null,
+-- 			"length" : 5,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "FILE_NAME",
+-- 			"dataType" : "String",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "File Name",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : true,
+-- 			"isTransient" : null,
+-- 			"length" : 150,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "FILE",
+-- 			"dataType" : "Blob",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Template",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : true,
+-- 			"isTransient" : null,
+-- 			"length" : null,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		},
+-- 		{
+-- 			"canEmpty" : true,
+-- 			"columnName" : "CONTENT_TYPE",
+-- 			"dataType" : "String",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Content Type",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : true,
+-- 			"isTransient" : null,
+-- 			"length" : 100,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "UPDATE_TIMESTAMP",
+-- 			"dataType" : "Date",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Update Timestamp",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : false,
+-- 			"isTransient" : null,
+-- 			"length" : null,
+-- 			"refColumnName" : null,
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		},
+-- 		{
+-- 			"canEmpty" : false,
+-- 			"columnName" : "UPDATE_USER",
+-- 			"dataType" : "String",
+-- 			"defaultValue" : null,
+-- 			"displayName" : "Update User",
+-- 			"filterType" : null,
+-- 			"index" : null,
+-- 			"isEditable" : false,
+-- 			"isTransient" : null,
+-- 			"length" : 60,
+-- 			"refColumnName" : "PERSON#USER_NAME",
+-- 			"valueChanged" : null,
+-- 			"valueField" : null,
+-- 			"values" : null,
+-- 			"visible" : true
+-- 		}
+-- 	],
+-- 	"fileColumnName" : "FILE_NAME",
+-- 	"group" : "General",
+-- 	"primaryKey" : [
+-- 		"ID"
+-- 	]
+-- }','General','List of BIRT Templates','admin','2022-07-21 23:28:29','N');

@@ -1,0 +1,20 @@
+
+
+--
+--  `kpi_criteria_type`
+--
+
+DROP TABLE IF EXISTS `kpi_criteria_type`;
+
+CREATE TABLE `kpi_criteria_type` (
+  `KPI_CRITERIA_TYPE_CODE` varchar(3) NOT NULL,
+  `KPI_TYPE_CODE` varchar(3) DEFAULT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  PRIMARY KEY (`KPI_CRITERIA_TYPE_CODE`),
+  KEY `KPI_CRITERIA_TYPE_FK` (`KPI_TYPE_CODE`),
+  CONSTRAINT `KPI_CRITERIA_TYPE_FK` FOREIGN KEY (`KPI_TYPE_CODE`) REFERENCES `kpi_type` (`KPI_TYPE_CODE`)
+);
+

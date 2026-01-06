@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `temp_attachment_migration`;
+
+CREATE TABLE `temp_attachment_migration` (
+  `ATTACHMENT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DATA` longblob,
+  `ATTACHMENT_TYPE` varchar(255) DEFAULT NULL,
+  `FILE_NAME` varchar(300) DEFAULT NULL,
+  `MIME_TYPE` varchar(255) DEFAULT NULL,
+  `PROJECT_ID` varchar(255) DEFAULT NULL,
+  `PROJECT_TYPE` varchar(255) DEFAULT NULL,
+  `FINANCE_PROJECT_ID` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ATTACHMENT_ID`)
+) ;

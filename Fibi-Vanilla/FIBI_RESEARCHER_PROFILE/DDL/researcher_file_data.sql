@@ -1,0 +1,15 @@
+
+DROP TABLE IF EXISTS `researcher_file_data`;
+
+CREATE TABLE `researcher_file_data` (
+  `FILE_DATA_ID` varchar(100) NOT NULL,
+  `MODULE_CODE` varchar(3) DEFAULT NULL,
+  `FILE_PATH` varchar(255) DEFAULT NULL,
+  `ORIGINAL_FILE_NAME` varchar(500) DEFAULT NULL,
+  `FILE_NAME` varchar(100) DEFAULT NULL,
+  `DATA` longblob,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ARCHIVED` char(1) DEFAULT NULL,
+  PRIMARY KEY (`FILE_DATA_ID`)
+) ;

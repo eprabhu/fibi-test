@@ -1,0 +1,1 @@
+INSERT INTO person_role_type (ROLE_TYPE_CODE,DESCRIPTION,UPDATE_TIMESTAMP,UPDATE_USER,IS_ACTIVE) VALUES (48,'External Review Administrators',UTC_TIMESTAMP(),'admin','Y');

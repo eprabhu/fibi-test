@@ -1,0 +1,5 @@
+-- Commented line 1 and 2 because of foreign key issue wiht award module
+-- INSERT INTO sr_module_mapping (SR_MODULE_MAPPING_ID, ASSOC_CONFIG_CODE, CATEGORY_CODE, TYPE_CODE, IS_ACTIVE, UPDATE_USER, UPDATE_TIMESTAMP) VALUES ('1', '1', '1', '1', 'Y', 'admin', utc_timestamp());
+-- INSERT INTO sr_module_mapping (SR_MODULE_MAPPING_ID, ASSOC_CONFIG_CODE, CATEGORY_CODE, TYPE_CODE, IS_ACTIVE, UPDATE_USER, UPDATE_TIMESTAMP) VALUES ('2', '1', '1', '3', 'Y', 'admin', utc_timestamp());
+-- INSERT INTO sr_module_mapping (SR_MODULE_MAPPING_ID, ASSOC_CONFIG_CODE, CATEGORY_CODE, TYPE_CODE, IS_ACTIVE, UPDATE_USER, UPDATE_TIMESTAMP) VALUES ('3', '3', '20', '26', 'Y', 'admin', utc_timestamp());
+-- INSERT INTO sr_module_mapping (SR_MODULE_MAPPING_ID, ASSOC_CONFIG_CODE, CATEGORY_CODE, TYPE_CODE, IS_ACTIVE, UPDATE_USER, UPDATE_TIMESTAMP) VALUES ('4', '3', '20', '27', 'Y', 'admin', utc_timestamp());

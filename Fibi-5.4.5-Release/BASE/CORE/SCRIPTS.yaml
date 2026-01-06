@@ -4,7 +4,7 @@ databaseChangeLog:
       id: FC-1393-1
       author: Prabhu.E
       labels: 'DDL'
-      comment: added new column REQUESTED_BY in prabhu table
+      comment: added new column REQUESTED_BY in NOTIFICATION_LOG table
       changes:
         - sql:
             sql: |
@@ -4034,5 +4034,5 @@ databaseChangeLog:
       rollback:
         - sql:
             sql: |
-              DELETE FROM parameter WHERE PARAMETER_NAME = 'SHOW_DISCLOSURE_DETAILS_IN_PROPOSAL_KEY_PERSON' ;
+              DELETE FROM parameter WHERE PARAMETER_NAME = 'SHOW_DISCLOSURE_DETAILS_IN_PROPOSAL_KEY_PERSON';
 

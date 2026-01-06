@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `sap_feed_type`;
+
+CREATE TABLE `sap_feed_type` (
+  `FEED_TYPE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(15) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  PRIMARY KEY (`FEED_TYPE_CODE`)
+) ;

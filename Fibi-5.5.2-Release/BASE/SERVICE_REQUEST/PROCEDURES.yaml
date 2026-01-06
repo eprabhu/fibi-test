@@ -1,0 +1,17 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: FIBI-9155-1
+      author: Vishnu BH
+      labels: 'PROCEDURES'
+      comment: Modified GET_SERVICE_REQUEST_DASHBOARD_V1 to include data type 6 in custom criteria logic for elastic search
+      runOnChange: true
+      changes:
+        - sql:
+            sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_DASHBOARD_V1;
+        - sqlFile:
+            path: ROUTINES/BASE/SERVICE_REQUEST/PROCEDURES/GET_SERVICE_REQUEST_DASHBOARD_V1.sql
+            relativeToChangelogFile: false
+            splitStatements: false
+      rollback: empty
+

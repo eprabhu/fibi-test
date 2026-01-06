@@ -1,0 +1,17 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: FIBI-6936-1
+      author: Shyla M
+      labels: 'PROCEDURES'
+      comment: New Procedure
+      runOnChange: true
+      changes:
+        - sql:
+            sql: |
+                DROP PROCEDURE IF EXISTS GET_SR_DATA_FOR_SYNC;
+        - sqlFile:
+            path: ROUTINES/MIT/SERVICE_REQUEST/PROCEDURES/GET_SR_DATA_FOR_SYNC.sql
+            relativeToChangelogFile: false
+            splitStatements: false
+      rollback: empty

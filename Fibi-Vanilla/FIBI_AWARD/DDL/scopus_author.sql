@@ -1,0 +1,25 @@
+
+
+--
+--  `scopus_author`
+--
+
+DROP TABLE IF EXISTS `scopus_author`;
+
+CREATE TABLE `scopus_author` (
+  `AUTHOR_ID` varchar(40) NOT NULL,
+  `SCOPUS_ID` varchar(40) NOT NULL,
+  `AUTHOR_URL` varchar(200) DEFAULT NULL,
+  `AUTHOR_NAME` varchar(100) DEFAULT NULL,
+  `GIVEN_NAME` varchar(100) DEFAULT NULL,
+  `SUR_NAME` varchar(100) DEFAULT NULL,
+  `INITIAL` varchar(30) DEFAULT NULL,
+  `AUTHOR_FLAG` varchar(1) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `AUTH_ID` varchar(45) NOT NULL,
+  PRIMARY KEY (`AUTHOR_ID`,`SCOPUS_ID`),
+  KEY `SCOPUS_AUTHOR_FK1` (`SCOPUS_ID`),
+  CONSTRAINT `SCOPUS_AUTHOR_FK1` FOREIGN KEY (`SCOPUS_ID`) REFERENCES `scopus` (`SCOPUS_ID`)
+);
+

@@ -1,0 +1,6 @@
+INSERT INTO ext_review_reviewers_status (DESCRIPTION,IS_ACTIVE,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('Awaiting Response','Y','2022-07-22 07:22:36','admin');
+INSERT INTO ext_review_reviewers_status (DESCRIPTION,IS_ACTIVE,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('Still In Progress','Y','2022-07-22 07:22:36','admin');
+INSERT INTO ext_review_reviewers_status (DESCRIPTION,IS_ACTIVE,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('Finalized','Y','2022-07-22 07:22:36','admin');
+INSERT INTO ext_review_reviewers_status (DESCRIPTION,IS_ACTIVE,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('Rejected','Y','2022-07-22 07:22:36','admin');
+INSERT INTO ext_review_reviewers_status (DESCRIPTION,IS_ACTIVE,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('Reserved','Y','2022-08-12 14:03:49','admin');
+INSERT INTO ext_review_reviewers_status (DESCRIPTION,IS_ACTIVE,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('Unassigned','Y','2025-03-21 13:36:31','admin');

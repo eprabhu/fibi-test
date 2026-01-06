@@ -1,0 +1,238 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_attachment_type.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_attachment_type;
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_additional_details.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_additional_details;
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_affiliation.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_affiliation;
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_attachment.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_attachment;
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_award_honor.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_award_honor;
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_collaboration_partnership.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_collaboration_partnership;
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_conference_detail.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_conference_detail;
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_file_data.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_file_data;
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_keyword.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_keyword;
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_media_and_outreach.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_media_and_outreach;
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_professional_membership.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_professional_membership;
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_profile_dyn_subsection_config.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_profile_dyn_subsection_config;
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_profile_section.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_profile_section;
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_profile_summary.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_profile_summary;
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_publication.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: |
+            SET FOREIGN_KEY_CHECKS = 0;
+            DROP TABLE IF EXISTS researcher_publication;
+            SET FOREIGN_KEY_CHECKS = 1;
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_social_profile.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_social_profile;
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_teaching_experience.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_teaching_experience;
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: DDL 
+      comment: DDL change set 
+      changes: 
+        - sqlFile: 
+            path: DDL/researcher_testimonial.sql 
+            relativeToChangelogFile: true 
+            splitStatements: true
+      rollback: 
+        - sql: DROP TABLE IF EXISTS researcher_testimonial;

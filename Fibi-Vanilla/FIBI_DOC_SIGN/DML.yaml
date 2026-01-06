@@ -1,0 +1,37 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/esignature_configuration.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/envelope_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/esign_recipient_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       

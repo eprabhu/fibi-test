@@ -1,0 +1,18 @@
+
+
+--
+--  `claim_files`
+--
+
+DROP TABLE IF EXISTS `claim_files`;
+
+CREATE TABLE `claim_files` (
+  `FILE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `FILE_NAME` varchar(50) DEFAULT NULL,
+  `NO_OF_RECORDS` int(11) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `FILE_INTERFACE` varchar(45) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  PRIMARY KEY (`FILE_ID`)
+);
+

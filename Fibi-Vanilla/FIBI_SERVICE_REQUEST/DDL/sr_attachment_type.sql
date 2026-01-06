@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `sr_attachment_type`;
+CREATE TABLE `sr_attachment_type` (
+  `ATTACHMENT_TYPE_CODE` int(11) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  `IS_PRIVATE` varchar(1) DEFAULT 'N',
+  PRIMARY KEY (`ATTACHMENT_TYPE_CODE`)
+);

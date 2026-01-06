@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `ext_reviewer_affiliation`;
+
+CREATE TABLE `ext_reviewer_affiliation` (
+  `AFFILATION_INSTITUITION_CODE` varchar(15) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`AFFILATION_INSTITUITION_CODE`)
+);
+

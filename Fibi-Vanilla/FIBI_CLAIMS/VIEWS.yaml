@@ -1,0 +1,106 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_claim_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/VIEWS/award_claim_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_claim_report_v; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS claim_age_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/VIEWS/claim_age_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS claim_age_report_v; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS claim_invoice_age_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/VIEWS/claim_invoice_age_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS claim_invoice_age_report_v; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS claim_master_dataset_rt_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/VIEWS/claim_master_dataset_rt_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS claim_master_dataset_rt_v; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS claim_pjt_end_not_cls_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/VIEWS/claim_pjt_end_not_cls_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS claim_pjt_end_not_cls_report_v; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS claim_pjt_end_not_ivc_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/VIEWS/claim_pjt_end_not_ivc_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS claim_pjt_end_not_ivc_report_v; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS claim_status_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/VIEWS/claim_status_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS claim_status_report_v; 

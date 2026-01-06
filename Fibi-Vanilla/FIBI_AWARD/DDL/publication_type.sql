@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `publication_type`;
+
+CREATE TABLE `publication_type` (
+  `PUBLICATION_TYPE_CODE` varchar(3) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`PUBLICATION_TYPE_CODE`)
+) ;

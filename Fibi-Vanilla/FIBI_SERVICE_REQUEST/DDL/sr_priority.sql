@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `sr_priority`;
+
+CREATE TABLE `sr_priority` (
+  `PRIORITY_ID` int(11) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`PRIORITY_ID`)
+) ;

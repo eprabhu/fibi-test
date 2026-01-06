@@ -1,0 +1,262 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/arg_value_lookup.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report_template.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/code_table_configuration.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/notification_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/person_role_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF_LOOKUP/ext_review_service_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_reviewers_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_reviewer_academic_area.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_reviewer_academic_rank.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_reviewer_affiliation.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_reviewer_attachment_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_reviewer_cira.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_reviewer_originality.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_reviewer_thoroughness.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_review_action_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_review_attachment_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_review_comment_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_review_reviewers_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_review_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 20 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/ext_rev_reviewer_flow_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+  - changeSet: 
+      id: 21 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/reviewer_rights.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: 22 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/letter_template_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 

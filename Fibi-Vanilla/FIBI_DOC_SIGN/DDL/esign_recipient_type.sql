@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `esign_recipient_type`;
+
+CREATE TABLE `esign_recipient_type` (
+  `ESIGN_RECIPIENT_TYPE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  PRIMARY KEY (`ESIGN_RECIPIENT_TYPE_CODE`)
+) ;

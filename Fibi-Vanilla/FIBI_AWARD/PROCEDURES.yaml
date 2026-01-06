@@ -1,0 +1,2431 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ADD_INBOX_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/ADD_INBOX_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ADD_INBOX_DATA; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS APPROVE_FIRST_STOP; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/APPROVE_FIRST_STOP.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS APPROVE_FIRST_STOP; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS APPROVE_TASK_STOPS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/APPROVE_TASK_STOPS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS APPROVE_TASK_STOPS; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_CLAIM_REMINDER_HALF_YEARLY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_CLAIM_REMINDER_HALF_YEARLY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_CLAIM_REMINDER_HALF_YEARLY; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_CLAIM_REMINDER_MONTHLY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_CLAIM_REMINDER_MONTHLY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_CLAIM_REMINDER_MONTHLY; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_CLAIM_REMINDER_QUARTERLY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_CLAIM_REMINDER_QUARTERLY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_CLAIM_REMINDER_QUARTERLY; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_CLAIM_REMINDER_YEARLY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_CLAIM_REMINDER_YEARLY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_CLAIM_REMINDER_YEARLY; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_DMP_END_DATE_REMAINDER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_DMP_END_DATE_REMAINDER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_DMP_END_DATE_REMAINDER; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_DMP_REMAINDER_APRIL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_DMP_REMAINDER_APRIL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_DMP_REMAINDER_APRIL; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_DMP_REMAINDER_MARCH; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_DMP_REMAINDER_MARCH.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_DMP_REMAINDER_MARCH; 
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_END_DATE_REMINDER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_END_DATE_REMINDER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_END_DATE_REMINDER; 
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_EXPENSE_TRACKER_REFRESH; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_EXPENSE_TRACKER_REFRESH.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_EXPENSE_TRACKER_REFRESH; 
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_EXPENSE_TRACKER_REFRESH_INSERT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_EXPENSE_TRACKER_REFRESH_INSERT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_EXPENSE_TRACKER_REFRESH_INSERT; 
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_EXPENSE_TRACKER_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_EXPENSE_TRACKER_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_EXPENSE_TRACKER_SYNC; 
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_EXP_TRACKR_PREVALIDATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_EXP_TRACKR_PREVALIDATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_EXP_TRACKR_PREVALIDATION; 
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_REVENUE_TRACKER_REFRESH; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/AWARD_REVENUE_TRACKER_REFRESH.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_REVENUE_TRACKER_REFRESH; 
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CHECK_CHILD_AWARDS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/CHECK_CHILD_AWARDS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CHECK_CHILD_AWARDS; 
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CHK_AWARD_BUDGET_VERSION_INCREASE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/CHK_AWARD_BUDGET_VERSION_INCREASE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CHK_AWARD_BUDGET_VERSION_INCREASE; 
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CLOSURE_REMAINDER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/CLOSURE_REMAINDER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CLOSURE_REMAINDER; 
+ 
+  - changeSet: 
+      id: 20 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CREATE_AWARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/CREATE_AWARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CREATE_AWARD; 
+ 
+  - changeSet: 
+      id: 21 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DEACTIVATE_INACTIVE_FEEDS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/DEACTIVATE_INACTIVE_FEEDS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DEACTIVATE_INACTIVE_FEEDS; 
+ 
+  - changeSet: 
+      id: 22 
+      author: fibi_admin 
+      labels: PROCEDURES
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DELETE_AWARD_BY_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/DELETE_AWARD_BY_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DELETE_AWARD_BY_ID; 
+ 
+  - changeSet: 
+      id: 23 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DELETE_AWARD_MASTER_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/DELETE_AWARD_MASTER_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DELETE_AWARD_MASTER_DATA; 
+ 
+  - changeSet: 
+      id: 24 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DEL_DUE_DATE_AFTER_END_DATE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/DEL_DUE_DATE_AFTER_END_DATE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DEL_DUE_DATE_AFTER_END_DATE; 
+ 
+  - changeSet: 
+      id: 25 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS FEED_AWARD_BUDGET; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/FEED_AWARD_BUDGET.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS FEED_AWARD_BUDGET; 
+ 
+  - changeSet: 
+      id: 26 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS FETCH_AND_UPDATE_AWARD_FOR_SCHEDULER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/FETCH_AND_UPDATE_AWARD_FOR_SCHEDULER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS FETCH_AND_UPDATE_AWARD_FOR_SCHEDULER; 
+ 
+  - changeSet: 
+      id: 27 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GENERATE_AWARD_WBS_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GENERATE_AWARD_WBS_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GENERATE_AWARD_WBS_NUMBER; 
+ 
+  - changeSet: 
+      id: 28 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GENERATE_AWARD_WBS_NUMBER_NEW; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GENERATE_AWARD_WBS_NUMBER_NEW.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GENERATE_AWARD_WBS_NUMBER_NEW; 
+ 
+  - changeSet: 
+      id: 29 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GENERATE_IO_CODE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GENERATE_IO_CODE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GENERATE_IO_CODE; 
+ 
+  - changeSet: 
+      id: 30 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GEN_AWARD_WBS_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GEN_AWARD_WBS_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GEN_AWARD_WBS_NUMBER; 
+ 
+  - changeSet: 
+      id: 31 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARDS_FOR_ORCID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARDS_FOR_ORCID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARDS_FOR_ORCID; 
+ 
+  - changeSet: 
+      id: 32 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_APPROVD_EQUPMNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_APPROVD_EQUPMNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_APPROVD_EQUPMNT; 
+ 
+  - changeSet: 
+      id: 33 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_APPROVD_TRAVEL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_APPROVD_TRAVEL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_APPROVD_TRAVEL; 
+ 
+  - changeSet: 
+      id: 34 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_BENEFITS_RATES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_BENEFITS_RATES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_BENEFITS_RATES; 
+ 
+  - changeSet: 
+      id: 35 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_BUDGET_MIGRATED_TO_AGREEMENT_FINANCIAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_BUDGET_MIGRATED_TO_AGREEMENT_FINANCIAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_BUDGET_MIGRATED_TO_AGREEMENT_FINANCIAL; 
+ 
+  - changeSet: 
+      id: 36 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_CLAIM_AMOUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_CLAIM_AMOUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_CLAIM_AMOUNT; 
+ 
+  - changeSet: 
+      id: 37 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_CLAIM_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_CLAIM_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_CLAIM_DETAILS; 
+ 
+  - changeSet: 
+      id: 38 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_COST_SHARE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_COST_SHARE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_COST_SHARE; 
+ 
+  - changeSet: 
+      id: 39 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 40 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 41 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD_COUNT_DYNAMIC_JSON; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_DASHBOARD_COUNT_DYNAMIC_JSON.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD_COUNT_DYNAMIC_JSON; 
+ 
+  - changeSet: 
+      id: 42 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD_DYNAMIC_JSON; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_DASHBOARD_DYNAMIC_JSON.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_DASHBOARD_DYNAMIC_JSON; 
+ 
+  - changeSet: 
+      id: 43 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_DATA_FOR_ORCID_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_DATA_FOR_ORCID_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_DATA_FOR_ORCID_SYNC; 
+ 
+  - changeSet: 
+      id: 44 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_DETAILS; 
+ 
+  - changeSet: 
+      id: 45 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_DETAILS_FOR_ASSOC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_DETAILS_FOR_ASSOC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_DETAILS_FOR_ASSOC; 
+ 
+  - changeSet: 
+      id: 46 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKER_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_EXPENSE_TRACKER_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKER_REPORT; 
+ 
+  - changeSet: 
+      id: 47 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKIG_DTLS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_EXPENSE_TRACKIG_DTLS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKIG_DTLS; 
+ 
+  - changeSet: 
+      id: 48 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKING; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_EXPENSE_TRACKING.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKING; 
+ 
+  - changeSet: 
+      id: 49 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKING_L1_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_EXPENSE_TRACKING_L1_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKING_L1_REPORT; 
+ 
+  - changeSet: 
+      id: 50 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKING_L2_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_EXPENSE_TRACKING_L2_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_EXPENSE_TRACKING_L2_REPORT; 
+ 
+  - changeSet: 
+      id: 51 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_FA_RATES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_FA_RATES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_FA_RATES; 
+ 
+  - changeSet: 
+      id: 52 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_FUNDED_PROPOSAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_FUNDED_PROPOSAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_FUNDED_PROPOSAL; 
+ 
+  - changeSet: 
+      id: 53 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_HIERARCHY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_HIERARCHY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_HIERARCHY; 
+ 
+  - changeSet: 
+      id: 54 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_PAYMENT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_PAYMENT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_PAYMENT; 
+ 
+  - changeSet: 
+      id: 55 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_PAYMENT_INVOICE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_PAYMENT_INVOICE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_PAYMENT_INVOICE; 
+ 
+  - changeSet: 
+      id: 56 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_PAYMNT_SCHEDULE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_PAYMNT_SCHEDULE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_PAYMNT_SCHEDULE; 
+ 
+  - changeSet: 
+      id: 57 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_PERSON_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_PERSON_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_PERSON_DETAILS; 
+ 
+  - changeSet: 
+      id: 58 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_PURCHASE_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_PURCHASE_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_PURCHASE_DETAILS; 
+ 
+  - changeSet: 
+      id: 59 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_REPORT; 
+ 
+  - changeSet: 
+      id: 60 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_REPORT_REQ_BASE_DATES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_REPORT_REQ_BASE_DATES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_REPORT_REQ_BASE_DATES; 
+ 
+  - changeSet: 
+      id: 61 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRACKER_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_REVENUE_TRACKER_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRACKER_REPORT; 
+ 
+  - changeSet: 
+      id: 62 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRACKING_L1_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_REVENUE_TRACKING_L1_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRACKING_L1_REPORT; 
+ 
+  - changeSet: 
+      id: 63 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRACKING_L2_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_REVENUE_TRACKING_L2_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRACKING_L2_REPORT; 
+ 
+  - changeSet: 
+      id: 64 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRANSACTIONS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_REVENUE_TRANSACTIONS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRANSACTIONS; 
+ 
+  - changeSet: 
+      id: 65 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRANSACTION_DTLS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_REVENUE_TRANSACTION_DTLS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_REVENUE_TRANSACTION_DTLS; 
+ 
+  - changeSet: 
+      id: 66 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_SPECIAL_REVIEW; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_SPECIAL_REVIEW.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_SPECIAL_REVIEW; 
+ 
+  - changeSet: 
+      id: 67 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_SPNSOR_CONTACT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_SPNSOR_CONTACT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_SPNSOR_CONTACT; 
+ 
+  - changeSet: 
+      id: 68 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_TABLE_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_TABLE_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_TABLE_COUNT; 
+ 
+  - changeSet: 
+      id: 69 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_TERMS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_TERMS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_TERMS; 
+ 
+  - changeSet: 
+      id: 70 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_TIMESHEET_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_TIMESHEET_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_TIMESHEET_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 71 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_TIMESHEET_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_TIMESHEET_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_TIMESHEET_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 72 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWARD_UNIT_CONTACT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWARD_UNIT_CONTACT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWARD_UNIT_CONTACT; 
+ 
+  - changeSet: 
+      id: 73 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWD_EXPNSE_GRP_COSTELEMENT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWD_EXPNSE_GRP_COSTELEMENT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWD_EXPNSE_GRP_COSTELEMENT; 
+ 
+  - changeSet: 
+      id: 74 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AWD_PURCHASE_GRP_COSTELEMENT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_AWD_PURCHASE_GRP_COSTELEMENT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AWD_PURCHASE_GRP_COSTELEMENT; 
+ 
+  - changeSet: 
+      id: 75 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_BUDGET_EXPENSE_MANPOWER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_BUDGET_EXPENSE_MANPOWER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_BUDGET_EXPENSE_MANPOWER; 
+ 
+  - changeSet: 
+      id: 76 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_CURRENT_AND_PENDING_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_CURRENT_AND_PENDING_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_CURRENT_AND_PENDING_DETAILS; 
+ 
+  - changeSet: 
+      id: 77 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_DMP_AWARD_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_DMP_AWARD_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_DMP_AWARD_DATA; 
+ 
+  - changeSet: 
+      id: 78 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_DMP_WRONG_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_DMP_WRONG_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_DMP_WRONG_DATA; 
+ 
+  - changeSet: 
+      id: 79 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_MANPOWER_CLOSE_POSITION_LIST; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_MANPOWER_CLOSE_POSITION_LIST.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_MANPOWER_CLOSE_POSITION_LIST; 
+ 
+  - changeSet: 
+      id: 80 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PR_REPORTING_DATES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_PR_REPORTING_DATES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PR_REPORTING_DATES; 
+ 
+  # - changeSet: 
+  #     id: 81 
+  #     author: fibi_admin 
+  #     labels: PROCEDURES 
+  #     comment: PROCEDURE change set 
+  #     changes: 
+  #       - sql: 
+  #           sql: DROP PROCEDURE IF EXISTS GET_RESEARCH_SUMMARY_DETAILS; 
+  #       - sqlFile: 
+  #           path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_RESEARCH_SUMMARY_DETAILS.sql 
+  #           relativeToChangelogFile: false 
+  #           splitStatements: false
+  #     rollback: 
+  #       - sql: DROP PROCEDURE IF EXISTS GET_RESEARCH_SUMMARY_DETAILS; 
+ 
+  - changeSet: 
+      id: 82 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SAP_CLAIM_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_SAP_CLAIM_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SAP_CLAIM_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 83 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SAP_CLAIM_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_SAP_CLAIM_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SAP_CLAIM_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 84 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SAP_FEED_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_SAP_FEED_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SAP_FEED_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 85 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SAP_FEED_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_SAP_FEED_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SAP_FEED_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 86 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SAP_FEED_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/GET_SAP_FEED_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SAP_FEED_STATUS; 
+ 
+  - changeSet: 
+      id: 87 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_CURRENT_AND_PENDING_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/INSERT_CURRENT_AND_PENDING_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_CURRENT_AND_PENDING_DETAILS; 
+ 
+  - changeSet: 
+      id: 88 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_MIGRATION_DATA_TO_SAP; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/INSERT_MIGRATION_DATA_TO_SAP.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_MIGRATION_DATA_TO_SAP; 
+ 
+  - changeSet: 
+      id: 89 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_ORCID_ID_TO_WBHK_NTFY_LOG; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/INSERT_ORCID_ID_TO_WBHK_NTFY_LOG.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_ORCID_ID_TO_WBHK_NTFY_LOG; 
+ 
+  - changeSet: 
+      id: 90 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_PERSON_DATA_TO_ORCID_WEBHOOK_NOTIFY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/INSERT_PERSON_DATA_TO_ORCID_WEBHOOK_NOTIFY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_PERSON_DATA_TO_ORCID_WEBHOOK_NOTIFY; 
+ 
+  - changeSet: 
+      id: 91 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_PERSON_ORCID_WEBHOOK_FLAG; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/INSERT_PERSON_ORCID_WEBHOOK_FLAG.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_PERSON_ORCID_WEBHOOK_FLAG; 
+ 
+  - changeSet: 
+      id: 92 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_ROLE_IN_AWARD_PERMISSION_ROLE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/INSERT_ROLE_IN_AWARD_PERMISSION_ROLE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_ROLE_IN_AWARD_PERMISSION_ROLE; 
+ 
+  - changeSet: 
+      id: 93 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS LOAD_ALL_AWARD_VERSION_CUSTM; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/LOAD_ALL_AWARD_VERSION_CUSTM.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS LOAD_ALL_AWARD_VERSION_CUSTM; 
+ 
+  - changeSet: 
+      id: 94 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS LOAD_ALL_AWARD_VERSION_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/LOAD_ALL_AWARD_VERSION_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS LOAD_ALL_AWARD_VERSION_REPORT; 
+ 
+  - changeSet: 
+      id: 95 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWARD_CONCURRENT_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWARD_CONCURRENT_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWARD_CONCURRENT_DATA; 
+ 
+  - changeSet: 
+      id: 96 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWARD_MASTER_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWARD_MASTER_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWARD_MASTER_DATA; 
+ 
+  - changeSet: 
+      id: 97 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWARD_MASTER_GENERAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWARD_MASTER_GENERAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWARD_MASTER_GENERAL; 
+ 
+  - changeSet: 
+      id: 98 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_BUDGET; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_MASTER_BUDGET.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_BUDGET; 
+ 
+  - changeSet: 
+      id: 99 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_COST_SHARE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_MASTER_COST_SHARE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_COST_SHARE; 
+ 
+  - changeSet: 
+      id: 100 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_MASTER_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_DATA; 
+ 
+  - changeSet: 
+      id: 101 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_DMP_QNR; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_MASTER_DMP_QNR.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_DMP_QNR; 
+ 
+  - changeSet: 
+      id: 102 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_MANPOWER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_MASTER_MANPOWER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_MANPOWER; 
+ 
+  - changeSet: 
+      id: 103 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_QNR; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_MASTER_QNR.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_QNR; 
+ 
+  - changeSet: 
+      id: 104 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_MASTER_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_REPORT; 
+ 
+  - changeSet: 
+      id: 105 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_ROLES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_MASTER_ROLES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_MASTER_ROLES; 
+ 
+  - changeSet: 
+      id: 106 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_AREA_OF_RSRCH; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_AREA_OF_RSRCH.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_AREA_OF_RSRCH; 
+ 
+  - changeSet: 
+      id: 107 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_AWARD_KPI; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_AWARD_KPI.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_AWARD_KPI; 
+ 
+  - changeSet: 
+      id: 108 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_BUDGET; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_BUDGET.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_BUDGET; 
+ 
+  - changeSet: 
+      id: 109 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_CONTACT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_CONTACT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_CONTACT; 
+ 
+  - changeSet: 
+      id: 110 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_COST_SHARE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_COST_SHARE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_COST_SHARE; 
+ 
+  - changeSet: 
+      id: 111 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_DISTRIBUTION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_DISTRIBUTION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_DISTRIBUTION; 
+ 
+  - changeSet: 
+      id: 112 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_DMP_QNR; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_DMP_QNR.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_DMP_QNR; 
+ 
+  - changeSet: 
+      id: 113 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_GENERAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_GENERAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_GENERAL; 
+ 
+  - changeSet: 
+      id: 114 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_INST_PROPOSAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_INST_PROPOSAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_INST_PROPOSAL; 
+ 
+  - changeSet: 
+      id: 115 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_KEY_PERSON; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_KEY_PERSON.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_KEY_PERSON; 
+ 
+  - changeSet: 
+      id: 116 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_MANPOWER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_MANPOWER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_MANPOWER; 
+ 
+  - changeSet: 
+      id: 117 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_MILESTONE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_MILESTONE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_MILESTONE; 
+ 
+  - changeSet: 
+      id: 118 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_OTHER_INFORMATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_OTHER_INFORMATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_OTHER_INFORMATION; 
+ 
+  - changeSet: 
+      id: 119 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_PAYMNT_INVOICE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_PAYMNT_INVOICE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_PAYMNT_INVOICE; 
+ 
+  - changeSet: 
+      id: 120 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_PROJECT_OUTCOME; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_PROJECT_OUTCOME.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_PROJECT_OUTCOME; 
+ 
+  - changeSet: 
+      id: 121 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_PROJECT_TEAM; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_PROJECT_TEAM.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_PROJECT_TEAM; 
+ 
+  - changeSet: 
+      id: 122 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_QNR; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_QNR.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_QNR; 
+ 
+  - changeSet: 
+      id: 123 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_REPORT; 
+ 
+  - changeSet: 
+      id: 124 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_ROLES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_ROLES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_ROLES; 
+ 
+  - changeSet: 
+      id: 125 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_SPECIAL_APPROVAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_SPECIAL_APPROVAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_SPECIAL_APPROVAL; 
+ 
+  - changeSet: 
+      id: 126 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_SPECIAL_REVIEW; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_SPECIAL_REVIEW.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_SPECIAL_REVIEW; 
+ 
+  - changeSet: 
+      id: 127 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_SUB_CONTRACT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_SUB_CONTRACT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_SUB_CONTRACT; 
+ 
+  - changeSet: 
+      id: 128 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_TERMS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_TERMS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_TERMS; 
+ 
+  - changeSet: 
+      id: 129 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_UPDATE_ROLES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/MERGE_AWD_SECTION_UPDATE_ROLES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_AWD_SECTION_UPDATE_ROLES; 
+ 
+  - changeSet: 
+      id: 130 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/RESET_AUTO_INCREMENT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT; 
+ 
+  - changeSet: 
+      id: 131 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_AWARD_FEED; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_AWARD_FEED.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_AWARD_FEED; 
+ 
+  - changeSet: 
+      id: 132 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_AWARD_UPDATE_HOLD_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_AWARD_UPDATE_HOLD_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_AWARD_UPDATE_HOLD_STATUS; 
+ 
+  - changeSet: 
+      id: 133 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_AWARD_UPDATE_HOLD_STATUS_MANUALLY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_AWARD_UPDATE_HOLD_STATUS_MANUALLY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_AWARD_UPDATE_HOLD_STATUS_MANUALLY; 
+ 
+  - changeSet: 
+      id: 134 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_CLAIM_INVOICE_LOG_FEED; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_CLAIM_INVOICE_LOG_FEED.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_CLAIM_INVOICE_LOG_FEED; 
+ 
+  - changeSet: 
+      id: 135 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_COMPARISON_DESCREPANCY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_COMPARISON_DESCREPANCY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_COMPARISON_DESCREPANCY; 
+ 
+  - changeSet: 
+      id: 136 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_BATCH_HISTORY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_BATCH_HISTORY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_BATCH_HISTORY; 
+ 
+  - changeSet: 
+      id: 137 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_BATCH_HISTORY_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_BATCH_HISTORY_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_BATCH_HISTORY_COUNT; 
+ 
+  - changeSet: 
+      id: 138 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_BUDGET_REINTERFACE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_BUDGET_REINTERFACE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_BUDGET_REINTERFACE; 
+ 
+  - changeSet: 
+      id: 139 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_BUDGET_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_BUDGET_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_BUDGET_REPORT; 
+ 
+  - changeSet: 
+      id: 140 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_DESCREPENCY_REPORT_BASED_ON_AWARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_DESCREPENCY_REPORT_BASED_ON_AWARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_DESCREPENCY_REPORT_BASED_ON_AWARD; 
+ 
+  - changeSet: 
+      id: 141 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_GENERATE_BATCH; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_GENERATE_BATCH.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_GENERATE_BATCH; 
+ 
+  - changeSet: 
+      id: 142 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_GENERATE_BATCH_MOD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_GENERATE_BATCH_MOD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_GENERATE_BATCH_MOD; 
+ 
+  - changeSet: 
+      id: 143 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_GENERATE_BATCH_NEW; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_GENERATE_BATCH_NEW.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_GENERATE_BATCH_NEW; 
+ 
+  - changeSet: 
+      id: 144 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_PROBLEMATIC_GRANT_CODE_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_PROBLEMATIC_GRANT_CODE_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_PROBLEMATIC_GRANT_CODE_REPORT; 
+ 
+  - changeSet: 
+      id: 145 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_REINTERFACE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_REINTERFACE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_REINTERFACE; 
+ 
+  - changeSet: 
+      id: 146 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_REINTERFACE_FEED_DATA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_REINTERFACE_FEED_DATA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_REINTERFACE_FEED_DATA; 
+ 
+  - changeSet: 
+      id: 147 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_REPORT; 
+ 
+  - changeSet: 
+      id: 148 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_SOFT_LAUNCH_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_SOFT_LAUNCH_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_SOFT_LAUNCH_COUNT; 
+ 
+  - changeSet: 
+      id: 149 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_SOFT_LAUNCH_NO_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_SOFT_LAUNCH_NO_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_SOFT_LAUNCH_NO_REPORT; 
+ 
+  - changeSet: 
+      id: 150 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_STATUS_UPDATE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_STATUS_UPDATE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_STATUS_UPDATE; 
+ 
+  - changeSet: 
+      id: 151 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_FEED_WRITING_ERROR_ROWS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_FEED_WRITING_ERROR_ROWS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_FEED_WRITING_ERROR_ROWS; 
+ 
+  - changeSet: 
+      id: 152 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SAP_VIREMENT_DESCREPANCY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SAP_VIREMENT_DESCREPANCY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SAP_VIREMENT_DESCREPANCY; 
+ 
+  - changeSet: 
+      id: 153 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SET_UNIQUE_ID_FOR_REPORT_TRACKING; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SET_UNIQUE_ID_FOR_REPORT_TRACKING.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SET_UNIQUE_ID_FOR_REPORT_TRACKING; 
+ 
+  - changeSet: 
+      id: 154 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SPECIAL_REVIEW_APPLICATION_DATE_REMAINDER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SPECIAL_REVIEW_APPLICATION_DATE_REMAINDER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SPECIAL_REVIEW_APPLICATION_DATE_REMAINDER; 
+ 
+  - changeSet: 
+      id: 155 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SPECIAL_REVIEW_REMAINDER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SPECIAL_REVIEW_REMAINDER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SPECIAL_REVIEW_REMAINDER; 
+ 
+  - changeSet: 
+      id: 156 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SYNC_PROJECTS_DISCLOSURE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/SYNC_PROJECTS_DISCLOSURE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SYNC_PROJECTS_DISCLOSURE; 
+ 
+  - changeSet: 
+      id: 157 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS TEMP_AWARD_ALL_IN_ONE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/TEMP_AWARD_ALL_IN_ONE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS TEMP_AWARD_ALL_IN_ONE; 
+ 
+  - changeSet: 
+      id: 158 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_AWARD_PERSON_ROLE; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/UPDATE_AWARD_PERSON_ROLE.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_AWARD_PERSON_ROLE; 
+ 
+  - changeSet: 
+      id: 159 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_AWD_REPREQ_DUE_DT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/UPDATE_AWD_REPREQ_DUE_DT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_AWD_REPREQ_DUE_DT; 
+ 
+  - changeSet: 
+      id: 160 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_WBS_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/UPDATE_WBS_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_WBS_NUMBER; 
+ 
+  - changeSet: 
+      id: 161 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPD_AWARD_TRANSACTION_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/UPD_AWARD_TRANSACTION_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPD_AWARD_TRANSACTION_STATUS; 
+ 
+  - changeSet: 
+      id: 162 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS VALIDATE_CREATE_TASK; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/PROCEDURES/VALIDATE_CREATE_TASK.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS VALIDATE_CREATE_TASK; 

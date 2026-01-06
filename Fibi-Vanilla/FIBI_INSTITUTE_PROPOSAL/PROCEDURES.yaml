@@ -1,0 +1,76 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GENERATE_IP_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_INSTITUTE_PROPOSAL/PROCEDURES/GENERATE_IP_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GENERATE_IP_NUMBER; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_INST_PROPOSAL_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_INSTITUTE_PROPOSAL/PROCEDURES/GET_INST_PROPOSAL_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_INST_PROPOSAL_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_INST_PROPOSAL_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_INSTITUTE_PROPOSAL/PROCEDURES/GET_INST_PROPOSAL_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_INST_PROPOSAL_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS MERGE_INSTITUTE_PROPOSAL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_INSTITUTE_PROPOSAL/PROCEDURES/MERGE_INSTITUTE_PROPOSAL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS MERGE_INSTITUTE_PROPOSAL; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_IP; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_INSTITUTE_PROPOSAL/PROCEDURES/RESET_AUTO_INCREMENT_IP.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_IP; 

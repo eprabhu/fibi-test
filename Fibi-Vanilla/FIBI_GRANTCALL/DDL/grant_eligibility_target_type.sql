@@ -1,0 +1,12 @@
+
+DROP TABLE IF EXISTS `grant_eligibility_target_type`;
+
+CREATE TABLE `grant_eligibility_target_type` (
+  `ELIGIBILITY_TARGET_TYPE_CODE` varchar(3) NOT NULL,
+  `TARGET_CATEGORY_TYPE_CODE` varchar(3) DEFAULT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  PRIMARY KEY (`ELIGIBILITY_TARGET_TYPE_CODE`)
+) ;

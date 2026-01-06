@@ -1,0 +1,31 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS elastic_institute_proposal_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_INSTITUTE_PROPOSAL/VIEWS/elastic_institute_proposal_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS elastic_institute_proposal_v; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS success_rate_view; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_INSTITUTE_PROPOSAL/VIEWS/success_rate_view.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS success_rate_view; 

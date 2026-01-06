@@ -1,0 +1,23 @@
+
+
+--
+--  `scopus_affiliation`
+--
+
+DROP TABLE IF EXISTS `scopus_affiliation`;
+
+CREATE TABLE `scopus_affiliation` (
+  `AFFILIATION_ID` varchar(40) NOT NULL,
+  `SCOPUS_ID` varchar(40) NOT NULL,
+  `URL` varchar(200) DEFAULT NULL,
+  `NAME` varchar(200) DEFAULT NULL,
+  `CITY` varchar(200) DEFAULT NULL,
+  `COUNTRY` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `AFF_ID` varchar(40) NOT NULL,
+  PRIMARY KEY (`AFFILIATION_ID`,`SCOPUS_ID`),
+  KEY `SCOPUS_AFFILIATION_FK1` (`SCOPUS_ID`),
+  CONSTRAINT `SCOPUS_AFFILIATION_FK1` FOREIGN KEY (`SCOPUS_ID`) REFERENCES `scopus` (`SCOPUS_ID`)
+);
+

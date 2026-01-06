@@ -1,0 +1,10 @@
+SET SQL_SAFE_UPDATES = 0;
+SET FOREIGN_KEY_CHECKS = 0;
+truncate workflow_map;
+INSERT INTO workflow_map (`MAP_ID`,`DESCRIPTION`,`MAP_TYPE`,`UPDATE_USER`,`UPDATE_TIMESTAMP`,`UNIT_NUMBER`,`MAP_NAME`) VALUES (2,'Principal Investigator','R','admin','2025-08-01 17:09:18','000001','PI');
+INSERT INTO workflow_map (`MAP_ID`,`DESCRIPTION`,`MAP_TYPE`,`UPDATE_USER`,`UPDATE_TIMESTAMP`,`UNIT_NUMBER`,`MAP_NAME`) VALUES (4,'Dept.Admin > GM > Research Office Admin','R','admin','2025-08-22 11:12:56','000001','Dept.Admin > GM > Research Office Admin');
+INSERT INTO workflow_map (`MAP_ID`,`DESCRIPTION`,`MAP_TYPE`,`UPDATE_USER`,`UPDATE_TIMESTAMP`,`UNIT_NUMBER`,`MAP_NAME`) VALUES (5,'Approval for externally funded proposals','R','admin','2025-08-04 18:39:53','100000','BSCRC Approval');
+INSERT INTO workflow_map (`MAP_ID`,`DESCRIPTION`,`MAP_TYPE`,`UPDATE_USER`,`UPDATE_TIMESTAMP`,`UNIT_NUMBER`,`MAP_NAME`) VALUES (6,'Routing flow for NIH proposals','R','admin','2025-08-20 01:01:33','000001','Routing for NIH Proposals');
+INSERT INTO workflow_map (`MAP_ID`,`DESCRIPTION`,`MAP_TYPE`,`UPDATE_USER`,`UPDATE_TIMESTAMP`,`UNIT_NUMBER`,`MAP_NAME`) VALUES (134,'BSCRC Committee for evaluation proposals','E','admin','2025-08-01 20:30:00','000001','BSCRC Committee');
+SET SQL_SAFE_UPDATES = 1;
+SET FOREIGN_KEY_CHECKS = 1;

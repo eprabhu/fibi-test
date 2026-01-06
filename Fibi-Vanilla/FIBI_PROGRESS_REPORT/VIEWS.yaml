@@ -1,0 +1,46 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_report_requirement_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_PROGRESS_REPORT/VIEWS/award_report_requirement_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_report_requirement_report_v; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS progress_report_status_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_PROGRESS_REPORT/VIEWS/progress_report_status_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS progress_report_status_v; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS progress_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_PROGRESS_REPORT/VIEWS/progress_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS progress_report_v; 

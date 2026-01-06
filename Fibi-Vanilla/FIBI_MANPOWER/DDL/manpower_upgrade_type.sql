@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `manpower_upgrade_type`;
+
+CREATE TABLE `manpower_upgrade_type` (
+  `UPGRADE_TYPE_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`UPGRADE_TYPE_CODE`)
+) ;

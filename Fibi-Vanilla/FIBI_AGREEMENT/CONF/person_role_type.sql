@@ -1,0 +1,2 @@
+INSERT INTO person_role_type (`ROLE_TYPE_CODE`,`DESCRIPTION`,`UPDATE_TIMESTAMP`,`UPDATE_USER`,`IS_ACTIVE`) VALUES (103,'Agreement Aggregator',utc_timestamp(),'admin','Y');
+INSERT INTO person_role_type (`ROLE_TYPE_CODE`,`DESCRIPTION`,`UPDATE_TIMESTAMP`,`UPDATE_USER`,`IS_ACTIVE`) VALUES (35,'Agreement Administrator',utc_timestamp(),'admin','Y');

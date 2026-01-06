@@ -1,0 +1,226 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ADD_ASSOC_FOR_SR; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/ADD_ASSOC_FOR_SR.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ADD_ASSOC_FOR_SR; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CLOSE_SERVICE_REQUEST; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/CLOSE_SERVICE_REQUEST.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CLOSE_SERVICE_REQUEST; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS COPY_SERVICE_REQUEST; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/COPY_SERVICE_REQUEST.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS COPY_SERVICE_REQUEST; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DELETE_SERVICE_REQUEST_BY_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/DELETE_SERVICE_REQUEST_BY_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DELETE_SERVICE_REQUEST_BY_ID; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/GET_SERVICE_REQUEST_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/GET_SERVICE_REQUEST_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_DETAILS_MEDUSA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/GET_SERVICE_REQUEST_DETAILS_MEDUSA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_DETAILS_MEDUSA; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_HISTORY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/GET_SERVICE_REQUEST_HISTORY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_HISTORY; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_WIDGET; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/GET_SERVICE_REQUEST_WIDGET.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_WIDGET; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_WIDGET_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/GET_SERVICE_REQUEST_WIDGET_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_WIDGET_COUNT; 
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_WIDGET_COUNT_IN_DETAIL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/GET_SERVICE_REQUEST_WIDGET_COUNT_IN_DETAIL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_SERVICE_REQUEST_WIDGET_COUNT_IN_DETAIL; 
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_SR; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/RESET_AUTO_INCREMENT_SR.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_SR; 
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_OLD_SR_HEADER_VALUES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/UPDATE_OLD_SR_HEADER_VALUES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_OLD_SR_HEADER_VALUES; 
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_SR_HEADER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/UPDATE_SR_HEADER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_SR_HEADER; 
+
+  - changeSet: 
+      id: 15
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CLEAN_ASSOC_SR; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_SERVICE_REQUEST/PROCEDURES/CLEAN_ASSOC_SR.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CLEAN_ASSOC_SR; 

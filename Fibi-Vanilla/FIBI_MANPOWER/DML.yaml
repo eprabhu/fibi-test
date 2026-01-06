@@ -1,0 +1,157 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/code_table_configuration.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/manpower_configuration_data.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/rights.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/role_rights.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/workday_configuration_data.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/manpower_budget_reference_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/manpower_compensation_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/manpower_interface_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/manpower_interface_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/manpower_position_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/manpower_resource_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/manpower_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/manpower_user_actions.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       

@@ -1,0 +1,301 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ADD_COLUMN_IN_AGREEMENT_CUSTOM_DATA_RT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/ADD_COLUMN_IN_AGREEMENT_CUSTOM_DATA_RT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ADD_COLUMN_IN_AGREEMENT_CUSTOM_DATA_RT; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ADD_COLUMN_IN_AWARD_CUSTOM_DATA_RT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/ADD_COLUMN_IN_AWARD_CUSTOM_DATA_RT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ADD_COLUMN_IN_AWARD_CUSTOM_DATA_RT; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ADD_FULL_COLUMN_IN_AGREEMENT_CUSTOM_DATA_RT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/ADD_FULL_COLUMN_IN_AGREEMENT_CUSTOM_DATA_RT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ADD_FULL_COLUMN_IN_AGREEMENT_CUSTOM_DATA_RT; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ADD_FULL_COLUMN_IN_AWARD_CUSTOM_DATA_RT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/ADD_FULL_COLUMN_IN_AWARD_CUSTOM_DATA_RT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ADD_FULL_COLUMN_IN_AWARD_CUSTOM_DATA_RT; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AGREEMENT_CUSTOM_DATA_RT_FULL_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/AGREEMENT_CUSTOM_DATA_RT_FULL_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AGREEMENT_CUSTOM_DATA_RT_FULL_SYNC; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AGREEMENT_CUSTOM_DATA_RT_SYNC_BY_AGREEMENT_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/AGREEMENT_CUSTOM_DATA_RT_SYNC_BY_AGREEMENT_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AGREEMENT_CUSTOM_DATA_RT_SYNC_BY_AGREEMENT_ID; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_CUSTOM_DATA_RT_FULL_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/AWARD_CUSTOM_DATA_RT_FULL_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_CUSTOM_DATA_RT_FULL_SYNC; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_CUSTOM_DATA_RT_SYNC_BY_AWARD_ID; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/AWARD_CUSTOM_DATA_RT_SYNC_BY_AWARD_ID.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_CUSTOM_DATA_RT_SYNC_BY_AWARD_ID; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_MASTER_DATASET_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/AWARD_MASTER_DATASET_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_MASTER_DATASET_SYNC; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS AWARD_REVENUE_TRACKER_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/AWARD_REVENUE_TRACKER_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS AWARD_REVENUE_TRACKER_SYNC; 
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CLAIM_MASTER_DATASET_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/CLAIM_MASTER_DATASET_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CLAIM_MASTER_DATASET_SYNC; 
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS CUSTOM_DATA_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/CUSTOM_DATA_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS CUSTOM_DATA_SYNC; 
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DMP_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/DMP_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DMP_REPORT; 
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DMP_REPORT_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/DMP_REPORT_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DMP_REPORT_SYNC; 
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS EXPENSE_DATA_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/EXPENSE_DATA_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS EXPENSE_DATA_SYNC; 
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS PR_MASTER_DATASET_FULL_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/PR_MASTER_DATASET_FULL_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS PR_MASTER_DATASET_FULL_SYNC; 
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS PR_MASTER_DATASET_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/PR_MASTER_DATASET_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS PR_MASTER_DATASET_SYNC; 
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS REFRESH_PERSON_ROLE_RT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/REFRESH_PERSON_ROLE_RT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS REFRESH_PERSON_ROLE_RT; 
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS REFRESH_PERSON_ROLE_RT_MV; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/REFRESH_PERSON_ROLE_RT_MV.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS REFRESH_PERSON_ROLE_RT_MV; 
+ 
+  - changeSet: 
+      id: 20 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS SPECIAL_TERM_QUEST_REPORT_SYNC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_REPORT/PROCEDURES/SPECIAL_TERM_QUEST_REPORT_SYNC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS SPECIAL_TERM_QUEST_REPORT_SYNC; 

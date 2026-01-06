@@ -1,0 +1,24 @@
+
+
+--
+--  `external_user_feed`
+--
+
+DROP TABLE IF EXISTS `external_user_feed`;
+
+CREATE TABLE `external_user_feed` (
+  `EXTERNAL_USER_FEED_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PERSON_ID` varchar(40) NOT NULL,
+  `ACTION` varchar(15) DEFAULT NULL,
+  `USER_NAME` varchar(60) DEFAULT NULL,
+  `FULL_NAME` varchar(100) DEFAULT NULL,
+  `PASSWORD` varchar(400) DEFAULT NULL,
+  `EMAIL_ADDRESS` varchar(60) DEFAULT NULL,
+  `ORGANIZATION_NAME` varchar(100) DEFAULT NULL,
+  `TYPE` varchar(45) DEFAULT NULL,
+  `IS_SENT` varchar(1) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`EXTERNAL_USER_FEED_ID`)
+);
+

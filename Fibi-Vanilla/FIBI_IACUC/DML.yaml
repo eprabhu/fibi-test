@@ -1,0 +1,49 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/special_review_usage.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+#   - changeSet: 
+#       id: 2 
+#       author: fibi_admin 
+#       labels: DML 
+#       comment: DML change set 
+#       changes: 
+#         - sqlFile: 
+#             path: DML/ac_protocol_status.sql 
+#             relativeToChangelogFile: true 
+#       rollback: empty 
+       
+ 
+#   - changeSet: 
+#       id: 3 
+#       author: fibi_admin 
+#       labels: DML 
+#       comment: DML change set 
+#       changes: 
+#         - sqlFile: 
+#             path: DML/ac_protocol_type.sql 
+#             relativeToChangelogFile: true 
+#       rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/code_table_configuration.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       

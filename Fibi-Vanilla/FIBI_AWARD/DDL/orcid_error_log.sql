@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `orcid_error_log`;
+
+CREATE TABLE `orcid_error_log` (
+  `ORCID_ERROR_LOG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ORCID_ID` varchar(30) DEFAULT NULL,
+  `ERROR_MESSAGE` longtext,
+  `ERROR_TYPE` varchar(50) DEFAULT NULL,
+  `PUT_CODE` int(11) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime NOT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  `IS_MAIL_SENT` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`ORCID_ERROR_LOG_ID`)
+) ;

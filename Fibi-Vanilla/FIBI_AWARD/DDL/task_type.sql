@@ -1,0 +1,18 @@
+
+
+--
+--  `task_type`
+--
+
+DROP TABLE IF EXISTS `task_type`;
+
+CREATE TABLE `task_type` (
+  `TASK_TYPE_CODE` varchar(255) NOT NULL,
+  `DESCRIPTION` varchar(500) DEFAULT NULL,
+  `INSTRUCTION` varchar(500) DEFAULT NULL,
+  `IS_REVIEW_TASK` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`TASK_TYPE_CODE`)
+);

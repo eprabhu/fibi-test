@@ -1,0 +1,10 @@
+
+DROP TABLE IF EXISTS `proposal_resrch_type`;
+
+CREATE TABLE `proposal_resrch_type` (
+  `RESRCH_TYPE_CODE` int(11) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`RESRCH_TYPE_CODE`)
+) ;

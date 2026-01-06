@@ -1,0 +1,301 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS ADD_ASSOC_FOR_AGREEMENT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/ADD_ASSOC_FOR_AGREEMENT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS ADD_ASSOC_FOR_AGREEMENT; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DELETE_AGREEMENT_RECORD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/DELETE_AGREEMENT_RECORD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DELETE_AGREEMENT_RECORD; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGMENT_DASHBOARD_CATEGORY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGMENT_DASHBOARD_CATEGORY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGMENT_DASHBOARD_CATEGORY; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGMNT_CAT_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGMNT_CAT_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGMNT_CAT_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_COUNT_BY_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGREEMENT_COUNT_BY_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_COUNT_BY_STATUS; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_COUNT_BY_STATUS_DETAIL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGREEMENT_COUNT_BY_STATUS_DETAIL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_COUNT_BY_STATUS_DETAIL; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGREEMENT_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGREEMENT_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_DETAILS_FOR_ASSOC; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGREEMENT_DETAILS_FOR_ASSOC.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_DETAILS_FOR_ASSOC; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGRMENT_DASHBOARD_DYN_JSON; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGRMENT_DASHBOARD_DYN_JSON.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGRMENT_DASHBOARD_DYN_JSON; 
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_AGRMENT_DASHBOARD_JSON_CNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_AGRMENT_DASHBOARD_JSON_CNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_AGRMENT_DASHBOARD_JSON_CNT; 
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_MODULE_DETAILS_FOR_AGREEMENT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_MODULE_DETAILS_FOR_AGREEMENT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_MODULE_DETAILS_FOR_AGREEMENT; 
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_NEGOTIATION_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_NEGOTIATION_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_NEGOTIATION_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 14 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_NEGOTIATION_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_NEGOTIATION_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_NEGOTIATION_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 15 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_NEGO_LOCATION_HISTORY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_NEGO_LOCATION_HISTORY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_NEGO_LOCATION_HISTORY; 
+ 
+  - changeSet: 
+      id: 16 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_RESEARCH_SUMMARY_AGREEMENT_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_RESEARCH_SUMMARY_AGREEMENT_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_RESEARCH_SUMMARY_AGREEMENT_COUNT; 
+ 
+  - changeSet: 
+      id: 17 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_RESEARCH_SUMMARY_AGREEMENT_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/GET_RESEARCH_SUMMARY_AGREEMENT_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_RESEARCH_SUMMARY_AGREEMENT_DETAILS; 
+ 
+  - changeSet: 
+      id: 18 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_AGREEMENT_ACTION_LOG; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/INSERT_AGREEMENT_ACTION_LOG.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_AGREEMENT_ACTION_LOG; 
+ 
+  - changeSet: 
+      id: 19 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: Procedure change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_AGREEMENT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/RESET_AUTO_INCREMENT_AGREEMENT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_AGREEMENT; 
+
+  - changeSet:
+      id: 20
+      author: Manesh.MS
+      labels: 'PROCEDURES'
+      comment: Added missing routine.
+      changes:
+        - sql:
+            sql: DROP PROCEDURE IF EXISTS UPDATE_AGREEMENT_DATA;
+        - sqlFile:
+            path: Fibi-Vanilla/ROUTINES/FIBI_AGREEMENT/PROCEDURES/UPDATE_AGREEMENT_DATA.sql
+            relativeToChangelogFile: false
+            splitStatements: false
+      rollback:
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_AGREEMENT_DATA;

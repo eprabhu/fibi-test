@@ -1,0 +1,133 @@
+databaseChangeLog: 
+ 
+#   - changeSet: 
+#       id: 1 
+#       author: fibi_admin 
+#       labels: DML 
+#       comment: DML change set 
+#       changes: 
+#         - sqlFile: 
+#             path: CONF/birt_download_option.sql 
+#             relativeToChangelogFile: true 
+#       rollback: empty 
+       
+ 
+#   - changeSet: 
+#       id: 2 
+#       author: fibi_admin 
+#       labels: DML 
+#       comment: DML change set 
+#       changes: 
+#         - sqlFile: 
+#             path: CONF/birt_template.sql 
+#             relativeToChangelogFile: true 
+#       rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/code_table_configuration.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+#   - changeSet: 
+#       id: 4 
+#       author: fibi_admin 
+#       labels: DML 
+#       comment: DML change set 
+#       changes: 
+#         - sqlFile: 
+#             path: CONF/report_columns.sql 
+#             relativeToChangelogFile: true 
+#       rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report_last_sync_time.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report_type_join.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/report_template.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/rights.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/role_rights.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/report_status.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       

@@ -1,0 +1,1 @@
+INSERT INTO business_rule_function (FUNCTION_NAME,MODULE_CODE,SUB_MODULE_CODE,DESCRIPTION,DB_FUNCTION_NAME,UPDATE_TIMESTAMP,UPDATE_USER) VALUES ('Duplicate Area of Research Rank in IP',2,0,'To check research area have duplicate rank or not','FN_CHECK_DUPLICATE_RANK',UTC_TIMESTAMP(),'admin');

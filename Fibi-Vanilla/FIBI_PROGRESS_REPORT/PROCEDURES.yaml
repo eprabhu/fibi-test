@@ -1,0 +1,76 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PROGRESS_REPORT_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_PROGRESS_REPORT/PROCEDURES/GET_PROGRESS_REPORT_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PROGRESS_REPORT_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_PROGRESS_REPORT_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_PROGRESS_REPORT/PROCEDURES/GET_PROGRESS_REPORT_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_PROGRESS_REPORT_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_CRITERIA_MAPPING; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_PROGRESS_REPORT/PROCEDURES/INSERT_CRITERIA_MAPPING.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_CRITERIA_MAPPING; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS PRO_REPORT_ROUTLOG_MIGRATION; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_PROGRESS_REPORT/PROCEDURES/PRO_REPORT_ROUTLOG_MIGRATION.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS PRO_REPORT_ROUTLOG_MIGRATION; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_FOR_PROGRESS_REPORT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_PROGRESS_REPORT/PROCEDURES/RESET_AUTO_INCREMENT_FOR_PROGRESS_REPORT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_FOR_PROGRESS_REPORT; 

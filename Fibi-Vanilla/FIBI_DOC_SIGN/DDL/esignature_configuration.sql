@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `esignature_configuration`;
+
+CREATE TABLE `esignature_configuration` (
+  `CONFIGURATION_KEY` varchar(255) NOT NULL,
+  `CONFIGURATION_VALUE` varchar(2500) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CONFIGURATION_KEY`)
+) ;

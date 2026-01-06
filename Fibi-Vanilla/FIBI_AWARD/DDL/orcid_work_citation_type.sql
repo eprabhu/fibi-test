@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `orcid_work_citation_type`;
+
+CREATE TABLE `orcid_work_citation_type` (
+  `ORCID_WORK_CITATION_TYPE_CODE` varchar(40) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`ORCID_WORK_CITATION_TYPE_CODE`)
+) ;

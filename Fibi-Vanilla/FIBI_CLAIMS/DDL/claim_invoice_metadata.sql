@@ -1,0 +1,24 @@
+
+
+--
+--  `claim_invoice_metadata`
+--
+
+DROP TABLE IF EXISTS `claim_invoice_metadata`;
+
+CREATE TABLE `claim_invoice_metadata` (
+  `BA_CODE` varchar(4) NOT NULL,
+  `DOCUMENT_TYPE_CODE` varchar(3) NOT NULL,
+  `DOCUMENT_TYPE_DESC` varchar(50) DEFAULT NULL,
+  `REVERSAL_DOCUMENT_TYPE_CODE` varchar(3) DEFAULT NULL,
+  `REVERSAL_DOCUMENT_TYPE_DESC` varchar(50) DEFAULT NULL,
+  `HEADER_POSTING_KEY` varchar(2) DEFAULT NULL,
+  `LINE_ITEM_POSTING_KEY` varchar(2) DEFAULT NULL,
+  `REVERSAL_HEADER_POSTING_KEY` varchar(2) DEFAULT NULL,
+  `REVERSAL_LINE_ITEM_POSTING_KEY` varchar(2) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  `UPDATE_TIMESTAMP` datetime NOT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  PRIMARY KEY (`BA_CODE`,`DOCUMENT_TYPE_CODE`)
+);
+

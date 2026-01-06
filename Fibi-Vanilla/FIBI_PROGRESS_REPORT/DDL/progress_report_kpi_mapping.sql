@@ -1,0 +1,13 @@
+
+DROP TABLE IF EXISTS `progress_report_kpi_mapping`;
+
+CREATE TABLE `progress_report_kpi_mapping` (
+  `KPI_TYPE_CODE` varchar(3) NOT NULL,
+  `KPI_CRITERIA_TYPE_CODE` varchar(3) NOT NULL,
+  `TEMPLATE_TABLE` varchar(60) DEFAULT NULL,
+  `SECTION_CODE` varchar(10) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`KPI_TYPE_CODE`,`KPI_CRITERIA_TYPE_CODE`)
+) ;

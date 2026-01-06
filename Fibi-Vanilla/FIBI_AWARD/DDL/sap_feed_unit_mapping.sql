@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS `sap_feed_unit_mapping`;
+
+CREATE TABLE `sap_feed_unit_mapping` (
+  `UNIT_NUMBER` varchar(8) NOT NULL,
+  `PERSON_RESPONSIBLE_NUMBER` varchar(8) NOT NULL,
+  `COMPANY_CODE` varchar(80) NOT NULL,
+  `CONTROLLING_AREA` varchar(80) NOT NULL,
+  `PLANT` varchar(80) NOT NULL,
+  `BA_CODE` varchar(4) DEFAULT NULL,
+  `UNIT_TYPE` varchar(20) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime NOT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  `REFER_SUB_UNIT_FLAG` varchar(1) DEFAULT NULL,
+  `SUPERIOR_SUP_ORG` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`UNIT_NUMBER`)
+) ;

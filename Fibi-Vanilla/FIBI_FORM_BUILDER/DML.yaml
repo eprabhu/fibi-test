@@ -1,0 +1,23 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/form_section_component_type.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+
+  - changeSet: 
+      id: 2
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: DML/form_builder_counter.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 

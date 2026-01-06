@@ -1,0 +1,15 @@
+
+DROP TABLE IF EXISTS `form_builder_prog_element`;
+
+CREATE TABLE `form_builder_prog_element` (
+  `PROG_ELEMENT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PROG_ELEMENT_NUMBER` varchar(20) NOT NULL,
+  `VERSION_NUMBER` int(11) NOT NULL,
+  `VERSION_STATUS` varchar(10) NOT NULL,
+  `PROG_ELEMENT_NAME` varchar(100) NOT NULL,
+  `DESCRIPTION` varchar(300) NOT NULL,
+  `IS_ACTIVE` varchar(1) NOT NULL,
+  `UPDATE_TIMESTAMP` datetime NOT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  PRIMARY KEY (`PROG_ELEMENT_ID`)
+) ;

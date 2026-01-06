@@ -1,0 +1,76 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_manpower_compr_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/VIEWS/award_manpower_compr_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_manpower_compr_report_v; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_manpower_new_hire_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/VIEWS/award_manpower_new_hire_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_manpower_new_hire_report_v; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_manpower_payroll_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/VIEWS/award_manpower_payroll_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_manpower_payroll_v; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_manpower_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/VIEWS/award_manpower_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_manpower_report_v; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS salary_discrepancy_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_MANPOWER/VIEWS/salary_discrepancy_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS salary_discrepancy_report_v; 

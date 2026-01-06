@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `manpower_position_status`;
+
+CREATE TABLE `manpower_position_status` (
+  `POSITION_STATUS_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  PRIMARY KEY (`POSITION_STATUS_CODE`)
+) ;

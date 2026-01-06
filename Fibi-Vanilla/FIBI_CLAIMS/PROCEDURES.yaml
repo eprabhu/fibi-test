@@ -1,0 +1,151 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS DELETE_CLAIM_RECORD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/DELETE_CLAIM_RECORD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS DELETE_CLAIM_RECORD; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_CLAIM_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/GET_CLAIM_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_CLAIM_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_CLAIM_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/GET_CLAIM_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_CLAIM_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_CLAIM_MANPOWER_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/GET_CLAIM_MANPOWER_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_CLAIM_MANPOWER_DETAILS; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_CLAIM_MANPOWER_DETAIL_BREAKDOWN; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/GET_CLAIM_MANPOWER_DETAIL_BREAKDOWN.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_CLAIM_MANPOWER_DETAIL_BREAKDOWN; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_NEXT_CLAIM_NUMBER; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/GET_NEXT_CLAIM_NUMBER.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_NEXT_CLAIM_NUMBER; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_CLAIM_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/INSERT_CLAIM_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_CLAIM_DETAILS; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS INSERT_CLAIM_SUMMARY_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/INSERT_CLAIM_SUMMARY_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS INSERT_CLAIM_SUMMARY_DETAILS; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_CLAIM_IDC_VALUES; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/UPDATE_CLAIM_IDC_VALUES.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_CLAIM_IDC_VALUES; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS UPDATE_CLAIM_INDIRECT_COST; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_CLAIMS/PROCEDURES/UPDATE_CLAIM_INDIRECT_COST.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS UPDATE_CLAIM_INDIRECT_COST; 

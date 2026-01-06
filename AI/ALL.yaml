@@ -1,0 +1,17 @@
+databaseChangeLog:
+
+    #AI-1.0
+    - include:
+        file: AI/AI-1.0/SCRIPTS.yaml
+        labels: 'AI-1.0'
+    - include:
+        file: AI/AI-1.0/PROCEDURES.yaml
+        labels: 'AI-1.0'
+
+    #AI-2.0
+    - include:
+        file: AI/AI-2.0/SCRIPTS.yaml
+        labels: 'AI-2.0'
+    - include:
+        file: AI/AI-2.0/PROCEDURES.yaml
+        labels: 'AI-2.0'

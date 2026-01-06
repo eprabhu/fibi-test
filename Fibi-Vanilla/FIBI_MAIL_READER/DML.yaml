@@ -1,0 +1,13 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: DML 
+      comment: DML change set 
+      changes: 
+        - sqlFile: 
+            path: CONF/mail_reader_subject_relation.sql 
+            relativeToChangelogFile: true 
+      rollback: empty 
+       

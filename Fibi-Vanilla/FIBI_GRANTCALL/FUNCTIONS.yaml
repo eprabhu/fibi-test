@@ -1,0 +1,121 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELGLTY_COI; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/FUNCTIONS/FN_CHK_GRANTCALL_ELGLTY_COI.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELGLTY_COI; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELGLTY_KP; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/FUNCTIONS/FN_CHK_GRANTCALL_ELGLTY_KP.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELGLTY_KP; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELGLTY_PI; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/FUNCTIONS/FN_CHK_GRANTCALL_ELGLTY_PI.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELGLTY_PI; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELIGIBILITY; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/FUNCTIONS/FN_CHK_GRANTCALL_ELIGIBILITY.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELIGIBILITY; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELIG_CRITERIA; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/FUNCTIONS/FN_CHK_GRANTCALL_ELIG_CRITERIA.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_GRANTCALL_ELIG_CRITERIA; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_GRANT_EVALPANEL_EXISTS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/FUNCTIONS/FN_CHK_GRANT_EVALPANEL_EXISTS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_GRANT_EVALPANEL_EXISTS; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_GRANT_MAIN_PANEL_EXISTS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/FUNCTIONS/FN_CHK_GRANT_MAIN_PANEL_EXISTS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_GRANT_MAIN_PANEL_EXISTS; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: FUNCTIONS 
+      comment: FUNCTION change set 
+      changes: 
+        - sql: 
+            sql: DROP FUNCTION IF EXISTS FN_CHK_GRANT_SCORING_EXISTS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/FUNCTIONS/FN_CHK_GRANT_SCORING_EXISTS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP FUNCTION IF EXISTS FN_CHK_GRANT_SCORING_EXISTS; 

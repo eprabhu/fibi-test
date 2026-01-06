@@ -1,0 +1,121 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS EXTERNAL_REVIEWER_DEADLINE_DATE_FOLLOW_UP; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_EXTERNAL_REVIEWER/PROCEDURES/EXTERNAL_REVIEWER_DEADLINE_DATE_FOLLOW_UP.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS EXTERNAL_REVIEWER_DEADLINE_DATE_FOLLOW_UP; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS EXTERNAL_REVIEWER_DEADLINE_DATE_REMINDERS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_EXTERNAL_REVIEWER/PROCEDURES/EXTERNAL_REVIEWER_DEADLINE_DATE_REMINDERS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS EXTERNAL_REVIEWER_DEADLINE_DATE_REMINDERS; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_EXTERNAL_REVIEW_SUMMARY_DETAILS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_EXTERNAL_REVIEWER/PROCEDURES/GET_EXTERNAL_REVIEW_SUMMARY_DETAILS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_EXTERNAL_REVIEW_SUMMARY_DETAILS; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_EXTERNAL_REVIEW_WIDGET_DATA_IN_DETAIL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_EXTERNAL_REVIEWER/PROCEDURES/GET_EXTERNAL_REVIEW_WIDGET_DATA_IN_DETAIL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_EXTERNAL_REVIEW_WIDGET_DATA_IN_DETAIL; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_EXT_REVIEWER_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_EXTERNAL_REVIEWER/PROCEDURES/GET_EXT_REVIEWER_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_EXT_REVIEWER_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_EXT_REVIEWER_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_EXTERNAL_REVIEWER/PROCEDURES/GET_EXT_REVIEWER_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_EXT_REVIEWER_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_EXT_REVIEW_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_EXTERNAL_REVIEWER/PROCEDURES/GET_EXT_REVIEW_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_EXT_REVIEW_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_EXT_REVIEW_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_EXTERNAL_REVIEWER/PROCEDURES/GET_EXT_REVIEW_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_EXT_REVIEW_DASHBOARD_COUNT; 

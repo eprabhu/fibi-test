@@ -1,0 +1,27 @@
+
+
+--
+--  `sap_grant_code`
+--
+
+DROP TABLE IF EXISTS `sap_grant_code`;
+
+CREATE TABLE `sap_grant_code` (
+  `GRANT_CODE` varchar(255) NOT NULL,
+  `CAMPUS` varchar(255) DEFAULT NULL,
+  `CREATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `GRANT_CODE_NAME` varchar(255) DEFAULT NULL,
+  `GRANT_CURRENCY` varchar(255) DEFAULT NULL,
+  `GRANT_TYPE` varchar(255) DEFAULT NULL,
+  `IS_ACTIVE` varchar(255) DEFAULT NULL,
+  `REMARKS` varchar(255) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime(6) DEFAULT NULL,
+  `UPDATE_USER` varchar(255) DEFAULT NULL,
+  `VALID_FROM` datetime(6) DEFAULT NULL,
+  `VALID_TO` datetime(6) DEFAULT NULL,
+  `COMPANY_CODE` varchar(255) DEFAULT NULL,
+  `GM_SPONSOR` varchar(255) DEFAULT NULL,
+  `DATE_WHEN_FEED_INACTIVE` datetime DEFAULT NULL,
+  PRIMARY KEY (`GRANT_CODE`)
+);
+

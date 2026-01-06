@@ -1,0 +1,106 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_GRANTCALL_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/PROCEDURES/GET_GRANTCALL_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_GRANTCALL_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_GRANTCALL_DASHBOARD_COUNT; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/PROCEDURES/GET_GRANTCALL_DASHBOARD_COUNT.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_GRANTCALL_DASHBOARD_COUNT; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_GRANTCALL_ELIGIBLITY_STATUS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/PROCEDURES/GET_GRANTCALL_ELIGIBLITY_STATUS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_GRANTCALL_ELIGIBLITY_STATUS; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_GRANTCALL_SUBMTD_PROPOSALS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/PROCEDURES/GET_GRANTCALL_SUBMTD_PROPOSALS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_GRANTCALL_SUBMTD_PROPOSALS; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS GET_IOI_DASHBOARD; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/PROCEDURES/GET_IOI_DASHBOARD.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS GET_IOI_DASHBOARD; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS NOTIFY_GRANT_ELIGIBLE_PERSONS; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/PROCEDURES/NOTIFY_GRANT_ELIGIBLE_PERSONS.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS NOTIFY_GRANT_ELIGIBLE_PERSONS; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: PROCEDURES 
+      comment: PROCEDURE change set 
+      changes: 
+        - sql: 
+            sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_GRANT_CALL; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_GRANTCALL/PROCEDURES/RESET_AUTO_INCREMENT_GRANT_CALL.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP PROCEDURE IF EXISTS RESET_AUTO_INCREMENT_GRANT_CALL; 

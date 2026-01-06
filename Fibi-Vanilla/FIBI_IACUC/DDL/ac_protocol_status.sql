@@ -1,0 +1,11 @@
+
+DROP TABLE IF EXISTS `ac_protocol_status`;
+CREATE TABLE `ac_protocol_status` (
+  `PROTOCOL_STATUS_CODE` varchar(3) NOT NULL,
+  `DESCRIPTION` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) NOT NULL,
+  `IS_ACTIVE` varchar(1) DEFAULT 'Y',
+  `STATUS_GROUP_CODE` int(11) NOT NULL,
+  PRIMARY KEY (`PROTOCOL_STATUS_CODE`)
+) ;

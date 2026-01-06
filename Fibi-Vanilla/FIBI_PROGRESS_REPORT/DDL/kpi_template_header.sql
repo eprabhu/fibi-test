@@ -1,0 +1,10 @@
+
+DROP TABLE IF EXISTS `kpi_template_header`;
+
+CREATE TABLE `kpi_template_header` (
+  `KPI_TEMPLATE_HEADER_ID` int(11) NOT NULL,
+  `TEMPLATE_NAME` varchar(200) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`KPI_TEMPLATE_HEADER_ID`)
+) ;

@@ -1,0 +1,196 @@
+databaseChangeLog: 
+ 
+  - changeSet: 
+      id: 1 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_amount_transactions_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_amount_transactions_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_amount_transactions_v; 
+
+  - changeSet: 
+      id: 8 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_v;
+
+  - changeSet: 
+      id: 2 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_expense_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_expense_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_expense_report_v; 
+ 
+  - changeSet: 
+      id: 3 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_master_dataset_rt_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_master_dataset_rt_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_master_dataset_rt_v; 
+ 
+  - changeSet: 
+      id: 4 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_mv; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_mv.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_mv; 
+ 
+  - changeSet: 
+      id: 5 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_orcid_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_orcid_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_orcid_report_v; 
+ 
+  - changeSet: 
+      id: 6 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_permission_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_permission_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_permission_report_v; 
+ 
+  - changeSet: 
+      id: 7 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_test_view; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_test_view.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_test_view; 
+ 
+  - changeSet: 
+      id: 9 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS award_vie; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/award_vie.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS award_vie; 
+ 
+  - changeSet: 
+      id: 10 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS elastic_award_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/elastic_award_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS elastic_award_v; 
+ 
+  - changeSet: 
+      id: 11 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS eps_proposal_report_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/eps_proposal_report_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS eps_proposal_report_v; 
+ 
+  - changeSet: 
+      id: 12 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS eps_proposal_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/eps_proposal_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS eps_proposal_v; 
+ 
+  - changeSet: 
+      id: 13 
+      author: fibi_admin 
+      labels: VIEWS 
+      comment: VIEW change set 
+      changes: 
+        - sql: 
+            sql: DROP VIEW IF EXISTS keyperson_timesheet_v; 
+        - sqlFile: 
+            path: Fibi-Vanilla/ROUTINES/FIBI_AWARD/VIEWS/keyperson_timesheet_v.sql 
+            relativeToChangelogFile: false 
+            splitStatements: false
+      rollback: 
+        - sql: DROP VIEW IF EXISTS keyperson_timesheet_v; 

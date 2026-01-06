@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `sap_concur_files`;
+
+CREATE TABLE `sap_concur_files` (
+  `FILE_ID` int(11) NOT NULL,
+  `FILE_NAME` varchar(300) DEFAULT NULL,
+  `NO_OF_RECORDS` int(11) DEFAULT NULL,
+  `UPDATE_USER` varchar(60) DEFAULT NULL,
+  `UPDATE_TIMESTAMP` datetime DEFAULT NULL,
+  PRIMARY KEY (`FILE_ID`)
+) ;
