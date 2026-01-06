@@ -19,6 +19,15 @@ jobs:
         with:
           fetch-depth: 2
       
+      - name: Get commit author info
+        id: author
+        run: |
+          AUTHOR_EMAIL=$(git log -1 --pretty=format:"%ae" || echo "${{ github.actor }}@users.noreply.github.com")
+          AUTHOR_NAME=$(git log -1 --pretty=format:"%an" || echo "${{ github.actor }}")
+          echo "author_email=$AUTHOR_EMAIL" >> $GITHUB_OUTPUT
+          echo "author_name=$AUTHOR_NAME" >> $GITHUB_OUTPUT
+          echo "Commit author: $AUTHOR_NAME <$AUTHOR_EMAIL>"
+      
       - name: Check if CORE files changed
         id: check-core
         run: |
@@ -367,4 +376,40 @@ jobs:
           else
             echo "No changes to commit. Already in sync."
           fi
+      
+      - name: Send failure notification email
+        if: failure()
+        continue-on-error: true
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "❌ CORE Sync Failed - fibi-test to COI Repository"
+          to: ${{ steps.author.outputs.author_email }},prabhu.e@polussolutions.com
+          from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
+          body: |
+            <h2>❌ CORE Sync Workflow Failed</h2>
+            
+            <p><strong>Repository:</strong> ${{ github.repository }}</p>
+            <p><strong>Commit:</strong> <code>${{ github.sha }}</code></p>
+            <p><strong>Commit Message:</strong> ${{ github.event.head_commit.message }}</p>
+            <p><strong>Author:</strong> ${{ steps.author.outputs.author_name }} (${{ steps.author.outputs.author_email }})</p>
+            <p><strong>Branch:</strong> ${{ github.ref_name }}</p>
+            <p><strong>Workflow:</strong> Sync CORE to COI</p>
+            <p><strong>Run ID:</strong> ${{ github.run_id }}</p>
+            
+            <hr>
+            
+            <h3>View Error Details:</h3>
+            <p><a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}">Click here to view the workflow run and error logs</a></p>
+            
+            <p><strong>Direct Link:</strong><br>
+            <code>${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}</code></p>
+            
+            <hr>
+            
+            <p><small>This is an automated notification from GitHub Actions. Please check the workflow logs for detailed error information.</small></p>
+          content_type: text/html
 
