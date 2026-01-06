@@ -75,7 +75,7 @@ databaseChangeLog:
         - sql:
             sql: |
               SET SQL_SAFE_UPDATES = 0;
-              UPDATE DYN_ELEMENT_CONFIG SET `DESCRIPTION` = 'Opened Ticket Summary ', `HELP` = 'Opened' WHERE (`UI_REFERENCE_ID` = 'srvc-rqst-rsrch-smry-Opened');
+              UPDATE DYN_ELEMENT_CONFIG SET `DESCRIPTION` = 'Opened Ticket Summary ', `HELP` = 'Opened' WHERE (`UI_REFERENCE_ID` = 'srvc-rqst-rsrch-smry-Opened') ;
               SET SQL_SAFE_UPDATES = 1;
 - changeSet:
       id: FIBI-7375-1
