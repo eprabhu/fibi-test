@@ -55,8 +55,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Configure remote URL with token
-          git remote set-url origin https://${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
+          # Get the current branch name
+          BRANCH=$(git branch --show-current || echo "main")
+          echo "Current branch: $BRANCH"
+          
+          # Configure remote URL with token (use x-oauth-basic for PAT)
+          git remote set-url origin https://x-access-token:${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
           
           git add DB/CORE/ || true
           
@@ -67,8 +71,8 @@ jobs:
           Source commit: ${{ github.sha }}
           Source: ${{ github.repository }}"
             
-            echo "Pushing to COI repository..."
-            git push origin main || git push origin master
+            echo "Pushing to COI repository (branch: $BRANCH)..."
+            git push origin $BRANCH
             echo "✅ Sync completed successfully!"
           else
             echo "No changes to commit. Already in sync."
