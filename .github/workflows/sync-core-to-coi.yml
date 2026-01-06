@@ -255,9 +255,24 @@ jobs:
                 # Try relative to repository root
                 elif [ -f "./$SQL_PATH" ]; then
                   SOURCE_FILE="./$SQL_PATH"
-                # Try to find the file anywhere in repository
-                else
-                  SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" | head -1)
+                # If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE (common pattern)
+                elif echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
+                  BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/CORE|ROUTINES/BASE/CORE|')
+                  if [ -f "$BASE_PATH" ]; then
+                    SOURCE_FILE="$BASE_PATH"
+                  fi
+                fi
+                
+                # If still not found, try to find the file anywhere in repository
+                if [ -z "$SOURCE_FILE" ]; then
+                  # Extract just the filename
+                  SQL_FILENAME=$(basename "$SQL_PATH")
+                  # Find file by name in ROUTINES directories
+                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" | grep -E "ROUTINES.*CORE" | head -1)
+                  # If not found, try with full path pattern
+                  if [ -z "$SOURCE_FILE" ]; then
+                    SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" | head -1)
+                  fi
                 fi
                 
                 if [ -n "$SOURCE_FILE" ] && [ -f "$SOURCE_FILE" ]; then
@@ -298,9 +313,22 @@ jobs:
           # Configure remote URL with token
           git remote set-url origin https://x-access-token:${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
           
-          git add DB/CORE/ ROUTINES/ || true
+          # Add CORE changes
+          git add DB/CORE/ || true
           
-          if [ -n "$(git status --porcelain DB/CORE ROUTINES/ 2>/dev/null)" ]; then
+          # Add ROUTINES changes if ROUTINES directory exists
+          if [ -d "ROUTINES" ]; then
+            git add ROUTINES/ || true
+          fi
+          
+          # Check if there are any changes to commit
+          CHANGES=$(git status --porcelain DB/CORE 2>/dev/null || echo "")
+          if [ -d "ROUTINES" ]; then
+            CHANGES="$CHANGES $(git status --porcelain ROUTINES/ 2>/dev/null || echo "")"
+          fi
+          CHANGES=$(echo "$CHANGES" | xargs)
+          
+          if [ -n "$CHANGES" ]; then
             echo "Committing changes..."
             git commit -m "Auto-sync CORE and ROUTINES from fibi-test
 
