@@ -40,11 +40,15 @@ if "!CORE_CHANGED!"=="1" (
     echo =========================================
     echo.
     
-    REM Get commit message for reference
-    for /f "delims=" %%m in ('git log -1 --pretty=format:"%%s"') do set "COMMIT_MSG=%%m"
+    REM Get commit message for reference (escape % properly)
+    for /f "delims=" %%m in ('git log -1 --pretty^=format:"%%s"') do set "COMMIT_MSG=%%m"
     
     REM Run the sync script using PowerShell
-    powershell.exe -ExecutionPolicy Bypass -NoProfile -File "%SYNC_SCRIPT%" "!COMMIT_MSG!"
+    if defined COMMIT_MSG (
+        powershell.exe -ExecutionPolicy Bypass -NoProfile -File "%SYNC_SCRIPT%" "!COMMIT_MSG!"
+    ) else (
+        powershell.exe -ExecutionPolicy Bypass -NoProfile -File "%SYNC_SCRIPT%"
+    )
     
     if !errorlevel! equ 0 (
         echo.
