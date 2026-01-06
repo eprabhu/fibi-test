@@ -136,7 +136,8 @@ if ($StashList -match "Auto-stash before CORE sync") {
     git stash pop
 }
 
-# Optionally push to remote (uncomment if you want auto-push)
+# Optionally push to remote
+# Uncomment the following lines if you want automatic push after sync
 # Write-Host "Pushing to remote..."
 # git push origin $CurrentBranch
 # if ($LASTEXITCODE -ne 0) {

@@ -1,0 +1,99 @@
+name: Sync CORE Module to COI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'Fibi-Vanilla/FIBI_CORE/**'
+      - '.github/workflows/sync-core-to-coi.yml'
+
+jobs:
+  sync-core:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    
+    steps:
+      - name: Checkout fibi-test repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Check if CORE files changed
+        id: check-core
+        run: |
+          if git diff --name-only HEAD~1 HEAD | grep -q "Fibi-Vanilla/FIBI_CORE"; then
+            echo "core_changed=true" >> $GITHUB_OUTPUT
+            echo "CORE files changed, proceeding with sync..."
+          else
+            echo "core_changed=false" >> $GITHUB_OUTPUT
+            echo "No CORE files changed, skipping sync..."
+          fi
+      
+      - name: Checkout COI repository
+        if: steps.check-core.outputs.core_changed == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: eprabhu/coi
+          path: coi-repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+      
+      - name: Configure Git
+        if: steps.check-core.outputs.core_changed == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Sync CORE files to COI
+        if: steps.check-core.outputs.core_changed == 'true'
+        run: |
+          echo "Syncing CORE module from fibi-test to COI..."
+          
+          # Copy files from fibi-test to COI
+          rsync -av --delete \
+            --exclude='.git' \
+            Fibi-Vanilla/FIBI_CORE/ coi-repo/DB/CORE/
+          
+          # Change to COI directory
+          cd coi-repo
+          
+          # Check if there are changes
+          if [ -n "$(git status --porcelain DB/CORE)" ]; then
+            echo "Changes detected, committing..."
+            
+            # Add CORE changes
+            git add DB/CORE/
+            
+            # Get source commit info
+            cd ..
+            SOURCE_COMMIT=$(git log -1 --pretty=format:"%h - %s (%an)")
+            cd coi-repo
+            
+            # Commit changes
+            git commit -m "Auto-sync CORE module from fibi-test
+
+          Source commit: $SOURCE_COMMIT
+          Synced by: GitHub Actions
+          Triggered by: Push to fibi-test repository"
+            
+            # Push to COI repository
+            git push origin main || git push origin master
+            
+            echo "Successfully synced CORE module to COI repository"
+          else
+            echo "No changes detected in CORE module. Already in sync."
+          fi
+      
+      - name: Summary
+        if: steps.check-core.outputs.core_changed == 'true'
+        run: |
+          echo "## ✅ CORE Sync Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "CORE module changes have been automatically synced to the COI repository." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Source Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**COI Repository:** eprabhu/coi" >> $GITHUB_STEP_SUMMARY
+
