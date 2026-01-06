@@ -64,8 +64,16 @@ jobs:
             echo "⚠️  Release CORE folders deleted: $DELETED_RELEASES"
           fi
           
+          # Check for routines YAML file changes (PROCEDURES.yaml, VIEWS.yaml, FUNCTIONS.yaml, etc.)
+          ROUTINES_YAML_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -E '\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
+          if [ -n "$ROUTINES_YAML_CHANGES" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "routines_yaml_changed=true" >> $GITHUB_OUTPUT
+            echo "Routines YAML files changed: $ROUTINES_YAML_CHANGES"
+          fi
+          
           # Set default if no changes
-          if [ -z "$ALL_CORE_CHANGES" ] && [ -z "$DELETED_RELEASES" ]; then
+          if [ -z "$ALL_CORE_CHANGES" ] && [ -z "$DELETED_RELEASES" ] && [ -z "$ROUTINES_YAML_CHANGES" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
             echo "No CORE files changed"
           fi
@@ -205,6 +213,79 @@ jobs:
             done
           fi
           
+          # Sync ROUTINES files if routines YAML files changed
+          if [ "${{ steps.check-core.outputs.routines_yaml_changed }}" == "true" ]; then
+            echo "Syncing ROUTINES files from changed YAML files..."
+            
+            # Get changed routines YAML files
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+            ROUTINES_YAML_FILES=$(echo "$CHANGED_FILES" | grep -E 'CORE/.*\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
+            
+            # Process each changed YAML file
+            for YAML_FILE in $ROUTINES_YAML_FILES; do
+              if [ ! -f "$YAML_FILE" ]; then
+                echo "⚠️  YAML file $YAML_FILE not found (may have been deleted), skipping"
+                continue
+              fi
+              
+              echo "Processing YAML file: $YAML_FILE"
+              
+              # Extract all sqlFile paths from YAML
+              # Pattern: sqlFile: followed by path: on next line
+              SQL_PATHS=$(awk '/sqlFile:/{getline; if(/path:/){gsub(/.*path:[[:space:]]*/, ""); gsub(/[[:space:]]*$/, ""); if($0 != "") print}}' "$YAML_FILE" || true)
+              
+              if [ -z "$SQL_PATHS" ]; then
+                echo "No sqlFile paths found in $YAML_FILE"
+                continue
+              fi
+              
+              # Copy each SQL file
+              for SQL_PATH in $SQL_PATHS; do
+                echo "Found SQL path: $SQL_PATH"
+                
+                # Normalize path (remove leading/trailing spaces)
+                SQL_PATH=$(echo "$SQL_PATH" | xargs)
+                
+                # Handle different path formats
+                SOURCE_FILE=""
+                
+                # Try path as-is first
+                if [ -f "$SQL_PATH" ]; then
+                  SOURCE_FILE="$SQL_PATH"
+                # Try relative to repository root
+                elif [ -f "./$SQL_PATH" ]; then
+                  SOURCE_FILE="./$SQL_PATH"
+                # Try to find the file anywhere in repository
+                else
+                  SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" | head -1)
+                fi
+                
+                if [ -n "$SOURCE_FILE" ] && [ -f "$SOURCE_FILE" ]; then
+                  # Get absolute path for source
+                  SOURCE_FILE=$(realpath "$SOURCE_FILE" 2>/dev/null || echo "$SOURCE_FILE")
+                  
+                  # Determine destination path (same structure in COI)
+                  # Remove leading ./ if present
+                  SQL_PATH_CLEAN=$(echo "$SQL_PATH" | sed 's|^\./||')
+                  DEST_FILE="coi-repo/$SQL_PATH_CLEAN"
+                  DEST_DIR=$(dirname "$DEST_FILE")
+                  
+                  # Create destination directory
+                  mkdir -p "$DEST_DIR"
+                  
+                  # Copy the file
+                  echo "Copying $SOURCE_FILE to $DEST_FILE"
+                  cp "$SOURCE_FILE" "$DEST_FILE" || true
+                  echo "✅ Synced routine file: $SQL_PATH_CLEAN"
+                else
+                  echo "⚠️  SQL file not found: $SQL_PATH (searched in repository)"
+                fi
+              done
+            done
+            
+            echo "✅ Finished syncing ROUTINES files"
+          fi
+          
           # Commit and push
           cd coi-repo
           git config user.name "github-actions[bot]"
@@ -217,11 +298,11 @@ jobs:
           # Configure remote URL with token
           git remote set-url origin https://x-access-token:${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
           
-          git add DB/CORE/ || true
+          git add DB/CORE/ ROUTINES/ || true
           
-          if [ -n "$(git status --porcelain DB/CORE)" ]; then
+          if [ -n "$(git status --porcelain DB/CORE ROUTINES/ 2>/dev/null)" ]; then
             echo "Committing changes..."
-            git commit -m "Auto-sync CORE from fibi-test
+            git commit -m "Auto-sync CORE and ROUTINES from fibi-test
 
           Source commit: ${{ github.sha }}
           Source: ${{ github.repository }}"
