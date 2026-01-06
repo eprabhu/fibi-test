@@ -2,6 +2,13 @@
 
 ## Setup (One-Time)
 
+### Windows (PowerShell):
+```powershell
+cd fibi-test
+powershell -ExecutionPolicy Bypass -File setup-hooks.ps1
+```
+
+### Linux/macOS/Git Bash:
 ```bash
 cd fibi-test
 chmod +x setup-hooks.sh
@@ -66,4 +73,6 @@ chmod +x .git/hooks/post-commit
 
 **Need more details?**
 See `CORE_SYNC_README.md` for complete documentation.
+
+
 

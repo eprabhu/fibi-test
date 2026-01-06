@@ -145,3 +145,5 @@ if ($StashList -match "Auto-stash before CORE sync") {
 
 exit 0
 
+
+
