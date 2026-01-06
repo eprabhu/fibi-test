@@ -29,14 +29,33 @@ jobs:
             echo "No CORE files changed"
           fi
       
+      - name: Verify Secret
+        if: steps.check-core.outputs.changed == 'true'
+        run: |
+          if [ -z "$GH_COI_PUSH_TOKEN" ]; then
+            echo "❌ ERROR: GH_COI_PUSH_TOKEN secret is empty or not set!"
+            echo "Please check: https://github.com/eprabhu/fibi-test/settings/secrets/actions"
+            exit 1
+          else
+            TOKEN_LENGTH=${#GH_COI_PUSH_TOKEN}
+            echo "✅ Token secret exists (length: $TOKEN_LENGTH characters)"
+            if [ $TOKEN_LENGTH -lt 10 ]; then
+              echo "⚠️  WARNING: Token seems too short. Please verify it's correct."
+            fi
+          fi
+        env:
+          GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
+      
       - name: Checkout COI
         if: steps.check-core.outputs.changed == 'true'
-        uses: actions/checkout@v4
-        with:
-          repository: eprabhu/coi
-          path: coi-repo
-          token: ${{ secrets.GH_COI_PUSH_TOKEN }}
-          persist-credentials: false
+        run: |
+          echo "Cloning COI repository..."
+          git clone https://x-access-token:$GH_COI_PUSH_TOKEN@github.com/eprabhu/coi.git coi-repo
+          cd coi-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+        env:
+          GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
       
       - name: Sync CORE files
         if: steps.check-core.outputs.changed == 'true'
