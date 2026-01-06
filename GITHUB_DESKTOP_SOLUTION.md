@@ -6,6 +6,7 @@
 
 ## Solution: GitHub Actions Workflow
 
+I've created a **GitHub Actions workflow** that automatically syncs CORE changes when you **push** to GitHub. This works perfectly with GitHub Desktop!
 
 ## How It Works
 
