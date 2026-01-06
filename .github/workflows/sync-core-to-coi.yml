@@ -24,19 +24,27 @@ jobs:
         run: |
           # Get all changed files (modified, added, deleted)
           CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          # Get deleted files specifically
+          DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD~1 HEAD || true)
           # Get added files specifically
-          ADDED_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD)
+          ADDED_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD || true)
           # Get modified files
-          MODIFIED_FILES=$(git diff --name-only --diff-filter=M HEAD~1 HEAD)
+          MODIFIED_FILES=$(git diff --name-only --diff-filter=M HEAD~1 HEAD || true)
           
-          # Combine all changes (additions and modifications)
+          # Combine all changes (additions, modifications, deletions)
           ALL_CORE_CHANGES=$(echo -e "$CHANGED_FILES" | grep -E 'Fibi-Vanilla/FIBI_CORE|Fibi-.*-Release.*/CORE' || true)
           
-          # Check for Fibi-Vanilla CORE changes (modified or added)
+          # Check for Fibi-Vanilla CORE changes (modified, added, or deleted)
           if echo "$ALL_CORE_CHANGES" | grep -q "Fibi-Vanilla/FIBI_CORE"; then
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "vanilla_changed=true" >> $GITHUB_OUTPUT
-            echo "Fibi-Vanilla CORE files changed (modified or added)"
+            echo "Fibi-Vanilla CORE files changed (modified, added, or deleted)"
+          fi
+          
+          # Check if entire Vanilla CORE folder was deleted
+          if echo "$DELETED_FILES" | grep -q "^Fibi-Vanilla/FIBI_CORE"; then
+            echo "vanilla_deleted=true" >> $GITHUB_OUTPUT
+            echo "⚠️  Entire Fibi-Vanilla CORE folder was deleted"
           fi
           
           # Check for Release CORE changes and extract release names
@@ -48,8 +56,16 @@ jobs:
             echo "Release CORE files changed in: $RELEASE_CHANGES"
           fi
           
+          # Check for deleted release CORE folders
+          DELETED_RELEASES=$(echo "$DELETED_FILES" | grep -oP "Fibi-[^/]+-Release" | sort -u || true)
+          if [ -n "$DELETED_RELEASES" ]; then
+            echo "release_deleted=true" >> $GITHUB_OUTPUT
+            echo "deleted_releases=$DELETED_RELEASES" >> $GITHUB_OUTPUT
+            echo "⚠️  Release CORE folders deleted: $DELETED_RELEASES"
+          fi
+          
           # Set default if no changes
-          if [ -z "$ALL_CORE_CHANGES" ]; then
+          if [ -z "$ALL_CORE_CHANGES" ] && [ -z "$DELETED_RELEASES" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
             echo "No CORE files changed"
           fi
@@ -92,20 +108,50 @@ jobs:
           # Create base destination directory
           mkdir -p coi-repo/DB/CORE
           
-          # Sync Fibi-Vanilla CORE (if changed)
-          if [ "${{ steps.check-core.outputs.vanilla_changed }}" == "true" ]; then
-            echo "Syncing Fibi-Vanilla CORE..."
-            # Remove existing CORE folder contents if exists (for clean sync)
-            if [ -d "coi-repo/DB/CORE" ] && [ "$(ls -A coi-repo/DB/CORE 2>/dev/null)" ]; then
-              echo "Removing existing CORE folder contents for clean sync..."
-              rm -rf coi-repo/DB/CORE/* coi-repo/DB/CORE/.* 2>/dev/null || true
+          # Handle Vanilla CORE deletion
+          if [ "${{ steps.check-core.outputs.vanilla_deleted }}" == "true" ]; then
+            echo "⚠️  Vanilla CORE folder was deleted, removing from COI..."
+            if [ -d "coi-repo/DB/CORE" ]; then
+              # Remove only vanilla CORE files, keep release folders
+              find coi-repo/DB/CORE -maxdepth 1 -type f -delete || true
+              find coi-repo/DB/CORE -maxdepth 1 -type d ! -name "CORE" ! -name "Fibi-*-Release" -exec rm -rf {} + || true
+              echo "✅ Removed Vanilla CORE from COI"
             fi
-            # Copy CORE files (preserve directory structure)
-            cp -r Fibi-Vanilla/FIBI_CORE/* coi-repo/DB/CORE/ || true
-            echo "✅ Synced Fibi-Vanilla CORE"
           fi
           
-          # Sync Release CORE folders (if changed)
+          # Sync Fibi-Vanilla CORE (if changed but not deleted)
+          if [ "${{ steps.check-core.outputs.vanilla_changed }}" == "true" ] && [ "${{ steps.check-core.outputs.vanilla_deleted }}" != "true" ]; then
+            echo "Syncing Fibi-Vanilla CORE..."
+            # Remove existing CORE folder contents if exists (for clean sync)
+            # But preserve release folders
+            if [ -d "coi-repo/DB/CORE" ]; then
+              # Remove files and non-release directories at root level
+              find coi-repo/DB/CORE -maxdepth 1 -type f -delete || true
+              find coi-repo/DB/CORE -maxdepth 1 -type d ! -name "CORE" ! -name "Fibi-*-Release" -exec rm -rf {} + || true
+            fi
+            # Copy CORE files (preserve directory structure)
+            if [ -d "Fibi-Vanilla/FIBI_CORE" ]; then
+              cp -r Fibi-Vanilla/FIBI_CORE/* coi-repo/DB/CORE/ || true
+              echo "✅ Synced Fibi-Vanilla CORE"
+            fi
+          fi
+          
+          # Handle deleted Release CORE folders
+          if [ "${{ steps.check-core.outputs.release_deleted }}" == "true" ]; then
+            echo "⚠️  Handling deleted Release CORE folders..."
+            DELETED_RELEASES="${{ steps.check-core.outputs.deleted_releases }}"
+            
+            for RELEASE in $DELETED_RELEASES; do
+              DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+              if [ -d "$DEST_DIR" ]; then
+                echo "Removing deleted release folder: $DEST_DIR"
+                rm -rf "$DEST_DIR"
+                echo "✅ Removed $RELEASE from COI"
+              fi
+            done
+          fi
+          
+          # Sync Release CORE folders (if changed but not deleted)
           if [ "${{ steps.check-core.outputs.release_changed }}" == "true" ]; then
             echo "Syncing Release CORE folders..."
             
@@ -117,6 +163,12 @@ jobs:
             
             for RELEASE in $RELEASES; do
               echo "Processing release: $RELEASE"
+              
+              # Check if this release folder still exists in source
+              if [ ! -d "$RELEASE" ]; then
+                echo "⚠️  Release folder $RELEASE no longer exists, skipping sync"
+                continue
+              fi
               
               # Find CORE folder in this release (could be BASE/CORE, or any subfolder/CORE)
               CORE_PATH=$(find "$RELEASE" -type d -name "CORE" | head -1)
@@ -143,6 +195,12 @@ jobs:
                 echo "✅ Synced $RELEASE CORE to $DEST_DIR"
               else
                 echo "⚠️  No CORE folder found in $RELEASE"
+                # If CORE folder doesn't exist in source, remove from destination
+                DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+                if [ -d "$DEST_DIR" ]; then
+                  echo "Removing $RELEASE folder from COI (CORE folder deleted in source)"
+                  rm -rf "$DEST_DIR"
+                fi
               fi
             done
           fi
