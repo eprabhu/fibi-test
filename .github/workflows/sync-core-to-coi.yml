@@ -22,17 +22,25 @@ jobs:
       - name: Check if CORE files changed
         id: check-core
         run: |
+          # Get all changed files (modified, added, deleted)
           CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          # Get added files specifically
+          ADDED_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD)
+          # Get modified files
+          MODIFIED_FILES=$(git diff --name-only --diff-filter=M HEAD~1 HEAD)
           
-          # Check for Fibi-Vanilla CORE changes
-          if echo "$CHANGED_FILES" | grep -q "Fibi-Vanilla/FIBI_CORE"; then
+          # Combine all changes (additions and modifications)
+          ALL_CORE_CHANGES=$(echo -e "$CHANGED_FILES" | grep -E 'Fibi-Vanilla/FIBI_CORE|Fibi-.*-Release.*/CORE' || true)
+          
+          # Check for Fibi-Vanilla CORE changes (modified or added)
+          if echo "$ALL_CORE_CHANGES" | grep -q "Fibi-Vanilla/FIBI_CORE"; then
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "vanilla_changed=true" >> $GITHUB_OUTPUT
-            echo "Fibi-Vanilla CORE files changed"
+            echo "Fibi-Vanilla CORE files changed (modified or added)"
           fi
           
           # Check for Release CORE changes and extract release names
-          RELEASE_CHANGES=$(echo "$CHANGED_FILES" | grep -oP "Fibi-[^/]+-Release" | sort -u || true)
+          RELEASE_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -oP "Fibi-[^/]+-Release" | sort -u || true)
           if [ -n "$RELEASE_CHANGES" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "release_changed=true" >> $GITHUB_OUTPUT
@@ -41,7 +49,7 @@ jobs:
           fi
           
           # Set default if no changes
-          if [ -z "$(echo "$CHANGED_FILES" | grep -E 'Fibi-Vanilla/FIBI_CORE|Fibi-.*-Release.*/CORE')" ]; then
+          if [ -z "$ALL_CORE_CHANGES" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
             echo "No CORE files changed"
           fi
@@ -87,7 +95,14 @@ jobs:
           # Sync Fibi-Vanilla CORE (if changed)
           if [ "${{ steps.check-core.outputs.vanilla_changed }}" == "true" ]; then
             echo "Syncing Fibi-Vanilla CORE..."
+            # Remove existing CORE folder contents if exists (for clean sync)
+            if [ -d "coi-repo/DB/CORE" ] && [ "$(ls -A coi-repo/DB/CORE 2>/dev/null)" ]; then
+              echo "Removing existing CORE folder contents for clean sync..."
+              rm -rf coi-repo/DB/CORE/* coi-repo/DB/CORE/.* 2>/dev/null || true
+            fi
+            # Copy CORE files (preserve directory structure)
             cp -r Fibi-Vanilla/FIBI_CORE/* coi-repo/DB/CORE/ || true
+            echo "✅ Synced Fibi-Vanilla CORE"
           fi
           
           # Sync Release CORE folders (if changed)
@@ -111,6 +126,14 @@ jobs:
                 
                 # Create destination directory for this release
                 DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+                
+                # Remove existing release folder if it exists (for clean sync)
+                if [ -d "$DEST_DIR" ]; then
+                  echo "Removing existing $RELEASE folder for clean sync..."
+                  rm -rf "$DEST_DIR"
+                fi
+                
+                # Create fresh directory
                 mkdir -p "$DEST_DIR"
                 
                 # Copy CORE folder contents (not the CORE folder itself)
