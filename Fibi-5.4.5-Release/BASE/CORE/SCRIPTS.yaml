@@ -4034,5 +4034,5 @@ databaseChangeLog:
       rollback:
         - sql:
             sql: |
-              DELETE FROM parameter WHERE PARAMETER_NAME = 'SHOW_DISCLOSURE_DETAILS_IN_PROPOSAL_KEY_PERSON';
+              DELETE FROM parameter WHERE PARAMETER_NAME = 'SHOW_DISCLOSURE_DETAILS_IN_PROPOSAL_KEY_PERSON' ;
 
