@@ -246,54 +246,80 @@ jobs:
                 # Normalize path (remove leading/trailing spaces)
                 SQL_PATH=$(echo "$SQL_PATH" | xargs)
                 
-                # Handle different path formats
+                # Handle different path formats - find source file
                 SOURCE_FILE=""
+                SQL_FILENAME=$(basename "$SQL_PATH")
                 
-                # Try path as-is first
+                # Strategy 1: Try path as-is
                 if [ -f "$SQL_PATH" ]; then
                   SOURCE_FILE="$SQL_PATH"
-                # Try relative to repository root
-                elif [ -f "./$SQL_PATH" ]; then
-                  SOURCE_FILE="./$SQL_PATH"
-                # If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE (common pattern)
-                elif echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
+                  echo "Found file at (as-is): $SQL_PATH"
+                fi
+                
+                # Strategy 2: If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE (common pattern)
+                if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
                   BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/CORE|ROUTINES/BASE/CORE|')
                   if [ -f "$BASE_PATH" ]; then
                     SOURCE_FILE="$BASE_PATH"
+                    echo "Found file at (BASE path): $BASE_PATH"
                   fi
                 fi
                 
-                # If still not found, try to find the file anywhere in repository
+                # Strategy 3: Try ROUTINES/BASE/ + relative path from ROUTINES/
+                if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/"; then
+                  RELATIVE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/||')
+                  TRY_PATH="ROUTINES/BASE/$RELATIVE_PATH"
+                  if [ -f "$TRY_PATH" ]; then
+                    SOURCE_FILE="$TRY_PATH"
+                    echo "Found file at (BASE relative): $TRY_PATH"
+                  fi
+                fi
+                
+                # Strategy 4: Find file by name in ROUTINES directories
                 if [ -z "$SOURCE_FILE" ]; then
-                  # Extract just the filename
-                  SQL_FILENAME=$(basename "$SQL_PATH")
-                  # Find file by name in ROUTINES directories
-                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" | grep -E "ROUTINES.*CORE" | head -1)
-                  # If not found, try with full path pattern
-                  if [ -z "$SOURCE_FILE" ]; then
-                    SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" | head -1)
+                  echo "Searching for file by name: $SQL_FILENAME"
+                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" ! -path "*/coi-repo/*" | grep -E "ROUTINES.*CORE" | head -1)
+                  if [ -n "$SOURCE_FILE" ]; then
+                    echo "Found by filename at: $SOURCE_FILE"
+                  fi
+                fi
+                
+                # Strategy 5: Try with full path pattern (last resort)
+                if [ -z "$SOURCE_FILE" ]; then
+                  SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" ! -path "*/coi-repo/*" | head -1)
+                  if [ -n "$SOURCE_FILE" ]; then
+                    echo "Found by path pattern at: $SOURCE_FILE"
                   fi
                 fi
                 
                 if [ -n "$SOURCE_FILE" ] && [ -f "$SOURCE_FILE" ]; then
-                  # Get absolute path for source
-                  SOURCE_FILE=$(realpath "$SOURCE_FILE" 2>/dev/null || echo "$SOURCE_FILE")
-                  
-                  # Determine destination path (same structure in COI)
-                  # Remove leading ./ if present
+                  # Determine destination path (same structure as in YAML, not source path)
+                  # Use the original SQL_PATH from YAML for destination
                   SQL_PATH_CLEAN=$(echo "$SQL_PATH" | sed 's|^\./||')
                   DEST_FILE="coi-repo/$SQL_PATH_CLEAN"
                   DEST_DIR=$(dirname "$DEST_FILE")
                   
-                  # Create destination directory
+                  # Create destination directory (create parent directories if needed)
+                  echo "Creating destination directory: $DEST_DIR"
                   mkdir -p "$DEST_DIR"
                   
-                  # Copy the file
+                  # Copy the file (will replace if exists)
                   echo "Copying $SOURCE_FILE to $DEST_FILE"
-                  cp "$SOURCE_FILE" "$DEST_FILE" || true
+                  cp -f "$SOURCE_FILE" "$DEST_FILE" || {
+                    echo "⚠️  Failed to copy $SOURCE_FILE to $DEST_FILE"
+                    continue
+                  }
                   echo "✅ Synced routine file: $SQL_PATH_CLEAN"
                 else
-                  echo "⚠️  SQL file not found: $SQL_PATH (searched in repository)"
+                  echo "⚠️  SQL file not found: $SQL_PATH"
+                  echo "   Searched paths:"
+                  echo "   - $SQL_PATH"
+                  if echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
+                    BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/CORE|ROUTINES/BASE/CORE|')
+                    echo "   - $BASE_PATH"
+                  fi
+                  SQL_FILENAME=$(basename "$SQL_PATH")
+                  echo "   - Files named: $SQL_FILENAME"
                 fi
               done
             done

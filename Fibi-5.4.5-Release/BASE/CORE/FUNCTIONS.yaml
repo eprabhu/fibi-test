@@ -9,7 +9,7 @@ databaseChangeLog:
         - sql: 
             sql: DROP FUNCTION IF EXISTS FN_CAMPUS_FOR_UNIT; 
         - sqlFile: 
-            path: ROUTINES/CORE/FUNCTIONS/FN_CAMPUS_FOR_UNIT.sql 
+            path: ROUTINES/BASE/CORE/FUNCTIONS/FN_CAMPUS_FOR_UNIT.sql 
             relativeToChangelogFile: false 
             splitStatements: false
       rollback: 
