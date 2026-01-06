@@ -1,0 +1,448 @@
+name: Sync CORE to COI
+
+on:
+  push:
+    paths:
+      - 'Fibi-Vanilla/FIBI_CORE/**'
+      - 'Fibi-*-Release/**/CORE/**'
+      - 'Fibi-*-Release/**/ROUTINES/**'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fibi-test
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      
+      - name: Get commit author info
+        id: author
+        run: |
+          AUTHOR_EMAIL=$(git log -1 --pretty=format:"%ae" || echo "${{ github.actor }}@users.noreply.github.com")
+          AUTHOR_NAME=$(git log -1 --pretty=format:"%an" || echo "${{ github.actor }}")
+          echo "author_email=$AUTHOR_EMAIL" >> $GITHUB_OUTPUT
+          echo "author_name=$AUTHOR_NAME" >> $GITHUB_OUTPUT
+          echo "Commit author: $AUTHOR_NAME <$AUTHOR_EMAIL>"
+      
+      - name: Get current branch name
+        id: branch
+        run: |
+          # Extract branch name from ref (e.g., refs/heads/feature-branch -> feature-branch)
+          BRANCH_NAME="${{ github.ref_name }}"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo "Current branch: $BRANCH_NAME"
+      
+      - name: Check if CORE files changed
+        id: check-core
+        run: |
+          # Get all changed files (modified, added, deleted)
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          # Get deleted files specifically
+          DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD~1 HEAD || true)
+          # Get added files specifically
+          ADDED_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD || true)
+          # Get modified files
+          MODIFIED_FILES=$(git diff --name-only --diff-filter=M HEAD~1 HEAD || true)
+          
+          # Combine all changes (additions, modifications, deletions)
+          ALL_CORE_CHANGES=$(echo -e "$CHANGED_FILES" | grep -E 'Fibi-Vanilla/FIBI_CORE|Fibi-.*-Release.*/CORE' || true)
+          
+          # Check for Fibi-Vanilla CORE changes (modified, added, or deleted)
+          if echo "$ALL_CORE_CHANGES" | grep -q "Fibi-Vanilla/FIBI_CORE"; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "vanilla_changed=true" >> $GITHUB_OUTPUT
+            echo "Fibi-Vanilla CORE files changed (modified, added, or deleted)"
+          fi
+          
+          # Check if entire Vanilla CORE folder was deleted
+          if echo "$DELETED_FILES" | grep -q "^Fibi-Vanilla/FIBI_CORE"; then
+            echo "vanilla_deleted=true" >> $GITHUB_OUTPUT
+            echo "⚠️  Entire Fibi-Vanilla CORE folder was deleted"
+          fi
+          
+          # Check for Release CORE changes and extract release names
+          RELEASE_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -oP "Fibi-[^/]+-Release" | sort -u || true)
+          if [ -n "$RELEASE_CHANGES" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "release_changed=true" >> $GITHUB_OUTPUT
+            echo "releases=$RELEASE_CHANGES" >> $GITHUB_OUTPUT
+            echo "Release CORE files changed in: $RELEASE_CHANGES"
+          fi
+          
+          # Check for deleted release CORE folders
+          DELETED_RELEASES=$(echo "$DELETED_FILES" | grep -oP "Fibi-[^/]+-Release" | sort -u || true)
+          if [ -n "$DELETED_RELEASES" ]; then
+            echo "release_deleted=true" >> $GITHUB_OUTPUT
+            echo "deleted_releases=$DELETED_RELEASES" >> $GITHUB_OUTPUT
+            echo "⚠️  Release CORE folders deleted: $DELETED_RELEASES"
+          fi
+          
+          # Check for routines YAML file changes (PROCEDURES.yaml, VIEWS.yaml, FUNCTIONS.yaml, etc.)
+          ROUTINES_YAML_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -E '\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
+          if [ -n "$ROUTINES_YAML_CHANGES" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "routines_yaml_changed=true" >> $GITHUB_OUTPUT
+            echo "Routines YAML files changed: $ROUTINES_YAML_CHANGES"
+          fi
+          
+          # Set default if no changes
+          if [ -z "$ALL_CORE_CHANGES" ] && [ -z "$DELETED_RELEASES" ] && [ -z "$ROUTINES_YAML_CHANGES" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No CORE files changed"
+          fi
+      
+      - name: Verify Secret
+        if: steps.check-core.outputs.changed == 'true'
+        run: |
+          if [ -z "$GH_COI_PUSH_TOKEN" ]; then
+            echo "❌ ERROR: GH_COI_PUSH_TOKEN secret is empty or not set!"
+            echo "Please check: https://github.com/eprabhu/fibi-test/settings/secrets/actions"
+            exit 1
+          else
+            TOKEN_LENGTH=${#GH_COI_PUSH_TOKEN}
+            echo "✅ Token secret exists (length: $TOKEN_LENGTH characters)"
+            if [ $TOKEN_LENGTH -lt 10 ]; then
+              echo "⚠️  WARNING: Token seems too short. Please verify it's correct."
+            fi
+          fi
+        env:
+          GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
+      
+      - name: Checkout COI
+        if: steps.check-core.outputs.changed == 'true'
+        run: |
+          echo "Cloning COI repository..."
+          git clone https://x-access-token:$GH_COI_PUSH_TOKEN@github.com/eprabhu/coi.git coi-repo
+          cd coi-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Get the branch name from the source repository
+          SOURCE_BRANCH="${{ steps.branch.outputs.branch_name }}"
+          echo "Checking out branch: $SOURCE_BRANCH"
+          
+          # Check if branch exists in COI repository
+          if git ls-remote --heads origin "$SOURCE_BRANCH" | grep -q "$SOURCE_BRANCH"; then
+            echo "Branch $SOURCE_BRANCH exists in COI, checking it out..."
+            git checkout "$SOURCE_BRANCH"
+          else
+            echo "Branch $SOURCE_BRANCH does not exist in COI, creating it..."
+            git checkout -b "$SOURCE_BRANCH"
+          fi
+        env:
+          GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
+      
+      - name: Sync CORE files
+        if: steps.check-core.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
+        run: |
+          echo "Syncing CORE files..."
+          
+          # Create base destination directory
+          mkdir -p coi-repo/DB/CORE
+          
+          # Handle Vanilla CORE deletion
+          if [ "${{ steps.check-core.outputs.vanilla_deleted }}" == "true" ]; then
+            echo "⚠️  Vanilla CORE folder was deleted, removing from COI..."
+            if [ -d "coi-repo/DB/CORE" ]; then
+              # Remove only vanilla CORE files, keep release folders
+              find coi-repo/DB/CORE -maxdepth 1 -type f -delete || true
+              find coi-repo/DB/CORE -maxdepth 1 -type d ! -name "CORE" ! -name "Fibi-*-Release" -exec rm -rf {} + || true
+              echo "✅ Removed Vanilla CORE from COI"
+            fi
+          fi
+          
+          # Sync Fibi-Vanilla CORE (if changed but not deleted)
+          if [ "${{ steps.check-core.outputs.vanilla_changed }}" == "true" ] && [ "${{ steps.check-core.outputs.vanilla_deleted }}" != "true" ]; then
+            echo "Syncing Fibi-Vanilla CORE..."
+            # Remove existing CORE folder contents if exists (for clean sync)
+            # But preserve release folders
+            if [ -d "coi-repo/DB/CORE" ]; then
+              # Remove files and non-release directories at root level
+              find coi-repo/DB/CORE -maxdepth 1 -type f -delete || true
+              find coi-repo/DB/CORE -maxdepth 1 -type d ! -name "CORE" ! -name "Fibi-*-Release" -exec rm -rf {} + || true
+            fi
+            # Copy CORE files (preserve directory structure)
+            if [ -d "Fibi-Vanilla/FIBI_CORE" ]; then
+              cp -r Fibi-Vanilla/FIBI_CORE/* coi-repo/DB/CORE/ || true
+              echo "✅ Synced Fibi-Vanilla CORE"
+            fi
+          fi
+          
+          # Handle deleted Release CORE folders
+          if [ "${{ steps.check-core.outputs.release_deleted }}" == "true" ]; then
+            echo "⚠️  Handling deleted Release CORE folders..."
+            DELETED_RELEASES="${{ steps.check-core.outputs.deleted_releases }}"
+            
+            for RELEASE in $DELETED_RELEASES; do
+              DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+              if [ -d "$DEST_DIR" ]; then
+                echo "Removing deleted release folder: $DEST_DIR"
+                rm -rf "$DEST_DIR"
+                echo "✅ Removed $RELEASE from COI"
+              fi
+            done
+          fi
+          
+          # Sync Release CORE folders (if changed but not deleted)
+          if [ "${{ steps.check-core.outputs.release_changed }}" == "true" ]; then
+            echo "Syncing Release CORE folders..."
+            
+            # Get changed files to find which releases need syncing
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+            
+            # Find all unique release folders with CORE changes
+            RELEASES=$(echo "$CHANGED_FILES" | grep -oP "Fibi-[^/]+-Release" | sort -u)
+            
+            for RELEASE in $RELEASES; do
+              echo "Processing release: $RELEASE"
+              
+              # Check if this release folder still exists in source
+              if [ ! -d "$RELEASE" ]; then
+                echo "⚠️  Release folder $RELEASE no longer exists, skipping sync"
+                continue
+              fi
+              
+              # Find CORE folder in this release (could be BASE/CORE, or any subfolder/CORE)
+              CORE_PATH=$(find "$RELEASE" -type d -name "CORE" | head -1)
+              
+              if [ -n "$CORE_PATH" ] && [ -d "$CORE_PATH" ]; then
+                echo "Found CORE folder at: $CORE_PATH"
+                
+                # Create destination directory for this release
+                DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+                
+                # Remove existing release folder if it exists (for clean sync)
+                if [ -d "$DEST_DIR" ]; then
+                  echo "Removing existing $RELEASE folder for clean sync..."
+                  rm -rf "$DEST_DIR"
+                fi
+                
+                # Create fresh directory
+                mkdir -p "$DEST_DIR"
+                
+                # Copy CORE folder contents (not the CORE folder itself)
+                echo "Copying from $CORE_PATH to $DEST_DIR"
+                cp -r "$CORE_PATH"/* "$DEST_DIR/" || true
+                
+                echo "✅ Synced $RELEASE CORE to $DEST_DIR"
+              else
+                echo "⚠️  No CORE folder found in $RELEASE"
+                # If CORE folder doesn't exist in source, remove from destination
+                DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+                if [ -d "$DEST_DIR" ]; then
+                  echo "Removing $RELEASE folder from COI (CORE folder deleted in source)"
+                  rm -rf "$DEST_DIR"
+                fi
+              fi
+            done
+          fi
+          
+          # Sync ROUTINES files if routines YAML files changed
+          if [ "${{ steps.check-core.outputs.routines_yaml_changed }}" == "true" ]; then
+            echo "Syncing ROUTINES files from changed YAML files..."
+            
+            # Get changed routines YAML files
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+            ROUTINES_YAML_FILES=$(echo "$CHANGED_FILES" | grep -E 'CORE/.*\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
+            
+            # Process each changed YAML file
+            for YAML_FILE in $ROUTINES_YAML_FILES; do
+              if [ ! -f "$YAML_FILE" ]; then
+                echo "⚠️  YAML file $YAML_FILE not found (may have been deleted), skipping"
+                continue
+              fi
+              
+              echo "Processing YAML file: $YAML_FILE"
+              
+              # Extract all sqlFile paths from YAML
+              # Pattern: sqlFile: followed by path: on next line
+              SQL_PATHS=$(awk '/sqlFile:/{getline; if(/path:/){gsub(/.*path:[[:space:]]*/, ""); gsub(/[[:space:]]*$/, ""); if($0 != "") print}}' "$YAML_FILE" || true)
+              
+              if [ -z "$SQL_PATHS" ]; then
+                echo "No sqlFile paths found in $YAML_FILE"
+                continue
+              fi
+              
+              # Copy each SQL file
+              for SQL_PATH in $SQL_PATHS; do
+                echo "Found SQL path: $SQL_PATH"
+                
+                # Normalize path (remove leading/trailing spaces)
+                SQL_PATH=$(echo "$SQL_PATH" | xargs)
+                
+                # Handle different path formats - find source file
+                SOURCE_FILE=""
+                SQL_FILENAME=$(basename "$SQL_PATH")
+                
+                # Strategy 1: Try path as-is
+                if [ -f "$SQL_PATH" ]; then
+                  SOURCE_FILE="$SQL_PATH"
+                  echo "Found file at (as-is): $SQL_PATH"
+                fi
+                
+                # Strategy 2: If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE (common pattern)
+                if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
+                  BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/CORE|ROUTINES/BASE/CORE|')
+                  if [ -f "$BASE_PATH" ]; then
+                    SOURCE_FILE="$BASE_PATH"
+                    echo "Found file at (BASE path): $BASE_PATH"
+                  fi
+                fi
+                
+                # Strategy 3: Try ROUTINES/BASE/ + relative path from ROUTINES/
+                if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/"; then
+                  RELATIVE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/||')
+                  TRY_PATH="ROUTINES/BASE/$RELATIVE_PATH"
+                  if [ -f "$TRY_PATH" ]; then
+                    SOURCE_FILE="$TRY_PATH"
+                    echo "Found file at (BASE relative): $TRY_PATH"
+                  fi
+                fi
+                
+                # Strategy 4: Find file by name in ROUTINES directories
+                if [ -z "$SOURCE_FILE" ]; then
+                  echo "Searching for file by name: $SQL_FILENAME"
+                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" ! -path "*/coi-repo/*" | grep -E "ROUTINES.*CORE" | head -1)
+                  if [ -n "$SOURCE_FILE" ]; then
+                    echo "Found by filename at: $SOURCE_FILE"
+                  fi
+                fi
+                
+                # Strategy 5: Try with full path pattern (last resort)
+                if [ -z "$SOURCE_FILE" ]; then
+                  SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" ! -path "*/coi-repo/*" | head -1)
+                  if [ -n "$SOURCE_FILE" ]; then
+                    echo "Found by path pattern at: $SOURCE_FILE"
+                  fi
+                fi
+                
+                if [ -n "$SOURCE_FILE" ] && [ -f "$SOURCE_FILE" ]; then
+                  # Determine destination path (same structure as in YAML, not source path)
+                  # Use the original SQL_PATH from YAML for destination
+                  SQL_PATH_CLEAN=$(echo "$SQL_PATH" | sed 's|^\./||')
+                  DEST_FILE="coi-repo/$SQL_PATH_CLEAN"
+                  DEST_DIR=$(dirname "$DEST_FILE")
+                  
+                  # Create destination directory (create parent directories if needed)
+                  echo "Creating destination directory: $DEST_DIR"
+                  mkdir -p "$DEST_DIR"
+                  
+                  # Copy the file (will replace if exists)
+                  echo "Copying $SOURCE_FILE to $DEST_FILE"
+                  cp -f "$SOURCE_FILE" "$DEST_FILE" || {
+                    echo "⚠️  Failed to copy $SOURCE_FILE to $DEST_FILE"
+                    continue
+                  }
+                  echo "✅ Synced routine file: $SQL_PATH_CLEAN"
+                else
+                  echo "⚠️  SQL file not found: $SQL_PATH"
+                  echo "   Searched paths:"
+                  echo "   - $SQL_PATH"
+                  if echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
+                    BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/CORE|ROUTINES/BASE/CORE|')
+                    echo "   - $BASE_PATH"
+                  fi
+                  SQL_FILENAME=$(basename "$SQL_PATH")
+                  echo "   - Files named: $SQL_FILENAME"
+                fi
+              done
+            done
+            
+            echo "✅ Finished syncing ROUTINES files"
+          fi
+          
+          # Commit and push
+          cd coi-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Get the branch name from source repository
+          SOURCE_BRANCH="${{ steps.branch.outputs.branch_name }}"
+          echo "Syncing to branch: $SOURCE_BRANCH"
+          
+          # Ensure we're on the correct branch
+          CURRENT_BRANCH=$(git branch --show-current || echo "")
+          if [ "$CURRENT_BRANCH" != "$SOURCE_BRANCH" ]; then
+            echo "Switching to branch: $SOURCE_BRANCH"
+            if git ls-remote --heads origin "$SOURCE_BRANCH" | grep -q "$SOURCE_BRANCH"; then
+              git checkout "$SOURCE_BRANCH"
+            else
+              git checkout -b "$SOURCE_BRANCH"
+            fi
+          fi
+          
+          # Configure remote URL with token
+          git remote set-url origin https://x-access-token:${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
+          
+          # Add CORE changes
+          git add DB/CORE/ || true
+          
+          # Add ROUTINES changes if ROUTINES directory exists
+          if [ -d "ROUTINES" ]; then
+            git add ROUTINES/ || true
+          fi
+          
+          # Check if there are any changes to commit
+          CHANGES=$(git status --porcelain DB/CORE 2>/dev/null || echo "")
+          if [ -d "ROUTINES" ]; then
+            CHANGES="$CHANGES $(git status --porcelain ROUTINES/ 2>/dev/null || echo "")"
+          fi
+          CHANGES=$(echo "$CHANGES" | xargs)
+          
+          if [ -n "$CHANGES" ]; then
+            echo "Committing changes..."
+            git commit -m "Auto-sync CORE and ROUTINES from fibi-test
+
+          Source commit: ${{ github.sha }}
+          Source branch: $SOURCE_BRANCH
+          Source repository: ${{ github.repository }}"
+            
+            echo "Pushing to COI repository (branch: $SOURCE_BRANCH)..."
+            git push origin "$SOURCE_BRANCH" || git push -u origin "$SOURCE_BRANCH"
+            echo "✅ Sync completed successfully to branch: $SOURCE_BRANCH"
+          else
+            echo "No changes to commit. Already in sync."
+          fi
+      
+      - name: Send failure notification email
+        if: failure()
+        continue-on-error: true
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "❌ CORE Sync Failed - fibi-test to COI Repository"
+          to: ${{ steps.author.outputs.author_email }},prabhu.e@polussolutions.com
+          from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
+          body: |
+            <h2>❌ CORE Sync Workflow Failed</h2>
+            
+            <p><strong>Repository:</strong> ${{ github.repository }}</p>
+            <p><strong>Commit:</strong> <code>${{ github.sha }}</code></p>
+            <p><strong>Commit Message:</strong> ${{ github.event.head_commit.message }}</p>
+            <p><strong>Author:</strong> ${{ steps.author.outputs.author_name }} (${{ steps.author.outputs.author_email }})</p>
+            <p><strong>Branch:</strong> ${{ github.ref_name }}</p>
+            <p><strong>Workflow:</strong> Sync CORE to COI</p>
+            <p><strong>Run ID:</strong> ${{ github.run_id }}</p>
+            
+            <hr>
+            
+            <h3>View Error Details:</h3>
+            <p><a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}">Click here to view the workflow run and error logs</a></p>
+            
+            <p><strong>Direct Link:</strong><br>
+            <code>${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}</code></p>
+            
+            <hr>
+            
+            <p><small>This is an automated notification from GitHub Actions. Please check the workflow logs for detailed error information.</small></p>
+          content_type: text/html
+
