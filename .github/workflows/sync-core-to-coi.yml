@@ -39,6 +39,8 @@ jobs:
       
       - name: Sync CORE files
         if: steps.check-core.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
         run: |
           echo "Syncing CORE files..."
           
@@ -52,6 +54,9 @@ jobs:
           cd coi-repo
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Configure remote URL with token
+          git remote set-url origin https://${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
           
           git add DB/CORE/ || true
           
