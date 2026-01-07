@@ -8,7 +8,7 @@ databaseChangeLog:
       changes:
         - sql:
             sql: |
-              ANALYZE TABLE NOTIFICATION_LOG;
+              ANALYZE TABLE NOTIFICATION_LOG ;
               SET @sql := IF(
                   (SELECT COUNT(*)
                    FROM information_schema.COLUMNS
