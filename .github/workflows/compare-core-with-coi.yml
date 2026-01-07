@@ -276,21 +276,37 @@ jobs:
                 fi
                 
                 if [ -n "$SOURCE_FILE" ] && [ -f "$SOURCE_FILE" ]; then
-                  # Determine destination path - place ROUTINES inside DB/ROUTINES/BASE/CORE/
-                  SQL_PATH_CLEAN=$(echo "$SQL_PATH" | sed 's|^\./||')
+                  # Determine destination path: DB/ROUTINES/CORE/(PROCEDURES|FUNCTIONS|VIEWS)/*.sql
+                  SQL_FILENAME=$(basename "$SOURCE_FILE")
                   
-                  # Convert destination path: ROUTINES/FIBI_CORE or ROUTINES/CORE -> DB/ROUTINES/BASE/CORE
-                  if echo "$SQL_PATH_CLEAN" | grep -q "^ROUTINES/FIBI_CORE"; then
-                    # Vanilla CORE: ROUTINES/FIBI_CORE/... -> DB/ROUTINES/BASE/CORE/...
-                    DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/FIBI_CORE|DB/ROUTINES/BASE/CORE|')
-                  elif echo "$SQL_PATH_CLEAN" | grep -q "^ROUTINES/CORE"; then
-                    # Release CORE: ROUTINES/CORE/... -> DB/ROUTINES/BASE/CORE/...
-                    DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/CORE|DB/ROUTINES/BASE/CORE|')
+                  # Extract type (PROCEDURES, FUNCTIONS, VIEWS, TRIGGERS) from source path
+                  ROUTINE_TYPE=""
+                  if echo "$SOURCE_FILE" | grep -qiE "(PROCEDURES|PROC)"; then
+                    ROUTINE_TYPE="PROCEDURES"
+                  elif echo "$SOURCE_FILE" | grep -qiE "(FUNCTIONS|FUNC)"; then
+                    ROUTINE_TYPE="FUNCTIONS"
+                  elif echo "$SOURCE_FILE" | grep -qiE "VIEWS"; then
+                    ROUTINE_TYPE="VIEWS"
+                  elif echo "$SOURCE_FILE" | grep -qiE "TRIGGERS"; then
+                    ROUTINE_TYPE="TRIGGERS"
                   else
-                    # Other paths: ROUTINES/... -> DB/ROUTINES/BASE/...
-                    DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/|DB/ROUTINES/BASE/|')
+                    # Try to extract from path structure
+                    if echo "$SOURCE_FILE" | grep -qE "/PROCEDURES/"; then
+                      ROUTINE_TYPE="PROCEDURES"
+                    elif echo "$SOURCE_FILE" | grep -qE "/FUNCTIONS/"; then
+                      ROUTINE_TYPE="FUNCTIONS"
+                    elif echo "$SOURCE_FILE" | grep -qE "/VIEWS/"; then
+                      ROUTINE_TYPE="VIEWS"
+                    elif echo "$SOURCE_FILE" | grep -qE "/TRIGGERS/"; then
+                      ROUTINE_TYPE="TRIGGERS"
+                    else
+                      # Default to FUNCTIONS if cannot determine
+                      ROUTINE_TYPE="FUNCTIONS"
+                    fi
                   fi
                   
+                  # Build destination: DB/ROUTINES/CORE/{TYPE}/{filename}.sql
+                  DEST_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
                   DEST_FILE="coi-repo/$DEST_PATH"
                   
                   if [ ! -f "$DEST_FILE" ]; then
