@@ -1,0 +1,322 @@
+name: Compare CORE with COI
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Target branch in COI repository (leave empty to use current branch)'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fibi-test
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      
+      - name: Determine target branch
+        id: branch
+        run: |
+          # Use provided branch or default to current branch
+          if [ -n "${{ github.event.inputs.target_branch }}" ]; then
+            BRANCH_NAME="${{ github.event.inputs.target_branch }}"
+            echo "Using provided target branch: $BRANCH_NAME"
+          else
+            BRANCH_NAME="${{ github.ref_name }}"
+            echo "Using current branch: $BRANCH_NAME"
+          fi
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo "Target branch: $BRANCH_NAME"
+      
+      - name: Checkout COI
+        run: |
+          echo "Cloning COI repository..."
+          git clone https://github.com/eprabhu/coi.git coi-repo
+          cd coi-repo
+          
+          # Get the target branch name
+          TARGET_BRANCH="${{ steps.branch.outputs.branch_name }}"
+          echo "Checking out branch: $TARGET_BRANCH"
+          
+          # Check if branch exists in COI repository
+          if git ls-remote --heads origin "$TARGET_BRANCH" | grep -q "$TARGET_BRANCH"; then
+            echo "Branch $TARGET_BRANCH exists in COI, checking it out..."
+            git checkout "$TARGET_BRANCH"
+          else
+            echo "⚠️  Branch $TARGET_BRANCH does not exist in COI, using default branch"
+            git checkout main || git checkout master || echo "Using current branch"
+          fi
+      
+      - name: Compare CORE and ROUTINES
+        id: compare
+        run: |
+          echo "🔍 Comparing CORE and ROUTINES between fibi-test and COI..."
+          echo ""
+          
+          # Create comparison report file
+          REPORT_FILE="comparison-report.txt"
+          echo "========================================" > "$REPORT_FILE"
+          echo "CORE & ROUTINES COMPARISON REPORT" >> "$REPORT_FILE"
+          echo "========================================" >> "$REPORT_FILE"
+          echo "Generated: $(date)" >> "$REPORT_FILE"
+          echo "Source: fibi-test (${{ github.ref_name }})" >> "$REPORT_FILE"
+          echo "Target: COI (${{ steps.branch.outputs.branch_name }})" >> "$REPORT_FILE"
+          echo "" >> "$REPORT_FILE"
+          
+          UNSYNCED_COUNT=0
+          
+          # ============================================
+          # COMPARE VANILLA CORE
+          # ============================================
+          echo "📦 Comparing Fibi-Vanilla CORE..." >> "$REPORT_FILE"
+          echo "----------------------------------------" >> "$REPORT_FILE"
+          
+          if [ -d "Fibi-Vanilla/FIBI_CORE" ]; then
+            # Find all files in source
+            find Fibi-Vanilla/FIBI_CORE -type f ! -path "*/.git/*" | sort > /tmp/fibi_vanilla_files.txt
+            
+            # Find all files in destination
+            if [ -d "coi-repo/DB/CORE" ]; then
+              find coi-repo/DB/CORE -maxdepth 1 -type f ! -path "*/.git/*" | sort > /tmp/coi_vanilla_files.txt
+            else
+              touch /tmp/coi_vanilla_files.txt
+            fi
+            
+            # Compare files
+            while IFS= read -r SOURCE_FILE; do
+              RELATIVE_PATH=$(echo "$SOURCE_FILE" | sed 's|^Fibi-Vanilla/FIBI_CORE/||')
+              DEST_FILE="coi-repo/DB/CORE/$RELATIVE_PATH"
+              
+              if [ ! -f "$DEST_FILE" ]; then
+                echo "❌ MISSING: $RELATIVE_PATH (exists in fibi-test, not in COI)" >> "$REPORT_FILE"
+                ((UNSYNCED_COUNT++))
+              elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE"; then
+                echo "⚠️  DIFFERENT: $RELATIVE_PATH (content differs)" >> "$REPORT_FILE"
+                ((UNSYNCED_COUNT++))
+              fi
+            done < /tmp/fibi_vanilla_files.txt
+            
+            # Check for files in COI that don't exist in fibi (orphaned files)
+            while IFS= read -r DEST_FILE; do
+              if [ -f "$DEST_FILE" ]; then
+                RELATIVE_PATH=$(echo "$DEST_FILE" | sed 's|^coi-repo/DB/CORE/||')
+                SOURCE_FILE="Fibi-Vanilla/FIBI_CORE/$RELATIVE_PATH"
+                
+                if [ ! -f "$SOURCE_FILE" ]; then
+                  echo "📌 ORPHANED: $RELATIVE_PATH (exists in COI, not in fibi-test)" >> "$REPORT_FILE"
+                fi
+              fi
+            done < /tmp/coi_vanilla_files.txt
+            
+            if [ $UNSYNCED_COUNT -eq 0 ] && [ ! -s /tmp/coi_vanilla_files.txt ] || [ ! -s /tmp/fibi_vanilla_files.txt ]; then
+              echo "✅ Vanilla CORE is in sync" >> "$REPORT_FILE"
+            fi
+          else
+            echo "⚠️  Fibi-Vanilla/FIBI_CORE directory not found" >> "$REPORT_FILE"
+          fi
+          
+          echo "" >> "$REPORT_FILE"
+          
+          # ============================================
+          # COMPARE RELEASE CORE FOLDERS
+          # ============================================
+          echo "📦 Comparing Release CORE folders..." >> "$REPORT_FILE"
+          echo "----------------------------------------" >> "$REPORT_FILE"
+          
+          # Find all release folders in source
+          RELEASE_FOLDERS=$(find . -maxdepth 1 -type d -name "Fibi-*-Release" | sort)
+          
+          if [ -n "$RELEASE_FOLDERS" ]; then
+            for RELEASE_DIR in $RELEASE_FOLDERS; do
+              RELEASE_NAME=$(basename "$RELEASE_DIR")
+              echo "Processing release: $RELEASE_NAME" >> "$REPORT_FILE"
+              
+              # Only check BASE/CORE
+              CORE_PATH="$RELEASE_DIR/BASE/CORE"
+              
+              if [ -d "$CORE_PATH" ]; then
+                # Find all files in source CORE
+                find "$CORE_PATH" -type f ! -path "*/.git/*" | sort > /tmp/fibi_release_files.txt
+                
+                # Find all files in destination
+                DEST_RELEASE_DIR="coi-repo/DB/CORE/$RELEASE_NAME"
+                if [ -d "$DEST_RELEASE_DIR" ]; then
+                  find "$DEST_RELEASE_DIR" -type f ! -path "*/.git/*" | sort > /tmp/coi_release_files.txt
+                else
+                  touch /tmp/coi_release_files.txt
+                fi
+                
+                # Compare files
+                while IFS= read -r SOURCE_FILE; do
+                  RELATIVE_PATH=$(echo "$SOURCE_FILE" | sed "s|^$CORE_PATH/||")
+                  DEST_FILE="$DEST_RELEASE_DIR/$RELATIVE_PATH"
+                  
+                  if [ ! -f "$DEST_FILE" ]; then
+                    echo "❌ MISSING: $RELEASE_NAME/$RELATIVE_PATH (exists in fibi-test, not in COI)" >> "$REPORT_FILE"
+                    ((UNSYNCED_COUNT++))
+                  elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE"; then
+                    echo "⚠️  DIFFERENT: $RELEASE_NAME/$RELATIVE_PATH (content differs)" >> "$REPORT_FILE"
+                    ((UNSYNCED_COUNT++))
+                  fi
+                done < /tmp/fibi_release_files.txt
+                
+                # Check for orphaned files in COI
+                while IFS= read -r DEST_FILE; do
+                  if [ -f "$DEST_FILE" ]; then
+                    RELATIVE_PATH=$(echo "$DEST_FILE" | sed "s|^$DEST_RELEASE_DIR/||")
+                    SOURCE_FILE="$CORE_PATH/$RELATIVE_PATH"
+                    
+                    if [ ! -f "$SOURCE_FILE" ]; then
+                      echo "📌 ORPHANED: $RELEASE_NAME/$RELATIVE_PATH (exists in COI, not in fibi-test)" >> "$REPORT_FILE"
+                    fi
+                  fi
+                done < /tmp/coi_release_files.txt
+                
+                if [ ! -d "$DEST_RELEASE_DIR" ]; then
+                  echo "❌ MISSING RELEASE: $RELEASE_NAME (entire release folder missing in COI)" >> "$REPORT_FILE"
+                  ((UNSYNCED_COUNT++))
+                fi
+              else
+                echo "⚠️  No BASE/CORE folder found in $RELEASE_NAME" >> "$REPORT_FILE"
+              fi
+              
+              echo "" >> "$REPORT_FILE"
+            done
+          else
+            echo "⚠️  No release folders found" >> "$REPORT_FILE"
+          fi
+          
+          # ============================================
+          # COMPARE ROUTINES FILES
+          # ============================================
+          echo "📦 Comparing ROUTINES files..." >> "$REPORT_FILE"
+          echo "----------------------------------------" >> "$REPORT_FILE"
+          
+          # Find all routines YAML files - ONLY from BASE/CORE or Fibi-Vanilla/FIBI_CORE
+          ROUTINES_YAML_FILES=$(find . -type f \( -name "PROCEDURES.yaml" -o -name "PROCEDURES.yml" -o -name "VIEWS.yaml" -o -name "VIEWS.yml" -o -name "FUNCTIONS.yaml" -o -name "FUNCTIONS.yml" -o -name "TRIGGERS.yaml" -o -name "TRIGGERS.yml" \) \( -path "*/Fibi-Vanilla/FIBI_CORE/*" -o -path "*/BASE/CORE/*" \) ! -path "*/.git/*" ! -path "*/coi-repo/*" | sort)
+          
+          if [ -n "$ROUTINES_YAML_FILES" ]; then
+            for YAML_FILE in $ROUTINES_YAML_FILES; do
+              echo "Processing YAML file: $YAML_FILE" >> "$REPORT_FILE"
+              
+              # Extract all sqlFile paths from YAML
+              SQL_PATHS=$(awk '/sqlFile:/{getline; if(/path:/){gsub(/.*path:[[:space:]]*/, ""); gsub(/[[:space:]]*$/, ""); if($0 != "") print}}' "$YAML_FILE" || true)
+              
+              if [ -z "$SQL_PATHS" ]; then
+                continue
+              fi
+              
+              # Check each SQL file
+              for SQL_PATH in $SQL_PATHS; do
+                SQL_PATH=$(echo "$SQL_PATH" | xargs)
+                SQL_FILENAME=$(basename "$SQL_PATH")
+                
+                # Find source file using same strategies as sync workflow
+                SOURCE_FILE=""
+                
+                # Strategy 1: Try path as-is
+                if [ -f "$SQL_PATH" ]; then
+                  SOURCE_FILE="$SQL_PATH"
+                fi
+                
+                # Strategy 2: If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE
+                if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
+                  BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/CORE|ROUTINES/BASE/CORE|')
+                  if [ -f "$BASE_PATH" ]; then
+                    SOURCE_FILE="$BASE_PATH"
+                  fi
+                fi
+                
+                # Strategy 3: Try ROUTINES/BASE/ + relative path
+                if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/"; then
+                  RELATIVE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/||')
+                  TRY_PATH="ROUTINES/BASE/$RELATIVE_PATH"
+                  if [ -f "$TRY_PATH" ]; then
+                    SOURCE_FILE="$TRY_PATH"
+                  fi
+                fi
+                
+                # Strategy 4: Find by filename
+                if [ -z "$SOURCE_FILE" ]; then
+                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" ! -path "*/coi-repo/*" | grep -E "ROUTINES.*CORE" | head -1)
+                fi
+                
+                # Strategy 5: Find by path pattern
+                if [ -z "$SOURCE_FILE" ]; then
+                  SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" ! -path "*/coi-repo/*" | head -1)
+                fi
+                
+                if [ -n "$SOURCE_FILE" ] && [ -f "$SOURCE_FILE" ]; then
+                  # Determine destination path - place ROUTINES inside DB/ROUTINES/
+                  SQL_PATH_CLEAN=$(echo "$SQL_PATH" | sed 's|^\./||')
+                  DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/|DB/ROUTINES/|')
+                  DEST_FILE="coi-repo/$DEST_PATH"
+                  
+                  if [ ! -f "$DEST_FILE" ]; then
+                    echo "❌ MISSING ROUTINE: $DEST_PATH (exists in fibi-test, not in COI)" >> "$REPORT_FILE"
+                    ((UNSYNCED_COUNT++))
+                  elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE"; then
+                    echo "⚠️  DIFFERENT ROUTINE: $DEST_PATH (content differs)" >> "$REPORT_FILE"
+                    ((UNSYNCED_COUNT++))
+                  fi
+                fi
+              done
+            done
+          else
+            echo "⚠️  No routines YAML files found" >> "$REPORT_FILE"
+          fi
+          
+          echo "" >> "$REPORT_FILE"
+          echo "========================================" >> "$REPORT_FILE"
+          echo "SUMMARY" >> "$REPORT_FILE"
+          echo "========================================" >> "$REPORT_FILE"
+          echo "Total unsynced files: $UNSYNCED_COUNT" >> "$REPORT_FILE"
+          
+          if [ $UNSYNCED_COUNT -eq 0 ]; then
+            echo "✅ All CORE and ROUTINES files are in sync!" >> "$REPORT_FILE"
+          else
+            echo "❌ Found $UNSYNCED_COUNT unsynced file(s)" >> "$REPORT_FILE"
+          fi
+          
+          echo "" >> "$REPORT_FILE"
+          echo "========================================" >> "$REPORT_FILE"
+          
+          # Display report
+          cat "$REPORT_FILE"
+          
+          # Save report as artifact
+          echo "UNSYNCED_COUNT=$UNSYNCED_COUNT" >> $GITHUB_OUTPUT
+      
+      - name: Upload comparison report
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-comparison-report
+          path: comparison-report.txt
+          retention-days: 30
+      
+      - name: Set job summary
+        run: |
+          UNSYNCED_COUNT="${{ steps.compare.outputs.UNSYNCED_COUNT }}"
+          if [ -z "$UNSYNCED_COUNT" ]; then
+            UNSYNCED_COUNT="0"
+          fi
+          if [ "$UNSYNCED_COUNT" = "0" ]; then
+            echo "## ✅ Comparison Complete" >> $GITHUB_STEP_SUMMARY
+            echo "All CORE and ROUTINES files are in sync!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ⚠️ Comparison Complete" >> $GITHUB_STEP_SUMMARY
+            echo "Found **$UNSYNCED_COUNT** unsynced file(s)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "📥 Download the full report from the artifacts section above." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Source Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Target Branch:** ${{ steps.branch.outputs.branch_name }}" >> $GITHUB_STEP_SUMMARY
+
