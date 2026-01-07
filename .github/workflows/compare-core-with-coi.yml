@@ -240,7 +240,15 @@ jobs:
                   SOURCE_FILE="$SQL_PATH"
                 fi
                 
-                # Strategy 2: If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE
+                # Strategy 2: If path starts with ROUTINES/FIBI_CORE, try ROUTINES/BASE/FIBI_CORE
+                if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/FIBI_CORE"; then
+                  BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/FIBI_CORE|ROUTINES/BASE/FIBI_CORE|')
+                  if [ -f "$BASE_PATH" ]; then
+                    SOURCE_FILE="$BASE_PATH"
+                  fi
+                fi
+                
+                # Strategy 3: If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE
                 if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
                   BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/CORE|ROUTINES/BASE/CORE|')
                   if [ -f "$BASE_PATH" ]; then
@@ -248,7 +256,7 @@ jobs:
                   fi
                 fi
                 
-                # Strategy 3: Try ROUTINES/BASE/ + relative path
+                # Strategy 4: Try ROUTINES/BASE/ + relative path from ROUTINES/
                 if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/"; then
                   RELATIVE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/||')
                   TRY_PATH="ROUTINES/BASE/$RELATIVE_PATH"
@@ -257,12 +265,12 @@ jobs:
                   fi
                 fi
                 
-                # Strategy 4: Find by filename
+                # Strategy 5: Find by filename in ROUTINES directories
                 if [ -z "$SOURCE_FILE" ]; then
-                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" ! -path "*/coi-repo/*" | grep -E "ROUTINES.*CORE" | head -1)
+                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" ! -path "*/coi-repo/*" | grep -E "ROUTINES.*(CORE|FIBI_CORE)" | head -1)
                 fi
                 
-                # Strategy 5: Find by path pattern
+                # Strategy 6: Find by path pattern (last resort)
                 if [ -z "$SOURCE_FILE" ]; then
                   SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" ! -path "*/coi-repo/*" | head -1)
                 fi

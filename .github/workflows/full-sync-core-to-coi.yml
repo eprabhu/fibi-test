@@ -193,7 +193,16 @@ jobs:
                   echo "Found file at (as-is): $SQL_PATH"
                 fi
                 
-                # Strategy 2: If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE (common pattern)
+                # Strategy 2: If path starts with ROUTINES/FIBI_CORE, try ROUTINES/BASE/FIBI_CORE
+                if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/FIBI_CORE"; then
+                  BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/FIBI_CORE|ROUTINES/BASE/FIBI_CORE|')
+                  if [ -f "$BASE_PATH" ]; then
+                    SOURCE_FILE="$BASE_PATH"
+                    echo "Found file at (BASE FIBI_CORE path): $BASE_PATH"
+                  fi
+                fi
+                
+                # Strategy 3: If path starts with ROUTINES/CORE, try ROUTINES/BASE/CORE (common pattern)
                 if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/CORE"; then
                   BASE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/CORE|ROUTINES/BASE/CORE|')
                   if [ -f "$BASE_PATH" ]; then
@@ -202,7 +211,7 @@ jobs:
                   fi
                 fi
                 
-                # Strategy 3: Try ROUTINES/BASE/ + relative path from ROUTINES/
+                # Strategy 4: Try ROUTINES/BASE/ + relative path from ROUTINES/
                 if [ -z "$SOURCE_FILE" ] && echo "$SQL_PATH" | grep -q "^ROUTINES/"; then
                   RELATIVE_PATH=$(echo "$SQL_PATH" | sed 's|^ROUTINES/||')
                   TRY_PATH="ROUTINES/BASE/$RELATIVE_PATH"
@@ -212,16 +221,16 @@ jobs:
                   fi
                 fi
                 
-                # Strategy 4: Find file by name in ROUTINES directories
+                # Strategy 5: Find file by name in ROUTINES directories
                 if [ -z "$SOURCE_FILE" ]; then
                   echo "Searching for file by name: $SQL_FILENAME"
-                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" ! -path "*/coi-repo/*" | grep -E "ROUTINES.*CORE" | head -1)
+                  SOURCE_FILE=$(find . -type f -name "$SQL_FILENAME" ! -path "*/.git/*" ! -path "*/coi-repo/*" | grep -E "ROUTINES.*(CORE|FIBI_CORE)" | head -1)
                   if [ -n "$SOURCE_FILE" ]; then
                     echo "Found by filename at: $SOURCE_FILE"
                   fi
                 fi
                 
-                # Strategy 5: Try with full path pattern (last resort)
+                # Strategy 6: Try with full path pattern (last resort)
                 if [ -z "$SOURCE_FILE" ]; then
                   SOURCE_FILE=$(find . -type f -path "*/$SQL_PATH" ! -path "*/.git/*" ! -path "*/coi-repo/*" | head -1)
                   if [ -n "$SOURCE_FILE" ]; then
