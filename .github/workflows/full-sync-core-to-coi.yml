@@ -239,11 +239,22 @@ jobs:
                 fi
                 
                 if [ -n "$SOURCE_FILE" ] && [ -f "$SOURCE_FILE" ]; then
-                  # Determine destination path - place ROUTINES inside DB/ROUTINES/
+                  # Determine destination path - place ROUTINES inside DB/ROUTINES/BASE/CORE/
                   # Use the original SQL_PATH from YAML for destination
                   SQL_PATH_CLEAN=$(echo "$SQL_PATH" | sed 's|^\./||')
-                  # Replace ROUTINES/ with DB/ROUTINES/ in destination
-                  DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/|DB/ROUTINES/|')
+                  
+                  # Convert destination path: ROUTINES/FIBI_CORE or ROUTINES/CORE -> DB/ROUTINES/BASE/CORE
+                  if echo "$SQL_PATH_CLEAN" | grep -q "^ROUTINES/FIBI_CORE"; then
+                    # Vanilla CORE: ROUTINES/FIBI_CORE/... -> DB/ROUTINES/BASE/CORE/...
+                    DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/FIBI_CORE|DB/ROUTINES/BASE/CORE|')
+                  elif echo "$SQL_PATH_CLEAN" | grep -q "^ROUTINES/CORE"; then
+                    # Release CORE: ROUTINES/CORE/... -> DB/ROUTINES/BASE/CORE/...
+                    DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/CORE|DB/ROUTINES/BASE/CORE|')
+                  else
+                    # Other paths: ROUTINES/... -> DB/ROUTINES/BASE/...
+                    DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/|DB/ROUTINES/BASE/|')
+                  fi
+                  
                   DEST_FILE="coi-repo/$DEST_PATH"
                   DEST_DIR=$(dirname "$DEST_FILE")
                   
