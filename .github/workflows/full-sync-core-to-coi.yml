@@ -124,8 +124,8 @@ jobs:
               RELEASE_NAME=$(basename "$RELEASE_DIR")
               echo "Processing release: $RELEASE_NAME"
               
-              # Find CORE folder in this release (could be BASE/CORE, or any subfolder/CORE)
-              CORE_PATH=$(find "$RELEASE_DIR" -type d -name "CORE" | head -1)
+              # Find CORE folder in this release - ONLY BASE/CORE (not client-based CORE)
+              CORE_PATH="$RELEASE_DIR/BASE/CORE"
               
               if [ -n "$CORE_PATH" ] && [ -d "$CORE_PATH" ]; then
                 echo "Found CORE folder at: $CORE_PATH"
@@ -230,10 +230,12 @@ jobs:
                 fi
                 
                 if [ -n "$SOURCE_FILE" ] && [ -f "$SOURCE_FILE" ]; then
-                  # Determine destination path (same structure as in YAML, not source path)
+                  # Determine destination path - place ROUTINES inside DB/ROUTINES/
                   # Use the original SQL_PATH from YAML for destination
                   SQL_PATH_CLEAN=$(echo "$SQL_PATH" | sed 's|^\./||')
-                  DEST_FILE="coi-repo/$SQL_PATH_CLEAN"
+                  # Replace ROUTINES/ with DB/ROUTINES/ in destination
+                  DEST_PATH=$(echo "$SQL_PATH_CLEAN" | sed 's|^ROUTINES/|DB/ROUTINES/|')
+                  DEST_FILE="coi-repo/$DEST_PATH"
                   DEST_DIR=$(dirname "$DEST_FILE")
                   
                   # Create destination directory (create parent directories if needed)
@@ -246,7 +248,7 @@ jobs:
                     echo "⚠️  Failed to copy $SOURCE_FILE to $DEST_FILE"
                     continue
                   }
-                  echo "✅ Synced routine file: $SQL_PATH_CLEAN"
+                  echo "✅ Synced routine file: $DEST_PATH"
                 else
                   echo "⚠️  SQL file not found: $SQL_PATH"
                   echo "   Searched paths:"
@@ -294,15 +296,15 @@ jobs:
           # Add CORE changes
           git add DB/CORE/ || true
           
-          # Add ROUTINES changes if ROUTINES directory exists
-          if [ -d "ROUTINES" ]; then
-            git add ROUTINES/ || true
+          # Add ROUTINES changes if DB/ROUTINES directory exists
+          if [ -d "DB/ROUTINES" ]; then
+            git add DB/ROUTINES/ || true
           fi
           
           # Check if there are any changes to commit
           CHANGES=$(git status --porcelain DB/CORE 2>/dev/null || echo "")
-          if [ -d "ROUTINES" ]; then
-            CHANGES="$CHANGES $(git status --porcelain ROUTINES/ 2>/dev/null || echo "")"
+          if [ -d "DB/ROUTINES" ]; then
+            CHANGES="$CHANGES $(git status --porcelain DB/ROUTINES/ 2>/dev/null || echo "")"
           fi
           CHANGES=$(echo "$CHANGES" | xargs)
           
