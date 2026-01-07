@@ -81,8 +81,9 @@ jobs:
             echo "⚠️  Release CORE folders deleted: $DELETED_RELEASES"
           fi
           
-          # Check for routines YAML file changes (PROCEDURES.yaml, VIEWS.yaml, FUNCTIONS.yaml, etc.)
-          ROUTINES_YAML_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -E '\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
+          # Check for routines YAML file changes - ONLY from BASE/CORE or Fibi-Vanilla/FIBI_CORE
+          # (PROCEDURES.yaml, VIEWS.yaml, FUNCTIONS.yaml, etc.)
+          ROUTINES_YAML_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -E '(Fibi-Vanilla/FIBI_CORE|BASE/CORE)/.*\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
           if [ -n "$ROUTINES_YAML_CHANGES" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "routines_yaml_changed=true" >> $GITHUB_OUTPUT
@@ -247,9 +248,10 @@ jobs:
           if [ "${{ steps.check-core.outputs.routines_yaml_changed }}" == "true" ]; then
             echo "Syncing ROUTINES files from changed YAML files..."
             
-            # Get changed routines YAML files
+            # Get changed routines YAML files - ONLY from BASE/CORE or Fibi-Vanilla/FIBI_CORE
             CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
-            ROUTINES_YAML_FILES=$(echo "$CHANGED_FILES" | grep -E 'CORE/.*\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
+            # Filter to only BASE/CORE or Fibi-Vanilla/FIBI_CORE (exclude client-based CORE)
+            ROUTINES_YAML_FILES=$(echo "$CHANGED_FILES" | grep -E '(Fibi-Vanilla/FIBI_CORE|BASE/CORE)/.*\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
             
             # Process each changed YAML file
             for YAML_FILE in $ROUTINES_YAML_FILES; do

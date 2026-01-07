@@ -160,8 +160,8 @@ jobs:
           # ============================================
           echo "📦 Syncing all ROUTINES files from all YAML files..."
           
-          # Find all routines YAML files in CORE folders
-          ROUTINES_YAML_FILES=$(find . -type f \( -name "PROCEDURES.yaml" -o -name "PROCEDURES.yml" -o -name "VIEWS.yaml" -o -name "VIEWS.yml" -o -name "FUNCTIONS.yaml" -o -name "FUNCTIONS.yml" -o -name "TRIGGERS.yaml" -o -name "TRIGGERS.yml" \) -path "*/CORE/*" ! -path "*/.git/*" ! -path "*/coi-repo/*" | sort)
+          # Find all routines YAML files - ONLY from BASE/CORE or Fibi-Vanilla/FIBI_CORE (exclude client-based CORE)
+          ROUTINES_YAML_FILES=$(find . -type f \( -name "PROCEDURES.yaml" -o -name "PROCEDURES.yml" -o -name "VIEWS.yaml" -o -name "VIEWS.yml" -o -name "FUNCTIONS.yaml" -o -name "FUNCTIONS.yml" -o -name "TRIGGERS.yaml" -o -name "TRIGGERS.yml" \) \( -path "*/Fibi-Vanilla/FIBI_CORE/*" -o -path "*/BASE/CORE/*" \) ! -path "*/.git/*" ! -path "*/coi-repo/*" | sort)
           
           if [ -n "$ROUTINES_YAML_FILES" ]; then
             for YAML_FILE in $ROUTINES_YAML_FILES; do
