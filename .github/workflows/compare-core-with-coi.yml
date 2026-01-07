@@ -57,6 +57,8 @@ jobs:
       - name: Compare CORE and ROUTINES
         id: compare
         run: |
+          set +e  # Don't exit on error, we want to continue and report all issues
+          
           echo "🔍 Comparing CORE and ROUTINES between fibi-test and COI..."
           echo ""
           
@@ -90,21 +92,27 @@ jobs:
             fi
             
             # Compare files
-            while IFS= read -r SOURCE_FILE; do
+            while IFS= read -r SOURCE_FILE || [ -n "$SOURCE_FILE" ]; do
+              if [ -z "$SOURCE_FILE" ]; then
+                continue
+              fi
               RELATIVE_PATH=$(echo "$SOURCE_FILE" | sed 's|^Fibi-Vanilla/FIBI_CORE/||')
               DEST_FILE="coi-repo/DB/CORE/$RELATIVE_PATH"
               
               if [ ! -f "$DEST_FILE" ]; then
                 echo "❌ MISSING: $RELATIVE_PATH (exists in fibi-test, not in COI)" >> "$REPORT_FILE"
-                ((UNSYNCED_COUNT++))
-              elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE"; then
+                UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
+              elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE" 2>/dev/null; then
                 echo "⚠️  DIFFERENT: $RELATIVE_PATH (content differs)" >> "$REPORT_FILE"
-                ((UNSYNCED_COUNT++))
+                UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
               fi
             done < /tmp/fibi_vanilla_files.txt
             
             # Check for files in COI that don't exist in fibi (orphaned files)
-            while IFS= read -r DEST_FILE; do
+            while IFS= read -r DEST_FILE || [ -n "$DEST_FILE" ]; do
+              if [ -z "$DEST_FILE" ]; then
+                continue
+              fi
               if [ -f "$DEST_FILE" ]; then
                 RELATIVE_PATH=$(echo "$DEST_FILE" | sed 's|^coi-repo/DB/CORE/||')
                 SOURCE_FILE="Fibi-Vanilla/FIBI_CORE/$RELATIVE_PATH"
@@ -154,21 +162,27 @@ jobs:
                 fi
                 
                 # Compare files
-                while IFS= read -r SOURCE_FILE; do
+                while IFS= read -r SOURCE_FILE || [ -n "$SOURCE_FILE" ]; do
+                  if [ -z "$SOURCE_FILE" ]; then
+                    continue
+                  fi
                   RELATIVE_PATH=$(echo "$SOURCE_FILE" | sed "s|^$CORE_PATH/||")
                   DEST_FILE="$DEST_RELEASE_DIR/$RELATIVE_PATH"
                   
                   if [ ! -f "$DEST_FILE" ]; then
                     echo "❌ MISSING: $RELEASE_NAME/$RELATIVE_PATH (exists in fibi-test, not in COI)" >> "$REPORT_FILE"
-                    ((UNSYNCED_COUNT++))
-                  elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE"; then
+                    UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
+                  elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE" 2>/dev/null; then
                     echo "⚠️  DIFFERENT: $RELEASE_NAME/$RELATIVE_PATH (content differs)" >> "$REPORT_FILE"
-                    ((UNSYNCED_COUNT++))
+                    UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
                   fi
                 done < /tmp/fibi_release_files.txt
                 
                 # Check for orphaned files in COI
-                while IFS= read -r DEST_FILE; do
+                while IFS= read -r DEST_FILE || [ -n "$DEST_FILE" ]; do
+                  if [ -z "$DEST_FILE" ]; then
+                    continue
+                  fi
                   if [ -f "$DEST_FILE" ]; then
                     RELATIVE_PATH=$(echo "$DEST_FILE" | sed "s|^$DEST_RELEASE_DIR/||")
                     SOURCE_FILE="$CORE_PATH/$RELATIVE_PATH"
@@ -181,7 +195,7 @@ jobs:
                 
                 if [ ! -d "$DEST_RELEASE_DIR" ]; then
                   echo "❌ MISSING RELEASE: $RELEASE_NAME (entire release folder missing in COI)" >> "$REPORT_FILE"
-                  ((UNSYNCED_COUNT++))
+                  UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
                 fi
               else
                 echo "⚠️  No BASE/CORE folder found in $RELEASE_NAME" >> "$REPORT_FILE"
@@ -261,10 +275,10 @@ jobs:
                   
                   if [ ! -f "$DEST_FILE" ]; then
                     echo "❌ MISSING ROUTINE: $DEST_PATH (exists in fibi-test, not in COI)" >> "$REPORT_FILE"
-                    ((UNSYNCED_COUNT++))
-                  elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE"; then
+                    UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
+                  elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE" 2>/dev/null; then
                     echo "⚠️  DIFFERENT ROUTINE: $DEST_PATH (content differs)" >> "$REPORT_FILE"
-                    ((UNSYNCED_COUNT++))
+                    UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
                   fi
                 fi
               done
@@ -293,6 +307,9 @@ jobs:
           
           # Save report as artifact
           echo "UNSYNCED_COUNT=$UNSYNCED_COUNT" >> $GITHUB_OUTPUT
+          
+          # Exit with success (we want to report even if there are differences)
+          exit 0
       
       - name: Upload comparison report
         uses: actions/upload-artifact@v4
