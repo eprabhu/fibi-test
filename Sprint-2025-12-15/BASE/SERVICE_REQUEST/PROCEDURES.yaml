@@ -1,0 +1,31 @@
+databaseChangeLog:
+
+  - changeSet:
+        id: FIBI-9389
+        author: Robin
+        labels: 'PROCEDURES'
+        comment: Modified GET_ALL_RIGHTS_FOR_A_MODULE
+        runOnChange: true
+        changes:
+          - sql:
+              sql: DROP PROCEDURE IF EXISTS GET_ALL_RIGHTS_FOR_A_MODULE;
+          - sqlFile:
+              path: ROUTINES/BASE/CORE/PROCEDURES/GET_ALL_RIGHTS_FOR_A_MODULE.sql
+              relativeToChangelogFile: false
+              splitStatements: false
+        rollback: empty
+
+  - changeSet:
+        id: FIBI-8854-1
+        author: Nabeel Ahamed m
+        labels: 'PROCEDURES'
+        comment: Created procedure SR_CONTRACT_ADMIN_UPDATION
+        runOnChange: true
+        changes:
+          - sql:
+              sql: DROP PROCEDURE IF EXISTS SR_CONTRACT_ADMIN_UPDATION;
+          - sqlFile:
+              path: ROUTINES/BASE/SERVICE_REQUEST/PROCEDURES/SR_CONTRACT_ADMIN_UPDATION.sql
+              relativeToChangelogFile: false
+              splitStatements: false
+        rollback: empty

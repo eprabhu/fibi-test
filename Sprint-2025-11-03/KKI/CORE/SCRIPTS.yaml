@@ -1,0 +1,81 @@
+databaseChangeLog:
+    - changeSet:
+        id: FIBI-8180
+        author: Arun Ramesh
+        labels: 'DML'
+        comment: Dynamic config for elastic sync for KKI instance.
+        changes:
+            - sql:
+                sql: |
+                    SET SQL_SAFE_UPDATES = 0;
+                    UPDATE integration_sync_config
+                    SET 
+                        IS_ACTIVE = 'Y',
+                        UPDATE_TIMESTAMP = utc_timestamp(),
+                        UPDATE_USER = 'admin'
+                    WHERE CONFIG_CATEGORY = 'elastic_sync';
+                    SET SQL_SAFE_UPDATES = 1;
+        rollback: empty
+
+    - changeSet:
+        id: FIBI-8181
+        author: Arun Ramesh
+        labels: 'DML'
+        comment: Dynamic config for integration sync for KKI instance.
+        changes:
+            - sql:
+                sql: |
+                    SET SQL_SAFE_UPDATES = 0;
+                    UPDATE integration_sync_config
+                    SET 
+                        IS_ACTIVE = CASE 
+                                        WHEN CONFIG_KEY IN ('attachment_data_migration', 'fi_expense_transaction_rt_processing', 'profit_center', 'fund_center', 'cost_center', 'grant_code', 'job_requisition', 'cost_allocation', 'cost_allocation_with_manual_date', 'update_feed_status', 'sync_medusa_relationship') THEN 'Y'
+                                        ELSE 'N'
+                                    END,
+                        UPDATE_TIMESTAMP = utc_timestamp(),
+                        UPDATE_USER = 'admin'
+                    WHERE CONFIG_CATEGORY = 'integration_sync';
+                    SET SQL_SAFE_UPDATES = 1;
+        rollback: empty
+
+    - changeSet:
+        id: FIBI-8845-1
+        author: Adarsh 
+        labels: 'DML'
+        comment: Insert a new value in person role type
+        changes:
+        - sql:
+            sql: |
+                INSERT IGNORE INTO person_role_type (ROLE_TYPE_CODE, DESCRIPTION, UPDATE_TIMESTAMP, UPDATE_USER, IS_ACTIVE) VALUES ('72', 'Program Manager', UTC_TIMESTAMP(), 'admin', 'Y');
+        rollback:
+        - sql:
+            sql: |
+                DELETE FROM person_role_type WHERE ROLE_TYPE_CODE = 72;
+
+    - changeSet:
+        id: FIBI-8845-2
+        author: Adarsh 
+        labels: 'DML'
+        comment: Insert in notification recipient
+        changes:
+        - sql:
+            sql: |
+                INSERT INTO notification_recipient (NOTIFICATION_TYPE_ID, ROLE_TYPE_CODE, CREATE_USER, CREATE_TIMESTAMP, UPDATE_USER, UPDATE_TIMESTAMP, RECIPIENT_TYPE, RECIPIENT_NAME) SELECT '714','72','admin',UTC_TIMESTAMP(),'admin',UTC_TIMESTAMP(),'TO','Program Manager' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM notification_recipient WHERE NOTIFICATION_TYPE_ID='714' AND ROLE_TYPE_CODE='72' AND RECIPIENT_TYPE='TO' AND RECIPIENT_NAME='Program Manager');
+        rollback:
+        - sql:
+            sql: |
+                DELETE FROM notification_recipient WHERE NOTIFICATION_TYPE_ID = '714'	AND ROLE_TYPE_CODE = '72'	AND RECIPIENT_TYPE = 'TO'	AND RECIPIENT_NAME = 'Program Manager';
+
+    - changeSet:
+        id: FIBI-8845-3
+        author: Adarsh 
+        labels: 'DML'
+        comment: Insert in notification recipient
+        changes:
+        - sql:
+            sql: |
+                INSERT INTO notification_recipient (NOTIFICATION_TYPE_ID, ROLE_TYPE_CODE, CREATE_USER, CREATE_TIMESTAMP, UPDATE_USER, UPDATE_TIMESTAMP, RECIPIENT_TYPE, RECIPIENT_NAME) SELECT '1414','72','admin',UTC_TIMESTAMP(),'admin',UTC_TIMESTAMP(),'TO','Program Manager' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM notification_recipient WHERE NOTIFICATION_TYPE_ID='1414' AND ROLE_TYPE_CODE='72' AND RECIPIENT_TYPE='TO' AND RECIPIENT_NAME='Program Manager');
+        rollback:
+        - sql:
+            sql: |
+                DELETE FROM notification_recipient WHERE NOTIFICATION_TYPE_ID = '1414' AND ROLE_TYPE_CODE = '72' AND RECIPIENT_TYPE = 'TO' AND RECIPIENT_NAME = 'Program Manager';

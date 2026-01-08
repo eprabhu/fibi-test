@@ -1,0 +1,30 @@
+databaseChangeLog:
+
+    - changeSet:
+        id: FIBI-8766-1
+        author: Suganya.S
+        labels: 'VIEWS'
+        comment: 
+        runOnChange: true
+        changes:
+            - sql:
+                sql: DROP VIEW IF EXISTS SR_ASSOC_DETAIL_V;
+            - sqlFile:
+                path: Fibi-5.5.1-Release/ROUTINES/FIBI_SERVICE_REQUEST/VIEWS/SR_ASSOC_DETAIL_V.sql
+                relativeToChangeLogFile: false
+                splitStatements: false
+        rollback: empty
+    - changeSet:
+        id: FIBI-8766-3
+        author: Suganya.S
+        labels: 'VIEWS'
+        comment: 
+        runOnChange: true
+        changes:
+            - sql:
+                sql: DROP VIEW IF EXISTS ASSOC_LINKED_MODULES_V;
+            - sqlFile:
+                path: Fibi-5.5.1-Release/ROUTINES/FIBI_SERVICE_REQUEST/VIEWS/ASSOC_LINKED_MODULES_V.sql
+                relativeToChangeLogFile: false
+                splitStatements: false
+        rollback: empty

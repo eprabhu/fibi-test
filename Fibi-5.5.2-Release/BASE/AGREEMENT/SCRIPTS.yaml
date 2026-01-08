@@ -1,6 +1,21 @@
 databaseChangeLog:
 
   - changeSet:
+      id: FIBI-9155-1
+      author: Vishnu BH
+      labels: 'PROCEDURES'
+      comment: Modified GET_AGREEMENT_DASHBOARD_V1 to include data type 6 in custom criteria logic for elastic search
+      runOnChange: true
+      changes:
+        - sql:
+            sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_DASHBOARD_V1;
+        - sqlFile:
+            path: ROUTINES/BASE/AGREEMENT/PROCEDURES/GET_AGREEMENT_DASHBOARD_V1.sql
+            relativeToChangelogFile: false
+            splitStatements: false
+      rollback: empty
+
+  - changeSet:
       id: FIBI-9134-1
       author: Reshma Antony
       labels: 'DML'
@@ -29,29 +44,3 @@ databaseChangeLog:
               DELETE FROM `DYN_ELEMENT_CONFIG` WHERE UI_REFERENCE_ID = 'agrmnt-prj-assoc-link-to';         
               DELETE FROM `DYN_ELEMENT_CONFIG` WHERE UI_REFERENCE_ID = 'grmnt-prj-assoc-relation-type';
               DELETE FROM `DYN_ELEMENT_CONFIG` WHERE UI_REFERENCE_ID = 'agrmnt-prj-assoc-module';
-
-  - changeSet:
-      id: FIBI-9378-1
-      author: Shyla M
-      labels: 'DML'
-      comment: Update DATE_TIME format and width for Agreement date columns
-      changes:
-        - sql:
-            sql: |
-                SET SQL_SAFE_UPDATES = 0;
-                UPDATE dashboard_column_lookup
-                SET COLUMN_CONF_ID = 18,
-                    WIDTH = 20,
-                    UPDATE_USER = 'admin',
-                    UPDATE_TIMESTAMP = UTC_TIMESTAMP()
-                WHERE COLUMN_KEY IN ('COL_AG_LAST_MOD_DATE', 'COL_AG_SUBMISSION_DATE');
-                SET SQL_SAFE_UPDATES = 1;
-      rollback: 
-        - sql:
-            sql: |    
-                UPDATE dashboard_column_lookup
-                SET COLUMN_CONF_ID = 3,
-                    WIDTH = 12,
-                    UPDATE_USER = 'admin',
-                    UPDATE_TIMESTAMP = UTC_TIMESTAMP()
-                WHERE COLUMN_KEY IN ('COL_AG_LAST_MOD_DATE', 'COL_AG_SUBMISSION_DATE');

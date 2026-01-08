@@ -1,0 +1,17 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: FIBI-6936-1
+      author: Shyla M
+      labels: 'PROCEDURES'
+      comment: Modified Procedure
+      runOnChange: true
+      changes:
+        - sql:
+            sql: |
+                DROP PROCEDURE IF EXISTS GET_AWARD_DETAILS_FOR_ASSOC;
+        - sqlFile:
+            path: ROUTINES/MIT/CORE/PROCEDURES/GET_AWARD_DETAILS_FOR_ASSOC.sql
+            relativeToChangelogFile: false
+            splitStatements: false
+      rollback: empty

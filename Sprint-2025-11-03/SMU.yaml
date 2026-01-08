@@ -1,0 +1,7 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-03/SMU/CORE/SCRIPTS.yaml
+        labels: 'CORE'
+

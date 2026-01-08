@@ -1,0 +1,6 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-24/NCBS/CORE/PROCEDURES.yaml
+        labels: 'CORE'

@@ -1,7 +1,7 @@
 config:
-  branch: "Fibi-Dev/Q2-2025-Liqubase"
+  branch: "Sprint/2026-01-06"
   credential_id: "mysql-password-dev"
-  jobname_uniqueid: "Fibi-Dev/Q2-2025-Liqubase"
+  jobname_uniqueid: "Sprint/2026-01-06"
   mail_id: "manesh.ms@polussolutions.com,farsana.khadar@polussolutions.com,arjun.kr@polussolutions.com"
-  url: "jdbc:mysql://192.168.1.248:3306/fibi_liquibase"
+  url: "jdbc:mysql://192.168.1.248:3306/fibi_5_1"
   changeLogFile: "RELEASE.yaml"

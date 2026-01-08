@@ -4,21 +4,21 @@ BEGIN
 SELECT 'ID'
 	,'Title'
 	,'Status'
-	,'Award Number'
 	,'Account Number'
-	,'Sponsor',
-	'Lead Unit',
-	'PI Name'
+	,'PI Name'
+	,'Lead Unit'
+	,'Sponsor Award ID'
+	,'Sponsor'
 UNION 
 SELECT 
-    MODULE_ITEM_KEY,
+	MODULE_ITEM_KEY, 
 	TITLE,
 	STATUS,
-    MODULE_ITEM_KEY,
     ACCOUNT_NUMBER,
-    SPONSOR_NAME,
+    PI_NAME,
 	CONCAT(LEAD_UNIT_NUMBER, ' - ',LEAD_UNIT_NAME) AS LEAD_UNIT,
-    PI_NAME
+    SPONSOR_AWARD_ID,
+    CONCAT(SPONSOR_CODE, ' - ', SPONSOR_NAME) AS SPONSOR
 FROM SR_INT_STAGE_ELASTIC_INDEX
 WHERE DOCUMENT_NUMBER = AV_MODULE_ITEM_ID AND MODULE_CODE = 1;     	
 END

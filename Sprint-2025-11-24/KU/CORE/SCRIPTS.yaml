@@ -1,0 +1,18 @@
+databaseChangeLog:
+    - changeSet:
+      id: FIBI-8178-1
+      author: Solih N
+      labels: 'DML'
+      comment: Update IS_ACTIVE and IS_MANDATORY for specified dynamic config rows
+      changes:
+        - sql:
+            sql: |
+              UPDATE dyn_element_config SET IS_ACTIVE = 'N', IS_MANDATORY = 'N', UPDATE_TIMESTAMP = utc_timestamp(), UPDATE_USER = 'admin'
+              WHERE SUB_SECTION_CODE = '301' AND SECTION_CODE = 'DP301' AND UI_REFERENCE_ID IN ('proposal-gnrl-master-proposal', 'prop-cfda-number');
+
+              UPDATE dyn_element_config SET IS_ACTIVE = 'N', IS_MANDATORY = 'N', UPDATE_TIMESTAMP = utc_timestamp(), UPDATE_USER = 'admin'
+              WHERE SUB_SECTION_CODE = '101' AND SECTION_CODE = 'AW101' AND UI_REFERENCE_ID IN ( 'cfda-number', 'dfafs-number');
+
+              UPDATE dyn_element_config SET IS_ACTIVE = 'N', IS_MANDATORY = 'N', UPDATE_TIMESTAMP = utc_timestamp(), UPDATE_USER = 'admin'
+              WHERE UI_REFERENCE_ID = 'prop-cfda-number' AND SUB_SECTION_CODE = '201' AND SECTION_CODE = 'IP201';
+      rollback: empty

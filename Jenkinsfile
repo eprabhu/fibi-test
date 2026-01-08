@@ -59,7 +59,7 @@ pipeline {
                     --logFile=$LOG_FILE_VALIDATE \
                     --logLevel=info \
                     validate \
-                    --labels='BASE AND !(COI AND IACUC AND IRB)'
+                    --labels='BASE'
                 """
             }
         }
@@ -74,7 +74,7 @@ pipeline {
                     --logFile=$LOG_FILE_STATUS \
                     --logLevel=info \
                     status \
-                    --labels='BASE AND !(COI AND IACUC AND IRB)'
+                    --labels='BASE'
                 """
             }
         }
@@ -91,7 +91,7 @@ pipeline {
                             --logFile=$LOG_FILE_UPDATE \
                             --logLevel=info \
                             update \
-                            --labels='BASE AND !(COI AND IACUC AND IRB)'
+                            --labels='BASE'
                         """
                         echo "Liquibase update executed successfully."
 

@@ -1,0 +1,6 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-24/KKI/CORE/SCRIPTS.yaml
+        labels: 'CORE'

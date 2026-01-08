@@ -1,28 +1,25 @@
 databaseChangeLog:
-    
-    #SERVICE_REQUEST
-    - include:
-        file: Fibi-5.5.1-Release/BASE/SERVICE_REQUEST/SCRIPTS.yaml
-        labels: 'SERVICE_REQUEST'
-    - include:
-        file: Fibi-5.5.1-Release/BASE/SERVICE_REQUEST/PROCEDURES.yaml
-        labels: 'SERVICE_REQUEST'
-    - include:
-        file: Fibi-5.5.1-Release/BASE/SERVICE_REQUEST/VIEWS.yaml
-        labels: 'SERVICE_REQUEST'
 
-    #AGREEMENT
     - include:
-        file: Fibi-5.5.1-Release/BASE/AGREEMENT/SCRIPTS.yaml
-        labels: 'AGREEMENT'
+        file: Fibi-5.5.1-Release/JHU/ALL.yaml
+        labels: 'JHU' 
     - include:
-        file: Fibi-5.5.1-Release/BASE/AGREEMENT/PROCEDURES.yaml
-        labels: 'AGREEMENT'
+        file: Fibi-5.5.1-Release/FIBI_EXTERNAL_REVIEWER/ALL.yaml
+        labels: 'FIBI_EXTERNAL_REVIEWER'      
     - include:
-        file: Fibi-5.5.1-Release/BASE/AGREEMENT/VIEWS.yaml
-        labels: 'AGREEMENT'
+        file: Fibi-5.5.1-Release/FIBI_AGREEMENT/ALL.yaml
+        labels: 'FIBI_AGREEMENT' 
+    - include:
+        file: Fibi-5.5.1-Release/FIBI_SERVICE_REQUEST/ALL.yaml
+        labels: 'SERVICE_REQUEST'      
+
+    - changeSet: 
+        id: 1
+        author: Suganya.S
+        comment: To insert build details
+        labels: 'DML'
+        changes:
+            - sql: 
+                sql:
+                     INSERT INTO build_details (`BUILD_ID`, `BUILD_VERSION`, `STATUS`, `APPLICATION_NAME`, `BUILD_UPDATE_TIMESTAMP`) VALUES (NULL, 'Fibi 5.5.1', 'Success', 'FIBI-WEB', now());
    
-    #EXTERNAL_REVIEWER
-    - include:
-        file: Fibi-5.5.1-Release/BASE/EXTERNAL_REVIEWER/PROCEDURES.yaml
-        labels: 'EXTERNAL_REVIEWER'

@@ -1,0 +1,79 @@
+databaseChangeLog:
+    - changeSet:
+        id: FIBI-9095-1
+        author: Adarsh
+        labels: 'DML'
+        comment: Update the letter template type code in JHU instance
+        changes:
+            - sql:
+                sql: |
+                    SET SQL_SAFE_UPDATES=0;
+                    UPDATE LETTER_TEMPLATE_TYPE 
+                    SET LETTER_TEMPLATE_TYPE_CODE = (
+                        SELECT TEMP FROM (
+                            SELECT MAX(CAST(LETTER_TEMPLATE_TYPE_CODE AS UNSIGNED)) + 1 AS TEMP
+                            FROM LETTER_TEMPLATE_TYPE
+                        ) AS t
+                    )
+                    WHERE LETTER_TEMPLATE_TYPE_CODE = 106;
+                    SET SQL_SAFE_UPDATES=1;
+        rollback: empty
+
+    - changeSet:
+        id: FIBI-9095-2
+        author: Adarsh
+        labels: 'DML'
+        comment: Update the letter template type code in JHU instance
+        changes:
+            - sql:
+                sql: |
+                    SET SQL_SAFE_UPDATES=0;
+                    UPDATE LETTER_TEMPLATE_TYPE SET LETTER_TEMPLATE_TYPE_CODE = 106 WHERE LETTER_TEMPLATE_TYPE_CODE = 20;
+                    SET SQL_SAFE_UPDATES=1;
+        rollback: empty
+
+    - changeSet:
+      id: FIBI-8178-1
+      author: Solih N
+      labels: 'DML'
+      comment: Update IS_ACTIVE and IS_MANDATORY for specified dynamic config rows
+      changes:
+        - sql:
+            sql: |
+              UPDATE dyn_element_config SET IS_ACTIVE = 'Y', IS_MANDATORY = 'N', UPDATE_TIMESTAMP = utc_timestamp(), UPDATE_USER = 'admin'
+              WHERE SUB_SECTION_CODE = '301' AND SECTION_CODE = 'DP301' AND UI_REFERENCE_ID IN ('prop-award-type', 'prop-sponsor');
+      rollback: empty
+
+    - changeSet:
+      id: FIBI-8183-1
+      author: Mohamed Fazil
+      labels: 'DML'
+      comment: Deactivate sections and subsections for JHU instance
+      changes:
+        - sql:
+            sql: |
+              UPDATE DYN_SECTION_CONFIG 
+              SET IS_ACTIVE = 'N', UPDATE_TIMESTAMP = UTC_TIMESTAMP(), UPDATE_USER = 'admin'
+              WHERE SECTION_CODE = 'COM103';
+
+              UPDATE DYN_SECTION_CONFIG 
+              SET IS_ACTIVE = 'N', UPDATE_TIMESTAMP = UTC_TIMESTAMP(), UPDATE_USER = 'admin'
+              WHERE SECTION_CODE = 'COM102';
+
+              UPDATE DYN_SUBSECTION_CONFIG 
+              SET IS_ACTIVE = 'N', UPDATE_TIMESTAMP = UTC_TIMESTAMP(), UPDATE_USER = 'admin'
+              WHERE SUB_SECTION_CODE IN ('4001', '4003', '4005', '4007', '4008');
+      rollback:
+        - sql:
+            sql: |
+              UPDATE DYN_SECTION_CONFIG 
+              SET IS_ACTIVE = 'Y', UPDATE_TIMESTAMP = UTC_TIMESTAMP(), UPDATE_USER = 'admin'
+              WHERE SECTION_CODE = 'COM103';
+
+              UPDATE DYN_SECTION_CONFIG 
+              SET IS_ACTIVE = 'Y', UPDATE_TIMESTAMP = UTC_TIMESTAMP(), UPDATE_USER = 'admin'
+              WHERE SECTION_CODE = 'COM102';
+
+              UPDATE DYN_SUBSECTION_CONFIG 
+              SET IS_ACTIVE = 'Y', UPDATE_TIMESTAMP = UTC_TIMESTAMP(), UPDATE_USER = 'admin'
+              WHERE SUB_SECTION_CODE IN ('4001', '4003', '4005', '4007', '4008');

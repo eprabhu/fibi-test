@@ -1,0 +1,8 @@
+databaseChangeLog:
+
+    - include:
+      file: DML.yaml
+      relativeToChangelogFile: true
+    - include:
+      file: VIEWS.yaml
+      relativeToChangelogFile: true

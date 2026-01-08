@@ -1,0 +1,9 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-03/JHU/CORE/SCRIPTS.yaml
+        labels: 'CORE'
+    - include:
+        file: Sprint-2025-11-03/JHU/RESEARCHER_PROFILE/PROCEDURES.yaml
+        labels: 'RESEARCHER_PROFILE'

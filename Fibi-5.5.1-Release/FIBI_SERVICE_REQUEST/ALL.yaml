@@ -1,0 +1,14 @@
+databaseChangeLog:
+
+    - include:
+      file: PROCEDURES.yaml
+      relativeToChangelogFile: true
+    - include:
+      file: DDL.yaml
+      relativeToChangelogFile: true
+    - include:
+      file: VIEWS.yaml
+      relativeToChangelogFile: true
+    - include:
+      file: DML.yaml
+      relativeToChangelogFile: true

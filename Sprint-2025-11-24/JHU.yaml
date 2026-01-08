@@ -1,0 +1,36 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-24/JHU/CORE/SCRIPTS.yaml
+        labels: 'CORE'
+
+    #GRANT_CALL
+    - include:
+        file: Sprint-2025-11-24/JHU/GRANT_CALL/PROCEDURES.yaml
+        labels: 'GRANT_CALL'
+
+    #DEV_PROPOSAL
+    - include:
+        file: Sprint-2025-11-24/JHU/DEV_PROPOSAL/PROCEDURES.yaml
+        labels: 'DEV_PROPOSAL'
+
+    #INSTITUTE_PROPOSAL
+    - include:
+        file: Sprint-2025-11-24/JHU/INSTITUTE_PROPOSAL/PROCEDURES.yaml
+        labels: 'INSTITUTE_PROPOSAL'        
+
+    #AWARD
+    - include:
+        file: Sprint-2025-11-24/JHU/AWARD/PROCEDURES.yaml
+        labels: 'AWARD'
+
+    #PROGRESS_REPORT
+    - include:
+        file: Sprint-2025-11-24/JHU/PROGRESS_REPORT/PROCEDURES.yaml
+        labels: 'PROGRESS_REPORT'       
+
+    #AGREEMENT
+    - include:
+        file: Sprint-2025-11-24/JHU/AGREEMENT/SCRIPTS.yaml
+        labels: 'AGREEMENT'

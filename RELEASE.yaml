@@ -1,33 +1,40 @@
 databaseChangeLog:
 
-    #Fibi-Vanilla
-    - include:
-        file: Fibi-Vanilla/ALL.yaml
-        labels: 'Fibi-Vanilla'
-    #Fibi_Demo_Config
-    - include:
-        file: Fibi_Demo_Config/ALL.yaml
-        labels: 'Fibi-Demo-Config'
-    #Fibi-5.4.5-Release
-    - include:
-        file: Fibi-5.4.5-Release/ALL.yaml
-        labels: 'Fibi-5.4.5-Release,BASE'
-    #Fibi-5.4.6-Release
-    - include:
-        file: Fibi-5.4.6-Release/ALL.yaml
-        labels: 'Fibi-5.4.6-Release,BASE'
-    #Fibi-5.4.6P1-Release
-    - include:
-        file: Fibi-5.4.6P1-Release/ALL.yaml
-        labels: 'Fibi-5.4.6P1-Release,BASE'
-    #Fibi-5.5-Release
-    - include:
-        file: Fibi-5.5-Release/ALL.yaml
-        labels: 'Fibi-5.5-Release,BASE'
-    - include:
-        file: Fibi-5.5-Release/JHU.yaml
-        labels: 'Fibi-5.5-Release,JHU'
-    #AI
-    - include:
-        file: AI/ALL.yaml
-        labels: 'AI'
+     # #Fibi-Vanilla
+     # - include:
+     #      file: Fibi-Vanilla/ALL.yaml
+     #      labels: 'Fibi-Vanilla'
+     # #Fibi_Demo_Config
+     # - include:
+     #      file: Fibi_Demo_Config/ALL.yaml
+     #      labels: 'Fibi-Demo-Config'
+     # #Fibi-5.4.5-Release
+     # - include:
+     #      file: Fibi-5.4.5-Release/ALL.yaml
+     #      labels: 'Fibi-5.4.5-Release,BASE'
+     # #Fibi-5.4.6-Release
+     # - include:
+     #      file: Fibi-5.4.6-Release/ALL.yaml
+     #      labels: 'Fibi-5.4.6-Release,BASE'
+     # #Fibi-5.4.6P1-Release
+     # - include:
+     #      file: Fibi-5.4.6P1-Release/ALL.yaml
+     #      labels: 'Fibi-5.4.6P1-Release,BASE'
+     # #Fibi-5.5-Release
+     # - include:
+     #      file: Fibi-5.5-Release/ALL.yaml
+     #      labels: 'Fibi-5.5-Release,BASE'
+     # - include:
+     #      file: Fibi-5.5-Release/JHU.yaml
+     #      labels: 'Fibi-5.5-Release,JHU'
+     # #Sprint-2025-11-24
+     # - include:
+     #      file: Sprint-2025-11-24/ALL.yaml
+     #      labels: 'Sprint-2025-11-24,BASE'
+     # #Sprint-2025-12-15
+     # - include:
+     #      file: Sprint-2025-12-15/ALL.yaml
+     #      labels: 'Sprint-2025-12-15,BASE'
+     - include:
+          file: Sprint-2026-01-06/MIT.yaml
+          labels: 'Sprint-2026-01-06,MIT'

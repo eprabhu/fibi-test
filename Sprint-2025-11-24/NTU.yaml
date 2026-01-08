@@ -1,0 +1,10 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-24/NTU/CORE/SCRIPTS.yaml
+        labels: 'CORE'
+    #MANPOWER
+    - include:
+        file: Sprint-2025-11-24/NTU/MANPOWER/PROCEDURES.yaml
+        labels: 'MANPOWER'

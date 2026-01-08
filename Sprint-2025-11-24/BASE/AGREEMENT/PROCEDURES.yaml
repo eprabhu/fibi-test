@@ -1,0 +1,17 @@
+databaseChangeLog:
+
+  - changeSet:
+        id: FIBI-9155-1
+        author: Vishnu B H
+        labels: 'PROCEDURES'
+        comment: Modified GET_AGREEMENT_DASHBOARD_V1
+        runOnChange: true
+        changes:
+          - sql:
+              sql: DROP PROCEDURE IF EXISTS GET_AGREEMENT_DASHBOARD_V1;
+          - sqlFile:
+              path: ROUTINES/BASE/AGREEMENT/PROCEDURES/GET_AGREEMENT_DASHBOARD_V1.sql
+              relativeToChangelogFile: false
+              splitStatements: false
+        rollback: empty
+

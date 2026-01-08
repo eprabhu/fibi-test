@@ -1,0 +1,160 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-10-13/BASE/CORE/SCRIPTS.yaml
+        labels: 'CORE'
+    - include:
+        file: Sprint-2025-10-13/BASE/CORE/PROCEDURES.yaml
+        labels: 'CORE'
+    - include:
+        file: Sprint-2025-10-13/BASE/CORE/FUNCTIONS.yaml
+        labels: 'CORE'
+    - include:
+        file: Sprint-2025-10-13/BASE/CORE/VIEWS.yaml
+        labels: 'CORE'
+
+    #REPORT
+    - include:
+        file: Sprint-2025-10-13/BASE/REPORT/SCRIPTS.yaml
+        labels: 'REPORT'
+    - include:
+        file: Sprint-2025-10-13/BASE/REPORT/PROCEDURES.yaml
+        labels: 'REPORT'
+    - include:
+        file: Sprint-2025-10-13/BASE/REPORT/FUNCTIONS.yaml
+        labels: 'REPORT'
+    - include:
+        file: Sprint-2025-10-13/BASE/REPORT/VIEWS.yaml
+        labels: 'REPORT'
+
+    #GRANT_CALL
+    - include:
+        file: Sprint-2025-10-13/BASE/GRANT_CALL/SCRIPTS.yaml
+        labels: 'GRANT_CALL'
+    - include:
+        file: Sprint-2025-10-13/BASE/GRANT_CALL/PROCEDURES.yaml
+        labels: 'GRANT_CALL'
+    - include:
+        file: Sprint-2025-10-13/BASE/GRANT_CALL/FUNCTIONS.yaml
+        labels: 'GRANT_CALL'
+    - include:
+        file: Sprint-2025-10-13/BASE/GRANT_CALL/VIEWS.yaml
+        labels: 'GRANT_CALL'
+
+    #DEV_PROPOSAL
+    - include:
+        file: Sprint-2025-10-13/BASE/DEV_PROPOSAL/SCRIPTS.yaml
+        labels: 'DEV_PROPOSAL'
+    - include:
+        file: Sprint-2025-10-13/BASE/DEV_PROPOSAL/PROCEDURES.yaml
+        labels: 'DEV_PROPOSAL'
+    - include:
+        file: Sprint-2025-10-13/BASE/DEV_PROPOSAL/FUNCTIONS.yaml
+        labels: 'DEV_PROPOSAL'
+    - include:
+        file: Sprint-2025-10-13/BASE/DEV_PROPOSAL/VIEWS.yaml
+        labels: 'DEV_PROPOSAL'
+
+    #INSTITUTE_PROPOSAL
+    - include:
+        file: Sprint-2025-10-13/BASE/INSTITUTE_PROPOSAL/SCRIPTS.yaml
+        labels: 'INSTITUTE_PROPOSAL'
+    - include:
+        file: Sprint-2025-10-13/BASE/INSTITUTE_PROPOSAL/PROCEDURES.yaml
+        labels: 'INSTITUTE_PROPOSAL'
+    - include:
+        file: Sprint-2025-10-13/BASE/INSTITUTE_PROPOSAL/FUNCTIONS.yaml
+        labels: 'INSTITUTE_PROPOSAL'
+    - include:
+        file: Sprint-2025-10-13/BASE/INSTITUTE_PROPOSAL/VIEWS.yaml
+        labels: 'INSTITUTE_PROPOSAL'
+
+    #AWARD
+    - include:
+        file: Sprint-2025-10-13/BASE/AWARD/SCRIPTS.yaml
+        labels: 'AWARD'
+    - include:
+        file: Sprint-2025-10-13/BASE/AWARD/PROCEDURES.yaml
+        labels: 'AWARD'
+    - include:
+        file: Sprint-2025-10-13/BASE/AWARD/FUNCTIONS.yaml
+        labels: 'AWARD'
+    - include:
+        file: Sprint-2025-10-13/BASE/AWARD/VIEWS.yaml
+        labels: 'AWARD'
+
+    #MANPOWER
+    - include:
+        file: Sprint-2025-10-13/BASE/MANPOWER/SCRIPTS.yaml
+        labels: 'MANPOWER'
+    - include:
+        file: Sprint-2025-10-13/BASE/MANPOWER/PROCEDURES.yaml
+        labels: 'MANPOWER'
+    - include:
+        file: Sprint-2025-10-13/BASE/MANPOWER/FUNCTIONS.yaml
+        labels: 'MANPOWER'
+    - include:
+        file: Sprint-2025-10-13/BASE/MANPOWER/VIEWS.yaml
+        labels: 'MANPOWER'
+
+    #SERVICE_REQUEST
+    - include:
+        file: Sprint-2025-10-13/BASE/SERVICE_REQUEST/SCRIPTS.yaml
+        labels: 'SERVICE_REQUEST'
+    - include:
+        file: Sprint-2025-10-13/BASE/SERVICE_REQUEST/PROCEDURES.yaml
+        labels: 'SERVICE_REQUEST'
+    - include:
+        file: Sprint-2025-10-13/BASE/SERVICE_REQUEST/FUNCTIONS.yaml
+        labels: 'SERVICE_REQUEST'
+    - include:
+        file: Sprint-2025-10-13/BASE/SERVICE_REQUEST/VIEWS.yaml
+        labels: 'SERVICE_REQUEST'
+
+    #AGREEMENT
+    - include:
+        file: Sprint-2025-10-13/BASE/AGREEMENT/SCRIPTS.yaml
+        labels: 'AGREEMENT'
+    - include:
+        file: Sprint-2025-10-13/BASE/AGREEMENT/PROCEDURES.yaml
+        labels: 'AGREEMENT'
+    - include:
+        file: Sprint-2025-10-13/BASE/AGREEMENT/FUNCTIONS.yaml
+        labels: 'AGREEMENT'
+    - include:
+        file: Sprint-2025-10-13/BASE/AGREEMENT/VIEWS.yaml
+        labels: 'AGREEMENT'
+
+    #FORM_BUILDER
+    - include:
+        file: Sprint-2025-10-13/BASE/FORM_BUILDER/SCRIPTS.yaml
+        labels: 'FORM_BUILDER'
+    - include:
+        file: Sprint-2025-10-13/BASE/FORM_BUILDER/PROCEDURES.yaml
+        labels: 'FORM_BUILDER'
+    - include:
+        file: Sprint-2025-10-13/BASE/FORM_BUILDER/FUNCTIONS.yaml
+        labels: 'FORM_BUILDER'
+    - include:
+        file: Sprint-2025-10-13/BASE/FORM_BUILDER/VIEWS.yaml
+        labels: 'FORM_BUILDER'
+
+    #COI
+    - include:
+        file: Sprint-2025-10-13/BASE/COI/SCRIPTS.yaml
+        labels: 'COI'
+    - include:
+        file: Sprint-2025-10-13/BASE/COI/PROCEDURES.yaml
+        labels: 'COI'
+    - include:
+        file: Sprint-2025-10-13/BASE/COI/FUNCTIONS.yaml
+        labels: 'COI'
+    - include:
+        file: Sprint-2025-10-13/BASE/COI/VIEWS.yaml
+        labels: 'COI'
+
+    #AI
+    - include:
+        file: Sprint-2025-10-13/BASE/AI/SCRIPTS.yaml
+        labels: 'AI'

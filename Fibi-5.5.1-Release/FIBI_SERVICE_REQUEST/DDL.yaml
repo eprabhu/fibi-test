@@ -1,0 +1,53 @@
+databaseChangeLog:
+
+        - changeSet:
+                id: FIBI-8333-1
+                author: Suganya.S
+                labels: 'DDL'
+                comment: Added PREV_CUSTOM_DATA column to SR_HEADER_HISTORY table.
+                changes:
+                  -sql:
+                        sql: |
+                                SET @col := (
+                                        SELECT COUNT(*)
+                                        FROM INFORMATION_SCHEMA.COLUMNS
+                                        WHERE TABLE_NAME = 'SR_HEADER_HISTORY'
+                                        AND TABLE_SCHEMA = DATABASE()
+                                        AND COLUMN_NAME = 'PREV_CUSTOM_DATA'
+                                );
+                                SET @sql := IF(@col = 0,
+                                        'ALTER TABLE SR_HEADER_HISTORY ADD COLUMN PREV_CUSTOM_DATA JSON NULL;',
+                                        'SELECT "Column PREV_CUSTOM_DATA already exists";');
+                                PREPARE stmt FROM @sql;
+                                EXECUTE stmt;
+                                DEALLOCATE PREPARE stmt;
+                        
+                rollback:
+                  -sql:
+                        sql: 
+                                ALTER TABLE SR_HEADER_HISTORY DROP COLUMN IF EXISTS PREV_CUSTOM_DATA;
+        - changeSet:
+                id: FIBI-8333-2
+                author: Suganya.S
+                labels: 'DDL'
+                comment: Added CUSTOM_DATA column to SR_HEADER_HISTORY table.
+                changes:
+                -sql:
+                        sql: |
+                                SET @col := (
+                                SELECT COUNT(*)
+                                FROM INFORMATION_SCHEMA.COLUMNS
+                                WHERE TABLE_NAME = 'SR_HEADER_HISTORY'
+                                AND TABLE_SCHEMA = DATABASE()
+                                AND COLUMN_NAME = 'CUSTOM_DATA'
+                                );
+                                SET @sql := IF(@col = 0,
+                                        'ALTER TABLE SR_HEADER_HISTORY ADD COLUMN CUSTOM_DATA JSON NULL;',
+                                        'SELECT "Column CUSTOM_DATA already exists";');
+                                PREPARE stmt FROM @sql;
+                                EXECUTE stmt;
+                                DEALLOCATE PREPARE stmt;
+                rollback:
+                  -sql:
+                        sql:
+                                ALTER TABLE SR_HEADER_HISTORY DROP COLUMN IF EXISTS CUSTOM_DATA ;

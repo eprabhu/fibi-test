@@ -1,0 +1,161 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: FIBI-8522-1
+      author: Hridya E K
+      labels: 'DML'
+      comment: Insert placeholder value for proposal action type
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO ARG_VALUE_LOOKUP(ARG_VALUE_LOOKUP_ID, ARGUMENT_NAME, ARGUMENT_VALUE, DESCRIPTION, UPDATE_TIMESTAMP, UPDATE_USER)
+                SELECT 
+                    (SELECT COALESCE(MAX(ARG_VALUE_LOOKUP_ID), 0) + 1 FROM ARG_VALUE_LOOKUP),
+                    'PLACEHOLDER_DEV_PROPOSAL',
+                    'ACTION_TYPE',
+                    'For setting action type for proposal.',
+                    UTC_TIMESTAMP(),
+                    'admin'
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM ARG_VALUE_LOOKUP
+                    WHERE ARGUMENT_NAME = 'PLACEHOLDER_DEV_PROPOSAL' AND ARGUMENT_VALUE = 'ACTION_TYPE'
+                );
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM ARG_VALUE_LOOKUP 
+              WHERE ARGUMENT_NAME = 'PLACEHOLDER_DEV_PROPOSAL' AND ARGUMENT_VALUE = 'ACTION_TYPE';
+
+  - changeSet:
+      id: FIBI-8522-2
+      author: Hridya E K
+      labels: 'DML'
+      comment: Insert placeholder value for proposal updated date time
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO ARG_VALUE_LOOKUP(ARG_VALUE_LOOKUP_ID, ARGUMENT_NAME, ARGUMENT_VALUE, DESCRIPTION, UPDATE_TIMESTAMP, UPDATE_USER)
+                SELECT 
+                    (SELECT COALESCE(MAX(ARG_VALUE_LOOKUP_ID), 0) + 1 FROM ARG_VALUE_LOOKUP),
+                    'PLACEHOLDER_DEV_PROPOSAL',
+                    'UPDATED_DATE_TIME',
+                    'For setting updated date time proposal.',
+                    UTC_TIMESTAMP(),
+                    'admin'
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM ARG_VALUE_LOOKUP
+                    WHERE ARGUMENT_NAME = 'PLACEHOLDER_DEV_PROPOSAL' AND ARGUMENT_VALUE = 'UPDATED_DATE_TIME'
+                );
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM ARG_VALUE_LOOKUP 
+              WHERE ARGUMENT_NAME = 'PLACEHOLDER_DEV_PROPOSAL' AND ARGUMENT_VALUE = 'UPDATED_DATE_TIME';
+
+  - changeSet:
+      id: FIBI-8522-3
+      author: Hridya E K
+      labels: 'DML'
+      comment: Insert placeholder value for proposal action performed user
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO ARG_VALUE_LOOKUP(ARG_VALUE_LOOKUP_ID, ARGUMENT_NAME, ARGUMENT_VALUE, DESCRIPTION, UPDATE_TIMESTAMP, UPDATE_USER)
+                SELECT 
+                    (SELECT COALESCE(MAX(ARG_VALUE_LOOKUP_ID), 0) + 1 FROM ARG_VALUE_LOOKUP),
+                    'PLACEHOLDER_DEV_PROPOSAL',
+                    'ACTIONED_BY_USER_NAME',
+                    'For setting action performed user.',
+                    UTC_TIMESTAMP(),
+                    'admin'
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM ARG_VALUE_LOOKUP
+                    WHERE ARGUMENT_NAME = 'PLACEHOLDER_DEV_PROPOSAL' AND ARGUMENT_VALUE = 'ACTIONED_BY_USER_NAME'
+                );
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM ARG_VALUE_LOOKUP 
+              WHERE ARGUMENT_NAME = 'PLACEHOLDER_DEV_PROPOSAL' AND ARGUMENT_VALUE = 'ACTIONED_BY_USER_NAME';
+
+  - changeSet:
+      id: FIBI-8522-4
+      author: Hridya E K
+      labels: 'DML'
+      comment: Insert placeholder value for proposal comment
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO ARG_VALUE_LOOKUP(ARG_VALUE_LOOKUP_ID, ARGUMENT_NAME, ARGUMENT_VALUE, DESCRIPTION, UPDATE_TIMESTAMP, UPDATE_USER)
+                SELECT 
+                    (SELECT COALESCE(MAX(ARG_VALUE_LOOKUP_ID), 0) + 1 FROM ARG_VALUE_LOOKUP),
+                    'PLACEHOLDER_DEV_PROPOSAL',
+                    'PROPOSAL_COMMENT',
+                    'For setting comment added by user.',
+                    UTC_TIMESTAMP(),
+                    'admin'
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM ARG_VALUE_LOOKUP
+                    WHERE ARGUMENT_NAME = 'PLACEHOLDER_DEV_PROPOSAL' AND ARGUMENT_VALUE = 'PROPOSAL_COMMENT'
+                );
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM ARG_VALUE_LOOKUP 
+              WHERE ARGUMENT_NAME = 'PLACEHOLDER_DEV_PROPOSAL' AND ARGUMENT_VALUE = 'PROPOSAL_COMMENT';
+
+  - changeSet:
+      id: FIBI-8522-5
+      author: Hridya E K
+      labels: 'DML'
+      comment: Insert notification for comment updations
+      changes:
+        - sql:
+            sql: |
+              INSERT IGNORE INTO NOTIFICATION_TYPE (`NOTIFICATION_TYPE_ID`, `MODULE_CODE`, `SUB_MODULE_CODE`, `DESCRIPTION`, `SUBJECT`, `MESSAGE`, `PROMPT_USER`, `IS_ACTIVE`, `CREATE_USER`, `CREATE_TIMESTAMP`, `UPDATE_USER`, `UPDATE_TIMESTAMP`, `IS_SYSTEM_SPECIFIC`, `SHOW_TEMPLATE_IN_MODULE`,`SENT_TO_INITIATOR`) VALUES ('2234', '3', '0', 'Proposal Comment Update', 'Proposal Comment Update Notification : {PROPOSAL_NUMBER} - {PROPOSAL_TITLE}', '<p>Dear user,</p><p>A recent update has been made to the proposal <strong>{PROPOSAL_TITLE} : {PROPOSAL_NUMBER}</strong></p><p>Details :</p><p><strong>Action Type</strong> :<strong> </strong>{ACTION_TYPE}</p><p><strong>Comment : </strong>{PROPOSAL_COMMENT}</p><p><strong>Action Performed By</strong> : {ACTIONED_BY_USER_NAME}</p><p><strong>Date</strong> : {UPDATED_DATE_TIME}</p><p> </p><p>Please go to<strong> </strong>{APPLICATION_URL} to view the details.</p><p>Thank you.</p><p><i>Note: This is a system-generated email. Please do not reply to this email.</i><br> </p>', 'N', 'Y', 'admin', UTC_TIMESTAMP(), 'admin', UTC_TIMESTAMP(), 'N', 'N', 'N');
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM NOTIFICATION_TYPE WHERE NOTIFICATION_TYPE_ID = 2234 AND MODULE_CODE = 3 AND SUB_MODULE_CODE = 0;
+
+  - changeSet:
+      id: FIBI-8522-6
+      author: Hridya E K
+      labels: 'DML'
+      comment: Insert notification for Admin Correction Initiation
+      changes:
+        - sql:
+            sql: |
+              INSERT IGNORE INTO NOTIFICATION_TYPE (`NOTIFICATION_TYPE_ID`, `MODULE_CODE`, `SUB_MODULE_CODE`, `DESCRIPTION`, `SUBJECT`, `MESSAGE`, `PROMPT_USER`, `IS_ACTIVE`, `CREATE_USER`, `CREATE_TIMESTAMP`, `UPDATE_USER`, `UPDATE_TIMESTAMP`, `IS_SYSTEM_SPECIFIC`, `SHOW_TEMPLATE_IN_MODULE`,`SENT_TO_INITIATOR`) VALUES ('2235', '3', '0', 'Proposal Admin Correction Initiated', 'Admin Correction Initiated : {PROPOSAL_NUMBER} - {PROPOSAL_TITLE}', '<p>Dear {PRINCIPAL_INVESTIGATOR} ,</p><p>An administrative correction has been initiated for your proposal <strong>{PROPOSAL_TITLE} (ID: {PROPOSAL_NUMBER})</strong>.</p><p>Description/Reason: {PROPOSAL_COMMENT}</p><p>You will be notified once the correction is completed and the proposal is re-submitted in the system.</p><p>You can view the proposal using the {APPLICATION_URL}.</p><p><span style="background-color:rgb(255,255,255);color:rgb(0,0,0);">Thank you.</span></p><p> </p><p><i>Note: This is a system-generated email. Please do not reply to this email.</i></p>', 'N', 'Y', 'admin', UTC_TIMESTAMP(), 'admin', UTC_TIMESTAMP(), 'N', 'N', 'N');
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM NOTIFICATION_TYPE WHERE NOTIFICATION_TYPE_ID = 2235 AND MODULE_CODE = 3 AND SUB_MODULE_CODE = 0;
+
+  - changeSet:
+      id: FIBI-8522-7
+      author: Hridya E K
+      labels: 'DML'
+      comment: Insert notification for Submit Admin Correction
+      changes:
+        - sql:
+            sql: |
+              INSERT IGNORE INTO NOTIFICATION_TYPE (`NOTIFICATION_TYPE_ID`, `MODULE_CODE`, `SUB_MODULE_CODE`, `DESCRIPTION`, `SUBJECT`, `MESSAGE`, `PROMPT_USER`, `IS_ACTIVE`, `CREATE_USER`, `CREATE_TIMESTAMP`, `UPDATE_USER`, `UPDATE_TIMESTAMP`, `IS_SYSTEM_SPECIFIC`, `SHOW_TEMPLATE_IN_MODULE`,`SENT_TO_INITIATOR`) VALUES ('2236', '3', '0', 'Submit Proposal Admin Correction', 'Proposal Submitted After Admin Correction : {PROPOSAL_NUMBER} - {PROPOSAL_TITLE}', '<p>Dear {PRINCIPAL_INVESTIGATOR},</p><p>Your proposal <strong>{PROPOSAL_TITLE} (ID: {PROPOSAL_NUMBER})</strong> has been updated and re-submitted after administrative correction.<br>Please review the updated details in the system.<br><strong>Edited By :</strong> {ACTIONED_BY_USER_NAME}<br><strong>Date : </strong>{UPDATED_DATE_TIME}</p><p>You can view the updated proposal using {APPLICATION_URL}.</p><p>Thank You .</p><p><i>Note: This is a system-generated email. Please do not reply to this email.</i></p>', 'N', 'Y', 'admin', UTC_TIMESTAMP(), 'admin', UTC_TIMESTAMP(), 'N', 'N', 'N');
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM NOTIFICATION_TYPE WHERE NOTIFICATION_TYPE_ID = 2236 AND MODULE_CODE = 3 AND SUB_MODULE_CODE = 0;
+
+  - changeSet:
+      id: FIBI-8522-8
+      author: Hridya E K
+      labels: 'DML'
+      comment: Insert notification for cancel Admin Correction
+      changes:
+        - sql:
+            sql: |
+              INSERT IGNORE INTO NOTIFICATION_TYPE (`NOTIFICATION_TYPE_ID`, `MODULE_CODE`, `SUB_MODULE_CODE`, `DESCRIPTION`, `SUBJECT`, `MESSAGE`, `PROMPT_USER`, `IS_ACTIVE`, `CREATE_USER`, `CREATE_TIMESTAMP`, `UPDATE_USER`, `UPDATE_TIMESTAMP`, `IS_SYSTEM_SPECIFIC`, `SHOW_TEMPLATE_IN_MODULE`,`SENT_TO_INITIATOR`) VALUES ('2237', '3', '0', 'Cancel Proposal Admin Correction', 'Admin Correction Canceled : {PROPOSAL_NUMBER} - {PROPOSAL_TITLE}', '<p>Dear {PRINCIPAL_INVESTIGATOR},</p><p>The administrative correction initiated for your proposal <strong>{PROPOSAL_TITLE} (ID: {PROPOSAL_NUMBER})</strong> has been canceled.<br>No changes were made to your proposal, and it remains in its previously submitted state.</p><p>You can view the proposal using {APPLICATION_URL} here .</p><p>Thank You.</p><p><i>Note: This is a system-generated email. Please do not reply to this email.</i></p>', 'N', 'Y', 'admin', UTC_TIMESTAMP(), 'admin', UTC_TIMESTAMP(), 'N', 'N', 'N');
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM NOTIFICATION_TYPE WHERE NOTIFICATION_TYPE_ID = 2237 AND MODULE_CODE = 3 AND SUB_MODULE_CODE = 0;

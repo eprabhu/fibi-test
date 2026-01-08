@@ -1,0 +1,18 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-03/KKI/CORE/SCRIPTS.yaml
+        labels: 'CORE'
+    - include:
+        file: Sprint-2025-11-03/KKI/CORE/PROCEDURES.yaml
+        labels: 'CORE'
+
+    #AGREEMENT
+    - include:
+        file: Sprint-2025-11-03/KKI/AGREEMENT/SCRIPTS.yaml
+        labels: 'AGREEMENT'
+    - include:
+        file: Sprint-2025-11-03/KKI/AGREEMENT/FUNCTIONS.yaml
+        labels: 'AGREEMENT'
+

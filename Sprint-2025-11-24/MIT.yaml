@@ -1,0 +1,14 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-24/MIT/CORE/PROCEDURES.yaml
+        labels: 'CORE'
+
+    #SERVICE_REQUEST
+    - include:
+        file: Sprint-2025-11-24/MIT/SERVICE_REQUEST/SCRIPTS.yaml
+        labels: 'SERVICE_REQUEST'
+    - include:
+        file: Sprint-2025-11-24/MIT/SERVICE_REQUEST/PROCEDURES.yaml
+        labels: 'SERVICE_REQUEST'

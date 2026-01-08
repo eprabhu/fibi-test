@@ -1,0 +1,42 @@
+databaseChangeLog:
+    - changeSet:
+        id: FIBI-8180
+        author: Arun Ramesh
+        labels: 'DML'
+        comment: Dynamic config for elastic sync for KU instance.
+        changes:
+            - sql:
+                sql: |
+                    SET SQL_SAFE_UPDATES = 0;
+                    UPDATE integration_sync_config
+                    SET 
+                        IS_ACTIVE = CASE 
+                                        WHEN CONFIG_KEY IN ('awardfibi', 'fibiproposal', 'grantcall', 'fibiperson', 'fibirolodex', 'agreementfibi', 'instituteproposal', 'externalreview', 'fibireviewer') THEN 'Y'
+                                        ELSE 'N'
+                                    END,
+                        UPDATE_TIMESTAMP = utc_timestamp(),
+                        UPDATE_USER = 'admin'
+                    WHERE CONFIG_CATEGORY = 'elastic_sync';
+                    SET SQL_SAFE_UPDATES = 1;
+        rollback: empty
+
+    - changeSet:
+        id: FIBI-8181
+        author: Arun Ramesh
+        labels: 'DML'
+        comment: Dynamic config for integration sync for KU instance.
+        changes:
+            - sql:
+                sql: |
+                    SET SQL_SAFE_UPDATES = 0;
+                    UPDATE integration_sync_config
+                    SET 
+                        IS_ACTIVE = CASE 
+                                        WHEN CONFIG_KEY IN ('sync_aderp_annual_budget', 'scopus_integration', 'cost_allocation_with_manual_date', 'update_feed_status') THEN 'Y'
+                                        ELSE 'N'
+                                    END,
+                        UPDATE_TIMESTAMP = utc_timestamp(),
+                        UPDATE_USER = 'admin'
+                    WHERE CONFIG_CATEGORY = 'integration_sync';
+                    SET SQL_SAFE_UPDATES = 1;
+        rollback: empty

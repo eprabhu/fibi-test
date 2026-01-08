@@ -1,0 +1,19 @@
+databaseChangeLog:
+
+    - changeSet:
+        id: FIBI-8658-1
+        author: Adarsh 
+        labels: 'DML'
+        comment: Updating bussiness_rule_variable SHOW_LOOKUP column 
+        changes:
+            - sql:
+                sql: |
+                    SET SQL_SAFE_UPDATES = 0;
+                    UPDATE BUSINESS_RULE_VARIABLE SET SHOW_LOOKUP = 'Y', UPDATE_TIMESTAMP = UTC_TIMESTAMP(), UPDATE_USER = 'admin' WHERE (VARIABLE_NAME = 'Grant Call Type');
+                    SET SQL_SAFE_UPDATES = 1;
+        rollback: 
+            - sql:
+                sql: |
+                    SET SQL_SAFE_UPDATES = 0;
+                    UPDATE BUSINESS_RULE_VARIABLE SET SHOW_LOOKUP = 'N', UPDATE_TIMESTAMP = UTC_TIMESTAMP(), UPDATE_USER = 'admin' WHERE (VARIABLE_NAME = 'Grant Call Type');
+                    SET SQL_SAFE_UPDATES = 1;

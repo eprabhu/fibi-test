@@ -1,0 +1,34 @@
+databaseChangeLog:
+
+  - changeSet:
+        id: FIBI-8198-1
+        author: Hridya.EK
+        labels: 'DDL'
+        comment: Add SPECIAL_REVIEW column to AWARD_MASTER_DATASET_RT table.
+        changes:
+          - sql:
+              sql: |
+                Analyze table AWARD_MASTER_DATASET_RT;
+
+                SET @sql := IF(
+                    (SELECT COUNT(*) FROM information_schema.COLUMNS
+                    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'AWARD_MASTER_DATASET_RT' AND COLUMN_NAME = 'SPECIAL_REVIEW') = 0,
+                    'ALTER TABLE AWARD_MASTER_DATASET_RT ADD COLUMN SPECIAL_REVIEW VARCHAR(200) NULL DEFAULT NULL;',
+                    'DO 1'
+                );
+                PREPARE stmt FROM @sql;
+                EXECUTE stmt;
+                DEALLOCATE PREPARE stmt;
+        rollback:
+          - sql:
+              sql: |
+                SET @sql := IF(
+                    (SELECT COUNT(*) FROM information_schema.COLUMNS
+                    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'AWARD_MASTER_DATASET_RT' AND COLUMN_NAME = 'SPECIAL_REVIEW') = 1,
+                    'ALTER TABLE AWARD_MASTER_DATASET_RT DROP COLUMN SPECIAL_REVIEW;',
+                    'DO 1'
+                );
+                PREPARE stmt FROM @sql;
+                EXECUTE stmt;
+                DEALLOCATE PREPARE stmt;
+

@@ -1,0 +1,46 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-11-03/BASE/CORE/SCRIPTS.yaml
+        labels: 'CORE'
+    - include:
+        file: Sprint-2025-11-03/BASE/CORE/PROCEDURES.yaml
+        labels: 'CORE'
+    - include:
+        file: Sprint-2025-11-03/BASE/CORE/FUNCTIONS.yaml
+        labels: 'CORE'
+    - include:
+        file: Sprint-2025-11-03/BASE/CORE/VIEWS.yaml
+        labels: 'CORE'
+
+    #REPORT
+    - include:
+        file: Sprint-2025-11-03/BASE/REPORT/SCRIPTS.yaml
+        labels: 'REPORT'
+        
+    #DEV_PROPOSAL
+    - include:
+        file: Sprint-2025-11-03/BASE/DEV_PROPOSAL/SCRIPTS.yaml
+        labels: 'DEV_PROPOSAL'
+
+    #SERVICE_REQUEST
+    - include:
+        file: Sprint-2025-11-03/BASE/SERVICE_REQUEST/SCRIPTS.yaml
+        labels: 'SERVICE_REQUEST'
+    - include:
+        file: Sprint-2025-11-03/BASE/SERVICE_REQUEST/PROCEDURES.yaml
+        labels: 'SERVICE_REQUEST'
+    - include:
+        file: Sprint-2025-11-03/BASE/SERVICE_REQUEST/VIEWS.yaml
+        labels: 'SERVICE_REQUEST'
+
+    #AGREEMENT
+    - include:
+        file: Sprint-2025-11-03/BASE/AGREEMENT/VIEWS.yaml
+        labels: 'AGREEMENT'
+
+    #EXTERNAL_REVIEWER
+    - include:
+        file: Sprint-2025-11-03/BASE/EXTERNAL_REVIEWER/PROCEDURES.yaml
+        labels: 'EXTERNAL_REVIEWER'

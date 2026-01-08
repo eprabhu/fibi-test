@@ -1,0 +1,21 @@
+databaseChangeLog:
+    - changeSet:
+      id: FIBI-7848-1
+      author: Sajith Muhammed
+      labels: 'DML'
+      comment: Update new changes for JIRA
+      changes:
+        - sql:
+            sql: |
+              UPDATE AWARD_PERSONNEL_TYPE SET IS_ACTIVE='Y' WHERE VALUE ='A';
+              UPDATE PARAMETER SET VALUE = 'Y' WHERE PARAMETER_NAME ='IMPORT_BUDGET_PERSON_LINE_ITEM_TO_AWARD_PROJECT_TEAM';
+      rollback:
+        - sql:
+            sql: |
+              UPDATE AWARD_PERSONNEL_TYPE
+              SET IS_ACTIVE = 'N'
+              WHERE VALUE = 'A';
+              
+              UPDATE PARAMETER
+              SET VALUE = 'N'
+              WHERE PARAMETER_NAME = 'IMPORT_BUDGET_PERSON_LINE_ITEM_TO_AWARD_PROJECT_TEAM';
