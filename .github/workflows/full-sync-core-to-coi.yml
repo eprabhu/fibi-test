@@ -137,6 +137,50 @@ jobs:
           fi
           
           # ============================================
+          # SYNC ALL SPRINT CORE FOLDERS
+          # ============================================
+          echo "📦 Syncing all Sprint CORE folders..."
+          
+          # Find all sprint folders
+          SPRINT_FOLDERS=$(find . -maxdepth 1 -type d -name "Sprint-*" | sort)
+          
+          if [ -n "$SPRINT_FOLDERS" ]; then
+            for SPRINT_DIR in $SPRINT_FOLDERS; do
+              SPRINT_NAME=$(basename "$SPRINT_DIR")
+              echo "Processing sprint: $SPRINT_NAME"
+              
+              # Find CORE folder in this sprint - ONLY BASE/CORE (not client-based CORE)
+              CORE_PATH="$SPRINT_DIR/BASE/CORE"
+              
+              if [ -n "$CORE_PATH" ] && [ -d "$CORE_PATH" ]; then
+                echo "Found CORE folder at: $CORE_PATH"
+                
+                # Create destination directory for this sprint
+                DEST_DIR="coi-repo/DB/CORE/$SPRINT_NAME"
+                
+                # Remove existing sprint folder if it exists (for clean sync)
+                if [ -d "$DEST_DIR" ]; then
+                  echo "Removing existing $SPRINT_NAME folder for clean sync..."
+                  rm -rf "$DEST_DIR"
+                fi
+                
+                # Create fresh directory
+                mkdir -p "$DEST_DIR"
+                
+                # Copy CORE folder contents (not the CORE folder itself)
+                echo "Copying from $CORE_PATH to $DEST_DIR"
+                cp -r "$CORE_PATH"/* "$DEST_DIR/" || true
+                
+                echo "✅ Synced $SPRINT_NAME CORE to $DEST_DIR"
+              else
+                echo "⚠️  No CORE folder found in $SPRINT_NAME"
+              fi
+            done
+          else
+            echo "⚠️  No sprint folders found"
+          fi
+          
+          # ============================================
           # SYNC ALL ROUTINES FILES
           # ============================================
           echo "📦 Syncing all ROUTINES files from all YAML files..."

@@ -150,6 +150,81 @@ jobs:
           fi
           
           # ============================================
+          # COMPARE SPRINT CORE FOLDERS
+          # ============================================
+          echo "📦 Comparing Sprint CORE folders..." >> "$REPORT_FILE"
+          echo "----------------------------------------" >> "$REPORT_FILE"
+          
+          # Find all sprint folders in source
+          SPRINT_FOLDERS=$(find . -maxdepth 1 -type d -name "Sprint-*" | sort)
+          
+          if [ -n "$SPRINT_FOLDERS" ]; then
+            for SPRINT_DIR in $SPRINT_FOLDERS; do
+              SPRINT_NAME=$(basename "$SPRINT_DIR")
+              echo "Processing sprint: $SPRINT_NAME" >> "$REPORT_FILE"
+              
+              # Only check BASE/CORE
+              CORE_PATH="$SPRINT_DIR/BASE/CORE"
+              
+              if [ -d "$CORE_PATH" ]; then
+                # Find all files in source CORE
+                find "$CORE_PATH" -type f ! -path "*/.git/*" | sort > /tmp/fibi_sprint_files.txt
+                
+                # Find all files in destination
+                DEST_SPRINT_DIR="coi-repo/DB/CORE/$SPRINT_NAME"
+                if [ -d "$DEST_SPRINT_DIR" ]; then
+                  find "$DEST_SPRINT_DIR" -type f ! -path "*/.git/*" | sort > /tmp/coi_sprint_files.txt
+                else
+                  touch /tmp/coi_sprint_files.txt
+                fi
+                
+                # Compare files
+                while IFS= read -r SOURCE_FILE || [ -n "$SOURCE_FILE" ]; do
+                  if [ -z "$SOURCE_FILE" ]; then
+                    continue
+                  fi
+                  RELATIVE_PATH=$(echo "$SOURCE_FILE" | sed "s|^$CORE_PATH/||")
+                  DEST_FILE="$DEST_SPRINT_DIR/$RELATIVE_PATH"
+                  
+                  if [ ! -f "$DEST_FILE" ]; then
+                    echo "❌ MISSING: $SPRINT_NAME/$RELATIVE_PATH (exists in fibi-test, not in COI)" >> "$REPORT_FILE"
+                    UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
+                  elif ! cmp -s "$SOURCE_FILE" "$DEST_FILE" 2>/dev/null; then
+                    echo "⚠️  DIFFERENT: $SPRINT_NAME/$RELATIVE_PATH (content differs)" >> "$REPORT_FILE"
+                    UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
+                  fi
+                done < /tmp/fibi_sprint_files.txt
+                
+                # Check for orphaned files in COI
+                while IFS= read -r DEST_FILE || [ -n "$DEST_FILE" ]; do
+                  if [ -z "$DEST_FILE" ]; then
+                    continue
+                  fi
+                  if [ -f "$DEST_FILE" ]; then
+                    RELATIVE_PATH=$(echo "$DEST_FILE" | sed "s|^$DEST_SPRINT_DIR/||")
+                    SOURCE_FILE="$CORE_PATH/$RELATIVE_PATH"
+                    
+                    if [ ! -f "$SOURCE_FILE" ]; then
+                      echo "📌 ORPHANED: $SPRINT_NAME/$RELATIVE_PATH (exists in COI, not in fibi-test)" >> "$REPORT_FILE"
+                    fi
+                  fi
+                done < /tmp/coi_sprint_files.txt
+                
+                if [ ! -d "$DEST_SPRINT_DIR" ]; then
+                  echo "❌ MISSING SPRINT: $SPRINT_NAME (entire sprint folder missing in COI)" >> "$REPORT_FILE"
+                  UNSYNCED_COUNT=$((UNSYNCED_COUNT + 1))
+                fi
+              else
+                echo "⚠️  No BASE/CORE folder found in $SPRINT_NAME" >> "$REPORT_FILE"
+              fi
+              
+              echo "" >> "$REPORT_FILE"
+            done
+          else
+            echo "⚠️  No sprint folders found" >> "$REPORT_FILE"
+          fi
+          
+          # ============================================
           # COMPARE ROUTINES FILES
           # ============================================
           echo "📦 Comparing ROUTINES files..." >> "$REPORT_FILE"

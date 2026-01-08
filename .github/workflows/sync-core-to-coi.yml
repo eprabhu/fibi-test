@@ -5,6 +5,8 @@ on:
     paths:
       - 'Fibi-*-Release/**/CORE/**'
       - 'Fibi-*-Release/**/ROUTINES/**'
+      - 'Sprint-*/**/CORE/**'
+      - 'Sprint-*/**/ROUTINES/**'
 
 permissions:
   contents: write
@@ -48,23 +50,41 @@ jobs:
           MODIFIED_FILES=$(git diff --name-only --diff-filter=M HEAD~1 HEAD || true)
           
           # Combine all changes (additions, modifications, deletions)
-          ALL_CORE_CHANGES=$(echo -e "$CHANGED_FILES" | grep -E 'Fibi-.*-Release.*/CORE' || true)
+          ALL_CORE_CHANGES=$(echo -e "$CHANGED_FILES" | grep -E '(Fibi-.*-Release|Sprint-.*)/.*/CORE' || true)
           
-          # Check for Release CORE changes and extract release names
+          # Check for Release and Sprint CORE changes and extract folder names
           RELEASE_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -oP "Fibi-[^/]+-Release" | sort -u || true)
-          if [ -n "$RELEASE_CHANGES" ]; then
+          SPRINT_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -oP "Sprint-[^/]+" | sort -u || true)
+          
+          if [ -n "$RELEASE_CHANGES" ] || [ -n "$SPRINT_CHANGES" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
-            echo "release_changed=true" >> $GITHUB_OUTPUT
-            echo "releases=$RELEASE_CHANGES" >> $GITHUB_OUTPUT
-            echo "Release CORE files changed in: $RELEASE_CHANGES"
+            if [ -n "$RELEASE_CHANGES" ]; then
+              echo "release_changed=true" >> $GITHUB_OUTPUT
+              echo "releases=$RELEASE_CHANGES" >> $GITHUB_OUTPUT
+              echo "Release CORE files changed in: $RELEASE_CHANGES"
+            fi
+            if [ -n "$SPRINT_CHANGES" ]; then
+              echo "sprint_changed=true" >> $GITHUB_OUTPUT
+              echo "sprints=$SPRINT_CHANGES" >> $GITHUB_OUTPUT
+              echo "Sprint CORE files changed in: $SPRINT_CHANGES"
+            fi
           fi
           
-          # Check for deleted release CORE folders
+          # Check for deleted release and sprint CORE folders
           DELETED_RELEASES=$(echo "$DELETED_FILES" | grep -oP "Fibi-[^/]+-Release" | sort -u || true)
-          if [ -n "$DELETED_RELEASES" ]; then
-            echo "release_deleted=true" >> $GITHUB_OUTPUT
-            echo "deleted_releases=$DELETED_RELEASES" >> $GITHUB_OUTPUT
-            echo "⚠️  Release CORE folders deleted: $DELETED_RELEASES"
+          DELETED_SPRINTS=$(echo "$DELETED_FILES" | grep -oP "Sprint-[^/]+" | sort -u || true)
+          
+          if [ -n "$DELETED_RELEASES" ] || [ -n "$DELETED_SPRINTS" ]; then
+            if [ -n "$DELETED_RELEASES" ]; then
+              echo "release_deleted=true" >> $GITHUB_OUTPUT
+              echo "deleted_releases=$DELETED_RELEASES" >> $GITHUB_OUTPUT
+              echo "⚠️  Release CORE folders deleted: $DELETED_RELEASES"
+            fi
+            if [ -n "$DELETED_SPRINTS" ]; then
+              echo "sprint_deleted=true" >> $GITHUB_OUTPUT
+              echo "deleted_sprints=$DELETED_SPRINTS" >> $GITHUB_OUTPUT
+              echo "⚠️  Sprint CORE folders deleted: $DELETED_SPRINTS"
+            fi
           fi
           
           # Check for routines YAML file changes - ONLY from BASE/CORE
@@ -196,6 +216,75 @@ jobs:
                 DEST_DIR="coi-repo/DB/CORE/$RELEASE"
                 if [ -d "$DEST_DIR" ]; then
                   echo "Removing $RELEASE folder from COI (CORE folder deleted in source)"
+                  rm -rf "$DEST_DIR"
+                fi
+              fi
+            done
+          fi
+          
+          # Handle deleted Sprint CORE folders
+          if [ "${{ steps.check-core.outputs.sprint_deleted }}" == "true" ]; then
+            echo "⚠️  Handling deleted Sprint CORE folders..."
+            DELETED_SPRINTS="${{ steps.check-core.outputs.deleted_sprints }}"
+            
+            for SPRINT in $DELETED_SPRINTS; do
+              DEST_DIR="coi-repo/DB/CORE/$SPRINT"
+              if [ -d "$DEST_DIR" ]; then
+                echo "Removing deleted sprint folder: $DEST_DIR"
+                rm -rf "$DEST_DIR"
+                echo "✅ Removed $SPRINT from COI"
+              fi
+            done
+          fi
+          
+          # Sync Sprint CORE folders (if changed but not deleted)
+          if [ "${{ steps.check-core.outputs.sprint_changed }}" == "true" ]; then
+            echo "Syncing Sprint CORE folders..."
+            
+            # Get changed files to find which sprints need syncing
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+            
+            # Find all unique sprint folders with CORE changes
+            SPRINTS=$(echo "$CHANGED_FILES" | grep -oP "Sprint-[^/]+" | sort -u)
+            
+            for SPRINT in $SPRINTS; do
+              echo "Processing sprint: $SPRINT"
+              
+              # Check if this sprint folder still exists in source
+              if [ ! -d "$SPRINT" ]; then
+                echo "⚠️  Sprint folder $SPRINT no longer exists, skipping sync"
+                continue
+              fi
+              
+              # Find CORE folder in this sprint - ONLY BASE/CORE (not client-based CORE)
+              CORE_PATH="$SPRINT/BASE/CORE"
+              
+              if [ -n "$CORE_PATH" ] && [ -d "$CORE_PATH" ]; then
+                echo "Found CORE folder at: $CORE_PATH"
+                
+                # Create destination directory for this sprint
+                DEST_DIR="coi-repo/DB/CORE/$SPRINT"
+                
+                # Remove existing sprint folder if it exists (for clean sync)
+                if [ -d "$DEST_DIR" ]; then
+                  echo "Removing existing $SPRINT folder for clean sync..."
+                  rm -rf "$DEST_DIR"
+                fi
+                
+                # Create fresh directory
+                mkdir -p "$DEST_DIR"
+                
+                # Copy CORE folder contents (not the CORE folder itself)
+                echo "Copying from $CORE_PATH to $DEST_DIR"
+                cp -r "$CORE_PATH"/* "$DEST_DIR/" || true
+                
+                echo "✅ Synced $SPRINT CORE to $DEST_DIR"
+              else
+                echo "⚠️  No CORE folder found in $SPRINT"
+                # If CORE folder doesn't exist in source, remove from destination
+                DEST_DIR="coi-repo/DB/CORE/$SPRINT"
+                if [ -d "$DEST_DIR" ]; then
+                  echo "Removing $SPRINT folder from COI (CORE folder deleted in source)"
                   rm -rf "$DEST_DIR"
                 fi
               fi
