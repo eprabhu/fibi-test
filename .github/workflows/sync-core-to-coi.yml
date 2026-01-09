@@ -20,7 +20,7 @@ jobs:
       - name: Checkout fibi-test
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0  # Fetch full history to handle merge commits properly
       
       - name: Get commit author info
         id: author
@@ -42,14 +42,30 @@ jobs:
       - name: Check if CORE files changed
         id: check-core
         run: |
+          # Determine the base commit for comparison
+          # For merge commits, compare against the first parent (main branch)
+          # For regular commits, compare against previous commit
+          if git cat-file -e HEAD^2 2>/dev/null; then
+            # This is a merge commit, compare against first parent (the branch we merged into)
+            BASE_COMMIT="HEAD^1"
+            echo "Merge commit detected, comparing against first parent"
+          else
+            # Regular commit, compare against previous commit
+            BASE_COMMIT="HEAD~1"
+            echo "Regular commit, comparing against previous commit"
+          fi
+          
           # Get all changed files (modified, added, deleted)
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          CHANGED_FILES=$(git diff --name-only $BASE_COMMIT HEAD || git diff --name-only HEAD~1 HEAD || echo "")
           # Get deleted files specifically
-          DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD~1 HEAD || true)
+          DELETED_FILES=$(git diff --name-only --diff-filter=D $BASE_COMMIT HEAD || git diff --name-only --diff-filter=D HEAD~1 HEAD || echo "")
           # Get added files specifically
-          ADDED_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD || true)
+          ADDED_FILES=$(git diff --name-only --diff-filter=A $BASE_COMMIT HEAD || git diff --name-only --diff-filter=A HEAD~1 HEAD || echo "")
           # Get modified files
-          MODIFIED_FILES=$(git diff --name-only --diff-filter=M HEAD~1 HEAD || true)
+          MODIFIED_FILES=$(git diff --name-only --diff-filter=M $BASE_COMMIT HEAD || git diff --name-only --diff-filter=M HEAD~1 HEAD || echo "")
+          
+          echo "Changed files detected:"
+          echo "$CHANGED_FILES" | head -20
           
           # Combine all changes (additions, modifications, deletions)
           ALL_CORE_CHANGES=$(echo -e "$CHANGED_FILES" | grep -E '(Fibi-.*-Release|Sprint-.*)/.*/CORE' || true)
@@ -99,11 +115,23 @@ jobs:
           fi
           
           # Check for direct changes in ROUTINES/BASE/CORE/** folders (SQL files)
-          ROUTINES_BASE_CORE_CHANGES=$(echo "$CHANGED_FILES" | grep -E '^ROUTINES/BASE/CORE/(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)/.*\.sql$' || true)
+          # Check both absolute paths and relative paths
+          ROUTINES_BASE_CORE_CHANGES=$(echo "$CHANGED_FILES" | grep -E '(^|/)ROUTINES/BASE/CORE/(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)/.*\.sql$' || true)
           if [ -n "$ROUTINES_BASE_CORE_CHANGES" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "routines_base_core_changed=true" >> $GITHUB_OUTPUT
             echo "Direct ROUTINES/BASE/CORE files changed: $ROUTINES_BASE_CORE_CHANGES"
+          else
+            # Also check if ROUTINES/BASE/CORE is in the changed files at all (might have different path format)
+            if echo "$CHANGED_FILES" | grep -qE 'ROUTINES.*BASE.*CORE.*\.(sql|yaml|yml)'; then
+              echo "ROUTINES/BASE/CORE files detected with different path format"
+              ROUTINES_BASE_CORE_CHANGES=$(echo "$CHANGED_FILES" | grep -E 'ROUTINES.*BASE.*CORE' || true)
+              if [ -n "$ROUTINES_BASE_CORE_CHANGES" ]; then
+                echo "changed=true" >> $GITHUB_OUTPUT
+                echo "routines_base_core_changed=true" >> $GITHUB_OUTPUT
+                echo "Direct ROUTINES/BASE/CORE files changed (detected): $ROUTINES_BASE_CORE_CHANGES"
+              fi
+            fi
           fi
           
           # Set default if no changes

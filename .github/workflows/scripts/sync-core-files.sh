@@ -4,6 +4,17 @@ set -e
 # This script syncs CORE files and creates PR
 # It's called from GitHub Actions workflow to avoid expression length limits
 
+# Determine the base commit for comparison (handles merge commits)
+if git cat-file -e HEAD^2 2>/dev/null; then
+  # This is a merge commit, compare against first parent (the branch we merged into)
+  BASE_COMMIT="HEAD^1"
+  echo "Merge commit detected, comparing against first parent (HEAD^1)"
+else
+  # Regular commit, compare against previous commit
+  BASE_COMMIT="HEAD~1"
+  echo "Regular commit, comparing against previous commit (HEAD~1)"
+fi
+
 echo "Syncing CORE files..."
 
 # Create base destination directory
@@ -24,12 +35,12 @@ if [ "$RELEASE_DELETED" == "true" ]; then
   done
 fi
 
-# Sync Release CORE folders (if changed but not deleted)
+  # Sync Release CORE folders (if changed but not deleted)
 if [ "$RELEASE_CHANGED" == "true" ]; then
   echo "Syncing Release CORE folders..."
   
   # Get changed files to find which releases need syncing
-  CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+  CHANGED_FILES=$(git diff --name-only $BASE_COMMIT HEAD || git diff --name-only HEAD~1 HEAD || echo "")
   
   # Find all unique release folders with CORE changes
   RELEASES=$(echo "$CHANGED_FILES" | grep -oP "Fibi-[^/]+-Release" | sort -u)
@@ -98,7 +109,7 @@ if [ "$SPRINT_CHANGED" == "true" ]; then
   echo "Syncing Sprint CORE folders..."
   
   # Get changed files to find which sprints need syncing
-  CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+  CHANGED_FILES=$(git diff --name-only $BASE_COMMIT HEAD || git diff --name-only HEAD~1 HEAD || echo "")
   
   # Find all unique sprint folders with CORE changes
   SPRINTS=$(echo "$CHANGED_FILES" | grep -oP "Sprint-[^/]+" | sort -u)
@@ -152,7 +163,7 @@ if [ "$ROUTINES_YAML_CHANGED" == "true" ]; then
   echo "Syncing ROUTINES files from changed YAML files..."
   
   # Get changed routines YAML files - ONLY from BASE/CORE
-  CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+  CHANGED_FILES=$(git diff --name-only $BASE_COMMIT HEAD || git diff --name-only HEAD~1 HEAD || echo "")
   # Filter to only BASE/CORE (exclude client-based CORE)
   ROUTINES_YAML_FILES=$(echo "$CHANGED_FILES" | grep -E 'BASE/CORE/.*\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
   
@@ -373,28 +384,78 @@ fi
 # ============================================
 if [ "$ROUTINES_BASE_CORE_CHANGED" == "true" ]; then
   echo "Syncing direct changes in ROUTINES/BASE/CORE/** folders..."
+  echo "DEBUG: ROUTINES_BASE_CORE_CHANGED flag is set to: $ROUTINES_BASE_CORE_CHANGED"
+  
+  # Also check if files actually exist in the directory (in case change detection worked but files exist)
+  if [ -d "ROUTINES/BASE/CORE" ]; then
+    echo "DEBUG: ROUTINES/BASE/CORE directory exists"
+    echo "DEBUG: Files in ROUTINES/BASE/CORE:"
+    find ROUTINES/BASE/CORE -name "*.sql" 2>/dev/null | head -10 || echo "  (no SQL files found)"
+  else
+    echo "⚠️  ROUTINES/BASE/CORE directory does not exist"
+  fi
   
   # Get changed files in ROUTINES/BASE/CORE/**
-  CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
-  ROUTINES_SQL_FILES=$(echo "$CHANGED_FILES" | grep -E '^ROUTINES/BASE/CORE/(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)/.*\.sql$' || true)
+  CHANGED_FILES=$(git diff --name-only $BASE_COMMIT HEAD || git diff --name-only HEAD~1 HEAD || echo "")
+  echo "DEBUG: Changed files detected:"
+  echo "$CHANGED_FILES" | head -20
+  
+  # Try multiple path patterns to catch the files
+  ROUTINES_SQL_FILES=$(echo "$CHANGED_FILES" | grep -E '(^|/)ROUTINES/BASE/CORE/(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)/.*\.sql$' || true)
+  
+  # If no matches with standard pattern, try without leading slash
+  if [ -z "$ROUTINES_SQL_FILES" ]; then
+    ROUTINES_SQL_FILES=$(echo "$CHANGED_FILES" | grep -E 'ROUTINES.*BASE.*CORE.*(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS).*\.sql$' || true)
+  fi
+  
+  # If still no matches, try to find all SQL files in the directory (fallback for full sync case)
+  if [ -z "$ROUTINES_SQL_FILES" ] && [ -d "ROUTINES/BASE/CORE" ]; then
+    echo "DEBUG: No changed files found in diff, checking all files in ROUTINES/BASE/CORE as fallback..."
+    ROUTINES_SQL_FILES=$(find ROUTINES/BASE/CORE -type f -name "*.sql" ! -path "*/.git/*" 2>/dev/null | sort || true)
+  fi
+  
+  echo "DEBUG: ROUTINES SQL files found: $ROUTINES_SQL_FILES"
   
   # Get deleted files
-  DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD~1 HEAD || true)
-  DELETED_ROUTINES_SQL=$(echo "$DELETED_FILES" | grep -E '^ROUTINES/BASE/CORE/(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)/.*\.sql$' || true)
+  DELETED_FILES=$(git diff --name-only --diff-filter=D $BASE_COMMIT HEAD || git diff --name-only --diff-filter=D HEAD~1 HEAD || echo "")
+  DELETED_ROUTINES_SQL=$(echo "$DELETED_FILES" | grep -E '(^|/)ROUTINES/BASE/CORE/(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)/.*\.sql$' || true)
+  
+  # If flag is set but no files found in diff, try to sync all existing files (fallback)
+  if [ -z "$ROUTINES_SQL_FILES" ] && [ -z "$DELETED_ROUTINES_SQL" ] && [ -d "ROUTINES/BASE/CORE" ]; then
+    echo "WARNING: ROUTINES_BASE_CORE_CHANGED flag is true but no files found in diff"
+    echo "Attempting to sync all SQL files from ROUTINES/BASE/CORE as fallback..."
+    ROUTINES_SQL_FILES=$(find ROUTINES/BASE/CORE -type f -name "*.sql" ! -path "*/.git/*" 2>/dev/null | sort || true)
+    echo "Found files to sync: $ROUTINES_SQL_FILES"
+  fi
   
   if [ -n "$ROUTINES_SQL_FILES" ] || [ -n "$DELETED_ROUTINES_SQL" ]; then
     # Process each changed/deleted SQL file
     ALL_ROUTINES_CHANGES=$(echo -e "$ROUTINES_SQL_FILES\n$DELETED_ROUTINES_SQL" | sort -u)
     
+    echo "DEBUG: Processing $ALL_ROUTINES_CHANGES files..."
+    
     for SQL_FILE in $ALL_ROUTINES_CHANGES; do
+      # Normalize path (remove leading ./ or / if present)
+      SQL_FILE=$(echo "$SQL_FILE" | sed 's|^\./||' | sed 's|^/||')
+      
       # Extract routine type from path (PROCEDURES, FUNCTIONS, VIEWS, TRIGGERS)
-      ROUTINE_TYPE=$(echo "$SQL_FILE" | sed -n 's|^ROUTINES/BASE/CORE/\(PROCEDURES\|FUNCTIONS\|VIEWS\|TRIGGERS\)/.*|\1|p')
+      # Try multiple patterns to extract the type
+      ROUTINE_TYPE=$(echo "$SQL_FILE" | sed -n 's|.*ROUTINES.*BASE.*CORE.*\(PROCEDURES\|FUNCTIONS\|VIEWS\|TRIGGERS\).*|\1|pi' | head -1)
+      
+      # If still not found, try simpler pattern
+      if [ -z "$ROUTINE_TYPE" ]; then
+        ROUTINE_TYPE=$(echo "$SQL_FILE" | grep -oiE "(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)" | head -1)
+      fi
+      
       SQL_FILENAME=$(basename "$SQL_FILE")
       
       if [ -z "$ROUTINE_TYPE" ]; then
         echo "⚠️  Could not determine routine type for: $SQL_FILE"
+        echo "   File path: $SQL_FILE"
         continue
       fi
+      
+      echo "Processing file: $SQL_FILE -> Type: $ROUTINE_TYPE, Filename: $SQL_FILENAME"
       
       # Check if file was deleted
       if echo "$DELETED_ROUTINES_SQL" | grep -q "^$SQL_FILE$"; then

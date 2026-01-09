@@ -74,12 +74,37 @@ if [ -n "$UNAUTHORIZED_FILES" ]; then
   git reset HEAD $UNAUTHORIZED_FILES 2>/dev/null || true
 fi
 
-# Check if there are any changes to commit
-CHANGES=$(git status --porcelain DB/CORE 2>/dev/null || echo "")
-if [ -d "DB/ROUTINES" ]; then
-  CHANGES="$CHANGES $(git status --porcelain DB/ROUTINES/ 2>/dev/null || echo "")"
+# Debug: Show what files exist in the directories
+echo "DEBUG: Checking for changes to commit..."
+echo "DEBUG: Files in DB/CORE:"
+find DB/CORE -type f 2>/dev/null | head -10 || echo "  (none)"
+echo "DEBUG: Files in DB/ROUTINES:"
+find DB/ROUTINES -type f 2>/dev/null | head -10 || echo "  (none)"
+
+# Check if there are any changes to commit (staged or unstaged)
+git add DB/CORE/ DB/ROUTINES/ 2>/dev/null || true
+
+# Check staged changes first
+CHANGES=$(git diff --cached --name-only DB/CORE DB/ROUTINES 2>/dev/null || echo "")
+if [ -z "$CHANGES" ]; then
+  # Check unstaged changes
+  CHANGES=$(git status --porcelain DB/CORE DB/ROUTINES 2>/dev/null || echo "")
 fi
 CHANGES=$(echo "$CHANGES" | xargs)
+
+echo "DEBUG: Changes detected:"
+echo "$CHANGES" | head -20
+
+# If still no changes but directories exist, check if files exist at all
+if [ -z "$CHANGES" ]; then
+  echo "DEBUG: No changes found in git status, checking if files exist..."
+  if [ -d "DB/CORE" ] && [ "$(find DB/CORE -type f 2>/dev/null | wc -l)" -gt 0 ]; then
+    echo "DEBUG: Files exist in DB/CORE but no changes detected - may already be synced"
+  fi
+  if [ -d "DB/ROUTINES" ] && [ "$(find DB/ROUTINES -type f 2>/dev/null | wc -l)" -gt 0 ]; then
+    echo "DEBUG: Files exist in DB/ROUTINES but no changes detected - may already be synced"
+  fi
+fi
 
 if [ -n "$CHANGES" ]; then
   echo "Committing changes to feature branch..."
