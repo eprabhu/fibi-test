@@ -4,10 +4,21 @@ set -e
 # This script performs full sync of CORE files from all Release and Sprint folders
 # It's called from GitHub Actions workflow to avoid expression length limits
 
+# Load configuration
+source .github/workflows/scripts/load-config.sh
+
+# Use config values or defaults
+DEST_CORE_DIR="${DEST_CORE_DIR:-DB/CORE}"
+DEST_ROUTINES_DIR="${DEST_ROUTINES_DIR:-DB/ROUTINES/CORE}"
+DEST_PROCEDURES_DIR="${DEST_PROCEDURES_DIR:-DB/ROUTINES/CORE/PROCEDURES}"
+DEST_FUNCTIONS_DIR="${DEST_FUNCTIONS_DIR:-DB/ROUTINES/CORE/FUNCTIONS}"
+DEST_VIEWS_DIR="${DEST_VIEWS_DIR:-DB/ROUTINES/CORE/VIEWS}"
+DEST_TRIGGERS_DIR="${DEST_TRIGGERS_DIR:-DB/ROUTINES/CORE/TRIGGERS}"
+
 echo "🔄 Starting FULL SYNC of CORE and ROUTINES..."
 
 # Create base destination directory
-mkdir -p coi-repo/DB/CORE
+mkdir -p "coi-repo/$DEST_CORE_DIR"
 
 # ============================================
 # SYNC ALL RELEASE CORE FOLDERS
@@ -29,7 +40,7 @@ if [ -n "$RELEASE_FOLDERS" ]; then
       echo "Found CORE folder at: $CORE_PATH"
       
       # Create destination directory for this release
-      DEST_DIR="coi-repo/DB/CORE/$RELEASE_NAME"
+      DEST_DIR="coi-repo/$DEST_CORE_DIR/$RELEASE_NAME"
       
       # Remove existing release folder if it exists (for clean sync)
       if [ -d "$DEST_DIR" ]; then
@@ -73,7 +84,7 @@ if [ -n "$SPRINT_FOLDERS" ]; then
       echo "Found CORE folder at: $CORE_PATH"
       
       # Create destination directory for this sprint
-      DEST_DIR="coi-repo/DB/CORE/$SPRINT_NAME"
+      DEST_DIR="coi-repo/$DEST_CORE_DIR/$SPRINT_NAME"
       
       # Remove existing sprint folder if it exists (for clean sync)
       if [ -d "$DEST_DIR" ]; then
@@ -211,8 +222,26 @@ if [ -n "$ROUTINES_YAML_FILES" ]; then
           fi
         fi
         
-        # Build destination: DB/ROUTINES/CORE/{TYPE}/{filename}.sql
-        DEST_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+        # Build destination path using config
+        case "$ROUTINE_TYPE" in
+          PROCEDURES)
+            DEST_TYPE_DIR="$DEST_PROCEDURES_DIR"
+            ;;
+          FUNCTIONS)
+            DEST_TYPE_DIR="$DEST_FUNCTIONS_DIR"
+            ;;
+          VIEWS)
+            DEST_TYPE_DIR="$DEST_VIEWS_DIR"
+            ;;
+          TRIGGERS)
+            DEST_TYPE_DIR="$DEST_TRIGGERS_DIR"
+            ;;
+          *)
+            DEST_TYPE_DIR="$DEST_ROUTINES_DIR/$ROUTINE_TYPE"
+            ;;
+        esac
+        
+        DEST_PATH="$DEST_TYPE_DIR/$SQL_FILENAME"
         DEST_FILE="coi-repo/$DEST_PATH"
         DEST_DIR=$(dirname "$DEST_FILE")
         
@@ -270,7 +299,7 @@ if [ -n "$ROUTINES_YAML_FILES" ]; then
         OLD_PATH=$(echo "$OLD_PATH" | xargs)
         
         # Skip if already using new path format
-        if echo "$OLD_PATH" | grep -q "^DB/ROUTINES/CORE"; then
+        if echo "$OLD_PATH" | grep -q "^$DEST_ROUTINES_DIR"; then
           continue
         fi
         
@@ -289,8 +318,26 @@ if [ -n "$ROUTINES_YAML_FILES" ]; then
           ROUTINE_TYPE="TRIGGERS"
         fi
         
-        # Build new path
-        NEW_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+        # Build new path using config
+        case "$ROUTINE_TYPE" in
+          PROCEDURES)
+            DEST_TYPE_DIR="$DEST_PROCEDURES_DIR"
+            ;;
+          FUNCTIONS)
+            DEST_TYPE_DIR="$DEST_FUNCTIONS_DIR"
+            ;;
+          VIEWS)
+            DEST_TYPE_DIR="$DEST_VIEWS_DIR"
+            ;;
+          TRIGGERS)
+            DEST_TYPE_DIR="$DEST_TRIGGERS_DIR"
+            ;;
+          *)
+            DEST_TYPE_DIR="$DEST_ROUTINES_DIR/$ROUTINE_TYPE"
+            ;;
+        esac
+        
+        NEW_PATH="$DEST_TYPE_DIR/$SQL_FILENAME"
         
         # Escape paths for sed
         OLD_PATH_ESCAPED=$(echo "$OLD_PATH" | sed 's|/|\\/|g' | sed 's|\.|\\\.|g')
@@ -335,8 +382,26 @@ if [ -n "$ROUTINES_SQL_FILES" ]; then
       continue
     fi
     
-    # Build destination path
-    DEST_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+    # Build destination path using config
+    case "$ROUTINE_TYPE" in
+      PROCEDURES)
+        DEST_TYPE_DIR="$DEST_PROCEDURES_DIR"
+        ;;
+      FUNCTIONS)
+        DEST_TYPE_DIR="$DEST_FUNCTIONS_DIR"
+        ;;
+      VIEWS)
+        DEST_TYPE_DIR="$DEST_VIEWS_DIR"
+        ;;
+      TRIGGERS)
+        DEST_TYPE_DIR="$DEST_TRIGGERS_DIR"
+        ;;
+      *)
+        DEST_TYPE_DIR="$DEST_ROUTINES_DIR/$ROUTINE_TYPE"
+        ;;
+    esac
+    
+    DEST_PATH="$DEST_TYPE_DIR/$SQL_FILENAME"
     DEST_FILE="coi-repo/$DEST_PATH"
     DEST_DIR=$(dirname "$DEST_FILE")
     

@@ -4,21 +4,33 @@ set -e
 # This script syncs CORE files and creates PR
 # It's called from GitHub Actions workflow to avoid expression length limits
 
+# Load configuration
+source .github/workflows/scripts/load-config.sh
+
+# Use config values or defaults
+DEST_CORE_DIR="${DEST_CORE_DIR:-DB/CORE}"
+DEST_ROUTINES_DIR="${DEST_ROUTINES_DIR:-DB/ROUTINES/CORE}"
+DEST_PROCEDURES_DIR="${DEST_PROCEDURES_DIR:-DB/ROUTINES/CORE/PROCEDURES}"
+DEST_FUNCTIONS_DIR="${DEST_FUNCTIONS_DIR:-DB/ROUTINES/CORE/FUNCTIONS}"
+DEST_VIEWS_DIR="${DEST_VIEWS_DIR:-DB/ROUTINES/CORE/VIEWS}"
+DEST_TRIGGERS_DIR="${DEST_TRIGGERS_DIR:-DB/ROUTINES/CORE/TRIGGERS}"
+DEBUG_MODE="${DEBUG_MODE:-false}"
+
 # Determine the base commit for comparison (handles merge commits)
 if git cat-file -e HEAD^2 2>/dev/null; then
   # This is a merge commit, compare against first parent (the branch we merged into)
   BASE_COMMIT="HEAD^1"
-  echo "Merge commit detected, comparing against first parent (HEAD^1)"
+  [ "$DEBUG_MODE" = "true" ] && echo "Merge commit detected, comparing against first parent (HEAD^1)"
 else
   # Regular commit, compare against previous commit
   BASE_COMMIT="HEAD~1"
-  echo "Regular commit, comparing against previous commit (HEAD~1)"
+  [ "$DEBUG_MODE" = "true" ] && echo "Regular commit, comparing against previous commit (HEAD~1)"
 fi
 
 echo "Syncing CORE files..."
 
 # Create base destination directory
-mkdir -p coi-repo/DB/CORE
+mkdir -p "coi-repo/$DEST_CORE_DIR"
 
 # Handle deleted Release CORE folders
 if [ "$RELEASE_DELETED" == "true" ]; then
@@ -26,7 +38,7 @@ if [ "$RELEASE_DELETED" == "true" ]; then
   DELETED_RELEASES="$DELETED_RELEASES"
   
   for RELEASE in $DELETED_RELEASES; do
-    DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+    DEST_DIR="coi-repo/$DEST_CORE_DIR/$RELEASE"
     if [ -d "$DEST_DIR" ]; then
       echo "Removing deleted release folder: $DEST_DIR"
       rm -rf "$DEST_DIR"
@@ -61,7 +73,7 @@ if [ "$RELEASE_CHANGED" == "true" ]; then
       echo "Found CORE folder at: $CORE_PATH"
       
       # Create destination directory for this release
-      DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+      DEST_DIR="coi-repo/$DEST_CORE_DIR/$RELEASE"
       
       # Remove existing release folder if it exists (for clean sync)
       if [ -d "$DEST_DIR" ]; then
@@ -80,7 +92,7 @@ if [ "$RELEASE_CHANGED" == "true" ]; then
     else
       echo "⚠️  No CORE folder found in $RELEASE"
       # If CORE folder doesn't exist in source, remove from destination
-      DEST_DIR="coi-repo/DB/CORE/$RELEASE"
+      DEST_DIR="coi-repo/$DEST_CORE_DIR/$RELEASE"
       if [ -d "$DEST_DIR" ]; then
         echo "Removing $RELEASE folder from COI (CORE folder deleted in source)"
         rm -rf "$DEST_DIR"
@@ -95,7 +107,7 @@ if [ "$SPRINT_DELETED" == "true" ]; then
   DELETED_SPRINTS_VAR="$DELETED_SPRINTS"
   
   for SPRINT in $DELETED_SPRINTS_VAR; do
-    DEST_DIR="coi-repo/DB/CORE/$SPRINT"
+    DEST_DIR="coi-repo/$DEST_CORE_DIR/$SPRINT"
     if [ -d "$DEST_DIR" ]; then
       echo "Removing deleted sprint folder: $DEST_DIR"
       rm -rf "$DEST_DIR"
@@ -130,7 +142,7 @@ if [ "$SPRINT_CHANGED" == "true" ]; then
       echo "Found CORE folder at: $CORE_PATH"
       
       # Create destination directory for this sprint
-      DEST_DIR="coi-repo/DB/CORE/$SPRINT"
+      DEST_DIR="coi-repo/$DEST_CORE_DIR/$SPRINT"
       
       # Remove existing sprint folder if it exists (for clean sync)
       if [ -d "$DEST_DIR" ]; then
@@ -149,7 +161,7 @@ if [ "$SPRINT_CHANGED" == "true" ]; then
     else
       echo "⚠️  No CORE folder found in $SPRINT"
       # If CORE folder doesn't exist in source, remove from destination
-      DEST_DIR="coi-repo/DB/CORE/$SPRINT"
+      DEST_DIR="coi-repo/$DEST_CORE_DIR/$SPRINT"
       if [ -d "$DEST_DIR" ]; then
         echo "Removing $SPRINT folder from COI (CORE folder deleted in source)"
         rm -rf "$DEST_DIR"
@@ -278,8 +290,26 @@ if [ "$ROUTINES_YAML_CHANGED" == "true" ]; then
           fi
         fi
         
-        # Build destination: DB/ROUTINES/CORE/{TYPE}/{filename}.sql
-        DEST_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+        # Build destination path using config
+        case "$ROUTINE_TYPE" in
+          PROCEDURES)
+            DEST_TYPE_DIR="$DEST_PROCEDURES_DIR"
+            ;;
+          FUNCTIONS)
+            DEST_TYPE_DIR="$DEST_FUNCTIONS_DIR"
+            ;;
+          VIEWS)
+            DEST_TYPE_DIR="$DEST_VIEWS_DIR"
+            ;;
+          TRIGGERS)
+            DEST_TYPE_DIR="$DEST_TRIGGERS_DIR"
+            ;;
+          *)
+            DEST_TYPE_DIR="$DEST_ROUTINES_DIR/$ROUTINE_TYPE"
+            ;;
+        esac
+        
+        DEST_PATH="$DEST_TYPE_DIR/$SQL_FILENAME"
         DEST_FILE="coi-repo/$DEST_PATH"
         DEST_DIR=$(dirname "$DEST_FILE")
         
@@ -337,7 +367,7 @@ if [ "$ROUTINES_YAML_CHANGED" == "true" ]; then
         OLD_PATH=$(echo "$OLD_PATH" | xargs)
         
         # Skip if already using new path format
-        if echo "$OLD_PATH" | grep -q "^DB/ROUTINES/CORE"; then
+        if echo "$OLD_PATH" | grep -q "^$DEST_ROUTINES_DIR"; then
           continue
         fi
         
@@ -356,8 +386,26 @@ if [ "$ROUTINES_YAML_CHANGED" == "true" ]; then
           ROUTINE_TYPE="TRIGGERS"
         fi
         
-        # Build new path
-        NEW_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+        # Build new path using config
+        case "$ROUTINE_TYPE" in
+          PROCEDURES)
+            DEST_TYPE_DIR="$DEST_PROCEDURES_DIR"
+            ;;
+          FUNCTIONS)
+            DEST_TYPE_DIR="$DEST_FUNCTIONS_DIR"
+            ;;
+          VIEWS)
+            DEST_TYPE_DIR="$DEST_VIEWS_DIR"
+            ;;
+          TRIGGERS)
+            DEST_TYPE_DIR="$DEST_TRIGGERS_DIR"
+            ;;
+          *)
+            DEST_TYPE_DIR="$DEST_ROUTINES_DIR/$ROUTINE_TYPE"
+            ;;
+        esac
+        
+        NEW_PATH="$DEST_TYPE_DIR/$SQL_FILENAME"
         
         # Escape paths for sed
         OLD_PATH_ESCAPED=$(echo "$OLD_PATH" | sed 's|/|\\/|g' | sed 's|\.|\\\.|g')
@@ -460,7 +508,27 @@ if [ "$ROUTINES_BASE_CORE_CHANGED" == "true" ]; then
       # Check if file was deleted
       if echo "$DELETED_ROUTINES_SQL" | grep -q "^$SQL_FILE$"; then
         echo "Handling deleted routine file: $SQL_FILE"
-        DEST_FILE="coi-repo/DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+        
+        # Determine destination directory based on type
+        case "$ROUTINE_TYPE" in
+          PROCEDURES)
+            DEST_TYPE_DIR="$DEST_PROCEDURES_DIR"
+            ;;
+          FUNCTIONS)
+            DEST_TYPE_DIR="$DEST_FUNCTIONS_DIR"
+            ;;
+          VIEWS)
+            DEST_TYPE_DIR="$DEST_VIEWS_DIR"
+            ;;
+          TRIGGERS)
+            DEST_TYPE_DIR="$DEST_TRIGGERS_DIR"
+            ;;
+          *)
+            DEST_TYPE_DIR="$DEST_ROUTINES_DIR/$ROUTINE_TYPE"
+            ;;
+        esac
+        
+        DEST_FILE="coi-repo/$DEST_TYPE_DIR/$SQL_FILENAME"
         if [ -f "$DEST_FILE" ]; then
           echo "Removing deleted routine file: $DEST_FILE"
           rm -f "$DEST_FILE"
@@ -471,8 +539,27 @@ if [ "$ROUTINES_BASE_CORE_CHANGED" == "true" ]; then
         if [ -f "$SQL_FILE" ]; then
           echo "Processing routine file: $SQL_FILE"
           
+          # Determine destination directory based on type
+          case "$ROUTINE_TYPE" in
+            PROCEDURES)
+              DEST_TYPE_DIR="$DEST_PROCEDURES_DIR"
+              ;;
+            FUNCTIONS)
+              DEST_TYPE_DIR="$DEST_FUNCTIONS_DIR"
+              ;;
+            VIEWS)
+              DEST_TYPE_DIR="$DEST_VIEWS_DIR"
+              ;;
+            TRIGGERS)
+              DEST_TYPE_DIR="$DEST_TRIGGERS_DIR"
+              ;;
+            *)
+              DEST_TYPE_DIR="$DEST_ROUTINES_DIR/$ROUTINE_TYPE"
+              ;;
+          esac
+          
           # Build destination path
-          DEST_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+          DEST_PATH="$DEST_TYPE_DIR/$SQL_FILENAME"
           DEST_FILE="coi-repo/$DEST_PATH"
           DEST_DIR=$(dirname "$DEST_FILE")
           

@@ -1,0 +1,130 @@
+# Sync Configuration File
+# This file contains all configuration settings for syncing between fibi-test and coi repositories
+
+# Repository Configuration
+repositories:
+  source:
+    name: "eprabhu/fibi-test"
+    default_branch: "main"
+  
+  destination:
+    name: "eprabhu/coi"
+    default_branch: "main"  # Falls back to "master" if main doesn't exist
+
+# Git Configuration
+git:
+  # Git access token secret name (stored in GitHub Secrets)
+  access_token_secret: "GH_COI_PUSH_TOKEN"
+  
+  # Git user configuration for commits
+  user:
+    name: "github-actions[bot]"
+    email: "github-actions[bot]@users.noreply.github.com"
+
+# Branch Configuration
+branches:
+  # Source branch to sync from (can be overridden via workflow input)
+  source_branch: "${GITHUB_REF_NAME}"  # Uses current branch by default
+  
+  # Destination branch naming convention for feature branches
+  feature_branch_prefix: "Fibi-Dev"
+  feature_branch_pattern: "${prefix}/${category}/${source-branch}-${timestamp}"
+  
+  # Categories for feature branches
+  categories:
+    incremental_sync: "core-sync"
+    full_sync: "full-core-sync"
+
+# Sync Paths Configuration
+sync_paths:
+  # Source paths to monitor for changes
+  triggers:
+    - "Fibi-*-Release/**/CORE/**"
+    - "Fibi-*-Release/**/ROUTINES/**"
+    - "Sprint-*/**/CORE/**"
+    - "Sprint-*/**/ROUTINES/**"
+    - "ROUTINES/BASE/CORE/**"
+  
+  # Directories to sync (relative to repository root)
+  source_directories:
+    core:
+      - "**/BASE/CORE/**"
+    routines:
+      - "ROUTINES/BASE/CORE/**"
+      - "**/BASE/CORE/**/PROCEDURES.yaml"
+      - "**/BASE/CORE/**/PROCEDURES.yml"
+      - "**/BASE/CORE/**/FUNCTIONS.yaml"
+      - "**/BASE/CORE/**/FUNCTIONS.yml"
+      - "**/BASE/CORE/**/VIEWS.yaml"
+      - "**/BASE/CORE/**/VIEWS.yml"
+      - "**/BASE/CORE/**/TRIGGERS.yaml"
+      - "**/BASE/CORE/**/TRIGGERS.yml"
+  
+  # Destination paths in COI repository
+  destination_directories:
+    core: "DB/CORE"
+    routines: "DB/ROUTINES/CORE"
+    routines_types:
+      procedures: "DB/ROUTINES/CORE/PROCEDURES"
+      functions: "DB/ROUTINES/CORE/FUNCTIONS"
+      views: "DB/ROUTINES/CORE/VIEWS"
+      triggers: "DB/ROUTINES/CORE/TRIGGERS"
+
+# PR Configuration
+pull_request:
+  # PR labels to add
+  labels:
+    - "auto-sync"
+    - "sync"
+  
+  # Full sync additional labels
+  full_sync_labels:
+    - "auto-sync"
+    - "full-sync"
+  
+  # PR title templates
+  titles:
+    incremental: "🔄 Auto-sync: CORE and ROUTINES from fibi-test (${source_branch})"
+    full_sync: "🔄 Full Sync: CORE and ROUTINES from fibi-test (${source_branch})"
+
+# Email Notification Configuration
+notifications:
+  # Email addresses for failure notifications
+  failure_recipients:
+    - "prabhu.e@polussolutions.com"
+  
+  # Email sender (uses EMAIL_USERNAME secret)
+  sender_secret: "EMAIL_USERNAME"
+  sender_password_secret: "EMAIL_PASSWORD"
+  
+  # Email server configuration
+  smtp:
+    server: "smtp.gmail.com"
+    port: 465
+
+# Exclusion Rules
+exclusions:
+  # Folders to exclude from sync
+  exclude_folders:
+    - "Fibi-Vanilla/**"
+    - "**/.git/**"
+    - "**/node_modules/**"
+    - "**/coi-repo/**"
+  
+  # File patterns to exclude
+  exclude_patterns:
+    - "**/*.tmp"
+    - "**/*.bak"
+    - "**/.DS_Store"
+
+# Advanced Settings
+advanced:
+  # Fetch depth for git checkout (0 = full history, 2 = shallow)
+  fetch_depth: 0
+  
+  # Maximum feature branch name length
+  max_branch_name_length: 100
+  
+  # Enable debug logging
+  debug: false
+

@@ -4,20 +4,42 @@ set -e
 # This script creates PR after full sync
 # It's called from GitHub Actions workflow to avoid expression length limits
 
+# Load configuration
+source .github/workflows/scripts/load-config.sh
+
+# Use config values or defaults
+GIT_USER_NAME="${GIT_USER_NAME:-github-actions[bot]}"
+GIT_USER_EMAIL="${GIT_USER_EMAIL:-github-actions[bot]@users.noreply.github.com}"
+DEST_DEFAULT_BRANCH="${DEST_DEFAULT_BRANCH:-main}"
+DEST_CORE_DIR="${DEST_CORE_DIR:-DB/CORE}"
+DEST_ROUTINES_DIR="${DEST_ROUTINES_DIR:-DB/ROUTINES/CORE}"
+FEATURE_BRANCH_PREFIX="${FEATURE_BRANCH_PREFIX:-Fibi-Dev}"
+FULL_SYNC_CATEGORY="${FULL_SYNC_CATEGORY:-full-core-sync}"
+MAX_BRANCH_NAME_LENGTH="${MAX_BRANCH_NAME_LENGTH:-100}"
+
 cd coi-repo
-git config user.name "github-actions[bot]"
-git config user.email "github-actions[bot]@users.noreply.github.com"
+git config user.name "$GIT_USER_NAME"
+git config user.email "$GIT_USER_EMAIL"
 
 # Source branch name already available from env
 
-# Always target main branch for PR (organization requirement)
+# Always target main branch for PR (from config)
 # Determine which default branch exists in COI repository
-TARGET_BRANCH="main"
-if ! git ls-remote --heads origin "main" | grep -q "main"; then
-  if git ls-remote --heads origin "master" | grep -q "master"; then
-    TARGET_BRANCH="master"
+TARGET_BRANCH="$DEST_DEFAULT_BRANCH"
+if ! git ls-remote --heads origin "$TARGET_BRANCH" | grep -q "$TARGET_BRANCH"; then
+  # Try alternative branch name
+  ALTERNATIVE_BRANCH="master"
+  if [ "$TARGET_BRANCH" = "main" ]; then
+    ALTERNATIVE_BRANCH="master"
   else
-    echo "⚠️  ERROR: Neither 'main' nor 'master' branch found in COI repository!"
+    ALTERNATIVE_BRANCH="main"
+  fi
+  
+  if git ls-remote --heads origin "$ALTERNATIVE_BRANCH" | grep -q "$ALTERNATIVE_BRANCH"; then
+    TARGET_BRANCH="$ALTERNATIVE_BRANCH"
+    echo "Using alternative branch: $TARGET_BRANCH"
+  else
+    echo "⚠️  ERROR: Neither '$DEST_DEFAULT_BRANCH' nor '$ALTERNATIVE_BRANCH' branch found in COI repository!"
     exit 1
   fi
 fi
@@ -32,17 +54,18 @@ echo "Checking out target branch: $TARGET_BRANCH"
 git checkout "$TARGET_BRANCH"
 git pull origin "$TARGET_BRANCH" || true
 
-# Configure remote URL with token
-git remote set-url origin https://x-access-token:$GH_COI_PUSH_TOKEN@github.com/eprabhu/coi.git
+# Configure remote URL with token (use config for repo name)
+DEST_REPO_NAME="${DEST_REPO_NAME:-eprabhu/coi}"
+git remote set-url origin https://x-access-token:$GH_COI_PUSH_TOKEN@github.com/${DEST_REPO_NAME}.git
 
-# Create feature branch name following COI repo naming convention: Fibi-Dev/*/*
+# Create feature branch name following COI repo naming convention from config
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-# Format: Fibi-Dev/{category}/{feature}
+# Format: {prefix}/{category}/{source-branch}-{timestamp}
 # Clean source branch name for use in branch path
 CLEAN_SOURCE_BRANCH=$(echo "$SOURCE_BRANCH_NAME" | sed 's/[^a-zA-Z0-9._-]/-/g')
-FEATURE_BRANCH="Fibi-Dev/full-core-sync/${CLEAN_SOURCE_BRANCH}-${TIMESTAMP}"
+FEATURE_BRANCH="${FEATURE_BRANCH_PREFIX}/${FULL_SYNC_CATEGORY}/${CLEAN_SOURCE_BRANCH}-${TIMESTAMP}"
 # Ensure branch name doesn't exceed reasonable length
-FEATURE_BRANCH=$(echo "$FEATURE_BRANCH" | cut -c1-100)
+FEATURE_BRANCH=$(echo "$FEATURE_BRANCH" | cut -c1-${MAX_BRANCH_NAME_LENGTH})
 
 echo "Creating feature branch: $FEATURE_BRANCH"
 git checkout -b "$FEATURE_BRANCH" || {
@@ -51,32 +74,32 @@ git checkout -b "$FEATURE_BRANCH" || {
   git merge "$TARGET_BRANCH" || true
 }
 
-# STRICTLY ONLY modify DB/CORE/ and DB/ROUTINES/ directories
+# STRICTLY ONLY modify configured directories
 # Add CORE changes (scripts YAML files)
-if [ -d "DB/CORE" ]; then
-  git add DB/CORE/ || true
+if [ -d "$DEST_CORE_DIR" ]; then
+  git add "$DEST_CORE_DIR/" || true
 fi
 
 # Add ROUTINES changes (SQL files)
-if [ -d "DB/ROUTINES" ]; then
-  git add DB/ROUTINES/ || true
+if [ -d "$DEST_ROUTINES_DIR" ]; then
+  git add "$DEST_ROUTINES_DIR/" || true
 fi
 
-# Safety check: Verify we're only staging DB/CORE/ and DB/ROUTINES/
+# Safety check: Verify we're only staging configured directories
 STAGED_FILES=$(git diff --cached --name-only 2>/dev/null || echo "")
-UNAUTHORIZED_FILES=$(echo "$STAGED_FILES" | grep -v "^DB/CORE/" | grep -v "^DB/ROUTINES/" | grep -v "^$" || true)
+UNAUTHORIZED_FILES=$(echo "$STAGED_FILES" | grep -v "^${DEST_CORE_DIR}/" | grep -v "^${DEST_ROUTINES_DIR}/" | grep -v "^$" || true)
 
 if [ -n "$UNAUTHORIZED_FILES" ]; then
-  echo "⚠️  WARNING: Attempted to stage files outside DB/CORE/ and DB/ROUTINES/:"
+  echo "⚠️  WARNING: Attempted to stage files outside $DEST_CORE_DIR/ and $DEST_ROUTINES_DIR/:"
   echo "$UNAUTHORIZED_FILES"
   echo "Resetting unauthorized files..."
   git reset HEAD $UNAUTHORIZED_FILES 2>/dev/null || true
 fi
 
 # Check if there are any changes to commit
-CHANGES=$(git status --porcelain DB/CORE 2>/dev/null || echo "")
-if [ -d "DB/ROUTINES" ]; then
-  CHANGES="$CHANGES $(git status --porcelain DB/ROUTINES/ 2>/dev/null || echo "")"
+CHANGES=$(git status --porcelain "$DEST_CORE_DIR" 2>/dev/null || echo "")
+if [ -d "$DEST_ROUTINES_DIR" ]; then
+  CHANGES="$CHANGES $(git status --porcelain "$DEST_ROUTINES_DIR/" 2>/dev/null || echo "")"
 fi
 CHANGES=$(echo "$CHANGES" | xargs)
 
@@ -121,14 +144,14 @@ if [ -n "$CHANGES" ]; then
     echo "- All direct ROUTINES: \`ROUTINES/BASE/CORE/**\` (PROCEDURES, FUNCTIONS, VIEWS, TRIGGERS)"
     echo ""
     echo "### Review Checklist"
-    echo "- [ ] Review all CORE script changes in \`DB/CORE/\`"
-    echo "- [ ] Review all ROUTINES changes in \`DB/ROUTINES/\`"
+    echo "- [ ] Review all CORE script changes in \`$DEST_CORE_DIR/\`"
+    echo "- [ ] Review all ROUTINES changes in \`$DEST_ROUTINES_DIR/\`"
     echo "- [ ] Verify file paths are correct"
     echo "- [ ] Check for any breaking changes"
     echo "- [ ] Verify all Release and Sprint folders are synced correctly"
     echo ""
     echo "### Note"
-    echo "This PR only modifies files in \`DB/CORE/\` and \`DB/ROUTINES/\` directories. No other files are affected."
+    echo "This PR only modifies files in \`$DEST_CORE_DIR/\` and \`$DEST_ROUTINES_DIR/\` directories. No other files are affected."
     echo ""
     echo "**This is a full sync - all Release and Sprint folders are included.**"
     echo ""
@@ -149,12 +172,15 @@ if [ -n "$CHANGES" ]; then
   PR_JSON="{\"title\":\"$PR_TITLE\",\"body\":\"$PR_BODY_ESCAPED\",\"head\":\"$FEATURE_BRANCH\",\"base\":\"$TARGET_BRANCH\"}"
   
   echo "Sending PR creation request to GitHub API..."
-  PR_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-    -H "Accept: application/vnd.github.v3+json" \
-    -H "Authorization: token $GH_COI_PUSH_TOKEN" \
-    -H "Content-Type: application/json" \
-    -d "$PR_JSON" \
-    https://api.github.com/repos/eprabhu/coi/pulls 2>&1)
+    # Use destination repo from config if available
+    DEST_REPO_NAME="${DEST_REPO_NAME:-eprabhu/coi}"
+    
+    PR_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+      -H "Accept: application/vnd.github.v3+json" \
+      -H "Authorization: token $GH_COI_PUSH_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d "$PR_JSON" \
+      https://api.github.com/repos/${DEST_REPO_NAME}/pulls 2>&1)
   
   # Note: Branch auto-deletion on merge should be configured in repository settings
   # Settings → Branches → Automatically delete head branches
@@ -174,37 +200,42 @@ if [ -n "$CHANGES" ]; then
       echo "🔗 PR Link: $PR_URL"
       
       # Try to add label if PR number is available
-      if [ -n "$PR_NUMBER" ]; then
-        curl -s -X POST \
-          -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token $GH_COI_PUSH_TOKEN" \
-          -H "Content-Type: application/json" \
-          -d '{"labels":["auto-sync","full-sync"]}' \
-          https://api.github.com/repos/eprabhu/coi/issues/$PR_NUMBER/labels > /dev/null || true
-      fi
+                if [ -n "$PR_NUMBER" ]; then
+                  DEST_REPO_NAME="${DEST_REPO_NAME:-eprabhu/coi}"
+                  curl -s -X POST \
+                    -H "Accept: application/vnd.github.v3+json" \
+                    -H "Authorization: token $GH_COI_PUSH_TOKEN" \
+                    -H "Content-Type: application/json" \
+                    -d '{"labels":["auto-sync","full-sync"]}' \
+                    https://api.github.com/repos/${DEST_REPO_NAME}/issues/$PR_NUMBER/labels > /dev/null || true
+                fi
     fi
   elif [ "$HTTP_CODE" = "422" ]; then
     # PR might already exist, try to find it
-    EXISTING_PR_RESPONSE=$(curl -s \
-      -H "Accept: application/vnd.github.v3+json" \
-      -H "Authorization: token $GH_COI_PUSH_TOKEN" \
-      "https://api.github.com/repos/eprabhu/coi/pulls?head=eprabhu:$FEATURE_BRANCH&base=$TARGET_BRANCH&state=open")
-    
-    EXISTING_PR_URL=$(echo "$EXISTING_PR_RESPONSE" | grep -o '"html_url":"[^"]*' | head -1 | cut -d'"' -f4 || echo "")
-    
-    if [ -n "$EXISTING_PR_URL" ]; then
-      echo "⚠️  Pull Request already exists"
-      echo "🔗 Existing PR Link: $EXISTING_PR_URL"
-    else
-      echo "⚠️  Failed to create PR (HTTP $HTTP_CODE). Response: $PR_BODY_RESPONSE"
-      echo "🔗 Please create PR manually: https://github.com/eprabhu/coi/compare/$TARGET_BRANCH...$FEATURE_BRANCH"
-      echo "PR Title: $PR_TITLE"
-    fi
-  else
-    echo "⚠️  Failed to create PR (HTTP $HTTP_CODE). Response: $PR_BODY_RESPONSE"
-    echo "🔗 Please create PR manually: https://github.com/eprabhu/coi/compare/$TARGET_BRANCH...$FEATURE_BRANCH"
-    echo "PR Title: $PR_TITLE"
-  fi
+              DEST_REPO_NAME="${DEST_REPO_NAME:-eprabhu/coi}"
+              DEST_REPO_OWNER=$(echo "$DEST_REPO_NAME" | cut -d'/' -f1)
+              
+              EXISTING_PR_RESPONSE=$(curl -s \
+                -H "Accept: application/vnd.github.v3+json" \
+                -H "Authorization: token $GH_COI_PUSH_TOKEN" \
+                "https://api.github.com/repos/${DEST_REPO_NAME}/pulls?head=${DEST_REPO_OWNER}:$FEATURE_BRANCH&base=$TARGET_BRANCH&state=open")
+              
+              EXISTING_PR_URL=$(echo "$EXISTING_PR_RESPONSE" | grep -o '"html_url":"[^"]*' | head -1 | cut -d'"' -f4 || echo "")
+              
+              if [ -n "$EXISTING_PR_URL" ]; then
+                echo "⚠️  Pull Request already exists"
+                echo "🔗 Existing PR Link: $EXISTING_PR_URL"
+              else
+                echo "⚠️  Failed to create PR (HTTP $HTTP_CODE). Response: $PR_BODY_RESPONSE"
+                echo "🔗 Please create PR manually: https://github.com/${DEST_REPO_NAME}/compare/$TARGET_BRANCH...$FEATURE_BRANCH"
+                echo "PR Title: $PR_TITLE"
+              fi
+            else
+              DEST_REPO_NAME="${DEST_REPO_NAME:-eprabhu/coi}"
+              echo "⚠️  Failed to create PR (HTTP $HTTP_CODE). Response: $PR_BODY_RESPONSE"
+              echo "🔗 Please create PR manually: https://github.com/${DEST_REPO_NAME}/compare/$TARGET_BRANCH...$FEATURE_BRANCH"
+              echo "PR Title: $PR_TITLE"
+            fi
 else
   echo "No changes to commit. Already in sync."
   # Delete feature branch if no changes

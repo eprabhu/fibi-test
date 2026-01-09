@@ -181,6 +181,12 @@ jobs:
         env:
           GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
       
+      - name: Load Configuration
+        if: steps.check-core.outputs.changed == 'true'
+        run: |
+          chmod +x .github/workflows/scripts/load-config.sh
+          source .github/workflows/scripts/load-config.sh || true
+      
       - name: Sync CORE files
         if: steps.check-core.outputs.changed == 'true'
         env:
