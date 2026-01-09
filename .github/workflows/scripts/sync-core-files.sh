@@ -368,5 +368,73 @@ if [ "$ROUTINES_YAML_CHANGED" == "true" ]; then
   cd ..
 fi
 
+# ============================================
+# SYNC DIRECT CHANGES IN ROUTINES/BASE/CORE/** FOLDERS
+# ============================================
+if [ "$ROUTINES_BASE_CORE_CHANGED" == "true" ]; then
+  echo "Syncing direct changes in ROUTINES/BASE/CORE/** folders..."
+  
+  # Get changed files in ROUTINES/BASE/CORE/**
+  CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+  ROUTINES_SQL_FILES=$(echo "$CHANGED_FILES" | grep -E '^ROUTINES/BASE/CORE/(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)/.*\.sql$' || true)
+  
+  # Get deleted files
+  DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD~1 HEAD || true)
+  DELETED_ROUTINES_SQL=$(echo "$DELETED_FILES" | grep -E '^ROUTINES/BASE/CORE/(PROCEDURES|FUNCTIONS|VIEWS|TRIGGERS)/.*\.sql$' || true)
+  
+  if [ -n "$ROUTINES_SQL_FILES" ] || [ -n "$DELETED_ROUTINES_SQL" ]; then
+    # Process each changed/deleted SQL file
+    ALL_ROUTINES_CHANGES=$(echo -e "$ROUTINES_SQL_FILES\n$DELETED_ROUTINES_SQL" | sort -u)
+    
+    for SQL_FILE in $ALL_ROUTINES_CHANGES; do
+      # Extract routine type from path (PROCEDURES, FUNCTIONS, VIEWS, TRIGGERS)
+      ROUTINE_TYPE=$(echo "$SQL_FILE" | sed -n 's|^ROUTINES/BASE/CORE/\(PROCEDURES\|FUNCTIONS\|VIEWS\|TRIGGERS\)/.*|\1|p')
+      SQL_FILENAME=$(basename "$SQL_FILE")
+      
+      if [ -z "$ROUTINE_TYPE" ]; then
+        echo "⚠️  Could not determine routine type for: $SQL_FILE"
+        continue
+      fi
+      
+      # Check if file was deleted
+      if echo "$DELETED_ROUTINES_SQL" | grep -q "^$SQL_FILE$"; then
+        echo "Handling deleted routine file: $SQL_FILE"
+        DEST_FILE="coi-repo/DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+        if [ -f "$DEST_FILE" ]; then
+          echo "Removing deleted routine file: $DEST_FILE"
+          rm -f "$DEST_FILE"
+          echo "✅ Removed $SQL_FILENAME from COI"
+        fi
+      else
+        # File was added or modified - copy it
+        if [ -f "$SQL_FILE" ]; then
+          echo "Processing routine file: $SQL_FILE"
+          
+          # Build destination path
+          DEST_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+          DEST_FILE="coi-repo/$DEST_PATH"
+          DEST_DIR=$(dirname "$DEST_FILE")
+          
+          # Create destination directory
+          echo "Creating destination directory: $DEST_DIR"
+          mkdir -p "$DEST_DIR"
+          
+          # Copy the file
+          echo "Copying $SQL_FILE to $DEST_FILE"
+          cp -f "$SQL_FILE" "$DEST_FILE" || {
+            echo "⚠️  Failed to copy $SQL_FILE to $DEST_FILE"
+            continue
+          }
+          echo "✅ Synced routine file: $DEST_PATH"
+        else
+          echo "⚠️  File not found (may have been deleted): $SQL_FILE"
+        fi
+      fi
+    done
+    
+    echo "✅ Finished syncing direct ROUTINES/BASE/CORE changes"
+  fi
+fi
+
 echo "✅ CORE and ROUTINES sync completed"
 

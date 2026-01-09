@@ -314,5 +314,49 @@ else
   echo "⚠️  No routines YAML files found"
 fi
 
+# ============================================
+# SYNC ALL DIRECT FILES IN ROUTINES/BASE/CORE/** FOLDERS (Full Sync)
+# ============================================
+echo "📦 Syncing all direct files in ROUTINES/BASE/CORE/** folders..."
+
+# Find all SQL files in ROUTINES/BASE/CORE/**
+ROUTINES_SQL_FILES=$(find ROUTINES/BASE/CORE -type f -name "*.sql" ! -path "*/.git/*" ! -path "*/coi-repo/*" 2>/dev/null | sort || true)
+
+if [ -n "$ROUTINES_SQL_FILES" ]; then
+  for SQL_FILE in $ROUTINES_SQL_FILES; do
+    echo "Processing routine file: $SQL_FILE"
+    
+    # Extract routine type from path (PROCEDURES, FUNCTIONS, VIEWS, TRIGGERS)
+    ROUTINE_TYPE=$(echo "$SQL_FILE" | sed -n 's|.*ROUTINES/BASE/CORE/\(PROCEDURES\|FUNCTIONS\|VIEWS\|TRIGGERS\)/.*|\1|p')
+    SQL_FILENAME=$(basename "$SQL_FILE")
+    
+    if [ -z "$ROUTINE_TYPE" ]; then
+      echo "⚠️  Could not determine routine type for: $SQL_FILE"
+      continue
+    fi
+    
+    # Build destination path
+    DEST_PATH="DB/ROUTINES/CORE/$ROUTINE_TYPE/$SQL_FILENAME"
+    DEST_FILE="coi-repo/$DEST_PATH"
+    DEST_DIR=$(dirname "$DEST_FILE")
+    
+    # Create destination directory
+    echo "Creating destination directory: $DEST_DIR"
+    mkdir -p "$DEST_DIR"
+    
+    # Copy the file
+    echo "Copying $SQL_FILE to $DEST_FILE"
+    cp -f "$SQL_FILE" "$DEST_FILE" || {
+      echo "⚠️  Failed to copy $SQL_FILE to $DEST_FILE"
+      continue
+    }
+    echo "✅ Synced routine file: $DEST_PATH"
+  done
+  
+  echo "✅ Finished syncing all direct ROUTINES/BASE/CORE files"
+else
+  echo "⚠️  No SQL files found in ROUTINES/BASE/CORE/**"
+fi
+
 echo "✅ Full sync completed"
 

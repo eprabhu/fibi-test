@@ -119,6 +119,7 @@ if [ -n "$CHANGES" ]; then
     echo "This PR syncs CORE scripts and ROUTINES from the following locations:"
     echo "- Release folders: \`Fibi-*-Release/BASE/CORE/**\`"
     echo "- Sprint folders: \`Sprint-*/BASE/CORE/**\`"
+    echo "- Direct ROUTINES: \`ROUTINES/BASE/CORE/**\` (PROCEDURES, FUNCTIONS, VIEWS, TRIGGERS)"
     echo ""
     echo "### Review Checklist"
     echo "- [ ] Review CORE script changes in \`DB/CORE/\`"
