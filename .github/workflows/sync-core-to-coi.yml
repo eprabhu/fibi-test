@@ -113,6 +113,18 @@ jobs:
             fi
           fi
           
+          # Check for deleted individual files in BASE/CORE (not entire folders)
+          # Files deleted but folder still exists
+          DELETED_CORE_FILES=$(echo "$DELETED_FILES" | grep -E '(Fibi-.*-Release|Sprint-.*)/.*/BASE/CORE/' || true)
+          if [ -n "$DELETED_CORE_FILES" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "core_files_deleted=true" >> $GITHUB_OUTPUT
+            # Convert newlines to a delimiter that can be passed safely
+            DELETED_CORE_FILES_SANITIZED=$(echo "$DELETED_CORE_FILES" | tr '\n' '|' | sed 's/|$//' || true)
+            echo "deleted_core_files=$DELETED_CORE_FILES_SANITIZED" >> $GITHUB_OUTPUT
+            echo "⚠️  Individual CORE files deleted: $DELETED_CORE_FILES"
+          fi
+          
           # Check for routines YAML file changes - ONLY from BASE/CORE
           # (PROCEDURES.yaml, VIEWS.yaml, FUNCTIONS.yaml, etc.)
           ROUTINES_YAML_CHANGES=$(echo "$ALL_CORE_CHANGES" | grep -E 'BASE/CORE/.*\.(yaml|yml)$' | grep -E '(PROCEDURES|VIEWS|FUNCTIONS|TRIGGERS)\.(yaml|yml)$' || true)
@@ -143,7 +155,7 @@ jobs:
           fi
           
           # Set default if no changes
-          if [ -z "$ALL_CORE_CHANGES" ] && [ -z "$DELETED_RELEASES" ] && [ -z "$ROUTINES_YAML_CHANGES" ] && [ -z "$ROUTINES_BASE_CORE_CHANGES" ]; then
+          if [ -z "$ALL_CORE_CHANGES" ] && [ -z "$DELETED_RELEASES" ] && [ -z "$DELETED_SPRINTS" ] && [ -z "$ROUTINES_YAML_CHANGES" ] && [ -z "$ROUTINES_BASE_CORE_CHANGES" ] && [ -z "$DELETED_CORE_FILES" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
             echo "No CORE files changed"
           fi
@@ -207,6 +219,8 @@ jobs:
           SPRINT_CHANGED: ${{ steps.check-core.outputs.sprint_changed }}
           ROUTINES_YAML_CHANGED: ${{ steps.check-core.outputs.routines_yaml_changed }}
           ROUTINES_BASE_CORE_CHANGED: ${{ steps.check-core.outputs.routines_base_core_changed }}
+          CORE_FILES_DELETED: ${{ steps.check-core.outputs.core_files_deleted }}
+          DELETED_CORE_FILES: ${{ steps.check-core.outputs.deleted_core_files }}
           SOURCE_BRANCH_NAME: ${{ steps.branch.outputs.branch_name }}
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_REPOSITORY: ${{ github.repository }}

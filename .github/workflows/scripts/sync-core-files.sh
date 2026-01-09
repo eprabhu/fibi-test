@@ -32,6 +32,54 @@ echo "Syncing CORE files..."
 # Create base destination directory
 mkdir -p "coi-repo/$DEST_CORE_DIR"
 
+# Handle deleted individual files in BASE/CORE (before folder sync)
+if [ "$CORE_FILES_DELETED" == "true" ] && [ -n "$DELETED_CORE_FILES" ]; then
+  echo "⚠️  Handling deleted individual CORE files..."
+  
+  # Convert pipe-delimited string back to newlines for processing
+  DELETED_FILES_LIST=$(echo "$DELETED_CORE_FILES" | tr '|' '\n')
+  
+  for DELETED_FILE in $DELETED_FILES_LIST; do
+    # Skip empty lines
+    [ -z "$DELETED_FILE" ] && continue
+    
+    echo "Processing deleted file: $DELETED_FILE"
+    
+    # Extract release/sprint name and file path
+    # Pattern: {Release|Sprint}/BASE/CORE/{file}
+    if echo "$DELETED_FILE" | grep -qE "(Fibi-.*-Release|Sprint-.*)/.*/BASE/CORE/"; then
+      # Extract folder name (Release or Sprint)
+      FOLDER_NAME=$(echo "$DELETED_FILE" | grep -oP "(Fibi-[^/]+-Release|Sprint-[^/]+)" | head -1)
+      # Extract file path relative to BASE/CORE
+      FILE_RELATIVE_PATH=$(echo "$DELETED_FILE" | sed -n 's|.*BASE/CORE/\(.*\)|\1|p')
+      
+      if [ -n "$FOLDER_NAME" ] && [ -n "$FILE_RELATIVE_PATH" ]; then
+        # Build destination path
+        DEST_FILE="coi-repo/$DEST_CORE_DIR/$FOLDER_NAME/$FILE_RELATIVE_PATH"
+        
+        if [ -f "$DEST_FILE" ]; then
+          echo "Removing deleted file: $DEST_FILE"
+          rm -f "$DEST_FILE"
+          echo "✅ Removed $FILE_RELATIVE_PATH from $FOLDER_NAME in COI"
+          
+          # Also remove parent directory if it becomes empty
+          DEST_FILE_DIR=$(dirname "$DEST_FILE")
+          if [ -d "$DEST_FILE_DIR" ] && [ -z "$(ls -A "$DEST_FILE_DIR" 2>/dev/null)" ]; then
+            echo "Removing empty directory: $DEST_FILE_DIR"
+            rmdir "$DEST_FILE_DIR" 2>/dev/null || true
+          fi
+        else
+          echo "⚠️  File not found in COI (may have been already removed): $DEST_FILE"
+        fi
+      else
+        echo "⚠️  Could not parse deleted file path: $DELETED_FILE"
+      fi
+    fi
+  done
+  
+  echo "✅ Finished handling deleted CORE files"
+fi
+
 # Handle deleted Release CORE folders
 # Note: DELETED_RELEASES comes from workflow output as space-separated string
 if [ "$RELEASE_DELETED" == "true" ]; then
@@ -537,6 +585,15 @@ if [ "$ROUTINES_BASE_CORE_CHANGED" == "true" ]; then
           echo "Removing deleted routine file: $DEST_FILE"
           rm -f "$DEST_FILE"
           echo "✅ Removed $SQL_FILENAME from COI"
+          
+          # Also remove parent directory if it becomes empty
+          DEST_FILE_DIR=$(dirname "$DEST_FILE")
+          if [ -d "$DEST_FILE_DIR" ] && [ -z "$(ls -A "$DEST_FILE_DIR" 2>/dev/null)" ]; then
+            echo "Removing empty directory: $DEST_FILE_DIR"
+            rmdir "$DEST_FILE_DIR" 2>/dev/null || true
+          fi
+        else
+          echo "⚠️  Routine file not found in COI (may have been already removed): $DEST_FILE"
         fi
       else
         # File was added or modified - copy it
