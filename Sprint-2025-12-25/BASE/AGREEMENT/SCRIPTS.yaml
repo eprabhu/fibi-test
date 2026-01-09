@@ -1,0 +1,27 @@
+  databaseChangeLog:
+
+  - changeSet:
+      id: FIBI-9378-1
+      author: Shyla M
+      labels: 'DML'
+      comment: Update DATE_TIME format and width for Agreement date columns
+      changes:
+        - sql:
+            sql: |
+                SET SQL_SAFE_UPDATES = 0;
+                UPDATE dashboard_column_lookup
+                SET COLUMN_CONF_ID = 18,
+                    WIDTH = 20,
+                    UPDATE_USER = 'admin',
+                    UPDATE_TIMESTAMP = UTC_TIMESTAMP()
+                WHERE COLUMN_KEY IN ('COL_AG_LAST_MOD_DATE', 'COL_AG_SUBMISSION_DATE');
+                SET SQL_SAFE_UPDATES = 1;
+      rollback: 
+        - sql:
+            sql: |    
+                UPDATE dashboard_column_lookup
+                SET COLUMN_CONF_ID = 3,
+                    WIDTH = 12,
+                    UPDATE_USER = 'admin',
+                    UPDATE_TIMESTAMP = UTC_TIMESTAMP()
+                WHERE COLUMN_KEY IN ('COL_AG_LAST_MOD_DATE', 'COL_AG_SUBMISSION_DATE');

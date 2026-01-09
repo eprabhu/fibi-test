@@ -1,0 +1,39 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-12-15/BASE/CORE/SCRIPTS.yaml
+        labels: 'CORE'
+
+    - include:
+        file: Sprint-2025-12-15/BASE/SERVICE_REQUEST/PROCEDURES.yaml
+        labels: 'CORE'
+
+    #SERVICE_REQUEST
+    - include:
+        file: Sprint-2025-12-15/BASE/SERVICE_REQUEST/SCRIPTS.yaml
+        labels: 'SERVICE_REQUEST'
+
+    #AGREEMENT      
+    - include:
+        file: Sprint-2025-12-15/BASE/AGREEMENT/SCRIPTS.yaml
+        labels: 'AGREEMENT' 
+        
+     #AWARD      
+    - include:
+        file: Sprint-2025-12-15/BASE/AWARD/SCRIPTS.yaml
+        labels: 'AWARD' 
+    
+    - include:
+        file: Sprint-2025-12-15/BASE/AWARD/PROCEDURES.yaml
+        labels: 'AWARD' 
+    
+    #REPORT      
+    - include:
+        file: Sprint-2025-12-15/BASE/REPORT/SCRIPTS.yaml
+        labels: 'REPORT'
+
+    #LANDING      
+    - include:
+        file: Sprint-2025-12-15/BASE/LANDING/SCRIPTS.yaml
+        labels: 'LANDING'

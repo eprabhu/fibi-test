@@ -1,0 +1,17 @@
+databaseChangeLog:
+
+  - changeSet:
+        id: FIBI-7848-1
+        author: Sajith Muhammed
+        labels: 'PROCEDURES'
+        comment: New Procedure
+        runOnChange: true
+        changes:
+          - sql:
+              sql: DROP PROCEDURE IF EXISTS IMPORT_BUDGET_PERSON_LINE_ITEM_TO_AWARD_PROJECT_TEAM;
+          - sqlFile:
+              path: ROUTINES/BASE/AWARD/PROCEDURES/IMPORT_BUDGET_PERSON_LINE_ITEM_TO_AWARD_PROJECT_TEAM.sql
+              relativeToChangelogFile: false
+              splitStatements: false
+        rollback: empty
+

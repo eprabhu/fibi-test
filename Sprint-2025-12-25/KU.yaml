@@ -1,0 +1,6 @@
+databaseChangeLog:
+
+    #CORE
+    - include:
+        file: Sprint-2025-12-15/KU/AWARD/SCRIPTS.yaml
+        labels: 'AWARD'

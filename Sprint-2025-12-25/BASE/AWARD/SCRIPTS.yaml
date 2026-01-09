@@ -1,0 +1,19 @@
+  databaseChangeLog:
+
+  - changeSet:
+      id: FIBI-7848-1
+      author: Sajith Muhammed
+      labels: DML
+      comment: Student slot changes to Parameter table and award_perrsonel_type
+      changes:
+        - sql:
+            sql: |
+              INSERT IGNORE INTO `AWARD_PERSONNEL_TYPE` (`VALUE`, `NAME`, `IS_ACTIVE`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('A', 'Award Project Team', 'N', utc_timestamp(), 'admin');
+              INSERT IGNORE INTO `PARAMETER` (`PARAMETER_NAME`, `VALUE`, `DESCRIPTION`, `UPDATE_TIMESTAMP`, `UPDATE_USER`) VALUES ('IMPORT_BUDGET_PERSON_LINE_ITEM_TO_AWARD_PROJECT_TEAM', 'N', 'When enabled, budget person line items are transferred to the award project team automatically at the time the proposal is awarded', utc_timestamp(), 'admin');
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM AWARD_PERSONNEL_TYPE
+              WHERE VALUE = 'A';
+              DELETE FROM PARAMETER
+              WHERE PARAMETER_NAME = 'IMPORT_BUDGET_PERSON_LINE_ITEM_TO_AWARD_PROJECT_TEAM';

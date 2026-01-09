@@ -1,7 +1,7 @@
 databaseChangeLog:
 
   - changeSet:
-      id: FIBI-9500-1
+      id: FIBI-6936-1
       author: Shyla M
       labels: 'PROCEDURES'
       comment: Modified Procedure
@@ -17,7 +17,7 @@ databaseChangeLog:
       rollback: empty
 
   - changeSet:
-      id: FIBI-9500-2
+      id: FIBI-9384-1
       author: Shyla M
       labels: 'PROCEDURES'
       comment: Modified Procedure
@@ -33,7 +33,7 @@ databaseChangeLog:
       rollback: empty
 
   - changeSet:
-      id: FIBI-9500-3
+      id: FIBI-9384-2
       author: Shyla M
       labels: 'PROCEDURES'
       comment: Modified Procedure

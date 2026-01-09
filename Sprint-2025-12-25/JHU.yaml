@@ -2,5 +2,5 @@ databaseChangeLog:
 
     #CORE
     - include:
-        file: Sprint-2026-01-06/MIT/CORE/PROCEDURES.yaml
+        file: Sprint-2025-12-15/JHU/CORE/PROCEDURES.yaml
         labels: 'CORE'
