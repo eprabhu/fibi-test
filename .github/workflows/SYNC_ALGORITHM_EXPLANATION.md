@@ -1,4 +1,6 @@
-# CORE Scripts Sync Algorithm - Executive Summary
+# CORE Scripts Sync Algorithm - Detailed Technical Documentation
+
+> **👋 Looking for a simple explanation?** See [`SYNC_ALGORITHM_EXPLANATION_SIMPLE.md`](./SYNC_ALGORITHM_EXPLANATION_SIMPLE.md) for an easy-to-understand version.
 
 ## Overview
 Automated workflow that synchronizes SQL scripts and database routines from `fibi-test` repository to `COI` repository.
