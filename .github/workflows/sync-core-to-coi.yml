@@ -147,7 +147,19 @@ jobs:
       - name: Sync CORE files
         if: steps.check-core.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
+          GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
+          RELEASE_DELETED: ${{ steps.check-core.outputs.release_deleted }}
+          DELETED_RELEASES: ${{ steps.check-core.outputs.deleted_releases }}
+          RELEASE_CHANGED: ${{ steps.check-core.outputs.release_changed }}
+          SPRINT_DELETED: ${{ steps.check-core.outputs.sprint_deleted }}
+          DELETED_SPRINTS: ${{ steps.check-core.outputs.deleted_sprints }}
+          SPRINT_CHANGED: ${{ steps.check-core.outputs.sprint_changed }}
+          ROUTINES_YAML_CHANGED: ${{ steps.check-core.outputs.routines_yaml_changed }}
+          SOURCE_BRANCH_NAME: ${{ steps.branch.outputs.branch_name }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_ACTOR: ${{ github.actor }}
         run: |
           echo "Syncing CORE files..."
           
@@ -155,9 +167,9 @@ jobs:
           mkdir -p coi-repo/DB/CORE
           
           # Handle deleted Release CORE folders
-          if [ "${{ steps.check-core.outputs.release_deleted }}" == "true" ]; then
+          if [ "$RELEASE_DELETED" == "true" ]; then
             echo "⚠️  Handling deleted Release CORE folders..."
-            DELETED_RELEASES="${{ steps.check-core.outputs.deleted_releases }}"
+            DELETED_RELEASES="$DELETED_RELEASES"
             
             for RELEASE in $DELETED_RELEASES; do
               DEST_DIR="coi-repo/DB/CORE/$RELEASE"
@@ -170,7 +182,7 @@ jobs:
           fi
           
           # Sync Release CORE folders (if changed but not deleted)
-          if [ "${{ steps.check-core.outputs.release_changed }}" == "true" ]; then
+          if [ "$RELEASE_CHANGED" == "true" ]; then
             echo "Syncing Release CORE folders..."
             
             # Get changed files to find which releases need syncing
@@ -224,11 +236,11 @@ jobs:
           fi
           
           # Handle deleted Sprint CORE folders
-          if [ "${{ steps.check-core.outputs.sprint_deleted }}" == "true" ]; then
+          if [ "$SPRINT_DELETED" == "true" ]; then
             echo "⚠️  Handling deleted Sprint CORE folders..."
-            DELETED_SPRINTS="${{ steps.check-core.outputs.deleted_sprints }}"
+            DELETED_SPRINTS_VAR="$DELETED_SPRINTS"
             
-            for SPRINT in $DELETED_SPRINTS; do
+            for SPRINT in $DELETED_SPRINTS_VAR; do
               DEST_DIR="coi-repo/DB/CORE/$SPRINT"
               if [ -d "$DEST_DIR" ]; then
                 echo "Removing deleted sprint folder: $DEST_DIR"
@@ -239,7 +251,7 @@ jobs:
           fi
           
           # Sync Sprint CORE folders (if changed but not deleted)
-          if [ "${{ steps.check-core.outputs.sprint_changed }}" == "true" ]; then
+          if [ "$SPRINT_CHANGED" == "true" ]; then
             echo "Syncing Sprint CORE folders..."
             
             # Get changed files to find which sprints need syncing
@@ -293,7 +305,7 @@ jobs:
           fi
           
           # Sync ROUTINES files if routines YAML files changed
-          if [ "${{ steps.check-core.outputs.routines_yaml_changed }}" == "true" ]; then
+          if [ "$ROUTINES_YAML_CHANGED" == "true" ]; then
             echo "Syncing ROUTINES files from changed YAML files..."
             
             # Get changed routines YAML files - ONLY from BASE/CORE
@@ -520,8 +532,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Get the source branch name (for reference and branch naming)
-          SOURCE_BRANCH="${{ steps.branch.outputs.branch_name }}"
+          # Get the source branch name (already available from env)
+          SOURCE_BRANCH="$SOURCE_BRANCH_NAME"
           
           # Always target main branch for PR (organization requirement)
           # Determine which default branch exists in COI repository
@@ -595,14 +607,8 @@ jobs:
           
           if [ -n "$CHANGES" ]; then
             echo "Committing changes to feature branch..."
-            # Extract GitHub context values to avoid expression length limit
-            COMMIT_SHA="${{ github.sha }}"
-            COMMIT_REPO="${{ github.repository }}"
-            COMMIT_RUN_ID="${{ github.run_id }}"
-            COMMIT_ACTOR="${{ github.actor }}"
-            
-            # Build commit message using extracted variables
-            COMMIT_MSG="Auto-sync CORE and ROUTINES from fibi-test"$'\n'$'\n'"Source commit: $COMMIT_SHA"$'\n'"Source branch: $SOURCE_BRANCH"$'\n'"Source repository: $COMMIT_REPO"$'\n'"Workflow run: $COMMIT_RUN_ID"$'\n'"Triggered by: $COMMIT_ACTOR"
+            # Use GitHub context values from env (already extracted above)
+            COMMIT_MSG="Auto-sync CORE and ROUTINES from fibi-test"$'\n'$'\n'"Source commit: $GITHUB_SHA"$'\n'"Source branch: $SOURCE_BRANCH"$'\n'"Source repository: $GITHUB_REPOSITORY"$'\n'"Workflow run: $GITHUB_RUN_ID"$'\n'"Triggered by: $GITHUB_ACTOR"
             git commit -m "$COMMIT_MSG"
             
             echo "Pushing feature branch: $FEATURE_BRANCH to COI repository..."
@@ -617,8 +623,8 @@ jobs:
             echo "Creating Pull Request..."
             PR_TITLE="🔄 Auto-sync: CORE and ROUTINES from fibi-test ($SOURCE_BRANCH)"
             
-            # Reuse GitHub context variables already extracted above
-            WORKFLOW_URL="https://github.com/$COMMIT_REPO/actions/runs/$COMMIT_RUN_ID"
+            # Use GitHub context variables from env (already extracted above)
+            WORKFLOW_URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             
             # Build PR body by writing to file first
             {
@@ -627,11 +633,11 @@ jobs:
               echo "This PR was automatically created by the sync workflow."
               echo ""
               echo "### Source Information"
-              echo "- **Source Repository**: $COMMIT_REPO"
+              echo "- **Source Repository**: $GITHUB_REPOSITORY"
               echo "- **Source Branch**: \`$SOURCE_BRANCH\`"
-              echo "- **Source Commit**: \`$COMMIT_SHA\`"
+              echo "- **Source Commit**: \`$GITHUB_SHA\`"
               echo "- **Workflow Run**: [View Run]($WORKFLOW_URL)"
-              echo "- **Triggered by**: @$COMMIT_ACTOR"
+              echo "- **Triggered by**: @$GITHUB_ACTOR"
               echo ""
               echo "### Changes"
               echo "This PR syncs CORE scripts and ROUTINES from the following locations:"
@@ -656,20 +662,29 @@ jobs:
             PR_BODY_ESCAPED=$(echo "$PR_BODY" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
             
             # Create PR using GitHub API (always targeting main branch)
+            echo "Preparing PR creation request..."
+            echo "Feature branch: $FEATURE_BRANCH"
+            echo "Target branch: $TARGET_BRANCH"
+            echo "PR Title: $PR_TITLE"
+            
             PR_JSON="{\"title\":\"$PR_TITLE\",\"body\":\"$PR_BODY_ESCAPED\",\"head\":\"$FEATURE_BRANCH\",\"base\":\"$TARGET_BRANCH\"}"
             
+            echo "Sending PR creation request to GitHub API..."
             PR_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
               -H "Accept: application/vnd.github.v3+json" \
               -H "Authorization: token $GH_COI_PUSH_TOKEN" \
               -H "Content-Type: application/json" \
               -d "$PR_JSON" \
-              https://api.github.com/repos/eprabhu/coi/pulls)
+              https://api.github.com/repos/eprabhu/coi/pulls 2>&1)
             
             # Note: Branch auto-deletion on merge should be configured in repository settings
             # Settings → Branches → Automatically delete head branches
             
             HTTP_CODE=$(echo "$PR_RESPONSE" | tail -n1)
             PR_BODY_RESPONSE=$(echo "$PR_RESPONSE" | sed '$d')
+            
+            echo "HTTP Response Code: $HTTP_CODE"
+            echo "API Response: $PR_BODY_RESPONSE"
             
             if [ "$HTTP_CODE" = "201" ] || [ "$HTTP_CODE" = "200" ]; then
               PR_URL=$(echo "$PR_BODY_RESPONSE" | grep -o '"html_url":"[^"]*' | cut -d'"' -f4 || echo "")

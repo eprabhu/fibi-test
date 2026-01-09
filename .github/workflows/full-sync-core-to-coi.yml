@@ -86,7 +86,12 @@ jobs:
       
       - name: Full Sync CORE and ROUTINES
         env:
-          GH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
+          GH_COI_PUSH_TOKEN: ${{ secrets.GH_COI_PUSH_TOKEN }}
+          SOURCE_BRANCH_NAME: ${{ steps.branch.outputs.branch_name }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_ACTOR: ${{ github.actor }}
         run: |
           echo "🔄 Starting FULL SYNC of CORE and ROUTINES..."
           
@@ -405,8 +410,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Get the source branch name (for reference and branch naming)
-          SOURCE_BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
+          # Source branch name already available from env
           
           # Always target main branch for PR (organization requirement)
           # Determine which default branch exists in COI repository
@@ -481,14 +485,8 @@ jobs:
           
           if [ -n "$CHANGES" ]; then
             echo "Committing changes to feature branch..."
-            # Extract GitHub context values to avoid expression length limit
-            COMMIT_SHA="${{ github.sha }}"
-            COMMIT_REPO="${{ github.repository }}"
-            COMMIT_RUN_ID="${{ github.run_id }}"
-            COMMIT_ACTOR="${{ github.actor }}"
-            
-            # Build commit message using extracted variables
-            COMMIT_MSG="Full sync: CORE and ROUTINES from fibi-test"$'\n'$'\n'"Full sync performed via workflow_dispatch"$'\n'"Source commit: $COMMIT_SHA"$'\n'"Target branch: $TARGET_BRANCH"$'\n'"Source repository: $COMMIT_REPO"$'\n'"Workflow run: $COMMIT_RUN_ID"$'\n'"Triggered by: $COMMIT_ACTOR"
+            # Use GitHub context values from env (already extracted above)
+            COMMIT_MSG="Full sync: CORE and ROUTINES from fibi-test"$'\n'$'\n'"Full sync performed via workflow_dispatch"$'\n'"Source commit: $GITHUB_SHA"$'\n'"Target branch: $TARGET_BRANCH"$'\n'"Source repository: $GITHUB_REPOSITORY"$'\n'"Workflow run: $GITHUB_RUN_ID"$'\n'"Triggered by: $GITHUB_ACTOR"
             git commit -m "$COMMIT_MSG"
             
             echo "Pushing feature branch: $FEATURE_BRANCH to COI repository..."
@@ -503,8 +501,8 @@ jobs:
             echo "Creating Pull Request..."
             PR_TITLE="🔄 Full Sync: CORE and ROUTINES from fibi-test ($SOURCE_BRANCH_NAME)"
             
-            # Reuse GitHub context variables already extracted above
-            WORKFLOW_URL="https://github.com/$COMMIT_REPO/actions/runs/$COMMIT_RUN_ID"
+            # Use GitHub context variables from env (already extracted above)
+            WORKFLOW_URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             
             # Build PR body by writing to file first
             {
@@ -513,11 +511,11 @@ jobs:
               echo "This PR was automatically created by the full sync workflow (manual trigger)."
               echo ""
               echo "### Source Information"
-              echo "- **Source Repository**: $COMMIT_REPO"
+              echo "- **Source Repository**: $GITHUB_REPOSITORY"
               echo "- **Source Branch**: \`$SOURCE_BRANCH_NAME\`"
-              echo "- **Source Commit**: \`$COMMIT_SHA\`"
+              echo "- **Source Commit**: \`$GITHUB_SHA\`"
               echo "- **Workflow Run**: [View Run]($WORKFLOW_URL)"
-              echo "- **Triggered by**: @$COMMIT_ACTOR"
+              echo "- **Triggered by**: @$GITHUB_ACTOR"
               echo ""
               echo "### Changes"
               echo "This PR performs a **full sync** of all CORE scripts and ROUTINES from:"
