@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   full-sync:
@@ -398,29 +399,57 @@ jobs:
           fi
           
           # ============================================
-          # COMMIT AND PUSH
+          # CREATE FEATURE BRANCH AND PULL REQUEST
           # ============================================
           cd coi-repo
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Get the target branch name
+          # Get the target branch name (will be used as base branch for PR)
           TARGET_BRANCH="${{ steps.branch.outputs.branch_name }}"
-          echo "Syncing to branch: $TARGET_BRANCH"
           
-          # Ensure we're on the correct branch
-          CURRENT_BRANCH=$(git branch --show-current || echo "")
-          if [ "$CURRENT_BRANCH" != "$TARGET_BRANCH" ]; then
-            echo "Switching to branch: $TARGET_BRANCH"
-            if git ls-remote --heads origin "$TARGET_BRANCH" | grep -q "$TARGET_BRANCH"; then
-              git checkout "$TARGET_BRANCH"
+          # Try to use main/master as base branch if target branch doesn't exist in COI
+          if ! git ls-remote --heads origin "$TARGET_BRANCH" | grep -q "$TARGET_BRANCH"; then
+            if git ls-remote --heads origin "main" | grep -q "main"; then
+              TARGET_BRANCH="main"
+            elif git ls-remote --heads origin "master" | grep -q "master"; then
+              TARGET_BRANCH="master"
             else
-              git checkout -b "$TARGET_BRANCH"
+              echo "⚠️  Target branch ${{ steps.branch.outputs.branch_name }} not found, and no main/master branch found. Will create new branch."
             fi
+          fi
+          
+          echo "Target branch for PR: $TARGET_BRANCH"
+          
+          # Checkout target branch first to get latest changes
+          echo "Fetching latest from origin..."
+          git fetch origin "$TARGET_BRANCH" || git fetch origin || true
+          
+          if git ls-remote --heads origin "$TARGET_BRANCH" | grep -q "$TARGET_BRANCH"; then
+            echo "Checking out target branch: $TARGET_BRANCH"
+            git checkout "$TARGET_BRANCH"
+            git pull origin "$TARGET_BRANCH" || true
+          else
+            echo "Target branch $TARGET_BRANCH doesn't exist, will create it"
+            git checkout -b "$TARGET_BRANCH" || git checkout "$TARGET_BRANCH" || true
           fi
           
           # Configure remote URL with token
           git remote set-url origin https://x-access-token:${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
+          
+          # Create feature branch name (unique for each full sync)
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          SOURCE_BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
+          FEATURE_BRANCH="sync/full-core-from-fibi-test-${SOURCE_BRANCH_NAME}-${TIMESTAMP}"
+          # Clean branch name (remove invalid characters)
+          FEATURE_BRANCH=$(echo "$FEATURE_BRANCH" | sed 's/[^a-zA-Z0-9._-]/-/g' | cut -c1-100)
+          
+          echo "Creating feature branch: $FEATURE_BRANCH"
+          git checkout -b "$FEATURE_BRANCH" || {
+            echo "Feature branch may already exist, checking out..."
+            git checkout "$FEATURE_BRANCH"
+            git merge "$TARGET_BRANCH" || true
+          }
           
           # STRICTLY ONLY modify DB/CORE/ and DB/ROUTINES/ directories
           # Add CORE changes (scripts YAML files)
@@ -452,20 +481,86 @@ jobs:
           CHANGES=$(echo "$CHANGES" | xargs)
           
           if [ -n "$CHANGES" ]; then
-            echo "Committing changes..."
-            git commit -m "Full sync: CORE and ROUTINES from fibi-test
-
-          Full sync performed via workflow_dispatch
-          Source commit: ${{ github.sha }}
-          Target branch: $TARGET_BRANCH
-          Source repository: ${{ github.repository }}
-          Triggered by: ${{ github.actor }}"
+            echo "Committing changes to feature branch..."
+            COMMIT_MSG="Full sync: CORE and ROUTINES from fibi-test"$'\n'$'\n'"Full sync performed via workflow_dispatch"$'\n'"Source commit: ${{ github.sha }}"$'\n'"Target branch: $TARGET_BRANCH"$'\n'"Source repository: ${{ github.repository }}"$'\n'"Workflow run: ${{ github.run_id }}"$'\n'"Triggered by: ${{ github.actor }}"
+            git commit -m "$COMMIT_MSG"
             
-            echo "Pushing to COI repository (branch: $TARGET_BRANCH)..."
-            git push origin "$TARGET_BRANCH" || git push -u origin "$TARGET_BRANCH"
-            echo "✅ Full sync completed successfully to branch: $TARGET_BRANCH"
+            echo "Pushing feature branch: $FEATURE_BRANCH to COI repository..."
+            git push origin "$FEATURE_BRANCH" || git push -u origin "$FEATURE_BRANCH" || {
+              echo "⚠️  Failed to push feature branch"
+              exit 1
+            }
+            
+            echo "✅ Feature branch pushed successfully"
+            
+            # Create Pull Request using GitHub API
+            echo "Creating Pull Request..."
+            PR_TITLE="🔄 Full Sync: CORE and ROUTINES from fibi-test ($SOURCE_BRANCH_NAME)"
+            # Build PR body with escaped newlines to avoid YAML parsing issues
+            PR_BODY="## 🔄 Full Sync CORE and ROUTINES from fibi-test"$'\n'$'\n'"This PR was automatically created by the full sync workflow (manual trigger)."$'\n'$'\n'"### Source Information"$'\n'"- **Source Repository**: ${{ github.repository }}"$'\n'"- **Source Branch**: \`$SOURCE_BRANCH_NAME\`"$'\n'"- **Source Commit**: \`${{ github.sha }}\`"$'\n'"- **Workflow Run**: [View Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"$'\n'"- **Triggered by**: @${{ github.actor }}"$'\n'$'\n'"### Changes"$'\n'"This PR performs a **full sync** of all CORE scripts and ROUTINES from:"$'\n'"- All Release folders: \`Fibi-*-Release/BASE/CORE/**\`"$'\n'"- All Sprint folders: \`Sprint-*/BASE/CORE/**\`"$'\n'$'\n'"### Review Checklist"$'\n'"- [ ] Review all CORE script changes in \`DB/CORE/\`"$'\n'"- [ ] Review all ROUTINES changes in \`DB/ROUTINES/\`"$'\n'"- [ ] Verify file paths are correct"$'\n'"- [ ] Check for any breaking changes"$'\n'"- [ ] Verify all Release and Sprint folders are synced correctly"$'\n'$'\n'"### Note"$'\n'"This PR only modifies files in \`DB/CORE/\` and \`DB/ROUTINES/\` directories. No other files are affected."$'\n'$'\n'"**This is a full sync - all Release and Sprint folders are included.**"
+            
+            # Escape PR body for JSON
+            PR_BODY_ESCAPED=$(echo "$PR_BODY" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+            
+            # Create PR using GitHub API
+            PR_JSON="{\"title\":\"$PR_TITLE\",\"body\":\"$PR_BODY_ESCAPED\",\"head\":\"$FEATURE_BRANCH\",\"base\":\"$TARGET_BRANCH\"}"
+            
+            PR_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: token $GH_COI_PUSH_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "$PR_JSON" \
+              https://api.github.com/repos/eprabhu/coi/pulls)
+            
+            HTTP_CODE=$(echo "$PR_RESPONSE" | tail -n1)
+            PR_BODY_RESPONSE=$(echo "$PR_RESPONSE" | sed '$d')
+            
+            if [ "$HTTP_CODE" = "201" ] || [ "$HTTP_CODE" = "200" ]; then
+              PR_URL=$(echo "$PR_BODY_RESPONSE" | grep -o '"html_url":"[^"]*' | cut -d'"' -f4 || echo "")
+              PR_NUMBER=$(echo "$PR_BODY_RESPONSE" | grep -o '"number":[0-9]*' | cut -d':' -f2 || echo "")
+              
+              echo "✅ Pull Request created successfully"
+              if [ -n "$PR_URL" ]; then
+                echo "🔗 PR Link: $PR_URL"
+                
+                # Try to add label if PR number is available
+                if [ -n "$PR_NUMBER" ]; then
+                  curl -s -X POST \
+                    -H "Accept: application/vnd.github.v3+json" \
+                    -H "Authorization: token $GH_COI_PUSH_TOKEN" \
+                    -H "Content-Type: application/json" \
+                    -d '{"labels":["auto-sync","full-sync"]}' \
+                    https://api.github.com/repos/eprabhu/coi/issues/$PR_NUMBER/labels > /dev/null || true
+                fi
+              fi
+            elif [ "$HTTP_CODE" = "422" ]; then
+              # PR might already exist, try to find it
+              EXISTING_PR_RESPONSE=$(curl -s \
+                -H "Accept: application/vnd.github.v3+json" \
+                -H "Authorization: token $GH_COI_PUSH_TOKEN" \
+                "https://api.github.com/repos/eprabhu/coi/pulls?head=eprabhu:$FEATURE_BRANCH&base=$TARGET_BRANCH&state=open")
+              
+              EXISTING_PR_URL=$(echo "$EXISTING_PR_RESPONSE" | grep -o '"html_url":"[^"]*' | head -1 | cut -d'"' -f4 || echo "")
+              
+              if [ -n "$EXISTING_PR_URL" ]; then
+                echo "⚠️  Pull Request already exists"
+                echo "🔗 Existing PR Link: $EXISTING_PR_URL"
+              else
+                echo "⚠️  Failed to create PR (HTTP $HTTP_CODE). Response: $PR_BODY_RESPONSE"
+                echo "🔗 Please create PR manually: https://github.com/eprabhu/coi/compare/$TARGET_BRANCH...$FEATURE_BRANCH"
+                echo "PR Title: $PR_TITLE"
+              fi
+            else
+              echo "⚠️  Failed to create PR (HTTP $HTTP_CODE). Response: $PR_BODY_RESPONSE"
+              echo "🔗 Please create PR manually: https://github.com/eprabhu/coi/compare/$TARGET_BRANCH...$FEATURE_BRANCH"
+              echo "PR Title: $PR_TITLE"
+            fi
           else
             echo "No changes to commit. Already in sync."
+            # Delete feature branch if no changes
+            git checkout "$TARGET_BRANCH" || true
+            git branch -D "$FEATURE_BRANCH" || true
+            git push origin --delete "$FEATURE_BRANCH" || true
           fi
       
       - name: Send failure notification email
