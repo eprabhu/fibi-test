@@ -81,7 +81,9 @@ For each file to sync:
 ### **Step 6: Create Feature Branch & Pull Request**
 ```
 IF (any files were successfully synced):
-  → Create feature branch: "sync/core-from-fibi-test-{source-branch}-{timestamp}"
+  → Create feature branch following COI naming convention: "Fibi-Dev/{category}/{feature}"
+    • Sync workflow: "Fibi-Dev/core-sync/{source-branch}-{timestamp}"
+    • Full sync workflow: "Fibi-Dev/full-core-sync/{source-branch}-{timestamp}"
   → Stage only files in DB/CORE/ and DB/ROUTINES/ directories
   → Create commit with sync details on feature branch
   → Push feature branch to COI repository

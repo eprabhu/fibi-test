@@ -551,11 +551,14 @@ jobs:
           # Configure remote URL with token
           git remote set-url origin https://x-access-token:${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
           
-          # Create feature branch name (unique for each sync)
+          # Create feature branch name following COI repo naming convention: Fibi-Dev/*/*
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-          FEATURE_BRANCH="sync/core-from-fibi-test-${SOURCE_BRANCH}-${TIMESTAMP}"
-          # Clean branch name (remove invalid characters)
-          FEATURE_BRANCH=$(echo "$FEATURE_BRANCH" | sed 's/[^a-zA-Z0-9._-]/-/g' | cut -c1-100)
+          # Format: Fibi-Dev/{category}/{feature}
+          # Clean source branch name for use in branch path
+          CLEAN_SOURCE_BRANCH=$(echo "$SOURCE_BRANCH" | sed 's/[^a-zA-Z0-9._-]/-/g')
+          FEATURE_BRANCH="Fibi-Dev/core-sync/${CLEAN_SOURCE_BRANCH}-${TIMESTAMP}"
+          # Ensure branch name doesn't exceed reasonable length
+          FEATURE_BRANCH=$(echo "$FEATURE_BRANCH" | cut -c1-100)
           
           echo "Creating feature branch: $FEATURE_BRANCH"
           git checkout -b "$FEATURE_BRANCH" || {
@@ -609,8 +612,42 @@ jobs:
             # Create Pull Request using GitHub API
             echo "Creating Pull Request..."
             PR_TITLE="🔄 Auto-sync: CORE and ROUTINES from fibi-test ($SOURCE_BRANCH)"
-            # Build PR body with escaped newlines to avoid YAML parsing issues
-            PR_BODY="## 🔄 Auto-sync CORE and ROUTINES from fibi-test"$'\n'$'\n'"This PR was automatically created by the sync workflow."$'\n'$'\n'"### Source Information"$'\n'"- **Source Repository**: ${{ github.repository }}"$'\n'"- **Source Branch**: \`$SOURCE_BRANCH\`"$'\n'"- **Source Commit**: \`${{ github.sha }}\`"$'\n'"- **Workflow Run**: [View Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"$'\n'"- **Triggered by**: @${{ github.actor }}"$'\n'$'\n'"### Changes"$'\n'"This PR syncs CORE scripts and ROUTINES from the following locations:"$'\n'"- Release folders: \`Fibi-*-Release/BASE/CORE/**\`"$'\n'"- Sprint folders: \`Sprint-*/BASE/CORE/**\`"$'\n'$'\n'"### Review Checklist"$'\n'"- [ ] Review CORE script changes in \`DB/CORE/\`"$'\n'"- [ ] Review ROUTINES changes in \`DB/ROUTINES/\`"$'\n'"- [ ] Verify file paths are correct"$'\n'"- [ ] Check for any breaking changes"$'\n'$'\n'"### Note"$'\n'"This PR only modifies files in \`DB/CORE/\` and \`DB/ROUTINES/\` directories. No other files are affected."
+            
+            # Build PR body in parts to avoid expression length limit
+            REPO_NAME="${{ github.repository }}"
+            COMMIT_SHA="${{ github.sha }}"
+            RUN_ID="${{ github.run_id }}"
+            ACTOR_NAME="${{ github.actor }}"
+            WORKFLOW_URL="https://github.com/$REPO_NAME/actions/runs/$RUN_ID"
+            
+            # Build PR body by writing to file first
+            {
+              echo "## 🔄 Auto-sync CORE and ROUTINES from fibi-test"
+              echo ""
+              echo "This PR was automatically created by the sync workflow."
+              echo ""
+              echo "### Source Information"
+              echo "- **Source Repository**: $REPO_NAME"
+              echo "- **Source Branch**: \`$SOURCE_BRANCH\`"
+              echo "- **Source Commit**: \`$COMMIT_SHA\`"
+              echo "- **Workflow Run**: [View Run]($WORKFLOW_URL)"
+              echo "- **Triggered by**: @$ACTOR_NAME"
+              echo ""
+              echo "### Changes"
+              echo "This PR syncs CORE scripts and ROUTINES from the following locations:"
+              echo "- Release folders: \`Fibi-*-Release/BASE/CORE/**\`"
+              echo "- Sprint folders: \`Sprint-*/BASE/CORE/**\`"
+              echo ""
+              echo "### Review Checklist"
+              echo "- [ ] Review CORE script changes in \`DB/CORE/\`"
+              echo "- [ ] Review ROUTINES changes in \`DB/ROUTINES/\`"
+              echo "- [ ] Verify file paths are correct"
+              echo "- [ ] Check for any breaking changes"
+              echo ""
+              echo "### Note"
+              echo "This PR only modifies files in \`DB/CORE/\` and \`DB/ROUTINES/\` directories. No other files are affected."
+            } > /tmp/pr_body.txt
+            PR_BODY=$(cat /tmp/pr_body.txt)
             
             # Escape PR body for JSON
             PR_BODY_ESCAPED=$(echo "$PR_BODY" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
