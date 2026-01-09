@@ -520,33 +520,30 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Get the target branch name from source repository (will be used as base branch for PR)
+          # Get the source branch name (for reference and branch naming)
           SOURCE_BRANCH="${{ steps.branch.outputs.branch_name }}"
-          TARGET_BRANCH="$SOURCE_BRANCH"
           
-          # Try to use main/master as base branch if target branch doesn't exist in COI
-          if ! git ls-remote --heads origin "$TARGET_BRANCH" | grep -q "$TARGET_BRANCH"; then
-            if git ls-remote --heads origin "main" | grep -q "main"; then
-              TARGET_BRANCH="main"
-            elif git ls-remote --heads origin "master" | grep -q "master"; then
+          # Always target main branch for PR (organization requirement)
+          # Determine which default branch exists in COI repository
+          TARGET_BRANCH="main"
+          if ! git ls-remote --heads origin "main" | grep -q "main"; then
+            if git ls-remote --heads origin "master" | grep -q "master"; then
               TARGET_BRANCH="master"
             else
-              echo "⚠️  Target branch $SOURCE_BRANCH not found, and no main/master branch found. Will create new branch."
+              echo "⚠️  ERROR: Neither 'main' nor 'master' branch found in COI repository!"
+              exit 1
             fi
           fi
+          
+          echo "PR will target branch: $TARGET_BRANCH (main branch as per organization requirement)"
           
           # Checkout target branch first to get latest changes
           echo "Fetching latest from origin..."
           git fetch origin "$TARGET_BRANCH" || git fetch origin || true
           
-          if git ls-remote --heads origin "$TARGET_BRANCH" | grep -q "$TARGET_BRANCH"; then
-            echo "Checking out target branch: $TARGET_BRANCH"
-            git checkout "$TARGET_BRANCH"
-            git pull origin "$TARGET_BRANCH" || true
-          else
-            echo "Target branch $TARGET_BRANCH doesn't exist, will create it"
-            git checkout -b "$TARGET_BRANCH" || git checkout "$TARGET_BRANCH" || true
-          fi
+          echo "Checking out target branch: $TARGET_BRANCH"
+          git checkout "$TARGET_BRANCH"
+          git pull origin "$TARGET_BRANCH" || true
           
           # Configure remote URL with token
           git remote set-url origin https://x-access-token:${{ secrets.GH_COI_PUSH_TOKEN }}@github.com/eprabhu/coi.git
@@ -646,13 +643,16 @@ jobs:
               echo ""
               echo "### Note"
               echo "This PR only modifies files in \`DB/CORE/\` and \`DB/ROUTINES/\` directories. No other files are affected."
+              echo ""
+              echo "### Branch Management"
+              echo "⚠️  **This feature branch will be automatically deleted after PR is merged.**"
             } > /tmp/pr_body.txt
             PR_BODY=$(cat /tmp/pr_body.txt)
             
             # Escape PR body for JSON
             PR_BODY_ESCAPED=$(echo "$PR_BODY" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
             
-            # Create PR using GitHub API
+            # Create PR using GitHub API (always targeting main branch)
             PR_JSON="{\"title\":\"$PR_TITLE\",\"body\":\"$PR_BODY_ESCAPED\",\"head\":\"$FEATURE_BRANCH\",\"base\":\"$TARGET_BRANCH\"}"
             
             PR_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
@@ -661,6 +661,9 @@ jobs:
               -H "Content-Type: application/json" \
               -d "$PR_JSON" \
               https://api.github.com/repos/eprabhu/coi/pulls)
+            
+            # Note: Branch auto-deletion on merge should be configured in repository settings
+            # Settings → Branches → Automatically delete head branches
             
             HTTP_CODE=$(echo "$PR_RESPONSE" | tail -n1)
             PR_BODY_RESPONSE=$(echo "$PR_RESPONSE" | sed '$d')

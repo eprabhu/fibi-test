@@ -87,11 +87,14 @@ IF (any files were successfully synced):
   → Stage only files in DB/CORE/ and DB/ROUTINES/ directories
   → Create commit with sync details on feature branch
   → Push feature branch to COI repository
-  → Create Pull Request from feature branch to target branch (main/master or source branch)
+  → Create Pull Request from feature branch to MAIN branch (always targets main/master)
   → Add auto-sync label to PR
+  → PR includes note about branch auto-deletion after merge
 ELSE:
   → Skip PR creation (no changes to sync)
   → Clean up feature branch if created
+
+Note: Feature branch will be automatically deleted after PR is merged (via repository settings)
 ```
 
 ---
@@ -171,7 +174,9 @@ ELSE:
 4. **PR-based**: Creates Pull Requests instead of direct pushes (follows organization culture)
 5. **Reviewable**: All changes go through PR review process before merging
 6. **Traceable**: Every PR includes commit with source information and workflow links
-7. **Branch-aware**: Creates PRs targeting the same branch name in COI repository (or main/master)
+7. **Main branch target**: Always creates PRs targeting main/master branch (not source branch)
+8. **Branch naming**: Follows COI repository convention: `Fibi-Dev/{category}/{feature}`
+9. **Auto-cleanup**: Feature branches are automatically deleted after PR merge
 
 ---
 
@@ -193,10 +198,12 @@ ELSE:
    - Source: ROUTINES/BASE/CORE/PROCEDURES/NEW_PROC.sql
    - Dest: coi-repo/DB/ROUTINES/CORE/PROCEDURES/NEW_PROC.sql
 
-5. Workflow creates feature branch and commits changes
-6. Workflow pushes feature branch and creates Pull Request
-7. Technical/Senior developers review and approve PR
-8. PR gets merged to COI repository (following organization culture)
+5. Workflow creates feature branch (following Fibi-Dev/*/* naming) and commits changes
+6. Workflow pushes feature branch to COI repository
+7. Workflow creates Pull Request targeting MAIN branch (not source branch)
+8. Technical/Senior developers review and approve PR in COI repository
+9. PR gets merged to main branch in COI repository
+10. Feature branch is automatically deleted after merge (via repository settings)
 ```
 
 ---
