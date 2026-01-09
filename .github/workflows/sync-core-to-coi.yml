@@ -595,7 +595,14 @@ jobs:
           
           if [ -n "$CHANGES" ]; then
             echo "Committing changes to feature branch..."
-            COMMIT_MSG="Auto-sync CORE and ROUTINES from fibi-test"$'\n'$'\n'"Source commit: ${{ github.sha }}"$'\n'"Source branch: $SOURCE_BRANCH"$'\n'"Source repository: ${{ github.repository }}"$'\n'"Workflow run: ${{ github.run_id }}"$'\n'"Triggered by: ${{ github.actor }}"
+            # Extract GitHub context values to avoid expression length limit
+            COMMIT_SHA="${{ github.sha }}"
+            COMMIT_REPO="${{ github.repository }}"
+            COMMIT_RUN_ID="${{ github.run_id }}"
+            COMMIT_ACTOR="${{ github.actor }}"
+            
+            # Build commit message using extracted variables
+            COMMIT_MSG="Auto-sync CORE and ROUTINES from fibi-test"$'\n'$'\n'"Source commit: $COMMIT_SHA"$'\n'"Source branch: $SOURCE_BRANCH"$'\n'"Source repository: $COMMIT_REPO"$'\n'"Workflow run: $COMMIT_RUN_ID"$'\n'"Triggered by: $COMMIT_ACTOR"
             git commit -m "$COMMIT_MSG"
             
             echo "Pushing feature branch: $FEATURE_BRANCH to COI repository..."
@@ -610,12 +617,8 @@ jobs:
             echo "Creating Pull Request..."
             PR_TITLE="🔄 Auto-sync: CORE and ROUTINES from fibi-test ($SOURCE_BRANCH)"
             
-            # Build PR body in parts to avoid expression length limit
-            REPO_NAME="${{ github.repository }}"
-            COMMIT_SHA="${{ github.sha }}"
-            RUN_ID="${{ github.run_id }}"
-            ACTOR_NAME="${{ github.actor }}"
-            WORKFLOW_URL="https://github.com/$REPO_NAME/actions/runs/$RUN_ID"
+            # Reuse GitHub context variables already extracted above
+            WORKFLOW_URL="https://github.com/$COMMIT_REPO/actions/runs/$COMMIT_RUN_ID"
             
             # Build PR body by writing to file first
             {
@@ -624,11 +627,11 @@ jobs:
               echo "This PR was automatically created by the sync workflow."
               echo ""
               echo "### Source Information"
-              echo "- **Source Repository**: $REPO_NAME"
+              echo "- **Source Repository**: $COMMIT_REPO"
               echo "- **Source Branch**: \`$SOURCE_BRANCH\`"
               echo "- **Source Commit**: \`$COMMIT_SHA\`"
               echo "- **Workflow Run**: [View Run]($WORKFLOW_URL)"
-              echo "- **Triggered by**: @$ACTOR_NAME"
+              echo "- **Triggered by**: @$COMMIT_ACTOR"
               echo ""
               echo "### Changes"
               echo "This PR syncs CORE scripts and ROUTINES from the following locations:"
