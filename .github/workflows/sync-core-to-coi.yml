@@ -78,12 +78,16 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
             if [ -n "$RELEASE_CHANGES" ]; then
               echo "release_changed=true" >> $GITHUB_OUTPUT
-              echo "releases=$RELEASE_CHANGES" >> $GITHUB_OUTPUT
+              # Convert newlines to spaces and sanitize for GitHub Actions output
+              RELEASES_SANITIZED=$(echo "$RELEASE_CHANGES" | tr '\n' ' ' | sed 's/[[:space:]]*$//' | sed 's/[[:space:]]\+/ /g')
+              echo "releases=$RELEASES_SANITIZED" >> $GITHUB_OUTPUT
               echo "Release CORE files changed in: $RELEASE_CHANGES"
             fi
             if [ -n "$SPRINT_CHANGES" ]; then
               echo "sprint_changed=true" >> $GITHUB_OUTPUT
-              echo "sprints=$SPRINT_CHANGES" >> $GITHUB_OUTPUT
+              # Convert newlines to spaces and sanitize for GitHub Actions output
+              SPRINTS_SANITIZED=$(echo "$SPRINT_CHANGES" | tr '\n' ' ' | sed 's/[[:space:]]*$//' | sed 's/[[:space:]]\+/ /g')
+              echo "sprints=$SPRINTS_SANITIZED" >> $GITHUB_OUTPUT
               echo "Sprint CORE files changed in: $SPRINT_CHANGES"
             fi
           fi
@@ -95,12 +99,16 @@ jobs:
           if [ -n "$DELETED_RELEASES" ] || [ -n "$DELETED_SPRINTS" ]; then
             if [ -n "$DELETED_RELEASES" ]; then
               echo "release_deleted=true" >> $GITHUB_OUTPUT
-              echo "deleted_releases=$DELETED_RELEASES" >> $GITHUB_OUTPUT
+              # Convert newlines to spaces and sanitize for GitHub Actions output
+              DELETED_RELEASES_SANITIZED=$(echo "$DELETED_RELEASES" | tr '\n' ' ' | sed 's/[[:space:]]*$//' | sed 's/[[:space:]]\+/ /g')
+              echo "deleted_releases=$DELETED_RELEASES_SANITIZED" >> $GITHUB_OUTPUT
               echo "⚠️  Release CORE folders deleted: $DELETED_RELEASES"
             fi
             if [ -n "$DELETED_SPRINTS" ]; then
               echo "sprint_deleted=true" >> $GITHUB_OUTPUT
-              echo "deleted_sprints=$DELETED_SPRINTS" >> $GITHUB_OUTPUT
+              # Convert newlines to spaces and sanitize for GitHub Actions output
+              DELETED_SPRINTS_SANITIZED=$(echo "$DELETED_SPRINTS" | tr '\n' ' ' | sed 's/[[:space:]]*$//' | sed 's/[[:space:]]\+/ /g')
+              echo "deleted_sprints=$DELETED_SPRINTS_SANITIZED" >> $GITHUB_OUTPUT
               echo "⚠️  Sprint CORE folders deleted: $DELETED_SPRINTS"
             fi
           fi

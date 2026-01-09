@@ -33,10 +33,12 @@ echo "Syncing CORE files..."
 mkdir -p "coi-repo/$DEST_CORE_DIR"
 
 # Handle deleted Release CORE folders
+# Note: DELETED_RELEASES comes from workflow output as space-separated string
 if [ "$RELEASE_DELETED" == "true" ]; then
   echo "⚠️  Handling deleted Release CORE folders..."
   DELETED_RELEASES="$DELETED_RELEASES"
   
+  # Iterate over space-separated release names
   for RELEASE in $DELETED_RELEASES; do
     DEST_DIR="coi-repo/$DEST_CORE_DIR/$RELEASE"
     if [ -d "$DEST_DIR" ]; then
@@ -102,10 +104,12 @@ if [ "$RELEASE_CHANGED" == "true" ]; then
 fi
 
 # Handle deleted Sprint CORE folders
+# Note: DELETED_SPRINTS comes from workflow output as space-separated string
 if [ "$SPRINT_DELETED" == "true" ]; then
   echo "⚠️  Handling deleted Sprint CORE folders..."
   DELETED_SPRINTS_VAR="$DELETED_SPRINTS"
   
+  # Iterate over space-separated sprint names
   for SPRINT in $DELETED_SPRINTS_VAR; do
     DEST_DIR="coi-repo/$DEST_CORE_DIR/$SPRINT"
     if [ -d "$DEST_DIR" ]; then
