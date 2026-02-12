@@ -1,0 +1,43 @@
+﻿DELIMITER $$
+CREATE  FUNCTION `FN_RULE_EVALUATION`(
+AV_MODULE_CODE 	      DECIMAL(38,0),
+AV_SUBMODULE_CODE     DECIMAL(38,0),
+AV_MODULE_ITEM_KEY    VARCHAR(200),
+AV_RULE_ID 	          DECIMAL(38,0),
+AV_LOGGIN_PERSON_ID   VARCHAR(200),
+AV_UPDATE_USER        VARCHAR(200)
+) RETURNS int
+    DETERMINISTIC
+BEGIN
+DECLARE LS_CODE CHAR(5) DEFAULT '00000';
+DECLARE LS_MSG TEXT;
+DECLARE LS_RULE_EXPR VARCHAR(300);
+DECLARE  LS_RESULT VARCHAR(10);
+DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+BEGIN
+  GET DIAGNOSTICS CONDITION 1
+	LS_CODE = RETURNED_SQLSTATE, LS_MSG = MESSAGE_TEXT;
+END;
+    SELECT
+    T1.RULE_EXPRESSION
+    INTO LS_RULE_EXPR
+    FROM BUSINESS_RULES T1
+    WHERE T1.RULE_ID = AV_RULE_ID;
+     CALL RULE_EVALUATE_EXPRESSION(AV_MODULE_CODE,
+                                             AV_SUBMODULE_CODE,
+                                             AV_MODULE_ITEM_KEY,
+                                             AV_RULE_ID,
+                                             LS_RULE_EXPR,
+                                             AV_UPDATE_USER,
+                                             AV_LOGGIN_PERSON_ID,
+                                             @LS_RESULT_EXP
+                                             );
+	SET LS_RESULT = @LS_RESULT_EXP;
+    IF LS_RESULT = 'TRUE' THEN
+        RETURN 1 ;
+    ELSE
+		RETURN 0;
+    END IF;
+END
+$$
+DELIMITER ;
