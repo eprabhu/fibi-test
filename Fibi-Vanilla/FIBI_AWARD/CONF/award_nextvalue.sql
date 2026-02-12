@@ -1,1 +1,0 @@
-INSERT INTO award_nextvalue (AWARD_NUMBER) VALUES (1);

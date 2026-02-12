@@ -1,9 +1,0 @@
-
-DROP TABLE IF EXISTS `manpower_temp`;
-
-CREATE TABLE `manpower_temp` (
-  `PERSON_ID` varchar(255) NOT NULL,
-  `CITIZENSHIP` varchar(255) DEFAULT NULL,
-  `NATIONALITY` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`PERSON_ID`)
-) ;

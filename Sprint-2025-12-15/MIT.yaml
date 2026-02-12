@@ -1,6 +1,0 @@
-databaseChangeLog:
-
-    #CORE
-    - include:
-        file: Sprint-2025-12-15/MIT/CORE/PROCEDURES.yaml
-        labels: 'CORE'

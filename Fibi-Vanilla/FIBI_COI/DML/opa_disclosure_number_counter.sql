@@ -1,1 +1,0 @@
-INSERT INTO `opa_disclosure_number_counter` (`counter_name`, `counter_value`) VALUES ('OPA_DISCLOSURE_NUMBER_COUNTER', '1');

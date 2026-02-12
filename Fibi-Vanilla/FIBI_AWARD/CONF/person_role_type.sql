@@ -1,1 +1,0 @@
-INSERT INTO person_role_type (`ROLE_TYPE_CODE`,`DESCRIPTION`,`UPDATE_TIMESTAMP`,`UPDATE_USER`,`IS_ACTIVE`) VALUES (102,'Award Aggregator',utc_timestamp(),'admin','Y');

@@ -1,5 +1,0 @@
-databaseChangeLog:
-
-    - include:
-        file: DML.yaml
-        relativeToChangelogFile: true

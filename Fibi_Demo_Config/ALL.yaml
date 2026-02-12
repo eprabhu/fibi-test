@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: SCRIPTS.yaml
-      relativeToChangelogFile: true
-  - include:
-      file: PROCEDURES.yaml
-      relativeToChangelogFile: true

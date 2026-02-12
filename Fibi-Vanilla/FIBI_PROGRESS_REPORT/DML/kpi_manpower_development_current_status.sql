@@ -1,2 +1,0 @@
-INSERT INTO kpi_manpower_development_current_status (CURRENT_STATUS_CODE,DESCRIPTION,UPDATE_TIMESTAMP,UPDATE_USER,IS_ACTIVE) VALUES ('1','Active','2021-01-28 13:18:07','admin','Y');
-INSERT INTO kpi_manpower_development_current_status (CURRENT_STATUS_CODE,DESCRIPTION,UPDATE_TIMESTAMP,UPDATE_USER,IS_ACTIVE) VALUES ('2','Graduated','2021-01-28 13:18:07','admin','Y');
