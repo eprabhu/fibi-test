@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_PROP_AWARD_TYPE_RULE`(as_proposal_ID int(11) ,
+CREATE  FUNCTION `FN_PROP_AWARD_TYPE_RULE`(as_proposal_ID int(11) ,
   ai_type  	varchar(3)) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN

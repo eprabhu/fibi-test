@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `is_record_locked`(av_grant_number  VARCHAR(6)) RETURNS varchar(1) CHARSET utf8mb4
+CREATE  FUNCTION `is_record_locked`(av_grant_number  VARCHAR(6)) RETURNS varchar(1) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE ls_return_number VARCHAR(1) DEFAULT NULL;

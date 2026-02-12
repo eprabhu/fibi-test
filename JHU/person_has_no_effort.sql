@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `person_has_no_effort`(
+CREATE  FUNCTION `person_has_no_effort`(
   AV_PROPOSAL_ID   int(10)
 ) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC

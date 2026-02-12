@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_IS_YNQ_Z1_Y_FOR_SOM`(a1s_proposal INT) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `FN_IS_YNQ_Z1_Y_FOR_SOM`(a1s_proposal INT) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
         DECLARE proposal_count  INT;

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_pd_has_rdt_user`(
+CREATE  FUNCTION `fn_pd_has_rdt_user`(
   av_proposal_id   int(10)
 ) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC

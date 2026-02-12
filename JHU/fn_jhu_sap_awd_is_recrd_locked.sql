@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_is_recrd_locked`(av_grant_number  VARCHAR(6)) RETURNS int
+CREATE  FUNCTION `fn_jhu_sap_awd_is_recrd_locked`(av_grant_number  VARCHAR(6)) RETURNS int
     DETERMINISTIC
 BEGIN
     DECLARE li_return_number VARCHAR(1) DEFAULT NULL;

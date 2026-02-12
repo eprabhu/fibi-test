@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `JHU_GET_IRB_SCHOOL`(protocol_number  varchar(20)) RETURNS varchar(100) CHARSET utf8mb4
+CREATE  FUNCTION `JHU_GET_IRB_SCHOOL`(protocol_number  varchar(20)) RETURNS varchar(100) CHARSET utf8mb4
     DETERMINISTIC
 begin
  Declare  return_school VARCHAR(15) default 'Unknown';

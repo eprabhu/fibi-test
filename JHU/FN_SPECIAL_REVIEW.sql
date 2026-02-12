@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_SPECIAL_REVIEW`(a1s_proposal INT ,a2i_review_type INT ) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `FN_SPECIAL_REVIEW`(a1s_proposal INT ,a2i_review_type INT ) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE li_count INT;

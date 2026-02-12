@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_get_awdnum`(av_grant_number  VARCHAR(6)
+CREATE  FUNCTION `fn_jhu_sap_awd_get_awdnum`(av_grant_number  VARCHAR(6)
 										,av_sponsored_program_number  VARCHAR(8)
 										,av_sponsored_program_type  VARCHAR(15)
 ) RETURNS varchar(12) CHARSET utf8mb4

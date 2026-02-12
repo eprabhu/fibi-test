@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_DEADLINE_DATE_ISNULL`(as_proposal int) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `FN_DEADLINE_DATE_ISNULL`(as_proposal int) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE ld_deadline datetime;

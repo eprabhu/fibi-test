@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_sr_dua_humans_checked`(
+CREATE  FUNCTION `fn_sr_dua_humans_checked`(
   AV_SR_HEADER_ID   int(10)
 ) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC

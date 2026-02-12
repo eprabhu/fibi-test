@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_sap_awd_get_award_changes1`()
+CREATE  PROCEDURE `jhu_sap_awd_get_award_changes1`()
 BEGIN
     DECLARE last_run_date DATE;
 	DECLARE LS_GRANT_NUMBER VARCHAR(6);

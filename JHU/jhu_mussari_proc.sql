@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_mussari_proc`()
+CREATE  PROCEDURE `jhu_mussari_proc`()
 BEGIN
 DECLARE filename VARCHAR(200) DEFAULT '/var/lib/mysql-files/eco_';
 DECLARE full_string VARCHAR(20000) DEFAULT ' ';

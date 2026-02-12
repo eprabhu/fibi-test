@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `jhu_get_protocol_fn`(
+CREATE  FUNCTION `jhu_get_protocol_fn`(
   GRANT_NUMBER_IN   int(10)
 ) RETURNS varchar(2000) CHARSET utf8mb4
     DETERMINISTIC

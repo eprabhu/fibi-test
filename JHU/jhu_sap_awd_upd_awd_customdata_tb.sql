@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_sap_awd_upd_awd_customdata_tb`(av_award_id INT
+CREATE  PROCEDURE `jhu_sap_awd_upd_awd_customdata_tb`(av_award_id INT
   ,av_proposal_number  VARCHAR(20)
   ,av_update_timestamp  DATE
   )

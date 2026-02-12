@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_get_null_spgmtp`(av_grant_number  VARCHAR(6)) RETURNS int
+CREATE  FUNCTION `fn_jhu_sap_awd_get_null_spgmtp`(av_grant_number  VARCHAR(6)) RETURNS int
     DETERMINISTIC
 BEGIN
 DECLARE li_null_type_count INT(3) DEFAULT 0;

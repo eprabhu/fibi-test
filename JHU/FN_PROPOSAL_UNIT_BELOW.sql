@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_PROPOSAL_UNIT_BELOW`(as_proposal int,as_unit_number varchar(8) ) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `FN_PROPOSAL_UNIT_BELOW`(as_proposal int,as_unit_number varchar(8) ) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE li_count INT;

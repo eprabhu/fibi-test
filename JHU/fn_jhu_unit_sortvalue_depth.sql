@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_unit_sortvalue_depth`(p_sort VARCHAR(50)) RETURNS int
+CREATE  FUNCTION `fn_jhu_unit_sortvalue_depth`(p_sort VARCHAR(50)) RETURNS int
     DETERMINISTIC
 BEGIN
   DECLARE i INT DEFAULT 1;

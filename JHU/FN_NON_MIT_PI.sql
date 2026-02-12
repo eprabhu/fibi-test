@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_NON_MIT_PI`(as_proposal int ) RETURNS varchar(8) CHARSET utf8mb4
+CREATE  FUNCTION `FN_NON_MIT_PI`(as_proposal int ) RETURNS varchar(8) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE ls_nonmit_cnt INT;

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `rpt_get_702_2_proc`(
+CREATE  PROCEDURE `rpt_get_702_2_proc`(
     IN person_id_in                VARCHAR(40),
     IN other_support_as_of_date_in VARCHAR(40)
 )

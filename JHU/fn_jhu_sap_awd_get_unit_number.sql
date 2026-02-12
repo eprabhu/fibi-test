@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_get_unit_number`(av_cost_center   VARCHAR(10)
+CREATE  FUNCTION `fn_jhu_sap_awd_get_unit_number`(av_cost_center   VARCHAR(10)
 ) RETURNS varchar(8) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN

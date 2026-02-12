@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_narrative_title_rule`(as_proposal INT) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `fn_jhu_narrative_title_rule`(as_proposal INT) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 declare li_pos double;

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_crnstn_trn_update_proc`()
+CREATE  PROCEDURE `jhu_crnstn_trn_update_proc`()
 BEGIN
 DECLARE training_table_id VARCHAR(30);
 DECLARE training_person_id VARCHAR(8);

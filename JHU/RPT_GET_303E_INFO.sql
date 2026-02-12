@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `RPT_GET_303E_INFO`(
+CREATE  PROCEDURE `RPT_GET_303E_INFO`(
                                  IN report_unit VARCHAR(8)
                              )
 BEGIN

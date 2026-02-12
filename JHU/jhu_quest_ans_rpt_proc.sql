@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_quest_ans_rpt_proc`(award_end_date_in VARCHAR(4), unit_in VARCHAR(8))
+CREATE  PROCEDURE `jhu_quest_ans_rpt_proc`(award_end_date_in VARCHAR(4), unit_in VARCHAR(8))
 BEGIN
 DECLARE filename VARCHAR(200) DEFAULT '/var/lib/mysql-files/qa_';
 DECLARE award_end_date DATE DEFAULT STR_TO_DATE(award_end_date_in, '%Y%m%d');

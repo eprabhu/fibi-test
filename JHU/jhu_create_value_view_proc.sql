@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_create_value_view_proc`(
+CREATE  PROCEDURE `jhu_create_value_view_proc`(
   column_name   VARCHAR(100)
  ,table_name    VARCHAR(100)
  ,where_clause  VARCHAR(1000)

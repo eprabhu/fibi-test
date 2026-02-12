@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_cost_element_final_or_max`(a1s_proposal int ,a2s_ce varchar(12)) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `fn_cost_element_final_or_max`(a1s_proposal int ,a2s_ce varchar(12)) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE li_count  INT;

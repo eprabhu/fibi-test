@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_ACTIVITY_TYPE_RULE`(as_proposal INT,
+CREATE  FUNCTION `FN_ACTIVITY_TYPE_RULE`(as_proposal INT,
 										ai_type varchar(3)) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN

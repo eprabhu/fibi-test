@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_grant_exists`(LS_GRANT_NUMBER VARCHAR(6), LS_SPONSORED_PROGRAM_NUMBER varchar(8),last_run_date date) RETURNS int
+CREATE  FUNCTION `fn_jhu_sap_awd_grant_exists`(LS_GRANT_NUMBER VARCHAR(6), LS_SPONSORED_PROGRAM_NUMBER varchar(8),last_run_date date) RETURNS int
     DETERMINISTIC
 BEGIN
 DECLARE li_awd_count INT(3) DEFAULT 0;

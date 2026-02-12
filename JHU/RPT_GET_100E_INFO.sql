@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `RPT_GET_100E_INFO`(IN unit varchar(20))
+CREATE  PROCEDURE `RPT_GET_100E_INFO`(IN unit varchar(20))
 BEGIN
 SELECT DISTINCT
         u.unit_name UNIT_NAME,

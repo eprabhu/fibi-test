@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_get_seq_num`(av_award_number VARCHAR(12)
+CREATE  FUNCTION `fn_jhu_sap_awd_get_seq_num`(av_award_number VARCHAR(12)
       ,av_sponsored_program_number VARCHAR(8)
       ,av_end_date VARCHAR(10)
       ,av_obligated DECIMAL(12,2)

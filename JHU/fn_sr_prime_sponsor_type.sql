@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_sr_prime_sponsor_type`(
+CREATE  FUNCTION `fn_sr_prime_sponsor_type`(
   AV_SR_HEADER_ID INT,
   AV_TYPE VARCHAR(10)
 ) RETURNS varchar(10) CHARSET utf8mb4

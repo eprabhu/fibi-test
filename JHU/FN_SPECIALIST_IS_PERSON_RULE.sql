@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_SPECIALIST_IS_PERSON_RULE`(a1s_proposal INT, a2s_person_id  int ) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `FN_SPECIALIST_IS_PERSON_RULE`(a1s_proposal INT, a2s_person_id  int ) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE  ls_person_count INT;

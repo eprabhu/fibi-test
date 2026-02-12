@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `jhu_sap_awd_sum_of_spnsrd_prgs`(av_grant_number VARCHAR(6)) RETURNS decimal(12,2)
+CREATE  FUNCTION `jhu_sap_awd_sum_of_spnsrd_prgs`(av_grant_number VARCHAR(6)) RETURNS decimal(12,2)
     DETERMINISTIC
 BEGIN
   DECLARE return_number  DECIMAL(12,2) DEFAULT NULL;

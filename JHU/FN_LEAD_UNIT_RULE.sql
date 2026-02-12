@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_LEAD_UNIT_RULE`(as_proposal  int,
+CREATE  FUNCTION `FN_LEAD_UNIT_RULE`(as_proposal  int,
       as_unit_number int ) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN

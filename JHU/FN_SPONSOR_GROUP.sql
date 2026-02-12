@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_SPONSOR_GROUP`(a1s_proposal INT,a2s_sponsor_group varchar(4000)) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `FN_SPONSOR_GROUP`(a1s_proposal INT,a2s_sponsor_group varchar(4000)) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 	declare ls_group VARCHAR(4000);

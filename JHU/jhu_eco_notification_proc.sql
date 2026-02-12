@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_eco_notification_proc`()
+CREATE  PROCEDURE `jhu_eco_notification_proc`()
 BEGIN
 DECLARE filename VARCHAR(200) DEFAULT '/var/lib/mysql-files/eco_';
 DECLARE proposal VARCHAR(20);

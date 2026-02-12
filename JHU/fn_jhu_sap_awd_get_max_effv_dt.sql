@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_get_max_effv_dt`(av_grant_number  VARCHAR(6)) RETURNS varchar(8) CHARSET utf8mb4
+CREATE  FUNCTION `fn_jhu_sap_awd_get_max_effv_dt`(av_grant_number  VARCHAR(6)) RETURNS varchar(8) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE ls_return_char  VARCHAR(8) DEFAULT NULL;

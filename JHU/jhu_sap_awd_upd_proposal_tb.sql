@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_sap_awd_upd_proposal_tb`(av_update_timestamp  DATE
+CREATE  PROCEDURE `jhu_sap_awd_upd_proposal_tb`(av_update_timestamp  DATE
   )
 BEGIN
 SET SQL_SAFE_UPDATES= 0;

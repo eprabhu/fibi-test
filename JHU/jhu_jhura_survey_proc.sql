@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_jhura_survey_proc`()
+CREATE  PROCEDURE `jhu_jhura_survey_proc`()
 BEGIN
 DECLARE filename VARCHAR(200) DEFAULT '/var/lib/mysql-files/jhura_survey_';
 DECLARE survey_proposal VARCHAR(20);

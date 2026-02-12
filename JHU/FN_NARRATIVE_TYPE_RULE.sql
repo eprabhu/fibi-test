@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_NARRATIVE_TYPE_RULE`(as_proposal INT,ai_type varchar(3) ) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `FN_NARRATIVE_TYPE_RULE`(as_proposal INT,ai_type varchar(3) ) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE li_count INT;

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_sap_awd_get_award_changes`()
+CREATE  PROCEDURE `jhu_sap_awd_get_award_changes`()
 BEGIN
     DECLARE last_run_date DATE;
     DECLARE LI_INTEGRATION_IN_PROGRESS INT;

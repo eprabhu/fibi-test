@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_GET_UNIT_NAME`( AW_UNIT_NUMBER  varchar(8)) RETURNS varchar(200) CHARSET utf8mb4
+CREATE  FUNCTION `FN_GET_UNIT_NAME`( AW_UNIT_NUMBER  varchar(8)) RETURNS varchar(200) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 declare var_unit_name varchar(200);

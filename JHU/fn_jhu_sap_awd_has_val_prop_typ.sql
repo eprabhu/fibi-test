@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_has_val_prop_typ`(av_proposal_number  VARCHAR(20)) RETURNS int
+CREATE  FUNCTION `fn_jhu_sap_awd_has_val_prop_typ`(av_proposal_number  VARCHAR(20)) RETURNS int
     DETERMINISTIC
 BEGIN
 DECLARE li_proposal_type_count INT(3) DEFAULT 0;

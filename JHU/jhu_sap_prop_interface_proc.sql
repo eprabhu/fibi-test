@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_sap_prop_interface_proc`()
+CREATE  PROCEDURE `jhu_sap_prop_interface_proc`()
 BEGIN
 BEGIN
 DROP TABLE IF EXISTS TMP_SAP_PROP_INTERFACE ;

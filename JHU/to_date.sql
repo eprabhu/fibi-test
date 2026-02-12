@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `to_date`(
+CREATE  FUNCTION `to_date`(
   date_string VARCHAR(20)
  ,format_string VARCHAR(20)
 ) RETURNS date

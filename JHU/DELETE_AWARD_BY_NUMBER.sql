@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `DELETE_AWARD_BY_NUMBER`(IN input_award_number VARCHAR(6))
+CREATE  PROCEDURE `DELETE_AWARD_BY_NUMBER`(IN input_award_number VARCHAR(6))
 BEGIN
     DECLARE finished INT DEFAULT 0;
     DECLARE current_award_id INT;

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `trunc`(
+CREATE  FUNCTION `trunc`(
   date_in DATE
 ) RETURNS date
     DETERMINISTIC

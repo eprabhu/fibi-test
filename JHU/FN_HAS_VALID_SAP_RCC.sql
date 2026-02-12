@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_HAS_VALID_SAP_RCC`(a1s_proposal int) RETURNS varchar(6) CHARSET utf8mb4
+CREATE  FUNCTION `FN_HAS_VALID_SAP_RCC`(a1s_proposal int) RETURNS varchar(6) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE proposal_count INT;

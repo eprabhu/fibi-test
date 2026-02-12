@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `fn_jhu_sap_awd_set_coeus_stats`(av_status  VARCHAR(6)
+CREATE  FUNCTION `fn_jhu_sap_awd_set_coeus_stats`(av_status  VARCHAR(6)
 												,av_user_status  VARCHAR(5)
                              					,av_end_date  VARCHAR(10)) RETURNS int
     DETERMINISTIC

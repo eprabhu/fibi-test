@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_GET_UNIT_SNUM`(sort_value_in  VARCHAR(30)) RETURNS varchar(8) CHARSET utf8mb4
+CREATE  FUNCTION `FN_GET_UNIT_SNUM`(sort_value_in  VARCHAR(30)) RETURNS varchar(8) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 declare unit_number_out varchar(8) default NULL;

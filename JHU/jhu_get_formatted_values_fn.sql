@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `jhu_get_formatted_values_fn`() RETURNS varchar(2000) CHARSET utf8mb4
+CREATE  FUNCTION `jhu_get_formatted_values_fn`() RETURNS varchar(2000) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
 DECLARE return_string VARCHAR(2000) DEFAULT ' ';

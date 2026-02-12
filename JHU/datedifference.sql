@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `datedifference`(startDate DATE,
+CREATE  FUNCTION `datedifference`(startDate DATE,
     endDate DATE) RETURNS varchar(255) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN

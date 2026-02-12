@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `JHU_GET_IRB_VALIDITY`(
+CREATE  FUNCTION `JHU_GET_IRB_VALIDITY`(
                                    protocol_number_in varchar(20)
                                ) RETURNS varchar(100) CHARSET utf8mb4
     DETERMINISTIC

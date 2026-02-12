@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` PROCEDURE `jhu_update_sap_sponsored_program`(IN proc_grant_number VARCHAR(6)
+CREATE  PROCEDURE `jhu_update_sap_sponsored_program`(IN proc_grant_number VARCHAR(6)
                                            ,IN proc_sponsored_program_number VARCHAR(20)
                                            ,IN proc_sponsored_program_type VARCHAR(100)
                                            ,IN proc_update_column VARCHAR(50)

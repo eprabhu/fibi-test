@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `jhu_get_question_answer_fn`(
+CREATE  FUNCTION `jhu_get_question_answer_fn`(
   pd_proposal_id_in         int(10)
  ,questionnaire_id_in       VARCHAR(10)
  ,person_id_in              VARCHAR(8)

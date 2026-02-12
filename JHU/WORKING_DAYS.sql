@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`jhufibi`@`%` FUNCTION `WORKING_DAYS`(
+CREATE  FUNCTION `WORKING_DAYS`(
                            p_start_date DATE
                          , p_end_date   DATE
                        ) RETURNS int
