@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`fibi`@`%` PROCEDURE `GET_AWARD_DASHBOARD_OVERVIEW`(
+CREATE  PROCEDURE `GET_AWARD_DASHBOARD_OVERVIEW`(
     AV_PERSON_ID                    VARCHAR(40),
     AV_PAGED                        INT,
     AV_LIMIT                        INT,

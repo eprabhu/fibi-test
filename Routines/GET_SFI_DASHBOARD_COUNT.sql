@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`fibi`@`%` PROCEDURE `GET_SFI_DASHBOARD_COUNT`(
+CREATE  PROCEDURE `GET_SFI_DASHBOARD_COUNT`(
 		AV_PERSON_ID                    VARCHAR(200),
         AV_TYPE                         VARCHAR(1),
         AV_ENTITY_NAME                  VARCHAR(90),

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`fibi`@`%` PROCEDURE `inst_attchment_feed`(av_type int)
+CREATE  PROCEDURE `inst_attchment_feed`(av_type int)
 BEGIN
 DECLARE LI_PROPOSAL_ID int(10);
 DECLARE LI_PROP_ATTACHMENT_ID int(10);

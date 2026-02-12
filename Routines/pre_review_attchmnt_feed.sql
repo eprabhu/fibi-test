@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`fibi`@`%` PROCEDURE `pre_review_attchmnt_feed`(av_type int)
+CREATE  PROCEDURE `pre_review_attchmnt_feed`(av_type int)
 BEGIN
 declare ls_ATTACHMENT_ID int(11);
 declare ls_ATTACHMENT longblob;

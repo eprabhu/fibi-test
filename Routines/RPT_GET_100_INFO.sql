@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`fibi`@`%` PROCEDURE `RPT_GET_100_INFO`(IN unit varchar(20))
+CREATE  PROCEDURE `RPT_GET_100_INFO`(IN unit varchar(20))
 BEGIN
 SELECT ju1.unit_number ENTITY,
         ju2.unit_number SCHOOL,

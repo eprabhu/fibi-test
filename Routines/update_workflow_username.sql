@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`fibi`@`%` PROCEDURE `update_workflow_username`(av_type int)
+CREATE  PROCEDURE `update_workflow_username`(av_type int)
 BEGIN
 DECLARE LS_USER_NAME VARCHAR(60);
 DECLARE LI_APPROVAL_STOP_NUMBER INT(3);

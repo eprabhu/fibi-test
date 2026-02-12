@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`fibi`@`%` PROCEDURE `kki_epsprop_budget_feed`(av_type int)
+CREATE  PROCEDURE `kki_epsprop_budget_feed`(av_type int)
 BEGIN
 declare ls_PROPOSAL_ID int(11);
 declare ls_BUDGET_HEADER_ID int(11);

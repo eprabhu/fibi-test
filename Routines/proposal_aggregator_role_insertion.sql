@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`fibi`@`%` PROCEDURE `proposal_aggregator_role_insertion`(av_type int)
+CREATE  PROCEDURE `proposal_aggregator_role_insertion`(av_type int)
 BEGIN
 DECLARE LI_PROPOSAL_ID INT(11);
 DECLARE LS_CREATE_USER VARCHAR(60);
