@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE PROCEDURE `GET_AWARD_PURCHASE_DETAILS`(
+CREATE  PROCEDURE `GET_AWARD_PURCHASE_DETAILS`(
 av_award_number varchar(12),
 av_account_number varchar(100)
   )

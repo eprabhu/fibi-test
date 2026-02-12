@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE PROCEDURE `GET_IOI_DASHBOARD`(
+CREATE  PROCEDURE `GET_IOI_DASHBOARD`(
 AV_GRANT_HEADER_ID               int(10),
 AV_LOGPERSON_ID                              VARCHAR(40),
 AV_TAB_TYPE                                  VARCHAR(30)
