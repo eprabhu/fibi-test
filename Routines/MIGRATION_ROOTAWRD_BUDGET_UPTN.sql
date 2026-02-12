@@ -1,0 +1,243 @@
+﻿DELIMITER $$
+CREATE DEFINER=`fibi`@`%` PROCEDURE `MIGRATION_ROOTAWRD_BUDGET_UPTN`(av_type int)
+BEGIN
+DECLARE LI_AWARD_AMOUNT_TRANSACTION_ID	DECIMAL(12,0);
+DECLARE LI_TRANSACTION_ID	DECIMAL(22,0);
+DECLARE LI_TRANSACTION_TYPE_CODE	DECIMAL(3,0);
+DECLARE LI_FUNDED_PROPOSAL_ID	DECIMAL(12,0);
+DECLARE LD_NOTICE_DATE	DATETIME;
+DECLARE LS_COMMENTS	VARCHAR(2000);
+DECLARE LS_SOURCE_AWARD_NUMBER	VARCHAR(12);
+DECLARE LS_DESTINATION_AWARD_NUMBER	VARCHAR(12);
+DECLARE LS_PARENT_AWARD_NUMBER 	VARCHAR(12);
+DECLARE LS_CHILD_LEGACY_PROJECT_ID VARCHAR(100);
+DECLARE LS_CHILD_LEGACY_WBS_NUMBER VARCHAR(100);
+DECLARE LI_FLAG INT;
+DECLARE LS_FILE_TYPE VARCHAR(50);
+DECLARE  LS_ROOT_AWARD_NUMBER	VARCHAR(12);
+DECLARE LI_AWARD_AMOUNT_INFO_ID	decimal(22,0);
+DECLARE LI_AWARD_ID	decimal(22,0);
+DECLARE LS_AWARD_NUMBER	varchar(12);
+DECLARE LI_SEQUENCE_NUMBER	int(11);
+DECLARE LI_COUNT	int(11);
+DECLARE LD_UPDATE_TIMESTAMP	datetime;
+DECLARE LS_UPDATE_USER	varchar(60);
+DECLARE LI_ANTICIPATED_CHANGE	decimal(12,2);
+DECLARE LI_ANTICIPATED_CHANGE_DIRECT	decimal(12,2);
+DECLARE LI_ANTICIPATED_CHANGE_INDIRECT	decimal(12,2);
+DECLARE LI_OBLIGATED_CHANGE	decimal(12,2);
+DECLARE LI_OBLIGATED_CHANGE_DIRECT	decimal(12,2);
+DECLARE LI_OBLIGATED_CHANGE_INDIRECT	decimal(12,2);
+DECLARE LI_ANTICIPATED_TOTAL_DIRECT	decimal(12,2);
+DECLARE LI_ANTICIPATED_TOTAL_INDIRECT	decimal(12,2);
+DECLARE LI_ANTICIPATED_TOTAL_AMOUNT	decimal(12,2);
+DECLARE LI_OBLIGATED_TOTAL_DIRECT	decimal(12,2);
+DECLARE LI_OBLIGATED_TOTAL_INDIRECT	decimal(12,2);
+DECLARE LI_AMOUNT_OBLIGATED_TO_DATE	decimal(12,2);
+DECLARE LI_ANT_DISTRIBUTABLE_AMOUNT	decimal(12,2);
+DECLARE LI_OBLI_DISTRIBUTABLE_AMOUNT	decimal(12,2);
+DECLARE LD_FINAL_EXPIRATION_DATE	datetime;
+DECLARE LD_CURRENT_FUND_EFFECTIVE_DATE	datetime;
+DECLARE LD_OBLIGATION_EXPIRATION_DATE	datetime;
+DECLARE LD_TOTAL_COST_IN_CURRENCY	decimal(12,2);
+DECLARE LS_CURRENCY_CODE	varchar(3);
+DECLARE LI_ANTICIPATED_TOTAL_AMOUNT_SUM decimal(12,2);
+DECLARE LS_ERROR VARCHAR(2000);
+BEGIN
+        DECLARE DONE0 INT DEFAULT FALSE;
+		DECLARE MIGRATION_ROOTAWRD_CURSOR0 CURSOR FOR
+		SELECT AWARD_NUMBER
+		FROM AWARD_HIERARCHY
+		WHERE AWARD_NUMBER LIKE '%-00001'
+		AND AWARD_NUMBER IN(SELECT AWARD_NUMBER FROM MIGRATION_AWARD)
+        AND AWARD_NUMBER in(select PARENT_AWARD_NUMBER FROM AWARD_HIERARCHY )
+        ;
+		DECLARE CONTINUE HANDLER FOR NOT FOUND SET DONE0 = TRUE;
+		DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+		BEGIN
+			GET DIAGNOSTICS CONDITION 1 @sqlstate = RETURNED_SQLSTATE,
+			 @errno = MYSQL_ERRNO, @msg = MESSAGE_TEXT;
+			SET @full_error = CONCAT("ERROR ", @errno, " (", @sqlstate, "): ", @msg);
+			SELECT @full_error INTO LS_ERROR;
+			INSERT INTO MIGRATION_ERROR_LOG(LEGACY_PROJECT_ID,LEGACY_WBS_NUMBER,ERROR_TYPE,FILE_NAME,ERROR_MESSAGE,VALIDATION_TYPE,FILE_TYPE)
+			VALUES(LS_AWARD_NUMBER,LI_AWARD_ID,'Exception','MIGRATION_ROOTAWRD_BUDGET_UPTN',SUBSTR(LS_ERROR,1,999),'During Migration',NULL);
+			COMMIT;
+		END;
+		OPEN MIGRATION_ROOTAWRD_CURSOR0;
+		MIGRATION_ROOTAWRD_CURSOR_LOOP0 : LOOP
+				FETCH MIGRATION_ROOTAWRD_CURSOR0 INTO LS_ROOT_AWARD_NUMBER;
+				IF DONE0 THEN
+					LEAVE MIGRATION_ROOTAWRD_CURSOR_LOOP0;
+				END IF;
+				SET LI_COUNT =  0;
+				SET LI_ANTICIPATED_TOTAL_AMOUNT_SUM = 0;
+						BEGIN
+								DECLARE DONE1 INT DEFAULT FALSE;
+								DECLARE MIGRATION_ROOTAWRD_CURSOR CURSOR FOR
+								SELECT AWARD_NUMBER,PARENT_AWARD_NUMBER
+								FROM AWARD_HIERARCHY
+								WHERE PARENT_AWARD_NUMBER LIKE '%-00001'
+								AND AWARD_NUMBER IN(SELECT AWARD_NUMBER FROM MIGRATION_AWARD)
+								AND PARENT_AWARD_NUMBER =  LS_ROOT_AWARD_NUMBER;
+								DECLARE CONTINUE HANDLER FOR NOT FOUND SET DONE1 = TRUE;
+								DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+								BEGIN
+									GET DIAGNOSTICS CONDITION 1 @sqlstate = RETURNED_SQLSTATE,
+									 @errno = MYSQL_ERRNO, @msg = MESSAGE_TEXT;
+									SET @full_error = CONCAT("ERROR ", @errno, " (", @sqlstate, "): ", @msg);
+									SELECT @full_error INTO LS_ERROR;
+									INSERT INTO MIGRATION_ERROR_LOG(LEGACY_PROJECT_ID,LEGACY_WBS_NUMBER,ERROR_TYPE,FILE_NAME,ERROR_MESSAGE,VALIDATION_TYPE,FILE_TYPE)
+									VALUES(LS_AWARD_NUMBER,LI_AWARD_ID,'Exception','MIGRATION_ROOTAWRD_BUDGET_UPTN',SUBSTR(LS_ERROR,1,999),'During Migration',NULL);
+									COMMIT;
+								END;
+								OPEN MIGRATION_ROOTAWRD_CURSOR;
+								MIGRATION_ROOTAWRD_CURSOR_LOOP : LOOP
+										FETCH MIGRATION_ROOTAWRD_CURSOR INTO LS_AWARD_NUMBER,LS_PARENT_AWARD_NUMBER;
+										IF DONE1 THEN
+											LEAVE MIGRATION_ROOTAWRD_CURSOR_LOOP;
+										END IF;
+														SELECT COUNT(*) INTO LI_COUNT
+														FROM AWARD_AMOUNT_TRANSACTION
+														WHERE AWARD_NUMBER = LS_AWARD_NUMBER;
+														IF LI_COUNT > 0 THEN
+																			SELECT COUNT(*) INTO LI_COUNT
+																			FROM AWARD_AMOUNT_INFO
+																			WHERE AWARD_NUMBER = LS_AWARD_NUMBER;
+																			IF LI_COUNT > 0 THEN
+																				BEGIN
+																						DECLARE LS_ERROR VARCHAR(2000);
+																						DECLARE DONE2 INT DEFAULT FALSE;
+																						DECLARE MIGRATION_ROOTAWRD_CURSOR2 CURSOR FOR
+																						SELECT AWARD_ID,
+																								TRANSACTION_ID,
+																								UPDATE_TIMESTAMP,
+																								UPDATE_USER,
+																								ANTICIPATED_CHANGE,
+																								ANTICIPATED_CHANGE_DIRECT,
+																								ANTICIPATED_CHANGE_INDIRECT,
+																								OBLIGATED_CHANGE,
+																								OBLIGATED_CHANGE_DIRECT,
+																								OBLIGATED_CHANGE_INDIRECT,
+																								ANTICIPATED_TOTAL_DIRECT,
+																								ANTICIPATED_TOTAL_INDIRECT,
+																								ANTICIPATED_TOTAL_AMOUNT,
+																								OBLIGATED_TOTAL_DIRECT,
+																								OBLIGATED_TOTAL_INDIRECT,
+																								AMOUNT_OBLIGATED_TO_DATE,
+																								ANT_DISTRIBUTABLE_AMOUNT,
+																								OBLI_DISTRIBUTABLE_AMOUNT,
+																								FINAL_EXPIRATION_DATE,
+																								CURRENT_FUND_EFFECTIVE_DATE,
+																								OBLIGATION_EXPIRATION_DATE,
+																								TOTAL_COST_IN_CURRENCY,
+																								CURRENCY_CODE
+																						FROM AWARD_AMOUNT_INFO
+																						WHERE AWARD_NUMBER = LS_AWARD_NUMBER;
+																						DECLARE CONTINUE HANDLER FOR NOT FOUND SET DONE2 = TRUE;
+																						OPEN MIGRATION_ROOTAWRD_CURSOR2;
+																						MIGRATION_ROOTAWRD_CURSOR_LOOP2 : LOOP
+																								FETCH MIGRATION_ROOTAWRD_CURSOR2 INTO LI_AWARD_ID,
+																													LI_TRANSACTION_ID,
+																													LD_UPDATE_TIMESTAMP,
+																													LS_UPDATE_USER,
+																													LI_ANTICIPATED_CHANGE,
+																													LI_ANTICIPATED_CHANGE_DIRECT,
+																													LI_ANTICIPATED_CHANGE_INDIRECT,
+																													LI_OBLIGATED_CHANGE,
+																													LI_OBLIGATED_CHANGE_DIRECT,
+																													LI_OBLIGATED_CHANGE_INDIRECT,
+																													LI_ANTICIPATED_TOTAL_DIRECT,
+																													LI_ANTICIPATED_TOTAL_INDIRECT,
+																													LI_ANTICIPATED_TOTAL_AMOUNT,
+																													LI_OBLIGATED_TOTAL_DIRECT,
+																													LI_OBLIGATED_TOTAL_INDIRECT,
+																													LI_AMOUNT_OBLIGATED_TO_DATE,
+																													LI_ANT_DISTRIBUTABLE_AMOUNT,
+																													LI_OBLI_DISTRIBUTABLE_AMOUNT,
+																													LD_FINAL_EXPIRATION_DATE,
+																													LD_CURRENT_FUND_EFFECTIVE_DATE,
+																													LD_OBLIGATION_EXPIRATION_DATE,
+																													LD_TOTAL_COST_IN_CURRENCY,
+																													LS_CURRENCY_CODE;
+																								IF DONE2 THEN
+																									LEAVE MIGRATION_ROOTAWRD_CURSOR_LOOP2;
+																								END IF;
+																									SET LI_ANTICIPATED_TOTAL_AMOUNT_SUM = LI_ANTICIPATED_TOTAL_AMOUNT_SUM +LI_ANTICIPATED_CHANGE;
+																										SET LI_AWARD_AMOUNT_INFO_ID = (SELECT IFNULL(MAX(AWARD_AMOUNT_INFO_ID),0)+1 FROM AWARD_AMOUNT_INFO);
+																										INSERT INTO AWARD_AMOUNT_INFO(AWARD_AMOUNT_INFO_ID,
+																																		AWARD_ID,
+																																		AWARD_NUMBER,
+																																		SEQUENCE_NUMBER,
+																																		TRANSACTION_ID,
+																																		UPDATE_TIMESTAMP,
+																																		UPDATE_USER,
+																																		ANTICIPATED_CHANGE,
+																																		ANTICIPATED_CHANGE_DIRECT,
+																																		ANTICIPATED_CHANGE_INDIRECT,
+																																		OBLIGATED_CHANGE,
+																																		OBLIGATED_CHANGE_DIRECT,
+																																		OBLIGATED_CHANGE_INDIRECT,
+																																		ANTICIPATED_TOTAL_DIRECT,
+																																		ANTICIPATED_TOTAL_INDIRECT,
+																																		ANTICIPATED_TOTAL_AMOUNT,
+																																		OBLIGATED_TOTAL_DIRECT,
+																																		OBLIGATED_TOTAL_INDIRECT,
+																																		AMOUNT_OBLIGATED_TO_DATE,
+																																		ANT_DISTRIBUTABLE_AMOUNT,
+																																		OBLI_DISTRIBUTABLE_AMOUNT,
+																																		FINAL_EXPIRATION_DATE,
+																																		CURRENT_FUND_EFFECTIVE_DATE,
+																																		OBLIGATION_EXPIRATION_DATE,
+																																		TOTAL_COST_IN_CURRENCY,
+																																		CURRENCY_CODE)
+																										values( LI_AWARD_AMOUNT_INFO_ID,LI_AWARD_ID,
+																																			LS_PARENT_AWARD_NUMBER,
+																																			1,
+																																			LI_TRANSACTION_ID,
+																																			LD_UPDATE_TIMESTAMP,
+																																			LS_UPDATE_USER,
+																																			LI_ANTICIPATED_CHANGE,
+																																			LI_ANTICIPATED_CHANGE_DIRECT,
+																																			LI_ANTICIPATED_CHANGE_INDIRECT,
+																																			LI_OBLIGATED_CHANGE,
+																																			LI_OBLIGATED_CHANGE_DIRECT,
+																																			LI_OBLIGATED_CHANGE_INDIRECT,
+																																			LI_ANTICIPATED_TOTAL_DIRECT,
+																																			LI_ANTICIPATED_TOTAL_INDIRECT,
+																																			LI_ANTICIPATED_TOTAL_AMOUNT_SUM,
+																																			LI_OBLIGATED_TOTAL_DIRECT,
+																																			LI_OBLIGATED_TOTAL_INDIRECT,
+																																			LI_ANTICIPATED_TOTAL_AMOUNT_SUM,
+																																			0,
+																																			0,
+																																			LD_FINAL_EXPIRATION_DATE,
+																																			LD_CURRENT_FUND_EFFECTIVE_DATE,
+																																			LD_OBLIGATION_EXPIRATION_DATE,
+																																			LD_TOTAL_COST_IN_CURRENCY,
+																																			LS_CURRENCY_CODE);
+																										SET LI_COUNT = LI_COUNT+1;
+																								COMMIT;
+																									END LOOP;
+																									CLOSE MIGRATION_ROOTAWRD_CURSOR2;
+																							END;
+																			END IF;
+														END IF;
+								END LOOP;
+								CLOSE MIGRATION_ROOTAWRD_CURSOR;
+						END;
+		END LOOP;
+		CLOSE MIGRATION_ROOTAWRD_CURSOR0;
+END;
+set sql_safe_updates =0;
+UPDATE AWARD_AMOUNT_INFO T1
+LEFT JOIN AWARD T2 ON T1.AWARD_NUMBER = T2.AWARD_NUMBER
+SET T1.AWARD_ID = T2.AWARD_ID
+WHERE T1.AWARD_NUMBER IN(SELECT AWARD_NUMBER FROM MIGRATION_AWARD);
+COMMIT;
+UPDATE AWARD_AMOUNT_INFO_ID_GENERATOR SET NEXT_VAL = (SELECT IFNULL(MAX(AWARD_AMOUNT_INFO_ID),0)+1   FROM AWARD_AMOUNT_INFO);
+UPDATE AWARD_AMOUNT_TRANSACTION_ID_GENERATOR  SET NEXT_VAL = (SELECT IFNULL(MAX(AWARD_AMOUNT_TRANSACTION_ID),0)+1   FROM AWARD_AMOUNT_TRANSACTION);
+COMMIT;
+SELECT 1  AS RESULT;
+END
+$$
+DELIMITER ;
