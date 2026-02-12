@@ -1,0 +1,20 @@
+﻿DELIMITER $$
+CREATE DEFINER=`jhufibi`@`%` FUNCTION `person_has_no_effort`(
+  AV_PROPOSAL_ID   int(10)
+) RETURNS varchar(6) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+DECLARE LI_COUNT int;
+DECLARE RETURN_STRING VARCHAR(5) DEFAULT 'FALSE';
+ SELECT COUNT(*)
+ INTO LI_COUNT
+ FROM eps_proposal_persons pi
+ WHERE pi.proposal_id = AV_PROPOSAL_ID
+ AND   pi.percentage_of_effort IS NULL;
+IF LI_COUNT > 0 THEN
+   SET RETURN_STRING = 'TRUE';
+END IF;
+RETURN RETURN_STRING;
+END
+$$
+DELIMITER ;

@@ -1,0 +1,11 @@
+﻿DELIMITER $$
+CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_GET_TEMP_UNIT`( PARENTUNIT  VARCHAR(40)) RETURNS longtext CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+declare TEMP_UNIT longtext  default null;
+call GET_TEMP_UNIT_PROC(PARENTUNIT,@temp_unit);
+set TEMP_UNIT=@temp_unit;
+return (TEMP_UNIT);
+END
+$$
+DELIMITER ;

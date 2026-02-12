@@ -1,0 +1,10 @@
+﻿DELIMITER $$
+CREATE DEFINER=`jhufibi`@`%` FUNCTION `trunc`(
+  date_in DATE
+) RETURNS date
+    DETERMINISTIC
+BEGIN
+  RETURN date_in;
+END
+$$
+DELIMITER ;

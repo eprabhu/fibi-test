@@ -1,0 +1,22 @@
+﻿DELIMITER $$
+CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_PERSON_UNIT_IS_NULL`(
+  AV_PROPOSAL_ID   int(10)
+) RETURNS varchar(6) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+DECLARE LI_COUNT int;
+DECLARE RETURN_STRING VARCHAR(5) DEFAULT 'FALSE';
+ SELECT COUNT(*)
+ INTO LI_COUNT
+ FROM eps_proposal_persons pi
+ LEFT JOIN eps_prop_person_units pu ON pi.proposal_person_id = pu.proposal_person_id
+ WHERE pi.proposal_id = AV_PROPOSAL_ID
+ AND   pi.person_id IS NOT NULL
+ AND   pu.unit_number IS NULL;
+IF LI_COUNT > 0 THEN
+   SET RETURN_STRING = 'TRUE';
+END IF;
+RETURN RETURN_STRING;
+END
+$$
+DELIMITER ;

@@ -1,0 +1,121 @@
+﻿DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RPT_GET_412_INFO_bkp`(IN report_start_date  VARCHAR(50)
+                  ,IN report_end_date  VARCHAR(50)
+                  ,IN report_unit  VARCHAR(8))
+BEGIN
+  SELECT distinct p.proposal_number MIT_AWARD_NUMBER
+        ,s.unit_number SCHOOL_NUMBER
+        ,s.unit_name SCHOOL_NAME
+        ,FN_GET_RPT_DEPT_NUM(s.unit_number,j.sort_value) DEPT_NUMBER
+        ,FN_GET_RPT_DEPT_NAME(s.unit_number,j.sort_value)  DEPT_NAME
+        ,'1' BUDGET_PERIOD
+        ,ibh.TOTAL_DIRECT_COST DIRECT_COST
+        ,ibh.TOTAL_INDIRECT_COST INDIRECT_COST
+        ,(ibh.TOTAL_DIRECT_COST + ibh.TOTAL_INDIRECT_COST) TOTAL_COST
+  FROM   proposal p
+		 JOIN ip_budget_header ibh ON ibh.proposal_id=p.proposal_id
+         JOIN prop_person_units pu ON pu.proposal_number = p.proposal_number AND    pu.sequence_number = (SELECT MAX(sequence_number)
+																											FROM   prop_person_units
+																											WHERE  proposal_number = pu.proposal_number)
+         LEFT OUTER JOIN unit s ON s.unit_number=CONCAT(SUBSTR(pu.unit_number, 1, 3) , '00000')
+             JOIN jhu_unit j ON j.unit_number = pu.unit_number
+  WHERE  DATE(p.start_date) >= STR_TO_DATE(report_start_date, '%m/%d/%Y')
+  AND    DATE(p.end_date) <= STR_TO_DATE(report_end_date, '%m/%d/%Y')
+  AND    ibh.TOTAL_DIRECT_COST > 0
+  AND    p.status_code = 1
+  AND    p.type_code IN (1, 4, 5, 6, 9)
+  AND    p.sequence_number = (SELECT MAX(sequence_number)
+                                FROM   proposal
+                                WHERE  proposal_number = p.proposal_number)
+  AND    FIND_IN_SET(pu.unit_number,fn_get_temp_unit(report_unit))
+  AND    pu.lead_unit_flag = 'Y'
+  UNION
+  SELECT distinct p.proposal_number MIT_AWARD_NUMBER
+        ,s.unit_number SCHOOL_NUMBER
+        ,s.unit_name SCHOOL_NAME
+        ,FN_GET_RPT_DEPT_NUM(s.unit_number,j.sort_value) DEPT_NUMBER
+        ,FN_GET_RPT_DEPT_NAME(s.unit_number,j.sort_value)  DEPT_NAME
+        ,'1' BUDGET_PERIOD
+        ,ibh.TOTAL_DIRECT_COST * ((datediff(DATE(p.end_date) , STR_TO_DATE(report_start_date, '%m/%d/%Y')) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) DIRECT_COST
+        ,ibh.TOTAL_INDIRECT_COST * ((datediff(DATE(p.end_date) , STR_TO_DATE(report_start_date, '%m/%d/%Y')) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) INDIRECT_COST
+        ,ibh.TOTAL_DIRECT_COST * ((datediff(DATE(p.end_date) , STR_TO_DATE(report_start_date, '%m/%d/%Y')) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) +
+         ibh.TOTAL_INDIRECT_COST * ((datediff(DATE(p.end_date) , STR_TO_DATE(report_start_date, '%m/%d/%Y')) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) TOTAL_COST
+  FROM   proposal p
+		 JOIN ip_budget_header ibh ON ibh.proposal_id=p.proposal_id
+         JOIN prop_person_units pu ON pu.proposal_number = p.proposal_number AND    pu.sequence_number = (SELECT MAX(sequence_number)
+																											FROM   prop_person_units
+																											WHERE  proposal_number = pu.proposal_number)
+         LEFT OUTER JOIN unit s ON s.unit_number=CONCAT(SUBSTR(pu.unit_number, 1, 3) , '00000')
+            JOIN jhu_unit j ON j.unit_number = pu.unit_number
+  WHERE  DATE(p.start_date) <  STR_TO_DATE(report_start_date, '%m/%d/%Y')
+  AND    DATE(p.end_date) >= STR_TO_DATE(report_start_date, '%m/%d/%Y')
+  AND    DATE(p.end_date) <= STR_TO_DATE(report_end_date, '%m/%d/%Y')
+  AND    ibh.TOTAL_DIRECT_COST > 0
+  AND    p.status_code = 1
+  AND    p.type_code IN (1, 4, 5, 6, 9)
+  AND    p.sequence_number = (SELECT MAX(sequence_number)
+                                FROM   proposal
+                                WHERE  proposal_number = p.proposal_number)
+  AND    FIND_IN_SET(pu.unit_number,fn_get_temp_unit(report_unit))
+  AND    pu.lead_unit_flag = 'Y'
+  UNION
+  SELECT distinct p.proposal_number MIT_AWARD_NUMBER
+        ,s.unit_number SCHOOL_NUMBER
+        ,s.unit_name SCHOOL_NAME
+        ,FN_GET_RPT_DEPT_NUM(s.unit_number,j.sort_value) DEPT_NUMBER
+        ,FN_GET_RPT_DEPT_NAME(s.unit_number,j.sort_value)  DEPT_NAME
+        ,'1' BUDGET_PERIOD
+        ,ibh.TOTAL_DIRECT_COST * ((datediff(STR_TO_DATE(report_end_date, '%m/%d/%Y') , DATE(p.start_date)) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) DIRECT_COST
+        ,ibh.TOTAL_INDIRECT_COST * ((datediff(STR_TO_DATE(report_end_date, '%m/%d/%Y') , DATE(p.start_date)) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) INDIRECT_COST
+        ,ibh.TOTAL_DIRECT_COST * ((datediff(STR_TO_DATE(report_end_date, '%m/%d/%Y') , DATE(p.start_date)) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) +
+         ibh.TOTAL_INDIRECT_COST * ((datediff(STR_TO_DATE(report_end_date, '%m/%d/%Y') , DATE(p.start_date)) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) TOTAL_COST
+  FROM   proposal p
+		 JOIN ip_budget_header ibh ON ibh.proposal_id=p.proposal_id
+         JOIN prop_person_units pu ON pu.proposal_number = p.proposal_number AND    pu.sequence_number = (SELECT MAX(sequence_number)
+                                FROM   prop_person_units
+                                WHERE  proposal_number = pu.proposal_number)
+         LEFT OUTER JOIN unit s ON s.unit_number=CONCAT(SUBSTR(pu.unit_number, 1, 3) , '00000')
+         JOIN jhu_unit j ON j.unit_number = pu.unit_number
+          WHERE  DATE(p.start_date) >= STR_TO_DATE(report_start_date, '%m/%d/%Y')
+  AND    DATE(p.start_date) <= STR_TO_DATE(report_end_date, '%m/%d/%Y')
+  AND    DATE(p.end_date) >  STR_TO_DATE(report_end_date, '%m/%d/%Y')
+  AND    ibh.TOTAL_DIRECT_COST > 0
+  AND    p.status_code = 1
+  AND    p.type_code IN (1, 4, 5, 6, 9)
+   AND    p.sequence_number = (SELECT MAX(sequence_number)
+                                FROM   proposal
+                                WHERE  proposal_number = p.proposal_number)
+  AND    FIND_IN_SET(pu.unit_number,fn_get_temp_unit(report_unit))
+  AND    pu.lead_unit_flag = 'Y'
+  UNION
+  SELECT p.proposal_number MIT_AWARD_NUMBER
+        ,s.unit_number SCHOOL_NUMBER
+        ,s.unit_name SCHOOL_NAME
+        ,FN_GET_RPT_DEPT_NUM(s.unit_number,j.sort_value) DEPT_NUMBER
+        ,FN_GET_RPT_DEPT_NAME(s.unit_number,j.sort_value)  DEPT_NAME
+        ,'1' BUDGET_PERIOD
+        ,ibh.TOTAL_DIRECT_COST * ((datediff(STR_TO_DATE(report_end_date, '%m/%d/%Y') , STR_TO_DATE(report_start_date, '%m/%d/%Y')) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) DIRECT_COST
+        ,ibh.TOTAL_INDIRECT_COST * ((datediff(STR_TO_DATE(report_end_date, '%m/%d/%Y') , STR_TO_DATE(report_start_date, '%m/%d/%Y')) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) INDIRECT_COST
+        ,ibh.TOTAL_DIRECT_COST * ((datediff(STR_TO_DATE(report_end_date, '%m/%d/%Y') , STR_TO_DATE(report_start_date, '%m/%d/%Y')) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) +
+         ibh.TOTAL_INDIRECT_COST * ((datediff(STR_TO_DATE(report_end_date, '%m/%d/%Y') , STR_TO_DATE(report_start_date, '%m/%d/%Y')) + 1) / (datediff(DATE(p.end_date) , DATE(p.start_date)) + 1)) TOTAL_COST
+  FROM   proposal p
+		 JOIN ip_budget_header ibh ON ibh.proposal_id=p.proposal_id
+         JOIN prop_person_units pu ON pu.proposal_number = p.proposal_number  AND    pu.sequence_number = (SELECT MAX(sequence_number)
+                                FROM   prop_person_units
+                                WHERE  proposal_number = pu.proposal_number)
+         LEFT OUTER JOIN unit s ON s.unit_number=CONCAT(SUBSTR(pu.unit_number, 1, 3) , '00000')
+         JOIN jhu_unit j ON j.unit_number = pu.unit_number
+        WHERE  DATE(p.start_date) < STR_TO_DATE(report_start_date, '%m/%d/%Y')
+  AND    DATE(p.end_date) > STR_TO_DATE(report_end_date, '%m/%d/%Y')
+  AND    ibh.TOTAL_DIRECT_COST > 0
+  AND    p.status_code = 1
+  AND    p.type_code IN (1, 4, 5, 6, 9)
+   AND    p.sequence_number = (SELECT MAX(sequence_number)
+                                FROM   proposal
+                                WHERE  proposal_number = p.proposal_number)
+  AND    FIND_IN_SET(pu.unit_number,fn_get_temp_unit(report_unit))
+  AND    pu.lead_unit_flag = 'Y'
+  ORDER BY 2, 4, 1;
+END
+$$
+DELIMITER ;

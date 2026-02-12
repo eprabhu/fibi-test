@@ -1,0 +1,22 @@
+﻿DELIMITER $$
+CREATE DEFINER=`jhufibi`@`%` FUNCTION `DEADLINE_DATE_IS_WORKDAY`(
+  AV_PROPOSAL_ID   int(10)
+) RETURNS varchar(6) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+DECLARE LI_COUNT int;
+DECLARE RETURN_STRING VARCHAR(5) DEFAULT 'FALSE';
+ SELECT COUNT(*)
+ INTO LI_COUNT
+ FROM eps_proposal p
+ WHERE p.PROPOSAL_ID=AV_PROPOSAL_ID
+ AND   p.sponsor_deadline_date IS NOT NULL
+ AND   WEEKDAY(p.sponsor_deadline_date) NOT IN (5, 6)
+ AND   p.sponsor_deadline_date NOT IN (SELECT date_value FROM holiday_spcl_working_day_cal);
+IF LI_COUNT > 0 THEN
+   SET RETURN_STRING = 'TRUE';
+END IF;
+RETURN RETURN_STRING;
+END
+$$
+DELIMITER ;

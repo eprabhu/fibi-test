@@ -1,0 +1,30 @@
+﻿DELIMITER $$
+CREATE DEFINER=`jhufibi`@`%` PROCEDURE `Find_wrong_data`()
+BEGIN
+DECLARE DONE TINYINT DEFAULT 0;
+DECLARE C1 CURSOR FOR
+	SELECT distinct questionnaire_id from quest_answer_header;
+OPEN C1;
+	LOOP1: LOOP BEGIN
+	DECLARE LD_END_DATE DATETIME;
+	DECLARE LD_START_DATE DATETIME;
+	DECLARE LI_QUEST_QUEST_ID INT(10);
+    DECLARE LI_quest_id INT(10);
+	DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET DONE = 1;
+	FETCH C1 INTO  LI_quest_id;
+	IF DONE THEN
+		LEAVE LOOP1;
+	END IF;
+	select distinct QUESTIONNAIRE_ID  into LI_QUEST_QUEST_ID
+    from quest_question where QUESTION_ID in (
+select QUESTION_ID from quest_answer where  QUESTIONNAIRE_ANS_HEADER_ID in
+(select QUESTIONNAIRE_ANS_HEADER_ID from quest_answer_header where QUESTIONNAIRE_ID=LI_quest_id));
+IF LI_QUEST_QUEST_ID <> LI_quest_id  THEN
+SELECT LI_quest_id;
+end IF;
+END;
+END LOOP;
+CLOSE C1;
+END
+$$
+DELIMITER ;

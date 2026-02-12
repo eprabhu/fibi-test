@@ -1,0 +1,17 @@
+﻿DELIMITER $$
+CREATE DEFINER=`jhufibi`@`%` FUNCTION `FN_GET_RPT_SCH_NAME`( PROP_UNIT_IN  varchar(8) ) RETURNS varchar(200) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+DECLARE	RPT_SCH_NAME varchar(200);
+SELECT
+    IF(COUNT(unit_name) > 0,
+        unit_name,
+        NULL)
+INTO RPT_SCH_NAME FROM
+    unit
+WHERE
+    unit_number = CONCAT(SUBSTR(PROP_UNIT_IN, 1, 3), '00000');
+	RETURN RPT_SCH_NAME ;
+END
+$$
+DELIMITER ;
