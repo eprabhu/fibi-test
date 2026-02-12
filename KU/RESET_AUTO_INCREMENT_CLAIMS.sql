@@ -1,0 +1,63 @@
+﻿DELIMITER $$
+CREATE PROCEDURE `RESET_AUTO_INCREMENT_CLAIMS`()
+BEGIN
+	SELECT @max := IFNULL(MAX(CLAIM_ID),0)+ 1 FROM CLAIM;
+      SET @alter_statement = concat('ALTER TABLE CLAIM AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+	SELECT @max := IFNULL(MAX(CLAIM_SUMMARY_ID),0)+ 1 FROM claim_summary;
+      SET @alter_statement = concat('ALTER TABLE claim_summary AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(CLAIM_DETAILS_ID),0)+ 1 FROM claim_summary_details;
+      SET @alter_statement = concat('ALTER TABLE claim_summary_details AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(FILE_ID),0)+ 1 FROM claim_files;
+      SET @alter_statement = concat('ALTER TABLE claim_files AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(FEED_ID),0)+ 1 FROM sap_claim_feed;
+      SET @alter_statement = concat('ALTER TABLE sap_claim_feed AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(BATCH_ID),0)+ 1 FROM sap_claim_feed_batch;
+      SET @alter_statement = concat('ALTER TABLE sap_claim_feed_batch AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(BATCH_ERROR_ID),0)+ 1 FROM sap_claim_feed_batch_error_log;
+      SET @alter_statement = concat('ALTER TABLE sap_claim_feed_batch_error_log AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(BATCH_FILE_ID),0)+ 1 FROM sap_claim_feed_batch_files;
+      SET @alter_statement = concat('ALTER TABLE sap_claim_feed_batch_error_log AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(RESPONSE_MESSGE_ID),0)+ 1 FROM sap_claim_feed_response_messge;
+      SET @alter_statement = concat('ALTER TABLE sap_claim_feed_response_messge AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(ACTION_LOG_ID),0)+ 1 FROM claim_action_log;
+      SET @alter_statement = concat('ALTER TABLE claim_action_log AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(INVOICE_DETAIL_ID),0)+ 1 FROM claim_invoice_details;
+      SET @alter_statement = concat('ALTER TABLE claim_invoice_details AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(CLAIM_INVOICE_LOG_ID),0)+ 1 FROM CLAIM_INVOICE_LOG;
+      SET @alter_statement = concat('ALTER TABLE CLAIM_INVOICE_LOG AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(INVOICE_DETAIL_ID),0)+ 1 FROM claim_invoice_details_log;
+      SET @alter_statement = concat('ALTER TABLE claim_invoice_details_log AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      SELECT @max := IFNULL(MAX(CLAIM_MANPOWER_ID),0)+ 1 FROM claim_manpower;
+      SET @alter_statement = concat('ALTER TABLE claim_manpower AUTO_INCREMENT = ', @max);
+      PREPARE stmt FROM @alter_statement;
+      EXECUTE stmt;
+      DEALLOCATE PREPARE stmt;
+END
+$$
+DELIMITER ;

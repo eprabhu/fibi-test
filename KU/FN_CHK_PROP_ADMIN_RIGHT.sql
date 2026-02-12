@@ -1,0 +1,20 @@
+﻿DELIMITER $$
+CREATE FUNCTION `FN_CHK_PROP_ADMIN_RIGHT`(
+AV_PROPOSAL_ID    INT(11),
+AV_PERSON_ID    varchar(40)
+) RETURNS varchar(10) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+DECLARE LI_COUNT INT(3);
+    SELECT COUNT(*) INTO LI_COUNT
+        from person_roles t1
+		inner join role_rights t2 on t1.ROLE_ID = t2.ROLE_ID
+		inner join rights t3 on t3.RIGHT_ID = t2.RIGHT_ID
+		where t3.RIGHT_NAME = 'PROPOSAL_SUBMIT_ADMIN_ACTION' AND t1.PERSON_ID = AV_PERSON_ID;
+   IF LI_COUNT > 0 THEN
+                RETURN 'TRUE';
+   END IF;
+RETURN 'FALSE';
+END
+$$
+DELIMITER ;

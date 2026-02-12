@@ -1,0 +1,865 @@
+﻿DELIMITER $$
+CREATE PROCEDURE `MIGRATION_EXTERNAL_REVIEWER`(
+av_id int
+)
+BEGIN
+DECLARE LI_ID INT;
+DECLARE LI_EXTERNAL_REVIEWER_ID INT;
+DECLARE LI_EXTERNAL_REVIEWER_EXT_ID INT;
+DECLARE LS_Academic_Rank varchar(500) DEFAULT NULL;
+DECLARE LS_ACADEMIC_RANK_CODE VARCHAR(10);
+DECLARE LS_Reviewer_Name varchar(500) DEFAULT NULL;
+DECLARE LS_First_Name	varchar(50) DEFAULT NULL;
+DECLARE LS_Last_Name	varchar(50) DEFAULT NULL;
+DECLARE LS_PASSWORD VARCHAR(20)  DEFAULT NULL;
+DECLARE LS_Passport_Name	varchar(500) DEFAULT NULL;
+DECLARE LS_Gender	varchar(20) DEFAULT NULL;
+DECLARE LS_Affiliated_Institution	varchar(500) DEFAULT NULL;
+DECLARE LS_AFFILATION_INSTITUITION_CODE VARCHAR(10);
+DECLARE LS_Department	varchar(500) DEFAULT NULL;
+DECLARE LS_Top_200_Institution	varchar(5) DEFAULT NULL;
+DECLARE LS_Work_Country	varchar(500) DEFAULT NULL;
+DECLARE LS_COUNTRY_CODE VARCHAR(10);
+DECLARE LS_Primary_Email	varchar(500) DEFAULT NULL;
+DECLARE LS_Secondary_Email	varchar(500) DEFAULT NULL;
+DECLARE LS_Disciplinary_Field	 varchar(500) DEFAULT NULL;
+DECLARE LS_Specialism	varchar(1000) DEFAULT NULL;
+DECLARE LS_SPECIALISM_KEYWORD_CODE varchar(15);
+DECLARE LI_SPECIALIZATION_ID int;
+DECLARE LS_SPLITTED_Specialism varchar(1000) DEFAULT NULL;
+DECLARE LS_Keyword_1	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_2	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_3	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_4	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_5	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_6	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_7	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_8	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_9	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_10	varchar(500) DEFAULT NULL;
+DECLARE LS_Keyword_11	varchar(500) DEFAULT NULL;
+DECLARE LS_KEYWORD_CODE varchar(50);
+DECLARE LS_SPLITTED_KEYWORD VARCHAR(500);
+DECLARE LS_KEYWORD_LIST VARCHAR(500);
+DECLARE LI_START_LENGTH int;
+DECLARE LI_END_LENGTH int;
+DECLARE LS_Academic_Area_1	varchar(500) DEFAULT NULL;
+DECLARE LS_ACADEMIC_AREA_CODE_1 varchar(10);
+DECLARE LS_Academic_Area_2	varchar(500) DEFAULT NULL;
+DECLARE LS_ACADEMIC_AREA_CODE_2 varchar(10);
+DECLARE LI_H_index	INT(5) DEFAULT NULL;
+DECLARE LS_Scopus	varchar(500) DEFAULT NULL;
+DECLARE LS_ERSA_Signed_YYYY_MON	varchar(500) DEFAULT NULL;
+DECLARE LS_ERSA_EXP_Signed_YYYY_MON	varchar(500) DEFAULT NULL;
+DECLARE LS_URL_to_profile 	varchar(500) DEFAULT NULL;
+DECLARE LI_Supplier_DOF	INT(5) DEFAULT NULL;
+DECLARE LS_CIRA_2021_Scoring_Trends	varchar(500) DEFAULT NULL;
+DECLARE LS_CIRA_CODE VARCHAR(10);
+DECLARE LS_CIRA_LIST VARCHAR(500);
+DECLARE LS_CIRA VARCHAR(500);
+DECLARE LS_Originality	varchar(500) DEFAULT NULL;
+DECLARE LS_THOROUGHNESS_CODE varchar(10);
+DECLARE LS_ORGINALITY_CODE varchar(10);
+DECLARE LS_Thoroughness	varchar(500) DEFAULT NULL;
+DECLARE LS_Misc_Files varchar(500) DEFAULT NULL;
+DECLARE LS_ERROR_MSG varchar(1000);
+DECLARE LS_ERROR_FLAG VARCHAR(1) DEFAULT 'N';
+DECLARE LI_COUNT INT;
+DECLARE LI_ALREADY_EXIST INT;
+BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	BEGIN
+		GET DIAGNOSTICS CONDITION 1 @sqlstate = RETURNED_SQLSTATE,
+		 @errno = MYSQL_ERRNO, @msg = MESSAGE_TEXT;
+		SET @full_error = CONCAT("ERROR ", @errno, " (", @sqlstate, "): ", @msg);
+		SELECT @full_error INTO LS_ERROR_MSG;
+		UPDATE stage_external_reviewer SET  validation_status = 'FAILED' and Migrated_ext_reviewer_id = -1 where ID = LI_ID;
+		INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID,ERROR_TYPE, FILE_NAME, ERROR_MESSAGE, VALIDATION_TYPE, UPDATE_TIMESTAMP, UPDATE_USER)
+		VALUES(LI_ID,'EXCEPTION','EXTERNAL_REVIEWER',LS_ERROR_MSG,'MIGRATION',NOW(),'quickstart');
+		COMMIT;
+	END;
+    IF av_id = 1 THEN
+		delete from MIGRATION_EXT_REVIEWER_ERROR_LOG  where  FILE_NAME = 'EXTERNAL_REVIEWER' and VALIDATION_TYPE = 'MIGRATION';
+		UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'VALID' where validation_status = 'FAILED' and Migrated_ext_reviewer_id = -1;
+    END IF;
+	BEGIN
+		DECLARE DONE1 INT DEFAULT FALSE;
+		DECLARE CUR_SEL_DATA CURSOR FOR
+		SELECT ID,
+				 Academic_Rank,
+				 Reviewer_Name,
+				 First_Name,
+				 Last_Name,
+				 Passport_Name,
+				 Gender,
+				 Affiliated_Institution,
+				 Department,
+				 Top_200_Institution,
+				 Work_Country,
+				 Primary_Email,
+				 Secondary_Email,
+				 Disciplinary_Field,
+				 Specialism,
+				 Keyword_1,
+				 Keyword_2,
+				 Keyword_3,
+				 Keyword_4,
+				 Keyword_5,
+				 Keyword_6,
+				 Keyword_7,
+				 Keyword_8,
+				 Keyword_9,
+				 Keyword_10,
+				 Keyword_11,
+				 Academic_Area_1,
+				 Academic_Area_2,
+				 H_index,
+				 Scopus,
+				 ERSA_Signed_YYYY_MON,
+				 ERSA_EXP_YYYY_MON,
+				 URL_profile,
+				 Supplier_DOF,
+				 CIRA_2021_Scoring_Trends,
+				 Originality,
+				 Thoroughness
+		FROM stage_external_reviewer
+	 	where  validation_status = 'VALID';
+		DECLARE CONTINUE HANDLER FOR NOT FOUND SET DONE1 = TRUE;
+		OPEN CUR_SEL_DATA;
+		EXT_REVIEWER_LOOP: LOOP
+		FETCH CUR_SEL_DATA INTO	LI_ID
+								,LS_Academic_Rank
+								,LS_Reviewer_Name
+								,LS_First_Name
+								,LS_Last_Name
+								,LS_Passport_Name
+								,LS_Gender
+								,LS_Affiliated_Institution
+								,LS_Department
+								,LS_Top_200_Institution
+								,LS_Work_Country
+								,LS_Primary_Email
+								,LS_Secondary_Email
+								,LS_Disciplinary_Field
+								,LS_Specialism
+								,LS_Keyword_1
+								,LS_Keyword_2
+								,LS_Keyword_3
+								,LS_Keyword_4
+								,LS_Keyword_5
+								,LS_Keyword_6
+								,LS_Keyword_7
+								,LS_Keyword_8
+								,LS_Keyword_9
+								,LS_Keyword_10
+								,LS_Keyword_11
+								,LS_Academic_Area_1
+								,LS_Academic_Area_2
+								,LI_H_index
+								,LS_Scopus
+								,LS_ERSA_Signed_YYYY_MON
+								,LS_ERSA_EXP_Signed_YYYY_MON
+								,LS_URL_to_profile
+								,LI_Supplier_DOF
+								,LS_CIRA_2021_Scoring_Trends
+								,LS_Originality
+								,LS_Thoroughness	;
+		IF DONE1 THEN
+			LEAVE EXT_REVIEWER_LOOP;
+		END IF;
+		SET LI_COUNT = NULL;
+		IF LS_Academic_Rank IS NOT NULL THEN
+			select count(*) into LI_COUNT from EXT_REVIEWER_ACADEMIC_RANK
+			WHERE  TRIM(UPPER(DESCRIPTION)) = TRIM(UPPER(LS_Academic_Rank));
+			IF LI_COUNT = 1 THEN
+				select  ACADEMIC_RANK_CODE into LS_ACADEMIC_RANK_CODE from EXT_REVIEWER_ACADEMIC_RANK
+				WHERE TRIM(UPPER(DESCRIPTION)) = TRIM(UPPER(LS_Academic_Rank));
+            ELSE
+				INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID,ERROR_TYPE, FILE_NAME, ERROR_MESSAGE, VALUE,VALIDATION_TYPE, UPDATE_TIMESTAMP, UPDATE_USER)
+				VALUES(LI_ID,'EXCEPTION','EXTERNAL_REVIEWER','Invalid Academic Rank',TRIM(LS_Academic_Rank),'MIGRATION',NOW(),'quickstart');
+				UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'FAILED', Migrated_ext_reviewer_id = -1 WHERE ID = LI_ID;
+				COMMIT;
+                ITERATE EXT_REVIEWER_LOOP;
+			END IF;
+		END IF;
+        SET LI_COUNT = NULL;
+		IF LS_Work_Country IS NOT NULL THEN
+			SELECT COUNT(*) INTO LI_COUNT FROM COUNTRY
+			WHERE UPPER(TRIM(COUNTRY_NAME)) = UPPER(TRIM(LS_Work_Country));
+				IF LI_COUNT = 1 THEN
+				SELECT COUNTRY_CODE INTO LS_COUNTRY_CODE FROM COUNTRY
+				WHERE UPPER(TRIM(COUNTRY_NAME)) = UPPER(TRIM(LS_Work_Country));
+				ELSE
+					INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID,ERROR_TYPE, FILE_NAME, ERROR_MESSAGE,VALUE, VALIDATION_TYPE, UPDATE_TIMESTAMP, UPDATE_USER)
+					VALUES(LI_ID,'EXCEPTION','EXTERNAL_REVIEWER','Invalid Work Country name',TRIM(LS_Work_Country),'MIGRATION',NOW(),'quickstart');
+					UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'FAILED', Migrated_ext_reviewer_id = -1 WHERE ID = LI_ID;
+					COMMIT;
+					ITERATE EXT_REVIEWER_LOOP;
+				END IF;
+		END IF;
+		SET LI_COUNT = NULL;
+		IF LS_Affiliated_Institution IS NOT NULL THEN
+			SELECT COUNT(*) INTO LI_COUNT FROM EXT_REVIEWER_AFFILIATION
+			WHERE UPPER(TRIM(DESCRIPTION)) = UPPER(TRIM(LS_Affiliated_Institution));
+				IF LI_COUNT = 1 THEN
+					SELECT AFFILATION_INSTITUITION_CODE INTO LS_AFFILATION_INSTITUITION_CODE FROM EXT_REVIEWER_AFFILIATION
+					WHERE UPPER(TRIM(DESCRIPTION)) = UPPER(TRIM(LS_Affiliated_Institution));
+				ELSE
+					INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID,ERROR_TYPE, FILE_NAME, ERROR_MESSAGE,VALUE, VALIDATION_TYPE, UPDATE_TIMESTAMP, UPDATE_USER)
+					VALUES(LI_ID,'EXCEPTION','EXTERNAL_REVIEWER','Invalid Affiliation name',TRIM(LS_Affiliated_Institution), 'MIGRATION',NOW(),'quickstart');
+					UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'FAILED', Migrated_ext_reviewer_id = -1 WHERE ID = LI_ID;
+					COMMIT;
+					ITERATE EXT_REVIEWER_LOOP;
+				END IF;
+		END IF;
+		SET LI_COUNT = NULL;
+		IF LS_Academic_Area_1 IS NOT NULL THEN
+			SELECT COUNT(*) INTO LI_COUNT FROM EXT_REVIEWER_ACADEMIC_AREA
+			WHERE UPPER(TRIM(DESCRIPTION)) = UPPER(TRIM(LS_Academic_Area_1));
+				IF LI_COUNT = 1 THEN
+                SELECT ACADEMIC_AREA_CODE INTO LS_ACADEMIC_AREA_CODE_1 FROM EXT_REVIEWER_ACADEMIC_AREA
+			    WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_Academic_Area_1,'\n','')));
+            ELSE
+					INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID,ERROR_TYPE, FILE_NAME, ERROR_MESSAGE, VALUE,VALIDATION_TYPE, UPDATE_TIMESTAMP, UPDATE_USER)
+					VALUES(LI_ID,'EXCEPTION','EXTERNAL_REVIEWER','Invalid AcademicArea 1',TRIM(replace(LS_Academic_Area_1,'\n','')),'MIGRATION',NOW(),'quickstart');
+					UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'FAILED', Migrated_ext_reviewer_id = -1 WHERE ID = LI_ID;
+					COMMIT;
+					ITERATE EXT_REVIEWER_LOOP;
+				END IF;
+		END IF;
+		SET LI_COUNT = NULL;
+		IF LS_Academic_Area_2 IS NOT NULL THEN
+			SELECT COUNT(*) INTO LI_COUNT FROM ext_reviewer_academic_sub_area
+			WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_Academic_Area_2,'\n','')));
+				IF LI_COUNT = 1 THEN
+						SELECT ACADEMIC_SUB_AREA_CODE INTO LS_ACADEMIC_AREA_CODE_2 FROM ext_reviewer_academic_sub_area
+						WHERE UPPER(TRIM(DESCRIPTION)) = UPPER(TRIM(replace(LS_Academic_Area_2,'\n','')));
+                ELSE
+					INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID,ERROR_TYPE, FILE_NAME, ERROR_MESSAGE, VALUE,VALIDATION_TYPE, UPDATE_TIMESTAMP, UPDATE_USER)
+					VALUES(LI_ID,'EXCEPTION','EXTERNAL_REVIEWER','Invalid Academic Area 2',TRIM(replace(LS_Academic_Area_2,'\n','')),'MIGRATION',NOW(),'quickstart');
+					UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'FAILED', Migrated_ext_reviewer_id = -1 WHERE ID = LI_ID;
+					commit;
+					ITERATE EXT_REVIEWER_LOOP;
+				END IF;
+		END IF;
+        set LI_COUNT = NULL;
+		SELECT COUNT(*) INTO LI_COUNT from EXTERNAL_REVIEWER
+		WHERE USER_NAME = LS_Primary_Email;
+		IF LI_COUNT = 0 THEN
+		select IFNULL(max(EXTERNAL_REVIEWER_ID),0)+1 into LI_EXTERNAL_REVIEWER_ID from EXTERNAL_REVIEWER;
+		INSERT INTO EXTERNAL_REVIEWER(
+									EXTERNAL_REVIEWER_ID
+									 ,LAST_NAME
+									 ,FIRST_NAME
+									 ,FULL_NAME
+									 ,GENDER
+									 ,EMAIL_ADDRESS_PRIMARY
+									 ,EMAIL_ADDRESS_SECONDARY
+									 ,COUNTRY_CODE
+									 ,ACADEMIC_RANK_CODE
+									 ,AFFILATION_INSTITUITION_CODE
+									 ,IS_TOP_INSTITUITION
+									 ,UPDATE_TIMESTAMP
+									 ,UPDATE_USER
+									 ,ACADEMIC_AREA_CODE_PRIMARY
+									  ,STATUS
+									 ,ACADEMIC_AREA_CODE_SECONDARY
+									  ,USER_NAME
+									 ,password
+									,AGREEMENT_END_DATE
+									 , AGREEMENT_START_DATE
+                                     ,DEPARTMENT
+								)values(
+									LI_EXTERNAL_REVIEWER_ID
+									,LS_Last_Name
+									,LS_First_Name
+									,LS_Reviewer_Name
+									,case when TRIM(UPPER(LS_Gender)) = 'MALE' THEN 'M'  WHEN TRIM(UPPER(LS_Gender)) = 'FEMALE' THEN 'F' END
+									,LS_Primary_Email
+									,LS_Secondary_Email
+									,LS_COUNTRY_CODE
+                                    , LS_ACADEMIC_RANK_CODE
+									,LS_AFFILATION_INSTITUITION_CODE
+									,CASE LS_Top_200_Institution WHEN 'Yes' THEN 'Y' WHEN  'No' THEN 'N' END
+									,UTC_TIMESTAMP()
+									,'quickstart'
+									,LS_ACADEMIC_AREA_CODE_1
+                                    , 'A'
+									,LS_ACADEMIC_AREA_CODE_2
+                                    ,LS_Primary_Email
+                                    ,'fcimXfH31LYNmW1r4iiDGh+CfFFofxNgMweRBrzk0DI='
+									, case when concat(substr(str_to_date(LS_ERSA_EXP_Signed_YYYY_MON, '%Y-%M'),1,8),'30 00:00:00') = '2024-02-30 00:00:00' then '2024-02-28 00:00:00' ELSE concat(substr(str_to_date(LS_ERSA_EXP_Signed_YYYY_MON, '%Y-%M'),1,8),'30 00:00:00') END
+									, concat(substr(str_to_date(LS_ERSA_Signed_YYYY_MON, '%Y-%M'),1,8),'01 00:00:00')
+                                    ,LS_Department
+								);
+				INSERT INTO EXTERNAL_REVIEWER_RIGHTS(
+										EXTERNAL_REVIEWER_ID
+										, REVIEWER_RIGHTS_ID
+										, UPDATE_TIMESTAMP
+										, UPDATE_USER
+								)VALUES(
+										LI_EXTERNAL_REVIEWER_ID
+										, 1
+										,UTC_TIMESTAMP()
+										,'quickstart'
+										);
+		ELSE
+			INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+			VALUES(LI_ID,'EXTERNAL_REVIEWER','User Name Already Exists',LS_Primary_Email ,'MIGRATION',NOW(),'quickstart');
+			UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'FAILED', Migrated_ext_reviewer_id = -1 WHERE ID = LI_ID;
+			ITERATE EXT_REVIEWER_LOOP;
+			COMMIT;
+		END IF;
+		SET LS_ERROR_FLAG = 'N';
+		SET LI_COUNT = NULL;
+		IF LS_Specialism IS NOT NULL THEN
+			set LS_Specialism = replace(replace(LS_Specialism, ',', ';') ,'.',';');
+							specialism_loop:  LOOP
+										if 	LS_Specialism is null or LENGTH(TRIM(LS_Specialism)) = 0 then
+											leave specialism_loop;
+										else
+											set LI_END_LENGTH = char_length(trim(LS_Specialism));
+											set LS_SPLITTED_Specialism =   SUBSTRING_INDEX(LS_Specialism, ';', 1);
+                                            SELECT COUNT(1) INTO LI_COUNT FROM ext_specialism_keyword
+											WHERE TRIM(UPPER(REPLACE(DESCRIPTION, '\n', ''))) = TRIM(UPPER(REPLACE(LS_SPLITTED_Specialism, '\n', '')));
+													IF LI_COUNT = 1 THEN
+														SELECT SPECIALISM_KEYWORD_CODE INTO LS_SPECIALISM_KEYWORD_CODE FROM ext_specialism_keyword
+														WHERE TRIM(UPPER(REPLACE(DESCRIPTION, '\n', ''))) = TRIM(UPPER(REPLACE(LS_SPLITTED_Specialism, '\n', '')));
+														set LI_ALREADY_EXIST = NULL;
+														select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+														where SPECIALIZATION_CODE = LS_SPECIALISM_KEYWORD_CODE
+														AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+														IF LI_ALREADY_EXIST = 0 THEN
+														select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+														INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION(
+																								EXTERNAL_REVIEWER_SPECIALIZATION_ID
+																								, SPECIALIZATION_CODE
+																								, EXTERNAL_REVIEWER_ID
+																								, UPDATE_TIMESTAMP
+																								, UPDATE_USER
+																							)values(
+																								LI_SPECIALIZATION_ID
+																								,LS_SPECIALISM_KEYWORD_CODE
+																								,LI_EXTERNAL_REVIEWER_ID
+																								,UTC_TIMESTAMP()
+																								,'quickstart'
+																								);
+														END if;
+                                                    ELSEIF TRIM(UPPER(REPLACE(LS_SPLITTED_Specialism, '\n', ''))) != ')' THEN
+														INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+														VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Specialism Keyword', TRIM(REPLACE(LS_SPLITTED_Specialism, '\n', '')),'MIGRATION',NOW(),'quickstart');
+                                                        SET LS_ERROR_FLAG = 'Y';
+														COMMIT;
+													END IF;
+											set LI_START_LENGTH = char_length(LS_SPLITTED_Specialism);
+											set LS_SPLITTED_Specialism = trim(substr(LS_Specialism, LI_START_LENGTH+2, LI_END_LENGTH));
+											set LS_Specialism = LS_SPLITTED_Specialism;
+										end if;
+							end loop;
+				END IF;
+			SET LI_COUNT = NULL;
+			IF LS_KEYWORD_1 IS NOT NULL THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_Keyword_1,'\n','')));
+				IF LI_COUNT = 1 THEN
+					SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+					WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_Keyword_1,'\n','')));
+					set LI_ALREADY_EXIST = NULL;
+					select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+					where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+					AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+					IF LI_ALREADY_EXIST = 0 THEN
+					select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+					 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+					END IF;
+					 ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_1, '\n', ''))) != ')' THEN
+						INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+						VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword1', TRIM(REPLACE(LS_Keyword_1, '\n', '')),'MIGRATION',NOW(),'quickstart');
+						SET LS_ERROR_FLAG = 'Y';
+						COMMIT;
+				END IF;
+			END IF;
+			set LI_COUNT = NULL;
+			IF LS_KEYWORD_2 IS NOT NULL THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_2,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_2,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+				 ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_2, '\n', ''))) != ')' THEN
+					INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+					VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword2', TRIM(REPLACE(LS_Keyword_2, '\n', '')),'MIGRATION',NOW(),'quickstart');
+					SET LS_ERROR_FLAG = 'Y';
+					COMMIT;
+				END IF;
+		END IF;
+			SET LI_COUNT = NULL;
+			IF LS_KEYWORD_3 IS NOT NULL THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_3,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_3,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+				 ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_3, '\n', ''))) != ')' THEN
+						INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+						VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword3', TRIM(REPLACE(LS_Keyword_3, '\n', '')),'MIGRATION',NOW(),'quickstart');
+						SET LS_ERROR_FLAG = 'Y';
+						COMMIT;
+				END IF;
+		END IF;
+					SET LI_COUNT = NULL;
+			IF LS_KEYWORD_4 IS NOT NULL THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_4,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_4,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+			 ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_4, '\n', ''))) != ')' THEN
+			INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+			VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword4', TRIM(REPLACE(LS_Keyword_4, '\n', '')),'MIGRATION',NOW(),'quickstart');
+			SET LS_ERROR_FLAG = 'Y';
+			COMMIT;
+			END IF;
+		END IF;
+					SET LI_COUNT = NULL;
+			IF LS_KEYWORD_5 IS NOT NULL THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_5,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_5,'\n','')));
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+			 ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_5, '\n', ''))) != ')' THEN
+				INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+				VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword5', TRIM(REPLACE(LS_Keyword_5, '\n', '')),'MIGRATION',NOW(),'quickstart');
+				SET LS_ERROR_FLAG = 'Y';
+				COMMIT;
+			END IF;
+		END IF;
+				SET LI_COUNT = NULL;
+			IF LS_keyword_6 IS NOT NULL THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_6,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_6,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+			 ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_6, '\n', ''))) != ')' THEN
+				INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+				VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword6', TRIM(REPLACE(LS_Keyword_6, '\n', '')),'MIGRATION',NOW(),'quickstart');
+				SET LS_ERROR_FLAG = 'Y';
+				COMMIT;
+			END IF;
+		END IF;
+					SET LI_COUNT = NULL;
+			IF LS_keyword_7 IS NOT NULL THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_7,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_7,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+				 ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_7, '\n', ''))) != ')' THEN
+			INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+			VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword7', TRIM(REPLACE(LS_Keyword_7, '\n', '')),'MIGRATION',NOW(),'quickstart');
+			SET LS_ERROR_FLAG = 'Y';
+			COMMIT;
+		END IF;
+		END IF;
+			SET LI_COUNT = NULL;
+			IF LS_keyword_8 IS NOT NULL THEN
+			SET LS_KEYWORD_CODE = NULL;
+			SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_8,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_8,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+			 ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_8, '\n', ''))) != ')' THEN
+				INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+				VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword8', TRIM(REPLACE(LS_Keyword_8, '\n', '')),'MIGRATION',NOW(),'quickstart');
+				SET LS_ERROR_FLAG = 'Y';
+				COMMIT;
+			END IF;
+		END IF;
+			SET LI_COUNT = NULL;
+			IF LS_keyword_9 IS NOT NULL THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_9,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_9,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+				ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_9, '\n', ''))) != ')' THEN
+				INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+				VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword9', TRIM(REPLACE(LS_Keyword_9, '\n', '')),'MIGRATION',NOW(),'quickstart');
+				SET LS_ERROR_FLAG = 'Y';
+				COMMIT;
+				END IF;
+		END IF;
+			SET LI_COUNT = NULL;
+			IF LS_keyword_10 IS NOT NULL THEN
+			SET LS_KEYWORD_CODE = NULL;
+				SELECT COUNT(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_10,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_10,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+			ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_10, '\n', ''))) != ')' THEN
+				INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+				VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword10', TRIM(REPLACE(LS_Keyword_10, '\n', '')),'MIGRATION',NOW(),'quickstart');
+				SET LS_ERROR_FLAG = 'Y';
+				COMMIT;
+			END IF;
+		END IF;
+			SET LI_COUNT = NULL;
+			IF LS_keyword_11 IS NOT NULL THEN
+		   SELECT count(*) INTO LI_COUNT FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_11,'\n','')));
+				IF LI_COUNT = 1 THEN
+				SET LS_KEYWORD_CODE = NULL;
+				SELECT SPECIALISM_KEYWORD_CODE INTO LS_KEYWORD_CODE FROM ext_specialism_keyword
+				WHERE UPPER(TRIM(replace(DESCRIPTION,'\n',''))) = UPPER(TRIM(replace(LS_KEYWORD_11,'\n','')));
+				set LI_ALREADY_EXIST = NULL;
+				select count(1) into LI_ALREADY_EXIST FROM EXTERNAL_REVIEWER_SPECIALIZATION
+				where SPECIALIZATION_CODE = LS_KEYWORD_CODE
+				AND EXTERNAL_REVIEWER_ID = LI_EXTERNAL_REVIEWER_ID;
+				IF LI_ALREADY_EXIST = 0 THEN
+				select IFNULL(max(EXTERNAL_REVIEWER_SPECIALIZATION_ID),0)+1 into LI_SPECIALIZATION_ID from EXTERNAL_REVIEWER_SPECIALIZATION;
+				 INSERT INTO EXTERNAL_REVIEWER_SPECIALIZATION
+											(EXTERNAL_REVIEWER_SPECIALIZATION_ID
+												, SPECIALIZATION_CODE
+												, EXTERNAL_REVIEWER_ID
+												, UPDATE_TIMESTAMP
+												, UPDATE_USER
+											)VALUES(
+												LI_SPECIALIZATION_ID
+												, LS_KEYWORD_CODE
+												, LI_EXTERNAL_REVIEWER_ID
+												, UTC_TIMESTAMP()
+												, 'quickstart'
+											);
+				END IF;
+				ELSEIF TRIM(UPPER(REPLACE(LS_Keyword_11, '\n', ''))) != ')' THEN
+						INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID, FILE_NAME, ERROR_MESSAGE,VALUE,VALIDATION_TYPE,  UPDATE_TIMESTAMP, UPDATE_USER )
+						VALUES(LI_ID,'EXTERNAL_REVIEWER','Invalid Keyword11', TRIM(REPLACE(LS_Keyword_11, '\n', '')),'MIGRATION',NOW(),'quickstart');
+						SET LS_ERROR_FLAG = 'Y';
+						COMMIT;
+                 END IF;
+		END IF;
+		SET LI_COUNT = NULL;
+		IF LS_Originality IS NOT NULL THEN
+			SELECT COUNT(*) INTO LI_COUNT FROM EXT_REVIEWER_ORIGINALITY
+			WHERE UPPER(TRIM(DESCRIPTION)) = UPPER(TRIM(LS_Originality));
+				IF LI_COUNT = 1 THEN
+					SELECT ORGINALITY_CODE INTO LS_ORGINALITY_CODE FROM EXT_REVIEWER_ORIGINALITY
+			      WHERE UPPER(TRIM(DESCRIPTION)) = UPPER(TRIM(LS_Originality));
+                ELSE
+					INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID,ERROR_TYPE, FILE_NAME, ERROR_MESSAGE, VALUE,VALIDATION_TYPE, UPDATE_TIMESTAMP, UPDATE_USER)
+					VALUES(LI_ID,'EXCEPTION','EXTERNAL_REVIEWER','Invalid Orginality',TRIM(LS_Originality),'MIGRATION',NOW(),'quickstart');
+                   SET LS_ERROR_FLAG = 'Y';
+					COMMIT;
+				END IF;
+		END IF;
+		SET LI_COUNT = NULL;
+		IF LS_Thoroughness IS NOT NULL THEN
+			SELECT COUNT(*) INTO LI_COUNT FROM EXT_REVIEWER_THOROUGHNESS
+			WHERE UPPER(TRIM(DESCRIPTION)) = UPPER(TRIM(LS_Thoroughness));
+				IF LI_COUNT = 1 THEN
+					SELECT THOROUGHNESS_CODE INTO LS_THOROUGHNESS_CODE FROM EXT_REVIEWER_THOROUGHNESS
+					WHERE UPPER(TRIM(DESCRIPTION)) = UPPER(TRIM(LS_Thoroughness));
+				ELSE
+					INSERT INTO MIGRATION_EXT_REVIEWER_ERROR_LOG ( STAGE_ID,ERROR_TYPE, FILE_NAME, ERROR_MESSAGE,VALUE, VALIDATION_TYPE, UPDATE_TIMESTAMP, UPDATE_USER)
+					VALUES(LI_ID,'EXCEPTION','EXTERNAL_REVIEWER','Invalid Thoroughness',TRIM(LS_Thoroughness),'MIGRATION',NOW(),'quickstart');
+                    SET LS_ERROR_FLAG = 'Y';
+					COMMIT;
+				END IF;
+		END IF;
+			IF LS_CIRA_2021_Scoring_Trends IS NOT NULL THEN
+				  set LS_CIRA = SUBSTRING_INDEX(LS_CIRA_2021_Scoring_Trends, ';', 1);
+				SELECT CIRA_CODE INTO LS_CIRA_CODE FROM ext_reviewer_cira
+				WHERE TRIM(UPPER(DESCRIPTION)) = TRIM(UPPER(LS_CIRA));
+			END IF;
+			SELECT IFNULL(MAX(EXTERNAL_REVIEWER_EXT_ID),0)+1 into LI_EXTERNAL_REVIEWER_EXT_ID from EXTERNAL_REVIEWER_EXT;
+			INSERT INTO EXTERNAL_REVIEWER_EXT(
+												EXTERNAL_REVIEWER_EXT_ID,
+												 EXTERNAL_REVIEWER_ID,
+												 HI_INDEX,
+												 SCOPUS_URL,
+												 SUPPLIER_DOF,
+												 CIRA_CODE,
+												 ORGINALITY_CODE,
+												 THOROUGHNESS_CODE,
+												 UPDATE_TIMESTAMP,
+												 UPDATE_USER,
+												 URL_PROFILE,
+												 DISCIPLINARY_FIELD
+											)VALUES(
+												LI_EXTERNAL_REVIEWER_EXT_ID
+												,LI_EXTERNAL_REVIEWER_ID
+												,LI_H_index
+												,LS_Scopus
+												,LI_Supplier_DOF
+												,LS_CIRA_CODE
+												,LS_ORGINALITY_CODE
+												,LS_THOROUGHNESS_CODE
+												,UTC_TIMESTAMP()
+												,'quickstart'
+												,LS_URL_to_profile
+												,LS_Disciplinary_Field
+												);
+		IF LS_ERROR_FLAG = 'Y' THEN
+			UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'FAILED' WHERE ID = LI_ID;
+		ELSE
+			UPDATE stage_external_reviewer SET VALIDATION_STATUS = 'SUCCESS', Migrated_ext_reviewer_id = LI_EXTERNAL_REVIEWER_ID WHERE ID = LI_ID;
+		END IF;
+			set LI_EXTERNAL_REVIEWER_ID = NULL;
+			set  LI_ID =  NULL;
+			SET LS_Academic_Rank  =  NULL;
+			SET LS_Reviewer_Name  =  NULL;
+			SET LS_First_Name	 =  NULL;
+			SET LS_Last_Name	 =  NULL;
+			SET LS_Passport_Name  =  NULL;
+			SET LS_Gender	 =  NULL;
+			SET LS_Affiliated_Institution	 =  NULL;
+			SET LS_Department	 =  NULL;
+			SET LS_Top_200_Institution	  =  NULL;
+			SET LS_Work_Country	 =  NULL;
+			SET LS_Primary_Email	 =  NULL;
+			SET LS_Secondary_Email	 =  NULL;
+			SET LS_Disciplinary_Field =  NULL;
+			SET LS_Specialism	 =  NULL;
+			SET LS_Keyword_1 =  NULL;
+			SET LS_Keyword_2	 =  NULL;
+			SET LS_Keyword_3	 =  NULL;
+			SET LS_Keyword_4	 =  NULL;
+			SET LS_Keyword_5 =  NULL;
+			SET LS_Keyword_6 =  NULL;
+			SET LS_Keyword_7	 =  NULL;
+			SET LS_Keyword_8	 =  NULL;
+			SET LS_Keyword_9	 =  NULL;
+			SET LS_Keyword_10			 =  NULL;
+			SET LS_Keyword_11	 =  NULL;
+			SET LS_Academic_Area_1	 =  NULL;
+			SET LS_Academic_Area_2	 =  NULL;
+			SET LI_H_index	 =  NULL;
+			SET LS_Scopus	 =  NULL;
+			SET LS_ERSA_Signed_YYYY_MON	 =  NULL;
+			SET LS_ERSA_EXP_Signed_YYYY_MON  =  NULL;
+			SET LS_URL_to_profile =  NULL;
+			SET LI_Supplier_DOF =  NULL;
+			SET LS_CIRA_2021_Scoring_Trends  =  NULL;
+			SET LS_Originality	 =  NULL;
+			SET LS_Thoroughness =  NULL;
+            set LS_ORGINALITY_CODE = NULL;
+			set LS_THOROUGHNESS_CODE = NULL;
+			set LS_CIRA_CODE = NULL;
+            set LS_ACADEMIC_RANK_CODE = NULL;
+            set LS_COUNTRY_CODE = NULL;
+            set LS_AFFILATION_INSTITUITION_CODE = NULL;
+            set LS_ACADEMIC_AREA_CODE_1 = null;
+            set LS_ACADEMIC_AREA_CODE_2 = null;
+		COMMIT;
+	END LOOP;
+Close CUR_SEL_DATA;
+END;
+END;
+END
+$$
+DELIMITER ;

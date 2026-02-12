@@ -1,0 +1,20 @@
+﻿DELIMITER $$
+CREATE FUNCTION `FN_GET_DATE_DURATION`(AV_START_DATE VARCHAR(10),
+AV_END_DATE VARCHAR(10)
+) RETURNS varchar(100) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+Declare  LD_START_DATE VARCHAR(10);
+Declare  LD_END_DATE VARCHAR(10);
+Declare  years varchar(40);
+Declare  months varchar(30);
+Declare  days varchar(30);
+SET LD_START_DATE = AV_START_DATE;
+SET LD_END_DATE = AV_END_DATE;
+set years=  TIMESTAMPDIFF( YEAR, LD_START_DATE,LD_END_DATE) ;
+set months= TIMESTAMPDIFF( MONTH, LD_START_DATE,LD_END_DATE ) % 12 ;
+set days =  if(FLOOR( TIMESTAMPDIFF( DAY, LD_START_DATE,LD_END_DATE ) % 30.4375 ) < 30,FLOOR( TIMESTAMPDIFF( DAY, LD_START_DATE,LD_END_DATE ) % 30.4375 ) ,'0') ;
+RETURN  concat(years ,' year(s), ' ,months ,' month(s) & ',days ,' day(s)' );
+END
+$$
+DELIMITER ;

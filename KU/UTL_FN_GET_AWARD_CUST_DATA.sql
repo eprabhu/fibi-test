@@ -1,0 +1,18 @@
+﻿DELIMITER $$
+CREATE FUNCTION `UTL_FN_GET_AWARD_CUST_DATA`(
+AV_AWARD_ID    DECIMAL(22),
+AV_CUSTOM_ELEMENT_NAME  VARCHAR(70)
+) RETURNS varchar(4000) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+DECLARE CVALUE varchar(4000) ;
+		select t1.value into CVALUE
+		from CUSTOM_DATA t1
+		inner join custom_data_elements t2 on t1.CUSTOM_DATA_ELEMENTS_ID = t2.CUSTOM_DATA_ELEMENTS_ID
+		where t2.custom_element_name = AV_CUSTOM_ELEMENT_NAME
+		and t2.IS_LATEST_VERSION = 'Y'
+		and t1.module_item_key = AV_AWARD_ID;
+		RETURN CVALUE;
+END
+$$
+DELIMITER ;

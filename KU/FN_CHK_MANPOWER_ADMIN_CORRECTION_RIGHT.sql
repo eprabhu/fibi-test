@@ -1,0 +1,39 @@
+﻿DELIMITER $$
+CREATE DEFINER=`ku_rms_user`@`%` FUNCTION `FN_CHK_MANPOWER_ADMIN_CORRECTION_RIGHT`(
+AV_LEAD_UNIT_NUMBER VARCHAR(50),
+AV_AWARD_VARIATION_TYPE_CODE VARCHAR(3),
+AV_PERSON_ID VARCHAR(40)
+) RETURNS varchar(6) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+        DECLARE LI_COUNT INT;
+		IF(AV_AWARD_VARIATION_TYPE_CODE = '24') THEN
+		SELECT COUNT(*) INTO LI_COUNT
+        FROM
+        PERSON_ROLES PR,
+        (SELECT ROLE_ID,RT.RIGHT_NAME
+           FROM ROLE_RIGHTS RR,
+                RIGHTS RT
+            WHERE RR.RIGHT_ID = RT.RIGHT_ID
+              AND RT.RIGHT_NAME IN (
+        'CREATE_MANPOWER_ADMIN_CORRECTION'
+    )
+        ) RLE
+        WHERE PR.PERSON_ID = AV_PERSON_ID
+          AND (( PR. DESCEND_FLAG = 'Y' AND AV_LEAD_UNIT_NUMBER IN (SELECT CHILD_UNIT_NUMBER
+                                                                 FROM UNIT_WITH_CHILDREN
+                                                                                  WHERE UNIT_NUMBER = PR.UNIT_NUMBER
+             ))OR ( PR. DESCEND_FLAG = 'N' AND PR.UNIT_NUMBER = AV_LEAD_UNIT_NUMBER )
+            )
+         AND RLE.ROLE_ID = PR.ROLE_ID;
+				IF LI_COUNT > 0 THEN
+						RETURN 'TRUE';
+					ELSE
+						RETURN 'FALSE';
+				END IF;
+		ELSE
+	      RETURN 'TRUE';
+		END IF;
+END
+$$
+DELIMITER ;
