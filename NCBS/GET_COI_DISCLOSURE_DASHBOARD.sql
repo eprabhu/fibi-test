@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_COI_DISCLOSURE_DASHBOARD`(
+CREATE  PROCEDURE `GET_COI_DISCLOSURE_DASHBOARD`(
 AV_PERSON_ID                    VARCHAR(200),
         AV_SORT_TYPE                    VARCHAR(500),
         AV_PAGED                        INT(10),

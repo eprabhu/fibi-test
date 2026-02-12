@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RPT_GET_415_INFO`(IN report_start_date  VARCHAR(500)
+CREATE  PROCEDURE `RPT_GET_415_INFO`(IN report_start_date  VARCHAR(500)
                   ,IN report_end_date  VARCHAR(500)
                   ,IN report_unit  VARCHAR(8)
                   )

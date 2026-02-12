@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `fn_person_training_completed`(
+CREATE  FUNCTION `fn_person_training_completed`(
   av_person_id VARCHAR(40),
   av_proposal_id INT(11)
 ) RETURNS varchar(20) CHARSET utf8mb4

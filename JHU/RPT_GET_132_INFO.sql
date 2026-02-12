@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RPT_GET_132_INFO`( IN unit  VARCHAR(8)
+CREATE  PROCEDURE `RPT_GET_132_INFO`( IN unit  VARCHAR(8)
                                    ,IN before_date  VARCHAR(50)
                                    ,IN after_date  VARCHAR(50)
                                   )

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_sap_award_recursive`()
+CREATE  PROCEDURE `get_sap_award_recursive`()
 BEGIN
     declare ls_error_msg varchar(4000);
 	BEGIN

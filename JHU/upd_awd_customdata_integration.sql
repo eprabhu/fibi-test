@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `upd_awd_customdata_integration`(av_int int
+CREATE  PROCEDURE `upd_awd_customdata_integration`(av_int int
   )
 BEGIN
   DECLARE li_award_id DECIMAL(22,0);

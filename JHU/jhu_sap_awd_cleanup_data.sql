@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jhu_sap_awd_cleanup_data`(av_grant_number VARCHAR(6))
+CREATE  PROCEDURE `jhu_sap_awd_cleanup_data`(av_grant_number VARCHAR(6))
 BEGIN
 SET SQL_SAFE_UPDATES= 0;
 DELETE FROM staged_awards;

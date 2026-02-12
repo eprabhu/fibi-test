@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jhu_sap_awd_upd_sub_cnt_tb`(av_sponsored_program_number  VARCHAR(8)
+CREATE  PROCEDURE `jhu_sap_awd_upd_sub_cnt_tb`(av_sponsored_program_number  VARCHAR(8)
 								  ,av_coeus_update_timestamp  DATE
 								  )
 BEGIN

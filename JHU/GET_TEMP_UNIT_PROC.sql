@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TEMP_UNIT_PROC`(IN  PARENTUNIT VARCHAR(20), inout TEMP_UNIT longtext)
+CREATE  PROCEDURE `GET_TEMP_UNIT_PROC`(IN  PARENTUNIT VARCHAR(20), inout TEMP_UNIT longtext)
 BEGIN
     DECLARE child_unit_number VARCHAR(20);
     set group_concat_max_len=1000000;

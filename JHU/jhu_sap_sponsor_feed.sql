@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jhu_sap_sponsor_feed`(av_sponsor_code_in  VARCHAR(100)
+CREATE  PROCEDURE `jhu_sap_sponsor_feed`(av_sponsor_code_in  VARCHAR(100)
   ,av_address_line_1_in  VARCHAR(80)
   ,av_acronym_in  VARCHAR(100)
   ,av_city_in  VARCHAR(30)

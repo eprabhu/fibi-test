@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jhu_sap_awd_upd_cost_shar_tb`(av_grant_number  VARCHAR(12)
+CREATE  PROCEDURE `jhu_sap_awd_upd_cost_shar_tb`(av_grant_number  VARCHAR(12)
                                           ,av_start_date  VARCHAR(10)
                                           ,av_sponsored_program_number  VARCHAR(8)
                                           ,av_obligated  DECIMAL(12,2)

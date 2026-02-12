@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_AWD_PURCHASE_GRP_COSTELEMENT`(
+CREATE  PROCEDURE `GET_AWD_PURCHASE_GRP_COSTELEMENT`(
 av_award_number varchar(12),
 av_account_number varchar(100)
   )

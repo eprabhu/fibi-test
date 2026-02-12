@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RESET_AUTO_INCREMENT_FOR_PROGRESS_REPORT`()
+CREATE  PROCEDURE `RESET_AUTO_INCREMENT_FOR_PROGRESS_REPORT`()
 BEGIN
 	  SELECT @max := IFNULL(MAX(PROGRESS_REPORT_ATTACHMENT_ID),0)+ 1 FROM award_progress_report_attachment;
       SET @alter_statement = concat('ALTER TABLE award_progress_report_attachment AUTO_INCREMENT = ', @max);

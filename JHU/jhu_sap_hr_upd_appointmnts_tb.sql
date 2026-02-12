@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jhu_sap_hr_upd_appointmnts_tb`(av_person_id  VARCHAR(40)
+CREATE  PROCEDURE `jhu_sap_hr_upd_appointmnts_tb`(av_person_id  VARCHAR(40)
 ,av_unit_number  VARCHAR(10)
 ,av_appointment_start_date  VARCHAR(10)
 ,av_appointment_end_date  VARCHAR(10)

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CHK_AWARD_BUDGET_VERSION_INCREASE`(AV_ID INT)
+CREATE  PROCEDURE `CHK_AWARD_BUDGET_VERSION_INCREASE`(AV_ID INT)
 begin
 DECLARE li_award_id decimal(22,0);
 declare ls_award_number	varchar(12);

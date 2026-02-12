@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_RPT_104E_INFO_2018`(IN start_date_in  VARCHAR(500),IN end_date_in  VARCHAR(500),IN unit  VARCHAR(8))
+CREATE  PROCEDURE `GET_RPT_104E_INFO_2018`(IN start_date_in  VARCHAR(500),IN end_date_in  VARCHAR(500),IN unit  VARCHAR(8))
 BEGIN
 select DISTINCT
 substr(a.award_number, 1,6) as GRANT_NUMBER

@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_sap_award_changes_split`(LS_GRANT_NUMBER VARCHAR(6))
+CREATE  PROCEDURE `get_sap_award_changes_split`(LS_GRANT_NUMBER VARCHAR(6))
 BEGIN
     DECLARE last_run_date DATE;
     DECLARE LI_GRANTS_COMPLETED INT;

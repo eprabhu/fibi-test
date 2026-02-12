@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `upd_spl_review_interface`(AV_INT INT)
+CREATE  PROCEDURE `upd_spl_review_interface`(AV_INT INT)
 BEGIN
 	DECLARE ls_award_number varchar(12);
     DECLARE li_sequence_number  INT(4);

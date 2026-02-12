@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jhu_sap_awd_update_proc`(av_changed_grant_number  VARCHAR(10))
+CREATE  PROCEDURE `jhu_sap_awd_update_proc`(av_changed_grant_number  VARCHAR(10))
 BEGIN
 	DECLARE file_path VARCHAR(33) DEFAULT '/var/www/tomcat/webapps/coeus/log';
 	DECLARE out_file_name VARCHAR(25) DEFAULT 'cufs_award_update.log';

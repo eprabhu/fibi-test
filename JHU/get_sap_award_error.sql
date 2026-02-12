@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_sap_award_error`()
+CREATE  PROCEDURE `get_sap_award_error`()
 BEGIN
     DECLARE last_run_date DATE;
 	DECLARE LS_GRANT_NUMBER VARCHAR(6);

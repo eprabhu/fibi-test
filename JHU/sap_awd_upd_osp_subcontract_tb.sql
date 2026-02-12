@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sap_awd_upd_osp_subcontract_tb`(proc_grant_number  VARCHAR(6)
+CREATE  PROCEDURE `sap_awd_upd_osp_subcontract_tb`(proc_grant_number  VARCHAR(6)
 									  ,av_sponsored_program_number  VARCHAR(8)
 									  ,av_start_date  VARCHAR(10)
 									  ,av_end_date  VARCHAR(10)

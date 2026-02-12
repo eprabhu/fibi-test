@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_EXT_REVIEWER_DASHBOARD_COUNT`(
+CREATE  PROCEDURE `GET_EXT_REVIEWER_DASHBOARD_COUNT`(
     AV_FIRST_NAME                           VARCHAR(500),
     AV_LAST_NAME                            VARCHAR(500),
     AV_PASPORT_NAME                         VARCHAR(500),

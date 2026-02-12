@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_AWARD_EXPENSE_TRACKING`(
+CREATE  PROCEDURE `GET_AWARD_EXPENSE_TRACKING`(
 av_award_number varchar(12),
 av_account_number varchar(100)
   )

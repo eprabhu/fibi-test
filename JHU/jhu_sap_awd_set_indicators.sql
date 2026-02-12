@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `jhu_sap_awd_set_indicators`(av_award_id INT
+CREATE  PROCEDURE `jhu_sap_awd_set_indicators`(av_award_id INT
 ,av_award_number VARCHAR(12)
 ,av_sequence_number INT(4)
 )

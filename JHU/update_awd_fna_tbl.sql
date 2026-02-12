@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_awd_fna_tbl`(av_grant_number  VARCHAR(12)
+CREATE  PROCEDURE `update_awd_fna_tbl`(av_grant_number  VARCHAR(12)
                                     ,av_sequence_number  INT(4)
                                     ,av_coeus_update_timestamp  DATE
                                     )

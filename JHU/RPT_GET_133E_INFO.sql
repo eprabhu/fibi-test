@@ -1,5 +1,5 @@
 ﻿DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RPT_GET_133E_INFO`(IN report_unit VARCHAR(8)                   )
+CREATE  PROCEDURE `RPT_GET_133E_INFO`(IN report_unit VARCHAR(8)                   )
 BEGIN
     SELECT Distinct	  ip.PROPOSAL_NUMBER
 			,SUBSTR(a.award_number, 1, 6) GRANT_NUMBER
